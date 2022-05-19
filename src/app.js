@@ -40,6 +40,21 @@ router.get('/', async (ctx) => {
 	const { CompanyName } = await ts.getAccount(ctx);
 	ctx.state.message = `Hello developer from ${CompanyName}!`;
 
+	/**Mes fonctions */
+// async function testGet(){
+// 	let response = await fetch(`https://api-sandbox.tradeshift.com/tradeshift/rest/external/network/companies`);
+//     //console.log(response.status);//200
+//     //console.log(response.statusText);//OK
+
+//     //consition nn obligatoire
+//    // if(response.status === 200){
+//         let data = await response.text()//handle data
+//         console.log(data)
+//   //  }
+// } testGet()
+
+/**Fin */
+
 	// render the message in the view
 	await ctx.render('view');
 });

@@ -1,9 +1,9 @@
-{
-	"extends": "airbnb-base",
-	"rules": {
-		"indent": ["error", "tab"],
-		"object-curly-newline": "off",
-		"no-console": "off",
-		"no-tabs": "off"
-	}
-}
+// {
+// 	"extends": "airbnb-base",
+// 	"rules": {
+// 		"indent": ["error", "tab"],
+// 		"object-curly-newline": "off",
+// 		"no-console": "off",
+// 		"no-tabs": "off"
+// 	}
+// }
