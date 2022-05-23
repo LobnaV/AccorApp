@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainPageComponent } from './main-page/main-page.component';
+import { UploadCsvToJsonComponent } from './Test/upload-csv-to-json/upload-csv-to-json.component';
 import { ListComponent } from './User/list/list.component';
 
 const routes: Routes = [
   {path: 'ListOfUsers', component:ListComponent},
-  {path: 'Home', component:MainPageComponent}
+  {path: 'Home', component:MainPageComponent},
+  {path: 'XlsxtoJson', component:UploadCsvToJsonComponent}
 ];
 
 @NgModule({

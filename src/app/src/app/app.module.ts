@@ -7,13 +7,17 @@ import { AppComponent } from './app.component';
 import { ListComponent } from './User/list/list.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { UpdateComponent } from './User/update/update.component';
+import { UploadCsvToJsonComponent } from './Test/upload-csv-to-json/upload-csv-to-json.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListComponent,
     MainPageComponent,
-    UpdateComponent
+    UpdateComponent,
+    UploadCsvToJsonComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

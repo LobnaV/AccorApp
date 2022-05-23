@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
 import { environment } from 'src/environments/environment';
 import { User } from './User/user';
 
@@ -14,7 +15,7 @@ export class AccorService {
   private allCompagnies = `${environment.BaseUrl}/network/companies`;
 
   constructor(
-    private http:HttpClient
+    private http:HttpClient,
     ) { }
 
     getUserInfo(){
@@ -58,6 +59,7 @@ export class AccorService {
     // createBranch(){
     //   //Url >  /tradeshift/rest/external/account/branches/new
     // }
+
 }
 
 

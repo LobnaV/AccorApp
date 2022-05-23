@@ -1,0 +1,40 @@
+[
+    {
+        "BRANCH_ID": "A9024903",
+        "HOME": "TRUE",
+        "EMAIL": "H3162-AM@ACCOR.COM",
+        "FIRST_NAME": "Glen",
+        "LAST_NAME": "Anderson",
+        "STATE": "LOCKED",
+        "MANAGER": "H3162-GM@ACCOR.COM",
+        "USER_TYPE": "Head of Department"
+    },
+    {
+        "BRANCH_ID": "A9024902",
+        "HOME": "FALSE",
+        "EMAIL": "H3162-AM@ACCOR.COM",
+        "FIRST_NAME": "Glen",
+        "LAST_NAME": "Anderson",
+        "STATE": "LOCKED",
+        "MANAGER": "H3162-GM@ACCOR.COM",
+        "USER_TYPE": "Head of Department"
+    },
+    {
+        "BRANCH_ID": "A9024903",
+        "HOME": "TRUE",
+        "EMAIL": "H3162-GM@ACCOR.COM",
+        "FIRST_NAME": "Terri",
+        "LAST_NAME": "Lord",
+        "STATE": "ACTIVE",
+        "MANAGER": "ernani.cervo@accorinvest.com",
+        "APPROVAL_LIMIT": 10000,
+        "USER_TYPE": "General Manager"
+    },
+    {
+        "BRANCH_ID": "Branche dans laquelle on veut ajouter le user",
+        "HOME": "Branche primaire \"primary branch or default branch\"= branche utilisée en 1er pour créer le user",
+        "EMAIL": "Email de prod (pour sandbox, mettre email sandbox)",
+        "STATE": "Active = je veux ajouter l'utilisateur dans la branche, si c'est un ajout OU si l'utilisateur existe déjà et que je veux Locked = je veux supprimer l'utilisateur de la branche",
+        "USER_TYPE": "Look-up table (voir fichier UMD onglet look-up table)"
+    }
+]

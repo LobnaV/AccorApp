@@ -34,4 +34,16 @@ export class MainPageComponent implements OnInit {
     })
     console.log('test account ' + this.listAccount)
   }
+
+ async testGet(){
+	let response = fetch(`https://api-sandbox.tradeshift.com/tradeshift/rest/external/network/companies`);
+    //console.log(response.status);//200
+    //console.log(response.statusText);//OK
+
+    //consition nn obligatoire
+   // if(response.status === 200){
+        let data = (await response).text()//handle data
+        console.log('data' + data)
+  //  }
+} 
 }
