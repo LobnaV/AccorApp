@@ -24,11 +24,3 @@
 <div>
     <pre id="dataJson">{{convertedJson}}</pre>
 </div>
-
-
-<h1>Convert Json to CSV file and Download it in the .csv format</h1>
-<ul *ngFor = "let data of jsonData">
-  <li>Branch : {{data.BRANCH_ID}}</li>
-</ul>
-
-<button (click)="fileDownload()"> Download </button>

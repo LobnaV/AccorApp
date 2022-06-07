@@ -13,14 +13,30 @@ import { ngxCsv } from 'ngx-csv/ngx-csv'
 })
 export class UploadCsvToJsonComponent implements OnInit {
 
-  jsonData: any = [];
+  jsonData:any[] = [];
+ 
+  searchKey: string = "";
+  searchTerm: string = "";
 
   constructor(
     private appService:AccorService,
     private http:HttpClient) { }
 
   ngOnInit(): void {
+    this.appService.getDonneeJson()
+      .subscribe(data => (this.jsonData = data))
+
+      this.appService.search.subscribe((val:any) =>{
+        this.searchKey = val;
+      })
+
   }
+
+  Search(event:any){
+    this.searchTerm = (event.target as HTMLInputElement).value;
+    console.log(this.searchTerm);
+    this.appService.search.next(this.searchTerm);
+ }
 
   convertedJson!: string;
 
@@ -46,48 +62,9 @@ export class UploadCsvToJsonComponent implements OnInit {
         // const saveData = new Blob([JSON.stringify(this.convertedJson)], {type : 'application/json'});
         //   saveAs(saveData, 'abc.json');
         //   console.log('save' + saveData)
-
-        let inventoryData = JsonPipe.toString()
       })
       console.log(workbook)
     }
-  }
-
-//   jsonData=[{
-//     "BRANCH_ID": "A9024903",
-//     "HOME": "TRUE",
-//     "EMAIL": "H3162-AM@ACCOR.COM",
-//     "FIRST_NAME": "Glen",
-//     "LAST_NAME": "Anderson",
-//     "STATE": "LOCKED",
-//     "MANAGER": "H3162-GM@ACCOR.COM",
-//     "USER_TYPE": "Head of Department"
-//   },
-//   {
-//     "BRANCH_ID": "B9024903",
-//   }
-// ]
-
-  // download(){
-  //   //let jsonData = this.http.get<any>('../assets/TestAccor.json');
-  //     this.appService.downloadFile(this.jsonData, 'TestAccor');
-  //     console.log('JsonDaata'+ this.jsonData)
-  // }
-
-  fileDownload(){
-    this.jsonData = this.http.get<any>('../assets/TestAccor.json');
-
-    let options = {
-      fieldSeparator: ';',
-      quoteStrings: '"',
-      decimalseparator: '.',
-      showLabels: true,
-      showTitle: true,
-      useBom: true,
-      headers:['BRANCH_ID', 'HOME', 'EMAIL', 'FIRST_NAME', 'LAST_NAME', 'STATE', 'MANAGER', 'APPROVAL_LIMIT', 'USER_TYPE']
-    };
-
-    new ngxCsv (this.jsonData, "DataInCsv",options )
   }
 
 }

@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { TestAccor } from './TestAccor';
 import { User } from './User/user';
 
 @Injectable({
@@ -13,6 +15,9 @@ export class AccorService {
   private findUsers = `${environment.BaseUrl}/account`;
   private companyAccountId = `${environment.BaseUrl}/account`;
   private allCompagnies = `${environment.BaseUrl}/network/companies`;
+  private testA: string = '../assets/TestAccor.json';
+
+  public search = new BehaviorSubject<string>("");
 
   constructor(
     private http:HttpClient,
@@ -59,6 +64,11 @@ export class AccorService {
     // createBranch(){
     //   //Url >  /tradeshift/rest/external/account/branches/new
     // }
+
+  getDonneeJson(): Observable<TestAccor[]>{
+    return this.http.get<TestAccor[]>(this.testA)
+
+  }
 
 }
 
