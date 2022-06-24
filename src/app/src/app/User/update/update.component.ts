@@ -56,15 +56,15 @@ export class UpdateComponent implements OnInit {
       )
   }
 
-  UpdateCompanyForm() {
-    const updateFormCompany = this.companyForm.value;
-    this.service.UpdateCompany(updateFormCompany)
-      .subscribe(
-        (company: any) => {
-          console.log("Update company done!")
-          //this.route.naviguate(['nom page'])
-        }
-      )
-  }
+  // UpdateCompanyForm() {
+  //   const updateFormCompany = this.companyForm.value;
+  //   this.service.UpdateCompany(updateFormCompany)
+  //     .subscribe(
+  //       (company: any) => {
+  //         console.log("Update company done!")
+  //         //this.route.naviguate(['nom page'])
+  //       }
+  //     )
+  // }
 
 }

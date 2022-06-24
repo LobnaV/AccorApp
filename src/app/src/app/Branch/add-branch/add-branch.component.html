@@ -1,0 +1,50 @@
+<!-- add branhc -->
+<div class="container col-md-6">
+    <div class="card">
+        <div class="card-header">
+            <h3>Add Branch</h3>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="branchForm" (ngSubmit)='Ajouter()'>
+                <div class="form-group">
+                    <label for="branch_Id">Id Branch:</label>
+                    <input type="text" id='branch_Id' validate="require=true"
+                        [ngClass]="{'is-invalid': (branchForm .get('branch_Id')?.dirty || branchForm .get('branch_Id')?.touched) && branchForm .get('branch_Id')?.invalid }"
+                        class="form-control" formControlName="branch_Id">
+                </div>
+                <div class="form-group">
+                    <label for="branch_Name">Name:</label>
+                    <input type="text" id='branch_Name' validate="require=true"
+                        [ngClass]="{'is-invalid': (branchForm .get('branch_Name')?.dirty || branchForm .get('branch_Name')?.touched) && branchForm .get('branch_Name')?.invalid }"
+                        class="form-control" formControlName="branch_Name">
+                </div>
+                <div class="form-group">
+                    <label for="country_Code">country code:</label>
+                    <input type="text" id='country_Code' validate="require=true"
+                        [ngClass]="{'is-invalid': (branchForm .get('country_Code')?.dirty || branchForm .get('country_Code')?.touched) && branchForm .get('country_Code')?.invalid }"
+                        class="form-control" formControlName="country_Code">
+                </div>
+                <div class="form-group">
+                    <label for="perimeter">perimeter :</label>
+                    <input type="text" id='perimeter' validate="require=true"
+                        [ngClass]="{'is-invalid': (branchForm .get('perimeter')?.dirty || branchForm .get('perimeter')?.touched) && branchForm .get('perimeter')?.invalid }"
+                        class="form-control" formControlName="perimeter">
+                </div>
+                <form [formGroup]="companies" (ngSubmit)='Ajouter()'>
+                    <div class="form-group">
+                        <label for="hotel_MegaCode">hotel_MegaCode :</label>
+                        <input type="text" id='hotel_MegaCode' validate="require=true"
+                            [ngClass]="{'is-invalid': (companies .get('hotel_MegaCode')?.dirty || companies .get('hotel_MegaCode')?.touched) && companies .get('hotel_MegaCode')?.invalid }"
+                            class="form-control" formControlName="hotel_MegaCode">
+                    </div>
+                    <div class="form-group">
+                        <label for="hotel_Name">hotel_Name :</label>
+                        <input type="text" id='hotel_Name' validate="require=true"
+                            [ngClass]="{'is-invalid': (companies .get('hotel_Name')?.dirty || companies .get('hotel_Name')?.touched) && companies .get('hotel_Name')?.invalid }"
+                            class="form-control" formControlName="hotel_Name">
+                    </div>
+                </form>
+                <button type="submit" class="btn btn-danger" [disabled]="companies.invalid">Add</button>
+            </form>
+        </div>
+    </div>

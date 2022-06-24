@@ -1,0 +1,33 @@
+<div class="form-group col-md-8" id="searchBar">
+    <div class="btn_searchbar">
+      <input class="form-control" type="text" [(ngModel)]="searchTerm" (keyup)="Search($event)" placeholder="rechercher">
+      <img type="button" class="cursor-pointer" src="">
+      <div class="container">
+        <button (click)="NewBranch()" class="btn add_Btn">Add Branch</button>
+      </div>
+    </div>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Branch ID </th>
+        <th scope="col">Branch name </th>
+        <th scope="col">Country code</th>
+        <th scope="col">perimeter</th>
+        <th scope="col">companies</th>
+      </tr>
+    </thead>
+    <tbody class="data">
+      <tr *ngFor="let data of branchs | filter: searchKey:'hotel_MegaCode'">
+        <td>{{data.branch_Id}}</td>
+        <td>{{data.branch_Name}}</td>
+        <td>{{data.country_Code}}</td>
+        <td>{{data.perimeter}}</td>
+        <!-- <td>{{data.companies}}</td>
+        <td><button [routerLink]="['/editBranch', data.branch_Id]" class="btn btn-edit"
+            style="margin-left: 10px;">Edit</button></td>
+        <td><button (click)="remove(data.branch_Id)" class="btn btn-delete"
+            style="margin-left: 10px;">Delete</button></td> -->
+      </tr>
+    </tbody>
+  </table>

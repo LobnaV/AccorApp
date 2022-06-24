@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  BaseUrl: 'https://api-sandbox.tradeshift.com/tradeshift/rest/external'
+  BaseUrl: 'https://api-sandbox.tradeshift.com/tradeshift/rest/external',
+  UrlLocal: 'http://localhost:8080/api'
 
 };
 

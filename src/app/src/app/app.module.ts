@@ -11,6 +11,20 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FilterPipe } from './Pipe/filter.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JsonToCsvComponent } from './Test/json-to-csv/json-to-csv.component';
+import { UserListComponent } from './UserBack/user-list/user-list.component';
+import { ParameterComponent } from './Parameter/parameter/parameter.component';
+import { AddUserComponent } from './UserBack/add-user/add-user.component';
+import { EditUserComponent } from './UserBack/edit-user/edit-user.component';
+import { AddParamComponent } from './Parameter/add-param/add-param.component';
+import { EditParamComponent } from './Parameter/edit-param/edit-param.component';
+import { CompanyListComponent } from './Company/company-list/company-list.component';
+import { EditCompanyComponent } from './Company/edit-company/edit-company.component';
+import { AddCompanyComponent } from './Company/add-company/add-company.component';
+import { ListBranchComponent } from './Branch/list-branch/list-branch.component';
+import { AddBranchComponent } from './Branch/add-branch/add-branch.component';
+import { ListCcComponent } from './CostCenter/list-cc/list-cc.component';
+import { AddCostCenterComponent } from './CostCenter/add-cost-center/add-cost-center.component';
+import { EditCCComponent } from './CostCenter/edit-cc/edit-cc.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +35,21 @@ import { JsonToCsvComponent } from './Test/json-to-csv/json-to-csv.component';
     UploadCsvToJsonComponent,
     NavbarComponent,
     FilterPipe,
-    JsonToCsvComponent
+    JsonToCsvComponent,
+    UserListComponent,
+    CompanyListComponent,
+    ParameterComponent,
+    AddUserComponent,
+    EditUserComponent,
+    AddParamComponent,
+    EditParamComponent,
+    EditCompanyComponent,
+    AddCompanyComponent,
+    ListBranchComponent,
+    AddBranchComponent,
+    ListCcComponent,
+    AddCostCenterComponent,
+    EditCCComponent,
   ],
   imports: [
     BrowserModule,

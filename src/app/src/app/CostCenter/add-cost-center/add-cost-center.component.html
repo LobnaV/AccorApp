@@ -1,0 +1,30 @@
+<!-- edit company test -->
+<div class="container col-md-6">
+    <div class="card">
+        <div class="card-header">
+            <h3>Add CC</h3>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="costCenterForm" (ngSubmit)='Ajouter()'>
+                <div class="form-group">
+                    <label for="megaCode_CostCenter_ID">megaCode CostCenter ID:</label>
+                    <input type="text" id='megaCode_CostCenter_ID' validate="require=true"
+                    [ngClass]="{'is-invalid': (costCenterForm .get('megaCode_CostCenter_ID')?.dirty || costCenterForm .get('megaCode_CostCenter_ID')?.touched) && costCenterForm .get('megaCode_CostCenter_ID')?.invalid }"
+                    class="form-control" formControlName="megaCode_CostCenter_ID">
+                </div>
+                <div class="form-group">
+                    <label for="megaCode_CostCenter_Label">megaCode CostCenter Label :</label>
+                    <input type="text" id='megaCode_CostCenter_Label' validate="require=true"
+                    [ngClass]="{'is-invalid': (costCenterForm .get('megaCode_CostCenter_Label')?.dirty || costCenterForm .get('megaCode_CostCenter_Label')?.touched) && costCenterForm .get('megaCode_CostCenter_Label')?.invalid }"
+                    class="form-control" formControlName="megaCode_CostCenter_Label">
+                </div>
+                <div class="form-group">
+                    <label for="owner_costCenter_email">owner costCenter email :</label>
+                    <input type="text" id='owner_costCenter_email' validate="require=true"
+                    [ngClass]="{'is-invalid': (costCenterForm .get('owner_costCenter_email')?.dirty || costCenterForm .get('owner_costCenter_email')?.touched) && costCenterForm .get('owner_costCenter_email')?.invalid }"
+                    class="form-control" formControlName="owner_costCenter_email">
+                </div>
+                <button type="submit" class="btn btn-danger" [disabled]="costCenterForm.invalid">Add</button>
+            </form>
+        </div>
+    </div>

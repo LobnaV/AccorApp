@@ -1,0 +1,37 @@
+<div class="form-group col-md-8 " id="searchBar">
+  <div class="btn_searchbar">
+    <input class="form-control" type="text" [(ngModel)]="searchTerm" (keyup)="Search($event)" placeholder="rechercher">
+    <!-- filtrer par megaCode -->
+    <img type="button" class="cursor-pointer" src="">
+    <div class="container">
+      <button (click)="NewUser()" class="btn add_Btn">Add User</button>
+    </div>
+  </div>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">name</th>
+      <th scope="col">email </th>
+      <th scope="col">type </th>
+      <th scope="col">CostCenters </th>
+    </tr>
+  </thead>
+  <tbody class="data">
+    <tr *ngFor="let dataa of tabUser.costCenters; let data of tabUser | filter: searchKey:'name'">
+      <th>{{data.id}}</th>
+      <th>{{data.name}}</th>
+      <td>{{data.email}}</td>
+      <td>{{data.type}}</td>
+      <td>{{dataa.costCenters}}</td>
+      <td><button [routerLink]="['/edit', data.id]" class="btn btn-edit" style="margin-left: 10px;">Edit</button>
+      </td>
+      <td><button (click)="remove(data.id)" class="btn btn-delete" style="margin-left: 10px;">Delete</button></td>
+      <!-- ngfor recup cc 
+          ajouter liaison megacode hotel pour cc et user
+        condition => if user.megacodehotel == cc.megacodehotel ==> afficher les cc correspondant -->
+    </tr>
+  </tbody>
+</table>

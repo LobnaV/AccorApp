@@ -1,0 +1,42 @@
+<!--Upadate Param-->
+<div class="container col-md-6">
+    <div class="card">
+        <div class="card-header">
+            <h3>Upadate Parameter</h3>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="editCompanyParamForm" (ngSubmit)='UpdateParam()'>
+                <div class="form-group">
+                    <label for="Perimeter">perimeter:</label>
+                    <input type="text" id='Perimeter' class="form-control" formControlName="perimeter">
+                </div>
+                <div class="form-group">
+                    <label for="HotelMegaCode">HotelMegaCode:</label>
+                    <input type="text" id='HotelMegaCode' class="form-control" formControlName="hotel_MegaCode">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="general_manager">GM</label>
+                    <input type="email" id='GeneralManager' class="form-control" formControlName="general_manager">
+                </div>
+                <div class="form-group">
+                  <label for="Portfolio">Portfolio</label>
+                  <input type="email" id='Portfolio' class="form-control" formControlName="portfolio">
+              </div>
+              <div class="form-group">
+                <label for="MM_GM">MM_GM:</label>
+                <input type="email" id='MM_GM' class="form-control" formControlName="mm_gm">
+              </div>
+              <div class="form-group">
+                <label for="MMM_GM">MMM_GM:</label>
+                <input type="email" id='MMM_GM' class="form-control" formControlName="mmm_gm">
+              </div>
+              <!-- <div class="form-group">
+                <label for="branch">branch:</label>
+                <input type="text" id='branch' class="form-control" formControlName="branch">
+              </div> -->
+                <button  type="submit" class="btn btn-danger" [disabled]="editCompanyParamForm.invalid">Add</button>
+            </form>
+        </div>
+    </div>
+
+</div> 

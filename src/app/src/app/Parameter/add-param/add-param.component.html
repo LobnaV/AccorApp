@@ -1,0 +1,54 @@
+<!--Add Param test-->
+<div class="container col-md-6">
+    <div class="card">
+        <div class="card-header">
+            <h3>Add Parameter</h3>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="companyParamForm" (ngSubmit)='Ajouter()'>
+                <div class="form-group">
+                    <label for="Perimeter">perimeter:</label>
+                    <input type="text" validate="required=true"
+                    [ngClass]="{'is-invalid': (companyParamForm .get('perimeter')?.dirty || companyParamForm .get('perimeter')?.touched) && companyParamForm .get('perimeter')?.invalid }"
+                    id='Perimeter' class="form-control" formControlName="perimeter">
+                </div>
+                <div class="form-group">
+                    <label for="HotelMegaCode">HotelMegaCode:</label>
+                    <input type="text" validate="required=true" 
+                    [ngClass]="{'is-invalid': (companyParamForm .get('hotel_MegaCode')?.dirty || companyParamForm .get('hotel_MegaCode')?.touched) && companyParamForm .get('hotel_MegaCode')?.invalid }"
+                    id='HotelMegaCode' class="form-control" formControlName="hotel_MegaCode">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="general_manager">GM</label>
+                    <input type="email" validate="required:true"
+                    [ngClass]="{'is-invalid': (companyParamForm .get('general_manager')?.dirty || companyParamForm .get('general_manager')?.touched) && companyParamForm .get('general_manager')?.invalid }"
+                     id='GeneralManager' class="form-control" formControlName="general_manager">
+                </div>
+                <div class="form-group">
+                  <label for="Portfolio">Portfolio</label>
+                  <input type="email" validate="required:true"
+                  [ngClass]="{'is-invalid': (companyParamForm .get('portfolio')?.dirty || companyParamForm .get('portfolio')?.touched) && companyParamForm .get('portfolio')?.invalid }"
+                   id='Portfolio' class="form-control" formControlName="portfolio">
+              </div>
+              <div class="form-group">
+                <label for="MM_GM">MM_GM:</label>
+                <input type="email" validate="required:true" 
+                [ngClass]="{'is-invalid': (companyParamForm .get('mm_gm')?.dirty || companyParamForm .get('mm_gm')?.touched) && companyParamForm .get('mm_gm')?.invalid }"
+                id='MM_GM' class="form-control" formControlName="mm_gm">
+              </div>
+              <div class="form-group">
+                <label for="MMM_GM">MMM_GM:</label>
+                <input type="email" validate="required=true"
+                [ngClass]="{'is-invalid': (companyParamForm .get('mmm_gm')?.dirty || companyParamForm .get('mmm_gm')?.touched) && companyParamForm .get('mmm_gm')?.invalid }"
+                id='MMM_GM' class="form-control" formControlName="mmm_gm">
+              </div>
+              <!-- <div class="form-group">
+                <label for="branch">branch:</label>
+                <input type="text" id='branch' class="form-control" formControlName="branch">
+              </div> -->
+                <button  type="submit" class="btn btn-danger" [disabled]="companyParamForm.invalid">Add</button>
+            </form>
+        </div>
+    </div>
+
+</div> 

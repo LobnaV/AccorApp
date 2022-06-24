@@ -31,5 +31,5 @@ const getClient = (ctx) => {
 };
 
 api.getAccount = async (ctx) => getClient(ctx).get('/account/info');
-
+//console.log('testt' + api.getClient)
 module.exports = api;
