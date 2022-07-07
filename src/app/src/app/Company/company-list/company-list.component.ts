@@ -34,7 +34,7 @@ export class CompanyListComponent implements OnInit {
     this.service.getCompanies()
       .subscribe(data => {
         this.companies = data;
-        console.log(this.companies)
+        console.log(this.companies.branch)
       })
 
     this.service.search.subscribe((val: any) => {

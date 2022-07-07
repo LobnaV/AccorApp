@@ -13,15 +13,12 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { AddParamComponent } from './Parameter/add-param/add-param.component';
 import { EditParamComponent } from './Parameter/edit-param/edit-param.component';
 import { ParameterComponent } from './Parameter/parameter/parameter.component';
-import { JsonToCsvComponent } from './Test/json-to-csv/json-to-csv.component';
-import { UploadCsvToJsonComponent } from './Test/upload-csv-to-json/upload-csv-to-json.component';
-import { ListComponent } from './User/list/list.component';
 import { AddUserComponent } from './UserBack/add-user/add-user.component';
 import { EditUserComponent } from './UserBack/edit-user/edit-user.component';
 import { UserListComponent } from './UserBack/user-list/user-list.component';
 
 const routes: Routes = [
-  {path: 'ListOfUsers', component:ListComponent},
+  {path: 'ListOfUsers', component:UserListComponent},
   {path: 'ListOfHotels', component:CompanyListComponent},
 
   {path: 'UserList', component:UserListComponent},
@@ -38,11 +35,8 @@ const routes: Routes = [
   {path: 'addBranch', component:AddBranchComponent},
   {path: 'listCostCenter', component:ListCcComponent},
   {path: 'addCostCenter', component:AddCostCenterComponent},
-  {path: 'editCC/:CostCenterId ', component:EditCCComponent},
-  {path: 'XlsxtoJson', component:UploadCsvToJsonComponent},
-  {path: 'JsonToCsv', component:JsonToCsvComponent},
-];
-
+  {path: 'editCC/:CostCenterId ', component:EditCCComponent}
+]
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

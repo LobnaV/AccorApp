@@ -1,14 +1,42 @@
 <div class="container-fluid">
     <div>
+        <!-- <h1>{{message}}</h1> -->
         <p>The app will allow you, as a GM, to manage the different Tradeshift users of your hotel and the cost centre attribution between them and you.  
 
             We remind you that the composition of the workflow is the following:  </p> 
-    <div><img src="../../assets/CompositonWorkflow.png" style="width:450px;height:225px;"></div>
+    <div><img src="../../assets/CompositonWorkflow.png" style="width:450px;height:225px;">
+        </div>
+
+        <!-- <div *ngFor="let data of companies">
+            <ng-select [items]="companies"
+                    bindLabel = "hotel_MegaCode"
+                    [(ngModel)]="test"></ng-select>
+               <p>
+               Selected : {{data.hotel_MegaCode}}
+               </p>
+           </div> -->
+
+
+           <form class="ngForm" (ngSubmit)="save()">
+                <select [(ngModel)]="companies" name="ValueCheck" (change)="ValueChange($event)">
+               <option [ngValue]="undefined" disabled>Select hotel</option>
+               <option *ngFor="let data of companies" [ngValue]="data.hotel_MegaCode" [selected]="data.hotel_MegaCode">{{data.hotel_MegaCode}}</option>
+                </select>
+                <button type="submit"> submit</button>
+           </form>
+  
     </div>
 
-        
 
-   <ul>
-       <li></li>
-   </ul>
+    <!-- <select class="form-select">
+        <div *ngFor="let data of companies">
+         <option [items]="companies"
+                 bindLabel = "data.hotel_MegaCode"
+                 [(ngModel)]="test"></option>
+        </div>
+     </select> -->
+
+<!--  <td>{{data.hotel_MegaCode}}</td>
+      <td>{{data.hotel_Name}}</td>
+      <td>{{data.users}}</td> -->
 </div>

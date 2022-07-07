@@ -27,8 +27,8 @@ app.use(morgan('dev'));
 
 // template for app served to the browser
 app.use(views(__dirname, {
-	map: { hbs: 'handlebars' },
-	extension: 'hbs',
+	map: { html: 'handlebars' },
+	extension: 'html',
 }));
 
 // single endpoint for the app that serves the view template with a message
@@ -40,8 +40,9 @@ router.get('/', async (ctx) => {
 	const { CompanyName } = await ts.getAccount(ctx);
 	ctx.state.message = `Hello developer from ${CompanyName}!`;
 
+
 	// render the message in the view
-	await ctx.render('view');
+	await ctx.render('../src/app/src/app/app.component.html');
 });
 
 // add routes to the app

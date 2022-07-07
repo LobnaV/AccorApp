@@ -7,8 +7,12 @@
         <div class="card-body">
             <form [formGroup]="userForm" (ngSubmit)='Update()'>
                 <div class="form-group">
-                    <label for="name">name:</label>
-                    <input type="text" id='name' class="form-control" formControlName="name">
+                    <label for="firstName">firstName:</label>
+                    <input type="text" id='firstName' class="form-control" formControlName="firstName">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">lastName:</label>
+                    <input type="text" id='lastName' class="form-control" formControlName="lastName">
                 </div>
                 <div class="form-group">
                     <label for="email">email:</label>

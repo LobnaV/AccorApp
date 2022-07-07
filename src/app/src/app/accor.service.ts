@@ -7,7 +7,7 @@ import { Company } from './Company/company';
 import { CostCenter } from './CostCenter/cost-center';
 import { Param } from './Parameter/param';
 import { TestAccor } from './TestAccor';
-import { User } from './User/user';
+import { User } from './UserBack/user';
 
 @Injectable({
   providedIn: 'root'

@@ -13,7 +13,8 @@
   <thead>
     <tr>
       <th scope="col">Id</th>
-      <th scope="col">name</th>
+      <th scope="col">first name</th>
+      <th scope="col">last name</th>
       <th scope="col">email </th>
       <th scope="col">type </th>
       <th scope="col">CostCenters </th>
@@ -22,7 +23,8 @@
   <tbody class="data">
     <tr *ngFor="let dataa of tabUser.costCenters; let data of tabUser | filter: searchKey:'name'">
       <th>{{data.id}}</th>
-      <th>{{data.name}}</th>
+      <th>{{data.firstName}}</th>
+      <th>{{data.lastName}}</th>
       <td>{{data.email}}</td>
       <td>{{data.type}}</td>
       <td>{{dataa.costCenters}}</td>

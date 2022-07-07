@@ -9,8 +9,8 @@ import { AccorService } from 'src/app/accor.service';
   styleUrls: ['./list-branch.component.scss']
 })
 export class ListBranchComponent implements OnInit {
-  branchs:any;
-  branch:any;
+  
+  branchs:any = [];
   searchKey: string = "";
   searchTerm: string = "";
 
@@ -29,20 +29,8 @@ export class ListBranchComponent implements OnInit {
     this.service.branchs()
       .subscribe(data =>{
         this.branchs = data;
-        console.log(this.branchs)
-
-        for (let i = 0; i < this.branchs.length; i++) {
-          const companiesBranch = this.branchs[i].companies;
-          console.log('test  ' + companiesBranch)
-
-          // for (let ic = 0; ic < this.companiesBranch.length; ic++) {
-          //   const element = array[ic];
-            
-          // }
-          
-
-          
-        }
+        console.log(this.branchs  )
+        console.log('Ligne 32  ' + JSON.stringify(this.branchs))
       })
 
     this.service.search.subscribe((val: any) => {

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccorService } from 'src/app/accor.service';
-import { User } from 'src/app/User/user';
 
 @Component({
   selector: 'app-user-list',
@@ -18,7 +17,8 @@ export class UserListComponent implements OnInit {
 
   userForm = new FormGroup({
     id: new FormControl(''),
-    name: new FormControl('', [Validators.required]),
+    firstName: new FormControl('', [Validators.required]),
+    lastName: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
     type: new FormControl('', [Validators.required]),
     costCenters: new FormControl('', Array)
@@ -29,6 +29,7 @@ export class UserListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
     this.service.users()
       .subscribe(data => {
         this.tabUser = data;
@@ -44,6 +45,7 @@ export class UserListComponent implements OnInit {
           // //console.log(this.tabcc)
           // this.tabcc
         }
+      
 
       })
 
@@ -68,8 +70,8 @@ export class UserListComponent implements OnInit {
      .subscribe( (data:any) =>{
        this.users = this.users?.filter((user: { id: any; }) => userId !== user.id);
          alert("deleted user");
-         this.router.navigate(["UserList"]);
-     })
+         window.location.reload()})
   }
 
+ 
 }

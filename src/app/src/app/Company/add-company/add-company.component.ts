@@ -10,7 +10,7 @@ import { Company } from '../company';
   styleUrls: ['./add-company.component.scss']
 })
 export class AddCompanyComponent implements OnInit {
-  
+
   companyForm = new FormGroup({
     hotel_MegaCode: new FormControl('',[Validators.required]),
     hotel_Name: new FormControl('', [Validators.required]),
@@ -21,7 +21,9 @@ export class AddCompanyComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
   }
+
 
   Ajouter(){
     const newCompany = this.companyForm.value;
