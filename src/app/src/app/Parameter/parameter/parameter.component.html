@@ -9,28 +9,28 @@
 </div>
 <table class="table">
   <thead>
+    <!-- les noms à modifier  (avec ceux de accor)! avec Alice  -->
     <tr>
-      <!-- les noms à modifier  (avec ceux de accor)! avec Alice  -->
       <th scope="col">Id</th>
+      <th scope="col">Branch </th> 
       <th scope="col">Perimeter </th>
       <th scope="col">HotelMegaCode </th>
-      <th scope="col">GM </th>
-      <th scope="col">Portfolio </th>
-      <th scope="col">gm line manager </th>
-      <th scope="col">N+1 Line manager </th>
-      <th scope="col">Branch </th>
+      <!-- <th scope="col">GM </th>
+        <th scope="col">Portfolio </th>
+        <th scope="col">gm line manager </th>
+        <th scope="col">N+1 Line manager </th>-->
     </tr>
   </thead>
   <tbody class="data">
     <tr *ngFor="let param of parameters | filter: searchKey:'hotel_MegaCode'">
       <th>{{param.id}}</th>
+      <td>{{param.branch}}</td> 
       <th>{{param.perimeter}}</th>
       <td>{{param.hotel_MegaCode}}</td>
-      <td>{{param.general_manager}}</td>
+      <!-- <td>{{param.general_manager}}</td>
       <td>{{param.portfolio}}</td>
       <td>{{param.mm_gm}}</td>
-      <td>{{param.mmm_gm}}</td>
-      <td>{{param.branch}}</td>
+      <td>{{param.mmm_gm}}</td>-->
       <td><button [routerLink]="['/editParameter', param.id]" class="btn btn-edit"
           style="margin-left: 10px;">Edit</button></td>
       <td><button (click)="remove(param.id)" class="btn btn-delete" style="margin-left: 10px;">Delete</button></td>

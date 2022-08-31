@@ -6,6 +6,12 @@
         </div>
         <div class="card-body">
             <form [formGroup]="userForm" (ngSubmit)='Update()'>
+
+                <!-- <div class="form-group">
+                    <label for="primaryBranch">primaryBranch:</label>
+                    <input id='primaryBranch' class="form-control" formControlName="primaryBranch">
+                </div> -->
+
                 <div class="form-group">
                     <label for="firstName">firstName:</label>
                     <input type="text" id='firstName' class="form-control" formControlName="firstName">
@@ -17,10 +23,6 @@
                 <div class="form-group">
                     <label for="email">email:</label>
                     <input type="email" id='email' class="form-control" formControlName="email">
-                </div>
-                <div class="form-group">
-                    <label for="type">type:</label>
-                    <input type="text" id='type' class="form-control" formControlName="type">
                 </div>
                 <!-- <div class="dropdown" >
                   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

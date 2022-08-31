@@ -21,6 +21,12 @@ export class AddParamComponent implements OnInit {
     // branch: new FormControl('')
     
   })
+
+  rolesParam:any = [
+    {id: 1, name: "GM"}, 
+    {id: 2, name: "GG_GM"},
+    {id: 3, name: "GGG_GM"}
+  ]
   
   constructor(
     private service: AccorService,

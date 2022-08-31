@@ -7,4 +7,5 @@ export class Param {
     mm_gm?:string;
     mmm_gm?:string; 
     branch?:string;
+    roleParam!:String;
 }

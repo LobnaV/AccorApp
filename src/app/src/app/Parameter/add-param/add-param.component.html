@@ -46,6 +46,11 @@
                 <label for="branch">branch:</label>
                 <input type="text" id='branch' class="form-control" formControlName="branch">
               </div> -->
+              <select>
+                <option *ngFor="let test of rolesParam, let i = index" value="{{test.rolesParam}}" selected="i == 0">
+                    {{test.rolesParam}}
+                </option>
+            </select>
                 <button  type="submit" class="btn btn-danger" [disabled]="companyParamForm.invalid">Add</button>
             </form>
         </div>

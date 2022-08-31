@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { env } from 'process';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Branch } from './Branch/branch';
 import { Company } from './Company/company';
@@ -13,12 +15,12 @@ import { User } from './UserBack/user';
   providedIn: 'root'
 })
 export class AccorService {
+  private url = `${environment.UrlLocal}`
   private userInfo = `${environment.BaseUrl}/account/info/user`;
   private userById = `${environment.BaseUrl}/account/users`;
   private findUsers = `${environment.BaseUrl}/account`;
   private companyAccountId = `${environment.BaseUrl}/account`;
   private allCompagnies = `${environment.BaseUrl}/network/companies`;
-  private testA: string = '../assets/TestAccor.json';
   private urlLocal = `${environment.UrlLocal}/User`
   private local = `${environment.UrlLocal}/Branch`;
   private paramUrl = `${environment.UrlLocal}/Parameter`
@@ -31,6 +33,7 @@ export class AccorService {
 
   constructor(
     private http:HttpClient,
+    private router:Router
     ) { }
 
     //________________Service back ______________________
@@ -110,6 +113,11 @@ export class AccorService {
       .delete<User>(this.urlLocal + "/delete/" + userId)
   }
 
+  dispId(id:number){  
+    return this.http
+      .get<User>(this.urlLocal + "/x/"+ id)
+  }
+
   branchs(){
     return this.http
       .get<Branch[]>(this.local + "/List")
@@ -145,9 +153,78 @@ export class AccorService {
       .delete<CostCenter>(this.CCUrl + "/deleteCostCenter/" + ccId)
   }
 
+  
+  /**
+   * méthode qui pérmet de s'enregistrer
+   * @param newUser
+   */
+   register(newUser: User) {
+    return this.http.post(`${this.url}/auth/signin`, newUser)
+  }
+
+  /**
+   * méthode qui permet de se logger et de save le token en localStorage
+   * @param user
+   */
+   login(user:User){
+    return this.http.post(`${this.url}/auth/login`,user)
+      .pipe(
+        map(
+          (resp:any)=>{
+            localStorage.setItem('TOKEN_APPLI', resp.token);
+            console.log('token Save');
+            return resp;
+          }
+        )
+      );
+  }
+
+    /**
+   * méthode qui récupère le token du localStorage
+   */
+     getToken(){
+      return localStorage.getItem("TOKEN_APPLI");
+    }
+  
+    logout() {
+      localStorage.removeItem('TOKEN_APPLI');
+      console.log('déconnecter');
+      this.router.navigate(['/login']);
+    }
 
 
 
+
+//_______________dispatcher________________________
+
+//items = [];
+
+// addToDispatcher(addedDispatcher: never){
+//   this.items.push(addedDispatcher);
+//   console.log(addedDispatcher);
+
+//   let existingItems:string[];
+//   if(localStorage.getItem('dispatch_Items')){
+//     existingItems = JSON.parse(localStorage.getItem('dispatch_Items')!);
+//     existingItems = [addedDispatcher, ...existingItems];
+//     console.log('Items exists')
+
+//   }else{
+//     console.log('Noitems exists')
+//   }
+
+// this.saveDispatcher();
+
+// }
+
+
+// saveDispatcher(): void{
+//   localStorage.setItem('dispatch_Items', JSON.stringify(this.items))
+// }
+
+// itemsInDispatcher(item: any):boolean{
+//   return this.items.findIndex((o) => o.id === item.id)> -1;
+// }
 
 
 //_______________Tradshift API________________________
@@ -194,10 +271,6 @@ export class AccorService {
     //   //Url >  /tradeshift/rest/external/account/branches/new
     // }
 
-  getDonneeJson(): Observable<TestAccor[]>{
-    return this.http.get<TestAccor[]>(this.testA)
-
-  }
 
   
 }

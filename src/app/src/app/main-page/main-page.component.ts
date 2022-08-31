@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
-import { Component,OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
+import { Component,Input,OnInit, Output } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { AccorService } from '../accor.service';
+import { Company } from '../Company/company';
 
 @Component({
   selector: 'app-main-page',
@@ -11,70 +11,46 @@ import { AccorService } from '../accor.service';
 
 })
 export class MainPageComponent implements OnInit {
-
-  private userInfo = `${environment.BaseUrl}/tradeshift/rest/external/account/info/user`
-  private listAccount = `${environment.BaseUrl}/tradeshift/rest/external/account`;
+  selectedCompanies = [];
   companies: any = [];
- 
+  radioTitle: string;
+  model   = this.companies.general_manager;
+
+   data!: number;
 
   constructor(
-    private http: HttpClient,
-    private service: AccorService
-    ) { }
+    private service: AccorService,
+    private route:ActivatedRoute
+    ) {
+      
+    this.radioTitle = 'select company';
+    
+    }
 
   ngOnInit(): void {
-    // this.getUserInfo();
-    // this.getAccount();
 
-    this.service.getCompanies()
+    this.service.getParams()
     .subscribe(data => {
       this.companies = data;
       console.log('test1', this.companies)
       // this.companies.push(data)
       // console.log('test2', this.companies.push(data)
       // )
-      
     })
 
 
   }
+ 
 
  ValueChange(event:any){
-  console.log("selected value", event?.target.value,
-  'value selected', this.companies)
+  console.log("selected value", event?.target.value)
  }
 
- save(){
-  console.log('value i got', this.companies)
- }
+   save(data:any){
+    data = this.selectedCompanies;
+    console.log('save data',data)
 
-
-
-//   getUserInfo(){
-//     this.http.get<any>(this.userInfo)
-//       .subscribe(response => {
-//         this.userInfo = response;
-//       })
-//       console.log('test get user info' + this.userInfo)
-//   }
-
-//   getAccount(){
-//     this.http.get<any>(this.listAccount)
-//       .subscribe(response => {
-//         this.listAccount = response;
-//     })
-//     console.log('test account ' + this.listAccount)
-//   }
-
-//  async testGet(){
-// 	let response = fetch(`https://api-sandbox.tradeshift.com/tradeshift/rest/external/network/companies`);
-//     //console.log(response.status);//200
-//     //console.log(response.statusText);//OK
-
-//     //consition nn obligatoire
-//    // if(response.status === 200){
-//         let data = (await response).text()//handle data
-//         console.log('data' + data)
-//   //  }
-// } 
+    localStorage.setItem('dataSource', JSON.stringify(data))
+  } 
+ 
 }
