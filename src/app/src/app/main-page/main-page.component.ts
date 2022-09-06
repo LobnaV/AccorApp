@@ -1,6 +1,6 @@
 import { Component,Input,OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AccorService } from '../accor.service';
 import { Company } from '../Company/company';
 
@@ -18,27 +18,35 @@ export class MainPageComponent implements OnInit {
 
    data!: number;
 
+   getUserEmail = localStorage.getItem('User_Email');
+
+
   constructor(
     private service: AccorService,
-    private route:ActivatedRoute
-    ) {
-      
+    private router: Router
+    ) {  
     this.radioTitle = 'select company';
-    
     }
 
+    element:any;
+
   ngOnInit(): void {
+
+    this.getUserEmail  = this.getUserEmail !.replace(/[""]/gi, '')
+    console.log(this.getUserEmail )
+
 
     this.service.getParams()
     .subscribe(data => {
       this.companies = data;
-      console.log('test1', this.companies)
-      // this.companies.push(data)
-      // console.log('test2', this.companies.push(data)
-      // )
+      
+      for (let i = 0; i < data.length; i++) {
+        this.element = data[i];
+        console.log('test1', this.element.general_manager)        
+      }
+
+
     })
-
-
   }
  
 
@@ -46,11 +54,21 @@ export class MainPageComponent implements OnInit {
   console.log("selected value", event?.target.value)
  }
 
-   save(data:any){
+  save(data:any){
     data = this.selectedCompanies;
-    console.log('save data',data)
+    
+    localStorage.setItem('getDataHmc', JSON.stringify(data.hmc))
+    localStorage.setItem('getDataHn', JSON.stringify(data.hn))
+    localStorage.setItem('getDataGm', JSON.stringify(data.gm))
+    localStorage.setItem('getDataBranch', JSON.stringify(data.branch))
+    
+    console.log('save data',data)  
 
-    localStorage.setItem('dataSource', JSON.stringify(data))
+
+    this.router.navigate(["UserList"]);
+
   } 
+
+ 
  
 }

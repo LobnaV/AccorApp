@@ -26,6 +26,7 @@ import { LoginComponent } from './Account/login/login.component';
 import { SignupComponent } from './Account/signup/signup.component';
 import { LayoutComponent } from './layout/layout.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +58,7 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
     FormsModule,
     HttpClientModule,
     CommonModule,
-    MatRadioModule
+    MatRadioModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

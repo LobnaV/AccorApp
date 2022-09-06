@@ -11,6 +11,9 @@ import { User } from '../user';
   styleUrls: ['./add-user.component.scss']
 })
 export class AddUserComponent implements OnInit {
+  getDataHmc = localStorage.getItem('getDataHmc');
+  getDataGm = localStorage.getItem('getDataGm');
+  getDataBranch = localStorage.getItem('getDataBranch');
 
 
   userForm = new FormGroup({
@@ -19,11 +22,8 @@ export class AddUserComponent implements OnInit {
     type: new FormControl,
     firstName: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.required, Validators.email]),
+    username: new FormControl('', [Validators.required, Validators.email]),
     //password: new FormControl('', [Validators.required, Validators.minLength(10)]),
-
-    
-    // costCenters: new FormControl('', Array)
   })
 
   private _fb: any;
@@ -39,6 +39,7 @@ export class AddUserComponent implements OnInit {
 
   selectedCompanies = [];
 
+
   displayStyle = "none";
 
   constructor(
@@ -47,13 +48,32 @@ export class AddUserComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
+    console.log('get',localStorage.getItem('getDataHmc'))
+    this.getDataHmc = this.getDataHmc!.replace(/[""]/gi, '')
+    this.getDataGm = this.getDataGm!.replace(/[""]/gi, '')
+    this.getDataBranch = this.getDataBranch!.replace(/[""]/gi, '')
+
+
+
     this.service.getParams()
     .subscribe(data => {
       this.parameters = data;
       console.log('param',this.parameters)
     })
 
+
    // this.rolesParam
+  }
+
+  disable(data:any){
+    var desired = this.getDataHmc!.replace(/[""]/gi, '')
+    console.log(desired)
+
+    console.log(data.selectCompany)
+    if(desired == data.selectCompany){
+      console.log('same')
+    }
   }
 
   openForm() {
@@ -72,18 +92,6 @@ export class AddUserComponent implements OnInit {
    // localStorage.setItem('dataSource', JSON.stringify(this.dataSource));
    // console.log(localStorage.getItem(this.dataSource))
    //console.log(localStorage.getItem( this.dataSource))
-   }
-
-   testGM(){
-    if(this.selectedCompanies.values  === this.parameters.hotel_MegaCode){
-      console.log('test gm',  this.selectedCompanies)
-      console.log('testX', this.parameters.hotel_MegaCode)
-      console.log('test gm2', this.selectedCompanies.values  === this.parameters.hotel_MegaCode)
-
-      //this.parameters?.filter((p: {hotel_MegaCode: any; p: any;}) => p.hotel_MegaCode === this.selectedCompanies.values)
-
-      return this.parameters.general_manager
-    }
    }
 
   initModelForm(): FormGroup {
@@ -151,13 +159,13 @@ export class AddUserComponent implements OnInit {
       )
 
     const limit = this.approvalLimit();
-    const branche = this.recupBranch();
+    const branche = this.getDataBranch;
     const home = this.trueOrFalse();
-    const gm = this.testGM();
+    const gm = this.getDataGm;
     const role = this.role();
 
     const data = [
-      [branche, home, this.userForm.value.email, this.userForm.value.firstName, this.userForm.value.lastName, 'ACTIVE', gm, limit, this.spend_limit, 'null',role]
+      [branche, home, this.userForm.value.username, this.userForm.value.firstName, this.userForm.value.lastName, 'ACTIVE', gm, limit, this.spend_limit, '',role]
     ];
     console.log('test form', this._fb)
 

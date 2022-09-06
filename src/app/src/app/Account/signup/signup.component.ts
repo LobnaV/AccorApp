@@ -11,13 +11,19 @@ import { User } from 'src/app/UserBack/user';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
-  registerForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    username: new FormControl('', [Validators.required]),
+  registerForm = new FormGroup({ 
+    selectCompany: new FormControl,
+    primaryBranch: new FormControl,
+    //email: new FormControl('', [Validators.required]),
+    username: new FormControl('', [Validators.required, Validators.email]),
     firstName: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required, Validators.minLength(10)]),
   })
+
+  parameters: any;
+  selectedCompanies = [];
+
 
 
   constructor(
@@ -26,9 +32,26 @@ export class SignupComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // this.service.getParams()
+    // .subscribe(data => {
+    //   this.parameters = data;
+    //   console.log('param', this.parameters)
+    // })
 
   }
 
+  ValueChange(event:any){
+    console.log("selected value", event?.target.value,
+    'all companies', this.parameters)
+   }
+
+   save(){
+    console.log('value i got', this.selectedCompanies)
+   // localStorage.setItem('dataSource', JSON.stringify(this.dataSource));
+   // console.log(localStorage.getItem(this.dataSource))
+   //console.log(localStorage.getItem( this.dataSource))
+   }
+  
 
   onRegister() {
     const newUser = this.registerForm.value;
@@ -37,7 +60,7 @@ export class SignupComponent implements OnInit {
       this.service.register(newUser)
         .subscribe(
           (user: User) => {
-            this.router.navigate(["UserList"])
+            this.router.navigate(["Home"])
             console.log(user);
           }
         )

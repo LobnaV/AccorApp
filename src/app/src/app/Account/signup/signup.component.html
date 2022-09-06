@@ -5,11 +5,23 @@
             <h1 class="text-center">Add GM</h1>
 
             <div class="card-body">
+
+
+               
+
+
                 <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
                     <div class="inputs">
+                        <!-- <div class="form-group"  >
+                            <select [(ngModel)]="selectedCompanies" name="ValueCheck" (change)="ValueChange($event)" formControlName="selectCompany">
+                                <option disabled>Select hotel</option>
+                                <option *ngFor="let data of parameters" [ngValue]="data.hotel_MegaCode" [selected]="data.hotel_MegaCode"  >
+                                    {{data?.hotel_MegaCode}}</option>
+                            </select>
+                        </div> -->
                         <div class="form-group col-md-8">
                             <div class="form-outline">
-                                <label class="form-label" for="username">username</label>
+                                <label class="form-label" for="username">email</label>
                                 <input type="text"
                                     [ngClass]="{'is-invalid': (registerForm.get('username')?.dirty || registerForm.get('username')?.touched) && registerForm.get('username')?.invalid }"
                                     id="username" class="form-control" formControlName="username" />
@@ -34,14 +46,14 @@
                             </div>
                         </div>
 
-                        <div class="form-group col-md-8">
+                        <!-- <div class="form-group col-md-8">
                             <div class="form-outline">
                                 <label class="form-label" for="mail">Email</label>
                                 <input type="mail"
                                     [ngClass]="{'is-invalid': (registerForm.get('email')?.dirty || registerForm.get('email')?.touched) && registerForm.get('email')?.invalid }"
                                     id="mail" class="form-control" formControlName="email" />
                             </div>
-                        </div>
+                        </div> -->
                         <div class="form-group col-md-8">
                             <div class="form-outline">
                                 <label class="form-label" for="password">Mot de passe</label>

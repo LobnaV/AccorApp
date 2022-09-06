@@ -21,7 +21,6 @@ public class CostCenter implements Serializable {
     @Id
     private String megaCode_CostCenter_ID;
     private String megaCode_CostCenter_Label;
-		@Email
     private User owner_costCenter_email;
 
    /* @JsonIgnoreProperties("costCenters")

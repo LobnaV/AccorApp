@@ -12,5 +12,6 @@ public interface UserService {
     Optional<User> userListId(Long id);
     User add(User user);
     User edit(User user);
+		Optional<User> dispId(Long id);
     void delete(Long id);
 }

@@ -1,29 +1,50 @@
 #searchBar{
-    margin-left: auto;
+    margin-left: 10rem;
+    display: flex;
+    align-items: center;
     .btn_searchbar{
         display: flex;   
         justify-content: flex-end;
         margin: 2rem; 
         margin-left: auto;
-            .container{
-                display: flex;
-                justify-content: flex-end;
-                .add_Btn{
-                    background-color: #9BE69F;
-                   
-                }
-            }
+           
     }
 }
-.table{
-    .data{
-        .btn-edit{
-            background-color:#F0AB29 ;
-        }
+.container{
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    .add_Btn{
+        background-color: #9BE69F;
+       
+    }
+}
 
-        .btn-delete{
-            background-color: #E38D9B;
-        }
+.table{
+
+    thead{
+        background-color: black;
+        color: white;
+    }
+
+    .data{
+        border-style: none;
+        border-bottom-color:white ;
+            th,td{
+                padding: 0.5rem;
+            }
+            tr{
+                background-color: #C5C5C5;
+            }
+            .btn-edit{
+                background-color:#F0AB29 ;
+            }
+    
+            .btn-delete{
+                background-color: #E38D9B;
+            }
+
+        
     }
 }
 
@@ -49,3 +70,8 @@
 
  
 }
+
+
+// tr   display: flex;
+//align-items: center;
+//justify-content: center;

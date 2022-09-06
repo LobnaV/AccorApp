@@ -13,6 +13,8 @@ export class AddParamComponent implements OnInit {
   
   companyParamForm = new FormGroup({
     hotel_MegaCode: new FormControl(''),
+    hotel_Name: new FormControl(''),
+    branchID: new FormControl(''),
     perimeter: new FormControl(''),
     general_manager: new FormControl('',[Validators.required,Validators.email]),
     portfolio: new FormControl('',[Validators.email]),

@@ -15,6 +15,7 @@ export class EditParamComponent implements OnInit {
 
   editCompanyParamForm = new FormGroup({
     hotel_MegaCode: new FormControl(''),
+    hotel_Name: new FormControl(''),
     perimeter: new FormControl(''),
     general_manager: new FormControl(''),
     portfolio: new FormControl(''),

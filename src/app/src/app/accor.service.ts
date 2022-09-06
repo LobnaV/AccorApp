@@ -173,6 +173,8 @@ export class AccorService {
           (resp:any)=>{
             localStorage.setItem('TOKEN_APPLI', resp.token);
             console.log('token Save');
+            localStorage.setItem('User_Email', JSON.stringify(user.username))
+            console.log(user)
             return resp;
           }
         )
@@ -188,6 +190,10 @@ export class AccorService {
   
     logout() {
       localStorage.removeItem('TOKEN_APPLI');
+      localStorage.removeItem('User_Email');
+      localStorage.removeItem('getDataHmc');
+      localStorage.removeItem('getDataGm');
+      localStorage.removeItem('getDataBranch');
       console.log('déconnecter');
       this.router.navigate(['/login']);
     }

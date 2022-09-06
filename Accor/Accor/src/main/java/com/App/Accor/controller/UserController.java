@@ -31,7 +31,14 @@ public class UserController {
         return service.userListId(id);
     }
 
-    @PutMapping(path = {"/edit/{id}"})
+	@GetMapping("/x/{id}")
+	public Optional<User> dispId(@PathVariable("id")Long id)
+	{
+		return service.dispId(id);
+	}
+
+
+	@PutMapping(path = {"/edit/{id}"})
     public User edit(@RequestBody User user, @PathVariable("id")Long id){
         user.setId(id);
         return service.edit(user);

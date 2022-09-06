@@ -37,7 +37,12 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(id);
     }
 
-    @Override
+	@Override
+	public Optional<User> dispId(Long id) {
+		return userRepository.findById(id);
+	}
+
+	@Override
     public User add(User user) {
  /*       Set<Company> companyList = user.getCompanies();
         for (var company:companyList) {

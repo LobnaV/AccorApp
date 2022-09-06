@@ -1,11 +1,12 @@
 package com.App.Accor.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,26 +19,37 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+		@Email
+		@NotNull
+		@Column(unique=true)
+		private String username;
     private String firstName;
     private String lastName;
-    @Column(unique=true)
-    private String email;
+		private String password;
     private String type;
-		private Boolean primaryBranch;
+		private String primaryBranch;
+		private String selectCompany;
 
-    @ManyToMany()
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(	name = "user_roles",
+		joinColumns = @JoinColumn(name = "user_id"),
+		inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Set<Role> roles = new HashSet<>();
+
+	   @ManyToMany()
     private Set<Company>companies = new HashSet<>();
 
 
     //@JsonIgnore
-    @OneToMany()
+  /*  @OneToMany()
     private Set<CostCenter> costCenters = new HashSet<>();
+*/
 
-    public User(String firstName,String lastName, String email, String type, Set<CostCenter> costCenters) {
-        this.lastName = lastName;
-				this.firstName = firstName;
-				this.email = email;
-        this.type = type;
-        this.costCenters = costCenters;
-    }
+
+	public User(String username, String encode, String firstName, String lastName) {
+		this.username = username;
+		this.password = encode;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
 }

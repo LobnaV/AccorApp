@@ -75,16 +75,16 @@ public class BranchController {
        // CostCenter costCenter2 = new CostCenter();
         //costCenters.add(costCenter);
         User user = new User();
-        user.setEmail("test@test.com");
+       // user.setEmail("test@test.com");
         user.setFirstName("test");
         user.setType("gm");
-        user.setCompanies(companies);
+        //user.setCompanies(companies);
 
         for (Branch branch: branchs) {
 
             if(branch.getPerimeter() == EPerimeter.NE){
 
-                user.setCostCenters(createUserDto.getCostCenters());
+               // user.setCostCenters(createUserDto.getCostCenters());
 
                 // branch NE => ajout user avec CC obligatoire
             }

@@ -13,10 +13,22 @@
                     id='Perimeter' class="form-control" formControlName="perimeter">
                 </div>
                 <div class="form-group">
+                    <label for="branchID">branchID:</label>
+                    <input type="text" validate="required=true"
+                    [ngClass]="{'is-invalid': (companyParamForm .get('branchID')?.dirty || companyParamForm .get('branchID')?.touched) && companyParamForm .get('branchID')?.invalid }"
+                    id='branchID' class="form-control" formControlName="branchID">
+                </div>
+                <div class="form-group">
                     <label for="HotelMegaCode">HotelMegaCode:</label>
                     <input type="text" validate="required=true" 
                     [ngClass]="{'is-invalid': (companyParamForm .get('hotel_MegaCode')?.dirty || companyParamForm .get('hotel_MegaCode')?.touched) && companyParamForm .get('hotel_MegaCode')?.invalid }"
                     id='HotelMegaCode' class="form-control" formControlName="hotel_MegaCode">
+                </div>
+                <div class="form-group">
+                    <label for="hotel_Name">HotelName:</label>
+                    <input type="text" validate="required=true" 
+                    [ngClass]="{'is-invalid': (companyParamForm .get('hotel_Name')?.dirty || companyParamForm .get('hotel_Name')?.touched) && companyParamForm .get('hotel_Name')?.invalid }"
+                    id='hotel_Name' class="form-control" formControlName="hotel_Name">
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="general_manager">GM</label>

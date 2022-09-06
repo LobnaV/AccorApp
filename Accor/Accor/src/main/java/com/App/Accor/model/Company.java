@@ -19,6 +19,7 @@ public class Company {
     @Id
     private String hotel_MegaCode;
     private String hotel_Name;
+		private String general_manager;
 
     @ManyToMany(mappedBy = "companies")
     private Set<User> users = new HashSet<>();
