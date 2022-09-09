@@ -12,9 +12,6 @@ import { AddUserComponent } from './UserBack/add-user/add-user.component';
 import { EditUserComponent } from './UserBack/edit-user/edit-user.component';
 import { AddParamComponent } from './Parameter/add-param/add-param.component';
 import { EditParamComponent } from './Parameter/edit-param/edit-param.component';
-import { CompanyListComponent } from './Company/company-list/company-list.component';
-import { EditCompanyComponent } from './Company/edit-company/edit-company.component';
-import { AddCompanyComponent } from './Company/add-company/add-company.component';
 import { ListBranchComponent } from './Branch/list-branch/list-branch.component';
 import { AddBranchComponent } from './Branch/add-branch/add-branch.component';
 import { ListCcComponent } from './CostCenter/list-cc/list-cc.component';
@@ -34,14 +31,11 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
     NavbarComponent,
     FilterPipe,
     UserListComponent,
-    CompanyListComponent,
     ParameterComponent,
     AddUserComponent,
     EditUserComponent,
     AddParamComponent,
     EditParamComponent,
-    EditCompanyComponent,
-    AddCompanyComponent,
     ListBranchComponent,
     AddBranchComponent,
     ListCcComponent,

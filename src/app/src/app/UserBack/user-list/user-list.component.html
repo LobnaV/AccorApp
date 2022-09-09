@@ -17,8 +17,8 @@
       <th></th>
     </tr>
   </thead>
-  <tbody class="data" [formGroup]="userForm" *ngFor="let data of tabUser | filter: searchKey:'firstName'">
-    <tr *ngIf="getDataHmc == data.selectCompany && roleName == 'ROLE_GM'">
+  <tbody class="data" [formGroup]="userForm" *ngFor="let data of tabUsersGM | filter: searchKey:'firstName'">
+    <tr>
       <th scope="row" #myNameElem><input type="radio" id="radioCheck" name="dispatcher" value="data.id"
         (click)="save(data);testDisp(data);csv(data)" attr.aria-checked="{{dispatcher}}">
       </th> 
@@ -45,8 +45,8 @@
       <th></th>
     </tr>
 </thead>
-    <tbody class="data" [formGroup]="userForm"*ngFor="let data of tabUser | filter: searchKey:'firstName'">
-      <tr *ngIf="getDataHmc == data.selectCompany">
+    <tbody class="data" [formGroup]="userForm"*ngFor="let data of tabUsersOther | filter: searchKey:'firstName'">
+      <tr>
         <th scope="row" #myNameElem><input type="radio" id="radioCheck" name="dispatcher" value="data.id"
             (click)="save(data);testDisp(data);csv(data)" attr.aria-checked="{{dispatcher}}">
         </th>

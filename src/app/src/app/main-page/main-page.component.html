@@ -32,9 +32,9 @@
     </div>
     <div class="listeDeroulante">
         <div class="part2">
-            <form class="ngForm" (ngSubmit)="save(data)">
+            <form class="ngForm" (ngSubmit)="save()">
                 <select [(ngModel)]="selectedCompanies" name="ValueCheck" (change)="ValueChange($event)" style="width: 75%">
-                    <option disabled aria-placeholder="Select hotel">Select hotel</option>
+                    <option aria-placeholder="Select hotel">Select hotel</option>
                     <ng-container *ngFor="let data of companies">
                         <option *ngIf="getUserEmail == data.general_manager"
                             [ngValue]="{hmc:data.hotel_MegaCode, hn:data.hotel_Name ,gm:data.general_manager, branch:data.branchID}"

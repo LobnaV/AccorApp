@@ -32,10 +32,10 @@ export class UserListComponent implements OnInit {
     { name: "primaryBranch" }
   ];
   
-  selectedCompanies = [];
-  
   users: any;
-  tabUser: any = [];
+  // tabUser: User[] = [];
+  tabUsersGM: User[] = [];
+  tabUsersOther: User[] = [];
   tabcc: any = [];
   searchKey: string = "";
   searchTerm: string = "";
@@ -92,29 +92,15 @@ export class UserListComponent implements OnInit {
 
 
    this.service.users()
-      .subscribe(data => {
-        this.tabUser = data;
-        console.log(this.tabUser)
-        for (let i = 0; i < this.tabUser.length; i++) {
-          this.tabi = this.tabUser[i];
-
-          this.t = this.tabUser[i].selectCompany
-          this.role = this.tabi.roles
-
-          for (let irole = 0; irole < this.role.length; irole++) {
-            this.role = this.role[irole];
-           // console.log(this.role)
-         
+      .subscribe((data: User[]) => {
+        console.log(data)
+        for (let user of data) {
+          if (user.roles?.map(role => role.name).includes('ROLE_GM')) {
+            this.tabUsersGM.push(user);
+          } else {
+            this.tabUsersOther.push(user);
           }
-          this.role.name
-          // console.log(this.role.name)
-          this.roleName = this.role.name
-          console.log(this.roleName == 'ROLE_GM')
-          console.log(this.roleName)
         }
-        this.roleName
-        console.log(this.role)
-
       })
       
     this.service.search.subscribe((val: any) => {

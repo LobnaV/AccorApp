@@ -2,7 +2,6 @@ import { Component,Input,OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AccorService } from '../accor.service';
-import { Company } from '../Company/company';
 
 @Component({
   selector: 'app-main-page',
@@ -11,7 +10,7 @@ import { Company } from '../Company/company';
 
 })
 export class MainPageComponent implements OnInit {
-  selectedCompanies = [];
+  selectedCompanies: any;
   selectedBranch = [];
   companies: any = [];
   radioTitle: string;
@@ -41,6 +40,7 @@ export class MainPageComponent implements OnInit {
     this.service.getParams()
     .subscribe(data => {
       this.companies = data;
+      console.log(this.companies)
       
       for (let i = 0; i < data.length; i++) {
         this.element = data[i];
@@ -53,18 +53,21 @@ export class MainPageComponent implements OnInit {
  
 
  ValueChange(event:any){
-  console.log("selected value", event?.target.value)
+  console.log("selected value");
+  console.log(event?.target.value);
  }
 
-  save(data:any){
-    data = this.selectedCompanies;
+  save(){
+    const data: {hmc: string, hn: string ,gm: string, branch: string} = this.selectedCompanies;
+    console.log('data');
+    console.log(data.hmc);
     
     localStorage.setItem('getDataHmc', JSON.stringify(data.hmc))
     localStorage.setItem('getDataHn', JSON.stringify(data.hn))
     localStorage.setItem('getDataGm', JSON.stringify(data.gm))
     localStorage.setItem('getDataBranch', JSON.stringify(data.branch))
     
-    console.log('save data',data)  
+    console.log('save data',data);
 
 
     this.router.navigate(["UserList"]);

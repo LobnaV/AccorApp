@@ -5,9 +5,6 @@ import { LoginComponent } from './Account/login/login.component';
 import { SignupComponent } from './Account/signup/signup.component';
 import { AddBranchComponent } from './Branch/add-branch/add-branch.component';
 import { ListBranchComponent } from './Branch/list-branch/list-branch.component';
-import { AddCompanyComponent } from './Company/add-company/add-company.component';
-import { CompanyListComponent } from './Company/company-list/company-list.component';
-import { EditCompanyComponent } from './Company/edit-company/edit-company.component';
 import { AddCostCenterComponent } from './CostCenter/add-cost-center/add-cost-center.component';
 import { EditCCComponent } from './CostCenter/edit-cc/edit-cc.component';
 import { ListCcComponent } from './CostCenter/list-cc/list-cc.component';
@@ -28,8 +25,6 @@ const routes: Routes = [
     {path: 'Home', component:MainPageComponent},
     { path:'signup',component:SignupComponent},
 
-  //{path: 'ListOfUsers', component:UserListComponent},
-  {path: 'ListOfHotels', component:CompanyListComponent},
 
   {path: 'UserList', component:UserListComponent},
   {path: 'x/:dispId', component:UserListComponent},
@@ -38,9 +33,6 @@ const routes: Routes = [
   {path: 'editParameter/:paramId', component:EditParamComponent},
   {path: 'addUser', component:AddUserComponent},
   {path: 'edit/:userId', component:EditUserComponent},
-  {path: 'companies', component:CompanyListComponent},
-  {path: 'editCompany/:companyId', component:EditCompanyComponent},
-  {path: 'addCompany', component:AddCompanyComponent},
   {path: 'branchs', component:ListBranchComponent},
   {path: 'addBranch', component:AddBranchComponent},
   {path: 'listCostCenter', component:ListCcComponent},
