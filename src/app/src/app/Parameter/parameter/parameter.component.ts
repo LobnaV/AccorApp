@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccorService } from 'src/app/accor.service';
 
@@ -13,13 +14,34 @@ export class ParameterComponent implements OnInit {
   searchKey: string = "";
   searchTerm: string = "";
 
+  getDataBranch = localStorage.getItem('getDataBranch');
+  getDataBranchName = localStorage.getItem('getDataBranchName');
 
   constructor(
     private service:AccorService,
     private router:Router
   ) { }
 
+  companyParamForm = new FormGroup({
+    hotel_MegaCode: new FormControl(''),
+    hotel_Name: new FormControl(''),
+    branchID: new FormControl(''),
+    perimeter: new FormControl(''),
+    general_manager: new FormControl('',[Validators.required,Validators.email]),
+    email_m_gm: new FormControl('',[Validators.required,Validators.email]),
+    portfolio: new FormControl('',[Validators.email]),
+    mm_gm: new FormControl('',[Validators.email]),
+    mmm_gm: new FormControl('',[Validators.email]), 
+    // branch: new FormControl('')
+    
+  })
+
   ngOnInit(): void {
+
+    this.getDataBranch = this.getDataBranch!.replace(/[""]/gi, '')
+    this.getDataBranchName = this.getDataBranchName!.replace(/[""]/gi, '')
+
+
     this.service.getParams()
     .subscribe(data => {
       this.parameters = data;

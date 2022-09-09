@@ -1,35 +1,41 @@
+
 <div class="form-group col-md-8" id="searchBar">
   <div class="btn_searchbar">
     <input class="form-control" type="text" [(ngModel)]="searchTerm" (keyup)="Search($event)" placeholder="rechercher">
-    <img type="button" class="cursor-pointer" src="">
     <div class="container">
-      <button (click)="NewParam()" class="btn add_Btn">Add Param</button>
+      <button (click)="NewParam()" class="btn add_Btn">Create new parameter</button>
     </div>
   </div>
 </div>
-<table class="table">
-  <thead>
+
+<div class="brancheName">
+  {{getDataBranch}} - {{getDataBranchName}}
+</div>
+
+<div style="margin: auto; width: 90%;">
+<table class="table" >
+  <thead class="thead-dark">
     <!-- les noms à modifier  (avec ceux de accor)! avec Alice  -->
     <tr>
-      <th scope="col">Id</th>
-      <th scope="col">Branch </th> 
-      <th scope="col">Perimeter </th>
       <th scope="col">HotelMegaCode </th>
+      <th scope="col">General manager</th>
+      <th scope="col">General manager N+1</th>
+      <th scope="col">General manager N+2</th>
+      <th></th>
+      <th></th>
       <!-- <th scope="col">GM </th>
         <th scope="col">Portfolio </th>
         <th scope="col">gm line manager </th>
-        <th scope="col">N+1 Line manager </th>-->
+        <th scope="col">N+1 Line manager </th> -->
     </tr>
   </thead>
-  <tbody class="data">
-    <tr *ngFor="let param of parameters | filter: searchKey:'hotel_MegaCode'">
-      <th>{{param.id}}</th>
-      <td>{{param.branchID}}</td> 
-      <th>{{param.perimeter}}</th>
+  <tbody class="data"  *ngFor="let param of parameters | filter: searchKey:'hotel_MegaCode'">
+    <tr *ngIf=" getDataBranch == param.branchID">
       <td>{{param.hotel_MegaCode}}</td>
-      <!-- <td>{{param.general_manager}}</td>
-      <td>{{param.portfolio}}</td>
+      <td>{{param.general_manager}}</td>
+      <td>{{param.email_m_gm}}</td>
       <td>{{param.mm_gm}}</td>
+      <!--<td>{{param.portfolio}}</td>
       <td>{{param.mmm_gm}}</td>-->
       <td><button [routerLink]="['/editParameter', param.id]" class="btn btn-edit"
           style="margin-left: 10px;">Edit</button></td>
@@ -37,3 +43,4 @@
     </tr>
   </tbody>
 </table>
+</div>

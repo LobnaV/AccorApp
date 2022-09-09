@@ -68,7 +68,7 @@ export class UserListComponent implements OnInit {
   idPop:any;
 
   role:any =[];
-  roleName:any;
+  roleName:string ="";
 
   constructor(
     private service: AccorService,
@@ -77,6 +77,9 @@ export class UserListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    this.displayStyle = "none";
+
 
    this.getDataHmc = this.getDataHmc!.replace(/[""]/gi, '')
    console.log(this.getDataHmc)
@@ -106,10 +109,12 @@ export class UserListComponent implements OnInit {
           this.role.name
           // console.log(this.role.name)
           this.roleName = this.role.name
-          console.log(this.roleName)
           console.log(this.roleName == 'ROLE_GM')
+          console.log(this.roleName)
         }
-        
+        this.roleName
+        console.log(this.role)
+
       })
       
     this.service.search.subscribe((val: any) => {
@@ -123,8 +128,14 @@ export class UserListComponent implements OnInit {
       })
 
       this.trueOrFalseHome
-    
-  }
+      this.roleName
+      //console.log(this.roleName)
+
+}
+
+
+
+
 
 
   trueOrFalseDispatcher() {

@@ -20,15 +20,15 @@ public class CompanyParameter implements Serializable {
     @Column(unique=true)
     private String hotel_MegaCode;
 		private String hotel_Name;
-		private String email;
-		private String lastName;
-		private String firstName;
+		private String general_manager;
+		private String lastName_gm;
+		private String firstName_gm;
+		private String email_m_gm;
+		private String lastName_m_gm;
+		private String firstName_m_gm;
    // private String perimeter;
 		private String roleParam;
-    private String general_manager;
-  /*  private String portfolio;
-    private String mm_gm;
-    private String mmm_gm;*/
+
 
 
 

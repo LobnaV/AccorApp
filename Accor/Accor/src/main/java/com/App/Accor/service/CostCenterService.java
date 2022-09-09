@@ -1,6 +1,5 @@
 package com.App.Accor.service;
 
-import com.App.Accor.model.Company;
 import com.App.Accor.model.CostCenter;
 import org.springframework.stereotype.Service;
 

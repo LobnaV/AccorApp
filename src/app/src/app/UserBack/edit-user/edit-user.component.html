@@ -1,31 +1,32 @@
 <!-- Add company test -->
-<div class="container col-md-6">
-    <div class="card">
-        <div class="card-header">
-            <h3>Update User</h3>
-        </div>
-        <div class="card-body">
-            <form [formGroup]="userForm" (ngSubmit)='Update()'>
+<div class="container">
+    <div class="btns">
+        <button class="btnBack" [routerLink]="'UserList'"> Back </button>
+    </div>
 
+    <div class="card-body">
+        <form [formGroup]="userForm" (ngSubmit)='Update()'>
+            <!-- 
                 <div class="form-group">
                     <label for="primaryBranch">primaryBranch:</label>
                     <input type="text"  id='primaryBranch' class="form-control" formControleName="primaryBranch">
-                </div>
+                </div> -->
 
-                <div class="form-group">
-                    <label for="firstName">firstName:</label>
-                    <input type="text" id='firstName' class="form-control" formControlName="firstName">
-                </div>
-                <div class="form-group">
-                    <label for="lastName">lastName:</label>
-                    <input type="text" id='lastName' class="form-control" formControlName="lastName">
-                </div>
-                <div class="form-group">
-                    <label for="username">email:</label>
-                    <input type="username" id='username' class="form-control" formControlName="username">
-                </div>
-                
-                <!-- <div class="dropdown" >
+            <div class="form-group">
+                <label for="firstName">firstName:</label>
+                <input type="text" id='firstName' class="form-control" formControlName="firstName">
+            </div>
+            <div class="form-group">
+                <label for="lastName">lastName:</label>
+                <input type="text" id='lastName' class="form-control" formControlName="lastName">
+            </div>
+            <div class="form-group">
+                <label for="username">email:</label>
+                <input type="username" id='username' class="form-control" formControlName="username"
+                    style="width: 92%; margin-left: 1.6rem;">
+            </div>
+
+            <!-- <div class="dropdown" >
                   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Select Cost Center
                   </button>
@@ -33,7 +34,8 @@
                     <a class="dropdown-item" formControlName="costCenters">{{data.costCenters}}</a>
                   </div>
                 </div> -->
-                <button type="submit" class="btn btn-danger" [disabled]="userForm.invalid">edit</button>
-            </form>
-        </div>
+            <div class="save">
+                <button type="submit" class="btn-Save" [disabled]="userForm.invalid">edit</button>
+            </div>
+        </form>
     </div>

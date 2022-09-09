@@ -1,28 +1,21 @@
 package com.App.Accor.service.serviceImpl;
 
-import com.App.Accor.model.Company;
-import com.App.Accor.model.EPerimeter;
 import com.App.Accor.model.User;
 import com.App.Accor.repository.BranchRepository;
-import com.App.Accor.repository.CompanyRepository;
 import com.App.Accor.repository.UserRepository;
 import com.App.Accor.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private CompanyRepository companyRepository;
     @Autowired
     private BranchRepository branchRepository;
 

@@ -192,8 +192,10 @@ export class AccorService {
       localStorage.removeItem('TOKEN_APPLI');
       localStorage.removeItem('User_Email');
       localStorage.removeItem('getDataHmc');
+      localStorage.removeItem('getDataHn');
       localStorage.removeItem('getDataGm');
       localStorage.removeItem('getDataBranch');
+      localStorage.removeItem('getDataBranchName')
       console.log('déconnecter');
       this.router.navigate(['/login']);
     }

@@ -28,16 +28,10 @@ public class Branch implements Serializable{
     @Enumerated(EnumType.STRING)
     private EPerimeter perimeter;
 
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    //mappedBy = "branch"
-    private Set<Company> companies = new HashSet<>();
 
 
-
-    public Branch(String branch_Name, String country_Code, Set<Company> companies) {
+    public Branch(String branch_Name, String country_Code) {
         this.branch_Name = branch_Name;
         this.country_Code = country_Code;
-        this.companies = companies;
     }
 }

@@ -12,6 +12,7 @@ import { Company } from '../Company/company';
 })
 export class MainPageComponent implements OnInit {
   selectedCompanies = [];
+  selectedBranch = [];
   companies: any = [];
   radioTitle: string;
   model   = this.companies.general_manager;
@@ -29,6 +30,7 @@ export class MainPageComponent implements OnInit {
     }
 
     element:any;
+    dataB:any;
 
   ngOnInit(): void {
 
@@ -68,6 +70,19 @@ export class MainPageComponent implements OnInit {
     this.router.navigate(["UserList"]);
 
   } 
+
+
+  saveB(dataB:any){
+    dataB = this.selectedBranch;
+    
+    localStorage.setItem('getDataBranch', JSON.stringify(dataB.branch))
+    console.log(dataB.branch)
+    localStorage.setItem('getDataBranchName', JSON.stringify(dataB.nameBranch))
+
+
+    this.router.navigate(["Parameter"]);
+
+  }
 
  
  

@@ -1,4 +1,6 @@
-<div class="container-fluid">
+<!-- Vu General Manager -->
+ <div class="container-fluid">
+
     <div class="contenue">
         <h5>The Accor User app:</h5>
 
@@ -38,6 +40,38 @@
                             [ngValue]="{hmc:data.hotel_MegaCode, hn:data.hotel_Name ,gm:data.general_manager, branch:data.branchID}"
                             [selected]="data.hotel_MegaCode">
                             {{data.hotel_MegaCode}} - {{data.hotel_Name}}</option>
+                    </ng-container>
+                </select>
+
+                <button type="submit"> Go</button>
+            </form>
+        </div>
+    </div>
+</div> 
+
+
+<!-- Vu Company Admin -->
+
+<div class="container-fluid">
+    <div class="contenue">
+        <h5>The Accor User app:</h5>
+
+        <div>The app will allow you, as a GM, to manage the different Tradeshift users of your hotel and the cost centre
+            attribution between them and you.
+
+            We remind you that the composition of the workflow is the following:
+        </div>
+    </div>
+    <div class="listeDeroulante">
+        <div class="part2">
+            <form class="ngForm" (ngSubmit)="saveB(dataB)">
+                <select [(ngModel)]="selectedBranch" name="ValueCheck" (change)="ValueChange($event)" style="width: 75%">
+                    <option disabled aria-placeholder="Select branch">Select  Branch</option>
+                    <ng-container *ngFor="let data of companies">
+                        <option *ngIf="getUserEmail == data.general_manager"
+                            [ngValue]="{hmc:data.hotel_MegaCode, hn:data.hotel_Name ,gm:data.general_manager, branch:data.branchID, nameBranch:data.branchName}"
+                            [selected]="data.branch">
+                            {{data.branchID}} - {{data.branchName}}</option>
                     </ng-container>
                 </select>
 

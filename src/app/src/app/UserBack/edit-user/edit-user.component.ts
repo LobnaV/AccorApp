@@ -101,7 +101,7 @@ export class EditUserComponent implements OnInit {
       const gm = this.getDataGm;
   
       const data = [
-        [branche, home, this.userForm.value.username, this.userForm.value.firstName, this.userForm.value.lastName, 'ACTIVE', gm, limit, this.spend_limit, 'Owned Cost Center','Head of Department']
+        [branche, home, this.userForm.value.username, this.userForm.value.firstName, this.userForm.value.lastName, 'ACTIVE', gm, limit, this.spend_limit, 'null','Head of Department']
       ];
       console.log('test form', this._fb)
   

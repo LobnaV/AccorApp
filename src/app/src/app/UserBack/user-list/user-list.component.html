@@ -6,7 +6,8 @@
   </div>
 </div>
 
-<table class="table" [ngStyle]="{'display':tableStyle}">
+<div class="tables" [ngStyle]="{'display':tableStyle}">
+<table class="table" >
   <thead class="thead-dark">
     <tr>
       <th scope="col">Dispatcher</th>
@@ -14,26 +15,26 @@
       <th scope="col">Last name</th>
       <th scope="col">Email </th>
       <th></th>
-      <th></th>
     </tr>
   </thead>
-  <tbody class="data" [formGroup]="userForm"*ngFor="let data of tabUser | filter: searchKey:'name'">
-    <tr *ngIf="getDataHmc == data.selectCompany && roleName == 'ROLE_GM' ">
+  <tbody class="data" [formGroup]="userForm" *ngFor="let data of tabUser | filter: searchKey:'firstName'">
+    <tr *ngIf="getDataHmc == data.selectCompany && roleName == 'ROLE_GM'">
       <th scope="row" #myNameElem><input type="radio" id="radioCheck" name="dispatcher" value="data.id"
         (click)="save(data);testDisp(data);csv(data)" attr.aria-checked="{{dispatcher}}">
       </th> 
       <th scope="row">{{data.firstName}}</th>
-      <th >{{data.lastName}}</th>
+      <th>{{data.lastName}}</th>
       <td>{{data.username}}</td>
       <td> <button [routerLink]="['/edit', data.id]" class="btn btn-edit" style="margin-left: 10px;">Edit</button>
       </tr>
     </tbody>
   </table>
+
   <div class="container">
     <button (click)="NewUser()" class="btn add_Btn">Add User</button>
   </div>
 
-<table class="table" [ngStyle]="{'display':tableStyle}">
+<table class="table" >
   <thead class="thead-dark">
   <tr>
     <th scope="col">Dispatcher</th>
@@ -44,8 +45,8 @@
       <th></th>
     </tr>
 </thead>
-    <tbody class="data" [formGroup]="userForm"*ngFor="let data of tabUser | filter: searchKey:'name'">
-      <tr *ngIf="getDataHmc == data.selectCompany && role.name == undefined">
+    <tbody class="data" [formGroup]="userForm"*ngFor="let data of tabUser | filter: searchKey:'firstName'">
+      <tr *ngIf="getDataHmc == data.selectCompany">
         <th scope="row" #myNameElem><input type="radio" id="radioCheck" name="dispatcher" value="data.id"
             (click)="save(data);testDisp(data);csv(data)" attr.aria-checked="{{dispatcher}}">
         </th>
@@ -60,6 +61,7 @@
         </tr>
     </tbody>
 </table>
+</div>
 
 <div class="popup1" [ngStyle]="{'display':displayStyle}">
   <p class="popup">If you need to temporarily delete a user, we advise you use the delegation rule option within

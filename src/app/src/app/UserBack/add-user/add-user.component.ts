@@ -125,11 +125,6 @@ export class AddUserComponent implements OnInit {
     }
   }
 
-  recupBranch() {
-    console.log('branche', this.branch)
-    return this.branch.filter(primary => true)
-  }
-
   trueOrFalse(){
     if(this.userForm.value.primaryBranch == true){
       return 'TRUE'
