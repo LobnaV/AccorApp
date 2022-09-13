@@ -15,13 +15,4 @@ public interface BranchService {
     Branch add(Branch branch );
     Branch edit(Branch  branch );
     void deleteBranch(Long id);
-
-    //placement provisoire
-
-   /* List<CompanyParameter> companyList();
-    Optional<CompanyParameter> listIdCompany(Long id);
-    CompanyParameter addCompany(CompanyParameter company );
-    CompanyParameter editCompany(CompanyParameter company);
-    void deleteCompany(Long id);*/
-
 }

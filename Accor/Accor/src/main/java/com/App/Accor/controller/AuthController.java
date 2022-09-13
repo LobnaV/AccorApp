@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -49,20 +50,20 @@ public class AuthController {
 	@PostMapping("/api/auth/login")
 	public ResponseEntity<?> authentication(@Valid @RequestBody LoginRequest loginRequest){
 		Authentication authentication = authenticationManager.authenticate(
-			new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),loginRequest.getPassword()));
+			new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		String jwt = jwtUtils.generateJwtToken(authentication);
 
 		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 		List<String> roles = userDetails.getAuthorities().stream()
-			.map(item -> item.getAuthority())
+			.map(GrantedAuthority::getAuthority)
 			.collect(Collectors.toList());
 
 		return ResponseEntity.ok(new JwtResponse(jwt,
 			userDetails.getId(),
-			userDetails.getUsername()
-			,roles));
+			userDetails.getUsername(),
+			roles));
 	}
 
 	@PostMapping("/api/auth/signin")
@@ -86,20 +87,20 @@ public class AuthController {
 		Set<ERole> strRoles = ERole.ConvertFromString(signupRequest.getRoles());
 		Set<Role> roles = new HashSet<>();
 
-		if (strRoles.isEmpty()){
-			Role userRole = roleRepository.findByName(ERole.ROLE_GM)
-				.orElseThrow(() -> new RuntimeException("Error: Role is not found"));
-			roles.add(userRole);
-		}else{
-			signupRequest.getRoles().forEach(role ->{
-				Role currentRole = roleRepository.findByName( ERole.valueOf(role))
-					.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-				roles.add(currentRole);
+//		if (strRoles.isEmpty()){
+//			Role userRole = roleRepository.findByName(ERole.ROLE_GM)
+//				.orElseThrow(() -> new RuntimeException("Error: Role is not found"));
+//			roles.add(userRole);
+//		}else{
+//			signupRequest.getRoles().forEach(role ->{
+//				Role currentRole = roleRepository.findByName( ERole.valueOf(role))
+//					.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+//				roles.add(currentRole);
+//
+//			});
+//		}
 
-			});
-		}
-
-		user.setRoles(roles);
+//		user.setRoles(roles);
 		userRepository.save(user);
 
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AccorService } from 'src/app/accor.service';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from "./auth.service";
+import {TokenStorageService} from "./token-storage.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -10,28 +11,46 @@ import { AccorService } from 'src/app/accor.service';
 })
 export class LoginComponent implements OnInit {
   loginForm = new FormGroup({
-    username: new FormControl('',[Validators.required]),
-    password: new FormControl('',[Validators.required, Validators.minLength(4)])
+    username: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required, Validators.minLength(4)])
   })
-  constructor(
-    private service: AccorService,
-    private router:Router) { }
+  isLoggedIn = false;
+  isLoginFailed = false;
+  errorMessage = '';
+  roles: string[] = [];
 
-  ngOnInit(): void {
+  constructor(
+    private tokenStorage: TokenStorageService,
+    private authService: AuthService,
+    private router: Router) {
   }
 
-  onLogin(){
-  const formValues = this.loginForm.value;
-  console.log(formValues);
-  this.service.login(formValues)
-    .subscribe(
-      (resp:any)=>{
-        console.log("Connection succed", resp);
+  ngOnInit(): void {
+    if (this.tokenStorage.getToken()) {
+      this.isLoggedIn = true;
+      this.roles = this.tokenStorage.getUser().roles;
+    }
+  }
+
+  onLogin() {
+    const formValues = this.loginForm.value;
+    console.log(formValues);
+
+    this.authService.login(this.loginForm.value).subscribe(
+      data => {
+        console.log(data);
+        this.tokenStorage.saveToken(data.token);
+        this.tokenStorage.saveUser(data.username);
+
+        this.isLoginFailed = false;
+        this.isLoggedIn = true;
+        this.roles = this.tokenStorage.getUser().roles;
         this.router.navigate(['Home']);
       },
-      error=>{
-        console.log(error);
+      err => {
+        this.errorMessage = err.error.message;
+        this.isLoginFailed = true;
       }
-    )
-    }
+    );
+  }
 }

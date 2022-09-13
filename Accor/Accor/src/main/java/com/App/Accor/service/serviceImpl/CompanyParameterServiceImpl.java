@@ -18,8 +18,8 @@ public class CompanyParameterServiceImpl implements CompanyParameterService {
     private CompanyParameterRepository parameterRepository;
 
     @Override
-    public List<CompanyParameter> paramList() {
-        return parameterRepository.findAll();
+    public CompanyParameter paramList(String username) throws Exception {
+        return parameterRepository.findByUserGMUsername(username).orElseThrow(() -> new Exception("Impossible de trouver l'hotel associé"));
     }
 
     @Override

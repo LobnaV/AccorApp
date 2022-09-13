@@ -1,32 +1,25 @@
 package com.App.Accor.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.transaction.annotation.Propagation;
 
-import javax.persistence.*;
-import javax.transaction.Transactional;
-import javax.validation.constraints.Email;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 
 @Data
 @Entity
+@Table
 @AllArgsConstructor
 @NoArgsConstructor
 public class CostCenter implements Serializable {
 
-    @Id
-    private String megaCode_CostCenter_ID;
-    private String megaCode_CostCenter_Label;
-    private User owner_costCenter_email;
+	@Id
+	private String megaCode_CostCenter_ID;
 
-   /* @JsonIgnoreProperties("costCenters")
-    @ManyToOne()
-    private User user;*/
-
+	private String megaCode_CostCenter_Label;
 
 
 }

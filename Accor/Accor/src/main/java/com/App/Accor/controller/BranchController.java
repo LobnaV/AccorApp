@@ -40,8 +40,8 @@ public class BranchController {
     }
 
     @PutMapping({"/edit/{id}"})
-    public Branch edit (@RequestBody Branch branch, @PathVariable("id")String id){
-        branch.setBranch_Id(id);
+    public Branch edit (@RequestBody Branch branch, @PathVariable("id")Long id){
+        branch.setId(id);
         return service.edit(branch);
     }
 

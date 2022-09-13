@@ -24,7 +24,7 @@ export class MainPageComponent implements OnInit {
   constructor(
     private service: AccorService,
     private router: Router
-    ) {  
+    ) {
     this.radioTitle = 'select company';
     }
 
@@ -41,16 +41,16 @@ export class MainPageComponent implements OnInit {
     .subscribe(data => {
       this.companies = data;
       console.log(this.companies)
-      
+
       for (let i = 0; i < data.length; i++) {
         this.element = data[i];
-        console.log('test1', this.element.general_manager)        
+        console.log('test1', this.element.general_manager)
       }
 
 
     })
   }
- 
+
 
  ValueChange(event:any){
   console.log("selected value");
@@ -61,23 +61,23 @@ export class MainPageComponent implements OnInit {
     const data: {hmc: string, hn: string ,gm: string, branch: string} = this.selectedCompanies;
     console.log('data');
     console.log(data.hmc);
-    
+
     localStorage.setItem('getDataHmc', JSON.stringify(data.hmc))
     localStorage.setItem('getDataHn', JSON.stringify(data.hn))
     localStorage.setItem('getDataGm', JSON.stringify(data.gm))
     localStorage.setItem('getDataBranch', JSON.stringify(data.branch))
-    
+
     console.log('save data',data);
 
 
     this.router.navigate(["UserList"]);
 
-  } 
+  }
 
 
   saveB(dataB:any){
     dataB = this.selectedBranch;
-    
+
     localStorage.setItem('getDataBranch', JSON.stringify(dataB.branch))
     console.log(dataB.branch)
     localStorage.setItem('getDataBranchName', JSON.stringify(dataB.nameBranch))
@@ -87,6 +87,6 @@ export class MainPageComponent implements OnInit {
 
   }
 
- 
- 
+
+
 }
