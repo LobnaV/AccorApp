@@ -46,7 +46,7 @@ public class StaffController {
 		return ResponseEntity.ok(service.findById(id));
 	}
 
-	@GetMapping("/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deleteStaff(@PathVariable Long id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();

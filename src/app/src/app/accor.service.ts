@@ -42,7 +42,7 @@ export class AccorService {
     return this.http
       .get<Param>(this.paramUrl + "/" + id)
   }
-  
+
   updateParam(param:Param){
     return this.http
       .put<Param>(this.paramUrl + "/editParameter/" + param.id, param);
@@ -51,6 +51,13 @@ export class AccorService {
   deleteParam(paramId:Param){
     return this.http
       .delete<Param>(this.paramUrl + "/deleteParameter/" + paramId)
+  }
+
+  generateExcel(): Observable<HttpResponse<Blob>> {
+    return this.http.get(`${this.paramUrl}/excel`, {
+      observe: 'response',
+      responseType: 'blob'
+    });
   }
 
   // Service User
@@ -81,7 +88,7 @@ export class AccorService {
       .delete<User>(this.urlLocal + "/delete/" + userId)
   }
 
-  dispId(id:number){  
+  dispId(id:number){
     return this.http
       .get<User>(this.urlLocal + "/x/"+ id)
   }
@@ -121,7 +128,7 @@ export class AccorService {
       .delete<CostCenter>(this.CCUrl + "/deleteCostCenter/" + ccId)
   }
 
-  
+
   /**
    * méthode qui pérmet de s'enregistrer
    * @param newUser
@@ -155,7 +162,7 @@ export class AccorService {
      getToken(){
       return localStorage.getItem("TOKEN_APPLI");
     }
-  
+
     logout() {
       localStorage.removeItem('TOKEN_APPLI');
       localStorage.removeItem('User_Email');
@@ -169,7 +176,7 @@ export class AccorService {
     }
 
 
-  
+
 }
 
 
