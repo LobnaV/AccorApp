@@ -1,11 +1,12 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ngxCsv } from 'ngx-csv';
 import { AccorService } from 'src/app/accor.service';
 import { User } from '../user';
 import { Location } from '@angular/common'
 import { checkServerIdentity } from 'tls';
+import { Console } from 'console';
 
 
 @Component({
@@ -49,12 +50,7 @@ export class UserListComponent implements OnInit {
   t:any;
   tabi : any = [];
 
-  getDataHmc = localStorage.getItem('getDataHmc');
-  getDataHn = localStorage.getItem('getDataHn');
-  getDataGm = localStorage.getItem('getDataGm');
-  getDataBranch = localStorage.getItem('getDataBranch');
-
-
+  companie?: any;
 
   userForm = new FormGroup({
     selectCompany: new FormControl,
@@ -73,6 +69,7 @@ export class UserListComponent implements OnInit {
   constructor(
     private service: AccorService,
     private router: Router,
+    private activatedRoute: ActivatedRoute,
     public theDispatcher: AccorService
   ) { }
 
@@ -80,16 +77,17 @@ export class UserListComponent implements OnInit {
 
     this.displayStyle = "none";
 
+    console.log('****');
 
-   this.getDataHmc = this.getDataHmc!.replace(/[""]/gi, '')
-   console.log(this.getDataHmc)
-   this.getDataGm = this.getDataGm!.replace(/[""]/gi, '')
-   console.log(this.getDataGm)
-   this.getDataBranch = this.getDataBranch!.replace(/[""]/gi, '')
-   this.getDataHn = this.getDataHn!.replace(/[""]/gi, '')
+    this.activatedRoute.params.subscribe(params => {
+      console.log(params['id']);
+      this.service.ParamId(params['id']).subscribe(data => {
+        this.companie = data;
+        console.log(data);
+      });
+    });
 
-
-
+    
 
    this.service.users()
       .subscribe((data: User[]) => {
@@ -155,7 +153,7 @@ export class UserListComponent implements OnInit {
   }
 
   disable(data:any){
-    var desired = this.getDataHmc!.replace(/[""]/gi, '')
+    var desired = this.companie.hotel_MegaCode.replace(/[""]/gi, '')
     console.log(desired)
     
     console.log(data.selectCompany)
@@ -224,9 +222,9 @@ export class UserListComponent implements OnInit {
 
   csv(dispId: any) {
       const limit = this.approvalLimit();
-      const branche = this.getDataBranch;
+      const branche = this.companie.BranchId;
       const home = this.trueOrFalseHome();
-      const gm= this.getDataGm;
+      const gm= this.companie.general_manager;
       //const disp = this.testDisp(dispId);
 
       const data = [
@@ -252,9 +250,9 @@ export class UserListComponent implements OnInit {
   csvdelete(dispId: any) {
   
     const limit = this.approvalLimit();
-    const branche = this.getDataBranch;
+    const branche = this.companie.BranchId;
     const home = this.trueOrFalseHome();
-    const gm = this.getDataGm;
+    const gm = this.companie.general_manager;
     const state = this.trueOrFalseState();
    // const disp = this.testDisp(dispId);
 

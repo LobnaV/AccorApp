@@ -1,7 +1,10 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
 import { AppComponent } from './app.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { FilterPipe } from './Pipe/filter.pipe';
@@ -23,6 +26,13 @@ import { LoginComponent } from './Account/login/login.component';
 import { SignupComponent } from './Account/signup/signup.component';
 import { LayoutComponent } from './layout/layout.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
+import { ForgotPasswordFormComponent } from './forgot-password-form/forgot-password-form.component';
+
+// Factory function required during AOT compilation
+export function httpTranslateLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
+
 
 @NgModule({
   declarations: [
@@ -44,6 +54,7 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
     LoginComponent,
     SignupComponent,
     LayoutComponent,
+    ForgotPasswordFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +64,13 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
     HttpClientModule,
     CommonModule,
     MatRadioModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpTranslateLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,10 +1,12 @@
 package com.App.Accor.service.serviceImpl;
 
 import com.App.Accor.model.User;
+import com.App.Accor.model.UserNotFoundException;
 import com.App.Accor.repository.BranchRepository;
 import com.App.Accor.repository.UserRepository;
 import com.App.Accor.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,15 +39,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
     public User add(User user) {
- /*       Set<Company> companyList = user.getCompanies();
-        for (var company:companyList) {
-            if (company.getBranch().getPerimeter() == EPerimeter.NE && !user.getCostCenters().isEmpty()){
-                return userRepository.save(user);
-
-            }else if (company.getBranch().getPerimeter() == EPerimeter.SE && user.getCostCenters().isEmpty())
-                return userRepository.save(user);
-
-        }return null;*/
         return userRepository.save(user);
 
     }
@@ -62,4 +55,29 @@ public class UserServiceImpl implements UserService {
             userRepository.delete(user.get());
         }
     }
+
+
+
+	public void updateResetPasswordToken(String token, String username) throws UserNotFoundException {
+		User user = userRepository.findByEmail(username);
+		if (user != null) {
+			user.setResetPasswordToken(token);
+			userRepository.save(user);
+		} else {
+			throw new UserNotFoundException("Could not find any customer with the email " + username);
+		}
+	}
+
+	public User getByResetPasswordToken(String token) {
+		return userRepository.findByResetPasswordToken(token);
+	}
+
+	public void updatePassword(User user, String newPassword) {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String encodedPassword = passwordEncoder.encode(newPassword);
+		user.setPassword(encodedPassword);
+
+		user.setResetPasswordToken(null);
+		userRepository.save(user);
+	}
 }

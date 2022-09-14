@@ -29,11 +29,12 @@ public class User implements Serializable {
     private String type;
 		private String primaryBranch;
 		private String selectCompany;
+		private String resetPasswordToken;
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(	name = "user_roles",
-		joinColumns = @JoinColumn(name = "user_id"),
-		inverseJoinColumns = @JoinColumn(name = "role_id"))
+	@ManyToMany
+	@JoinTable(	name = "user_role",
+		joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+		inverseJoinColumns = @JoinColumn(name = "role_name", referencedColumnName = "name"))
 	private Set<Role> roles = new HashSet<>();
 
 

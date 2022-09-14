@@ -86,7 +86,12 @@ export class AccorService {
       .get<User>(this.urlLocal + "/x/"+ id)
   }
 
-  branchs(){
+  branchId(id:number){  
+    return this.http
+      .get<Branch>(this.local + "/"+ id)
+  }
+
+  branches(){
     return this.http
       .get<Branch[]>(this.local + "/List")
   }

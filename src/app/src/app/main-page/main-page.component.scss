@@ -4,12 +4,16 @@
 }
 .container-fluid{
     display: flex;
-    .contenue{
+    .contenue {
         width: 60%;
     }
-    .listeDeroulante{ 
+    .listeDeroulante { 
         margin: auto;
         width: 40%;
+
+        select {
+            width: 75%;
+        }
 
         .part2{
             .ngForm{

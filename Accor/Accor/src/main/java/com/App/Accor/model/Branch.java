@@ -21,6 +21,8 @@ import java.util.Set;
 @NoArgsConstructor
 public class Branch implements Serializable{
     @Id
+		@GeneratedValue(strategy = GenerationType.IDENTITY)
+		private long id;
     private String branch_Id;
     private String branch_Name;
     private String country_Code;

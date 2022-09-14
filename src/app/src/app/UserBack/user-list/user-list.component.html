@@ -1,5 +1,5 @@
 <div class="form-group col-md-8 " id="searchBar">
-  <div>Megacode {{getDataHmc}} - Hotel name {{getDataHn}}</div> 
+  <div>Megacode {{companie?.hotel_MegaCode}} - Hotel name {{companie?.hotel_Name}}</div> 
   <div class="btn_searchbar">
     <input class="form-control" type="text" [(ngModel)]="searchTerm" (keyup)="Search($event)" placeholder="rechercher">
     <img type="button" class="cursor-pointer" src="">

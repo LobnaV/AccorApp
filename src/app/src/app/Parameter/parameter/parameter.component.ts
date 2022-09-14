@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AccorService } from 'src/app/accor.service';
 
 @Component({
@@ -13,13 +13,13 @@ export class ParameterComponent implements OnInit {
   parameters: any;
   searchKey: string = "";
   searchTerm: string = "";
-
-  getDataBranch = localStorage.getItem('getDataBranch');
-  getDataBranchName = localStorage.getItem('getDataBranchName');
+  branche?:any;
 
   constructor(
     private service:AccorService,
-    private router:Router
+    private router:Router,
+    private activatedRoute: ActivatedRoute,
+
   ) { }
 
   companyParamForm = new FormGroup({
@@ -38,9 +38,13 @@ export class ParameterComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.getDataBranch = this.getDataBranch!.replace(/[""]/gi, '')
-    this.getDataBranchName = this.getDataBranchName!.replace(/[""]/gi, '')
-
+    this.activatedRoute.params.subscribe(params => {
+      console.log(params['id']);
+      this.service.branchId(params['id']).subscribe(data => {
+        this.branche = data;
+        console.log(data);
+      });
+    });
 
     this.service.getParams()
     .subscribe(data => {
