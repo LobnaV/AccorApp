@@ -1,18 +1,15 @@
-package com.App.Accor.service.serviceImpl.detailsImpl;
+package com.App.Accor.model;
 
-import com.App.Accor.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class UserDetailsImpl implements UserDetails {
+public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {
 
 	private static final long serialVersionUID = 1L;
 
@@ -26,20 +23,20 @@ public class UserDetailsImpl implements UserDetails {
 
 	private Collection<? extends GrantedAuthority> authorities;
 
-	public UserDetailsImpl(Long id, String username, String password,
-												 Collection<? extends GrantedAuthority> authorities) {
+	public UserDetails(Long id, String username, String password,
+	                   Collection<? extends GrantedAuthority> authorities) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.authorities = authorities;
 	}
 
-	public static UserDetailsImpl build(User user){
+	public static UserDetails build(User user){
 		List<GrantedAuthority> authorities = user.getRoles().stream()
 			.map(role -> new SimpleGrantedAuthority(role.getName().name()))
 			.collect(Collectors.toList());
 
-		return new UserDetailsImpl(
+		return new UserDetails(
 			user.getId(),
 			user.getUsername(),
 			user.getPassword(),
@@ -89,7 +86,7 @@ public class UserDetailsImpl implements UserDetails {
 			return true;
 		if (o == null || getClass() !=o.getClass())
 			return false;
-		UserDetailsImpl user = (UserDetailsImpl) o;
+		UserDetails user = (UserDetails) o;
 		return Objects.equals(id,user.id);
 	}
 

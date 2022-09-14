@@ -16,6 +16,10 @@ public class Branch implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(unique = true)
+	@NotNull
+	private String code;
+
 	private String name;
 
 	private String countryCode;

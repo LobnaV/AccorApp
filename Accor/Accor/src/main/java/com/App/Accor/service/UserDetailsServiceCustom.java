@@ -1,25 +1,25 @@
-package com.App.Accor.service.serviceImpl.detailsImpl;
+package com.App.Accor.service;
 
 import com.App.Accor.model.User;
+import com.App.Accor.model.UserDetails;
 import com.App.Accor.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class UserDetailsServiceCustom implements UserDetailsService {
 	@Autowired
 	UserRepository userRepository;
 
 	@Override
 	@Transactional
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userRepository.findByUsername(username)
-			.orElseThrow(() -> new UsernameNotFoundException("User Not Found with username:"+ username));
+			.orElseThrow(() -> new UsernameNotFoundException("User Not Found with username : " + username));
 
-		return UserDetailsImpl.build(user);
+		return UserDetails.build(user);
 	}
 }

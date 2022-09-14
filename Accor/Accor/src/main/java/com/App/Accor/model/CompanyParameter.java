@@ -3,6 +3,7 @@ package com.App.Accor.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Data
@@ -22,7 +23,8 @@ public class CompanyParameter implements Serializable {
 
 	private String name;
 
-	@ManyToOne
+	@OneToOne
+	@NotNull
 	private User userGM;
 
 	private String dispacherMail;

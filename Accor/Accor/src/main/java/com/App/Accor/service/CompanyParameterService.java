@@ -1,19 +1,38 @@
 package com.App.Accor.service;
 
 import com.App.Accor.model.CompanyParameter;
+import com.App.Accor.repository.CompanyParameterRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @Service
-public interface CompanyParameterService {
-	CompanyParameter paramList(String username) throws Exception;
+@Transactional
+public class CompanyParameterService {
 
-	Optional<CompanyParameter> paramId(Long id);
+	@Autowired
+	private CompanyParameterRepository parameterRepository;
 
-	CompanyParameter addParam(CompanyParameter param);
+	public CompanyParameter paramList(String username) throws Exception {
+		return parameterRepository.findByUserGMUsername(username).orElseThrow(() -> new Exception("Impossible de trouver l'hotel associé"));
+	}
 
-	CompanyParameter editParam(CompanyParameter param);
+	public Optional<CompanyParameter> paramId(Long id) {
+		return parameterRepository.findById(id);
+	}
 
-	void deleteParam(Long id);
+	public CompanyParameter addParam(CompanyParameter param) {
+		return parameterRepository.save(param);
+	}
+
+	public CompanyParameter editParam(CompanyParameter param) {
+		return parameterRepository.save(param);
+	}
+
+	public void deleteParam(final Long id) {
+		Optional<CompanyParameter> param = parameterRepository.findById(id);
+		param.ifPresent(companyParameter -> parameterRepository.delete(companyParameter));
+	}
 }
