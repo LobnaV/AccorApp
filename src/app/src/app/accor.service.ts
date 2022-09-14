@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, map} from 'rxjs';
+import {BehaviorSubject, map, Observable} from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Branch } from './Branch/branch';
 import { CostCenter } from './CostCenter/cost-center';
@@ -13,12 +13,10 @@ import { User } from './UserBack/user';
 })
 export class AccorService {
   private url = `${environment.UrlLocal}`
-  private urlLocal = `${environment.UrlLocal}/User`
-  private local = `${environment.UrlLocal}/Branch`;
-  private paramUrl = `${environment.UrlLocal}/Parameter`
-  private CCUrl = `${environment.UrlLocal}/CostCenter`
-
-
+  private urlLocal = `${this.url}/User`
+  private local = `${this.url}/Branch`;
+  private paramUrl = `${this.url}/Parameter`
+  private CCUrl = `${this.url}/CostCenter`
 
   public search = new BehaviorSubject<string>("");
 
