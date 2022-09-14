@@ -8,9 +8,11 @@
     <a class="nav-link " [routerLink]="'Parameter'" routerLinkActive="active-link" aria-current="page">Parameter</a>
     <a class="nav-link" (click)="onClickLogout()">Se déconnecter</a>
   </div>
+  Change Language : <select #selLang (change)="translateLanguageTo(selLang.value)">
+    <option *ngFor="let language of translate.getLangs()" [value]="language">{{ language }}</option>
+  </select>
   <div class="logo">
    <img id="logo_Invoicing" class="" src="../../assets/Logo_Invoicing.png">
   </div> 
-
 
 </nav>

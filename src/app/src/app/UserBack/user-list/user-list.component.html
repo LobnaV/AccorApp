@@ -1,5 +1,5 @@
 <div class="form-group col-md-8 " id="searchBar">
-  <div>Megacode {{getDataHmc}} - Hotel name {{getDataHn}}</div> 
+  <div>Megacode {{companie?.megaCode}} - Hotel name {{companie?.name}}</div>
   <div class="btn_searchbar">
     <input class="form-control" type="text" [(ngModel)]="searchTerm" (keyup)="Search($event)" placeholder="rechercher">
     <img type="button" class="cursor-pointer" src="">
@@ -17,15 +17,18 @@
       <th></th>
     </tr>
   </thead>
-  <tbody class="data" [formGroup]="userForm" *ngFor="let data of tabUsersGM | filter: searchKey:'firstName'">
+  <tbody class="data" [formGroup]="userForm">
     <tr>
-      <th scope="row" #myNameElem><input type="radio" id="radioCheck" name="dispatcher" value="data.id"
-        (click)="save(data);testDisp(data);csv(data)" attr.aria-checked="{{dispatcher}}">
-      </th> 
-      <th scope="row">{{data.firstName}}</th>
-      <th>{{data.lastName}}</th>
-      <td>{{data.username}}</td>
-      <td> <button [routerLink]="['/edit', data.id]" class="btn btn-edit" style="margin-left: 10px;">Edit</button>
+      <th scope="row"><input type="radio" id="radioCheck" name="dispatcher"
+                             [value]="tabUserGM?.username === companie?.dispacherMail"
+                             [checked]="tabUserGM?.username === companie?.dispacherMail"
+                             [disabled]="isLoading"
+                             (click)="generateCsv(tabUserGM?.username!, tabUserGM?.firstName!, tabUserGM?.username!, tabUserGM?.username!)" >
+      </th>
+      <th scope="row">{{tabUserGM?.firstName}}</th>
+      <th>{{tabUserGM?.lastName}}</th>
+      <td>{{tabUserGM?.username}}</td>
+      <td> <button [routerLink]="['/edit', tabUserGM?.id]" class="btn btn-edit" style="margin-left: 10px;">Edit</button>
       </tr>
     </tbody>
   </table>
@@ -34,7 +37,7 @@
     <button (click)="NewUser()" class="btn add_Btn">Add User</button>
   </div>
 
-<table class="table" >
+<table class="table" *ngIf="staffs">
   <thead class="thead-dark">
   <tr>
     <th scope="col">Dispatcher</th>
@@ -45,15 +48,19 @@
       <th></th>
     </tr>
 </thead>
-    <tbody class="data" [formGroup]="userForm"*ngFor="let data of tabUsersOther | filter: searchKey:'firstName'">
+    <tbody class="data" [formGroup]="userForm" *ngFor="let data of staffs | filter: searchKey:'firstName'">
       <tr>
-        <th scope="row" #myNameElem><input type="radio" id="radioCheck" name="dispatcher" value="data.id"
-            (click)="save(data);testDisp(data);csv(data)" attr.aria-checked="{{dispatcher}}">
+        <th scope="row" #myNameElem>
+          <input type="radio" id="radioCheck" name="dispatcher"
+                 [value]="data?.mail === companie?.dispacherMail"
+                 [checked]="data?.mail === companie?.dispacherMail"
+                 [disabled]="isLoading"
+                 (click)="generateCsv(data?.mail!, data?.firstName!, data?.lastName!, data?.companyParameter?.userGM?.username!)">
         </th>
-        <th scope="row">{{data.firstName}}</th>
-        <th >{{data.lastName}}</th>
-        <td>{{data.username}}</td>
-        <td> <button [routerLink]="['/edit', data.id]" class="btn btn-edit" style="margin-left: 10px;">Edit</button>
+        <th scope="row">{{data?.firstName}}</th>
+        <th >{{data?.lastName}}</th>
+        <td>{{data?.mail}}</td>
+        <td> <button [routerLink]="['/edit', data?.id]" class="btn btn-edit" style="margin-left: 10px;">Edit</button>
         </td>
         <!-- <td> <button [disabled]="dispatcher == false" (click)="remove(data.id); csvdelete(data)"
               class="btn btn-delete" style="margin-left: 10px;">Delete</button> </td> -->

@@ -1,82 +1,53 @@
 <!-- Vu General Manager -->
- <div class="container-fluid">
+<div class="container-fluid">
 
     <div class="contenue">
-        <h5>The Accor User app:</h5>
+        <h5>{{'TITLE' | translate}}</h5>
 
-        <div>The app will allow you, as a GM, to manage the different Tradeshift users of your hotel and the cost centre
-            attribution between them and you.
-
-            We remind you that the composition of the workflow is the following:
-        </div>
+        <div>{{'DESCRIPTION' | translate}}</div>
         <div>
             <img src="../../assets/CompositonWorkflow.png" style="width:450px;height:225px;">
         </div>
 
-        <h6>Conditions / rules to be respected: </h6>
+        <h6>{{'CONDITIONS.TITLE2' | translate}}</h6>
         <div>
             <ul>
-                <li>Only the General Manager shall access the application and
-                    perform changes within users of his hotel (no Head of Department).
-                </li>
-                <li>If some changes are temporary (holiday, maternity leave, sick leave),
-                    we encourage you use the delegation rules in place in Tradeshift
-                    instead of performing permanent changes.
-                </li>
-                <li>If you need to change the name of one of your user (and keep the same email address),
-                    please edit directly the user in the corresponding field and do not delete the user to recreate one.
-                </li>
+                <li>{{'CONDITIONS.RULE1' | translate}}</li>
+                <li>{{'CONDITIONS.RULE2' | translate}}</li>
+                <li>{{'CONDITIONS.RULE3' | translate}}</li>
             </ul>
 
         </div>
     </div>
     <div class="listeDeroulante">
-        <div class="part2">
-            <form class="ngForm" (ngSubmit)="save()">
-                <select [(ngModel)]="selectedCompanies" name="ValueCheck" (change)="ValueChange($event)" style="width: 75%">
-                    <option aria-placeholder="Select hotel">Select hotel</option>
-                    <ng-container *ngFor="let data of companies">
-                        <option *ngIf="getUserEmail == data.general_manager"
-                            [ngValue]="{hmc:data.hotel_MegaCode, hn:data.hotel_Name ,gm:data.general_manager, branch:data.branchID}"
-                            [selected]="data.hotel_MegaCode">
-                            {{data.hotel_MegaCode}} - {{data.hotel_Name}}</option>
-                    </ng-container>
-                </select>
+        <select [(ngModel)]="selectedCompanie">
+            <option [ngValue]="null" disabled>Select hotel</option>
+            <option *ngFor="let compagnie of companies" [ngValue]="compagnie">
+                {{compagnie.megaCode}} - {{compagnie.name}}
+            </option>
+        </select>
 
-                <button type="submit"> Go</button>
-            </form>
-        </div>
+        <button [disabled]="!selectedCompanie" [routerLink]="['/UserList', selectedCompanie?.id]"> Go</button>
     </div>
-</div> 
+</div>
 
 
 <!-- Vu Company Admin -->
 
 <div class="container-fluid">
     <div class="contenue">
-        <h5>The Accor User app:</h5>
+        <h5>{{'TITLE' | translate}}</h5>
 
-        <div>The app will allow you, as a GM, to manage the different Tradeshift users of your hotel and the cost centre
-            attribution between them and you.
-
-            We remind you that the composition of the workflow is the following:
-        </div>
+        <div>{{'DESCRIPTION' | translate}}</div>
     </div>
     <div class="listeDeroulante">
-        <div class="part2">
-            <form class="ngForm" (ngSubmit)="saveB(dataB)">
-                <select [(ngModel)]="selectedBranch" name="ValueCheck" (change)="ValueChange($event)" style="width: 75%">
-                    <option disabled aria-placeholder="Select branch">Select  Branch</option>
-                    <ng-container *ngFor="let data of companies">
-                        <option *ngIf="getUserEmail == data.general_manager"
-                            [ngValue]="{hmc:data.hotel_MegaCode, hn:data.hotel_Name ,gm:data.general_manager, branch:data.branchID, nameBranch:data.branchName}"
-                            [selected]="data.branch">
-                            {{data.branchID}} - {{data.branchName}}</option>
-                    </ng-container>
-                </select>
+        <select [(ngModel)]="selectedBranch">
+            <option [ngValue]="null" disabled>Select hotel</option>
+            <option *ngFor="let branche of branches" [ngValue]="branche">
+                {{branche.branch_Id}} - {{branche.branch_Name}}
+            </option>
+        </select>
 
-                <button type="submit"> Go</button>
-            </form>
-        </div>
+        <button [disabled]="!selectedBranch" [routerLink]="['/Parameter', selectedBranch?.id]"> Go</button>
     </div>
 </div>

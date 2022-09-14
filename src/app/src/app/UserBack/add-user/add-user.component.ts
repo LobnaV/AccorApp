@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ngxCsv } from 'ngx-csv';
 import { AccorService } from 'src/app/accor.service';
 import { ParameterComponent } from 'src/app/Parameter/parameter/parameter.component';
-import { User } from '../user';
+import { User } from '../../model/user';
 @Component({
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',
@@ -78,7 +78,7 @@ export class AddUserComponent implements OnInit {
 
   openForm() {
     this.displayStyle = "block"
-   
+
   }
 
 
@@ -86,7 +86,7 @@ export class AddUserComponent implements OnInit {
     console.log("selected value", event?.target.value,
     'all companies', this.parameters)
    }
-  
+
    save(){
     console.log('value i got', this.selectedCompanies)
    // localStorage.setItem('dataSource', JSON.stringify(this.dataSource));
@@ -97,7 +97,7 @@ export class AddUserComponent implements OnInit {
   initModelForm(): FormGroup {
     return this._fb.group({
       otherControls: [''],
-      // The formArray, empty 
+      // The formArray, empty
       myChoices: new FormArray([]),
     })
 

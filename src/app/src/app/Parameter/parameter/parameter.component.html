@@ -8,8 +8,8 @@
   </div>
 </div>
 
-<div class="brancheName">
-  {{getDataBranch}} - {{getDataBranchName}}
+<div class="brancheName" >
+ Branche {{branche?.branch_Id}} - Branche Name {{branche?.branch_Name}}
 </div>
 
 <div style="margin: auto; width: 90%;">
@@ -30,7 +30,7 @@
     </tr>
   </thead>
   <tbody class="data"  *ngFor="let param of parameters | filter: searchKey:'hotel_MegaCode'">
-    <tr *ngIf=" getDataBranch == param.branchID">
+    <tr >
       <td>{{param.hotel_MegaCode}}</td>
       <td>{{param.general_manager}}</td>
       <td>{{param.email_m_gm}}</td>

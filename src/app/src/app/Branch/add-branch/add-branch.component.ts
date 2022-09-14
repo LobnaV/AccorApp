@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccorService } from 'src/app/accor.service';
-import { Branch } from '../branch';
+import { Branch } from '../../model/branch';
 
 @Component({
   selector: 'app-add-branch',
@@ -10,10 +10,10 @@ import { Branch } from '../branch';
   styleUrls: ['./add-branch.component.scss']
 })
 export class AddBranchComponent implements OnInit {
-  
+
   //private companies: any = [];
 
- 
+
   constructor(
     private service:AccorService,
     private router:Router,
@@ -21,12 +21,12 @@ export class AddBranchComponent implements OnInit {
   ) { }
 
   branchForm = this.fb.group({
-    branch_Id:new FormControl('',[Validators.required]), 
+    branch_Id:new FormControl('',[Validators.required]),
     branch_Name:new FormControl('',[Validators.required]),
     country_Code:new  FormControl('',[Validators.required]),
     perimeter:new FormControl('',[Validators.required]),
   })
-  companies = this.fb.group({  
+  companies = this.fb.group({
     hotel_MegaCode: new FormControl('',[Validators.required]),
     hotel_Name: new FormControl('', [Validators.required]),
   })

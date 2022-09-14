@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ngxCsv } from 'ngx-csv';
 import { AccorService } from 'src/app/accor.service';
-import { Param } from '../param';
+import { Param } from '../../model/param';
 
 @Component({
   selector: 'app-add-param',
@@ -26,12 +26,12 @@ export class AddParamComponent implements OnInit {
     general_manager: new FormControl('',[Validators.required,Validators.email]),
     lastName_gm: new FormControl('',[Validators.required]),
     firstName_gm: new FormControl('',[Validators.required]),
-    email_m_gm: new FormControl('',[Validators.required,Validators.email]), 
+    email_m_gm: new FormControl('',[Validators.required,Validators.email]),
     lastName_m_gm: new FormControl('',[Validators.required]),
     firstName_m_gm: new FormControl('',[Validators.required]),
     // branch: new FormControl('')
   })
-  
+
   constructor(
     private service: AccorService,
     private router: Router
@@ -70,9 +70,9 @@ export class AddParamComponent implements OnInit {
     console.log(newParam)
     this.service.addParam(newParam)
      .subscribe(
-       (param:Param) => {    
+       (param:Param) => {
           alert("add successfully")
-          this.router.navigate(["Parameter"]);      
+          this.router.navigate(["Parameter"]);
        }
      )
 

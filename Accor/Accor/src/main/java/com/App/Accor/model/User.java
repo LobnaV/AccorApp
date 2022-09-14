@@ -32,6 +32,8 @@ public class User implements Serializable {
 
 	private String primaryBranch;
 
+	private String resetPasswordToken;
+
 	@ManyToMany
 	@JoinTable(
 		name = "users_roles",

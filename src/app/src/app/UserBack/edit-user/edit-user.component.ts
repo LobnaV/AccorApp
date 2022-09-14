@@ -4,7 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ngxCsv } from 'ngx-csv';
 import { AccorService } from 'src/app/accor.service';
-import { User } from '../user';
+import { User } from '../../model/user';
 
 @Component({
   selector: 'app-edit-user',
@@ -23,7 +23,7 @@ export class EditUserComponent implements OnInit {
     { name: "primaryBranch" }
   ];
 
-  
+
   getDataGm = localStorage.getItem('getDataGm');
   getDataBranch = localStorage.getItem('getDataBranch');
 
@@ -36,21 +36,21 @@ export class EditUserComponent implements OnInit {
   userForm = new FormGroup({
     selectCompany: new FormControl,
     primaryBranch: new FormControl,
-   id: new FormControl(''), 
+   id: new FormControl(''),
    firstName: new FormControl(''),
    lastName: new FormControl(''),
    username: new FormControl(''),
   })
-  
+
   constructor(
     private service: AccorService,
-    private router: Router, 
+    private router: Router,
     private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
 
-    
+
     this.getDataGm = this.getDataGm!.replace(/[""]/gi, '')
     this.getDataBranch = this.getDataBranch!.replace(/[""]/gi, '')
 
@@ -99,12 +99,12 @@ export class EditUserComponent implements OnInit {
       const branche = this.getDataBranch;
       const home = this.trueOrFalse();
       const gm = this.getDataGm;
-  
+
       const data = [
         [branche, home, this.userForm.value.username, this.userForm.value.firstName, this.userForm.value.lastName, 'ACTIVE', gm, limit, this.spend_limit, 'null','Head of Department']
       ];
       console.log('test form', this._fb)
-  
+
       let options = {
         fieldSeparator: ';',
         quoteStrings: '"',
@@ -115,9 +115,9 @@ export class EditUserComponent implements OnInit {
         headers: ['BranchId', 'HOME', 'Email', 'First Name', 'Last Name', 'State', 'Manager', 'Approval limit', 'Spend_limit', 'Owned Cost Center', 'User type']
       };
       console.log('dataFormtoCSV', data)
-  
+
       new ngxCsv(data, "Accortemplateuserssheet", options)
-  
+
   }
 
 }

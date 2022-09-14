@@ -1,11 +1,14 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ngxCsv } from 'ngx-csv';
-import { AccorService } from 'src/app/accor.service';
-import { User } from '../user';
-import { Location } from '@angular/common'
-import { checkServerIdentity } from 'tls';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ngxCsv} from 'ngx-csv';
+import {AccorService} from 'src/app/accor.service';
+import {User} from '../../model/user';
+import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
+import {Param} from "../../model/param";
+import {Staff} from "../../model/staff";
+import {CsvFormat} from "../../model/csv-format";
+import * as moment from 'moment';
 
 
 @Component({
@@ -18,44 +21,30 @@ export class UserListComponent implements OnInit {
   @ViewChild("dispatcher") myNameElem!: ElementRef;
   val = localStorage.getItem('dispatcher');
 
-  
-  @Input() pdata:any;
-  
-  private _fb: any;
+
+  @Input() pdata: any;
   form: any;
   type = 'Head of Department';
   spend_limit = 0;
   params: any;
   parameters: any;
-  
   branch = [
-    { name: "primaryBranch" }
+    {name: "primaryBranch"}
   ];
-  
   users: any;
-  // tabUser: User[] = [];
-  tabUsersGM: User[] = [];
-  tabUsersOther: User[] = [];
   tabcc: any = [];
   searchKey: string = "";
   searchTerm: string = "";
-  
   displayStyle = "none";
   displayStyle2 = "none";
   displayHome = 'none';
   tableStyle = "table";
-  
-  dispatcher :any;
-  t:any;
-  tabi : any = [];
-
-  getDataHmc = localStorage.getItem('getDataHmc');
-  getDataHn = localStorage.getItem('getDataHn');
-  getDataGm = localStorage.getItem('getDataGm');
-  getDataBranch = localStorage.getItem('getDataBranch');
-
-
-
+  dispatcher: any;
+  t: any;
+  tabi: any = [];
+  companie?: Param | null;
+  tabUserGM?: User | null;
+  staffs?: Staff[] | null = [];
   userForm = new FormGroup({
     selectCompany: new FormControl,
     primaryBranch: new FormControl,
@@ -64,68 +53,53 @@ export class UserListComponent implements OnInit {
     lastName: new FormControl(''),
     email: new FormControl(''),
   })
-
-  idPop:any;
-
-  role:any =[];
-  roleName:string ="";
+  role: any = [];
+  roleName: string = "";
+  private _fb: any;
+  isLoading = false;
 
   constructor(
     private service: AccorService,
     private router: Router,
+    private activatedRoute: ActivatedRoute,
     public theDispatcher: AccorService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
 
     this.displayStyle = "none";
 
+    console.log('****');
 
-   this.getDataHmc = this.getDataHmc!.replace(/[""]/gi, '')
-   console.log(this.getDataHmc)
-   this.getDataGm = this.getDataGm!.replace(/[""]/gi, '')
-   console.log(this.getDataGm)
-   this.getDataBranch = this.getDataBranch!.replace(/[""]/gi, '')
-   this.getDataHn = this.getDataHn!.replace(/[""]/gi, '')
+    this.activatedRoute.params.subscribe(params => {
+      console.log(params['id']);
+      this.service.ParamId(params['id']).subscribe(
+        (res: HttpResponse<Param>) => {
+          console.log(res.body);
+          this.companie = res.body;
+          this.tabUserGM = this.companie?.userGM;
+        },
+        (res: HttpErrorResponse) => console.log(res.message)
+      );
+      this.service.staffCompagnie(params['id']).subscribe(
+        (res: HttpResponse<Staff[]>) => {
+          console.log(res.body);
+          this.staffs = res.body;
+        },
+        (res: HttpErrorResponse) => console.log(res.message)
+      );
+    });
 
-
-
-
-   this.service.users()
-      .subscribe((data: User[]) => {
-        console.log(data)
-        for (let user of data) {
-          if (user.roles?.map(role => role.name).includes('ROLE_GM')) {
-            this.tabUsersGM.push(user);
-          } else {
-            this.tabUsersOther.push(user);
-          }
-        }
-      })
-      
     this.service.search.subscribe((val: any) => {
       this.searchKey = val;
     })
 
-    this.service.getParams()
-      .subscribe(data => {
-        this.parameters = data;
-        console.log('param', this.parameters)
-      })
-
-      this.trueOrFalseHome
-      this.roleName
-      //console.log(this.roleName)
-
-}
-
-
-
-
+  }
 
 
   trueOrFalseDispatcher() {
-    if (document.getElementById('dispatcher') ) {
+    if (document.getElementById('dispatcher')) {
       localStorage.setItem('dispatcher', JSON.stringify(this.dispatcher))
       console.log(this.dispatcher)
       return true
@@ -135,54 +109,53 @@ export class UserListComponent implements OnInit {
   }
 
 
-
   testDisp(dispId: any) {
-          if(this.trueOrFalseDispatcher() == true){ 
-            console.log(document.getElementById('radioCheck')!.ariaChecked )
-            //document.getElementById('radioCheck')!.ariaChecked = localStorage.getItem("radio"); 
-            return dispId.selectCompany;
-          } else {
-            return 'null'
-          }         
+    if (this.trueOrFalseDispatcher()) {
+      console.log(document.getElementById('radioCheck')!.ariaChecked)
+      //document.getElementById('radioCheck')!.ariaChecked = localStorage.getItem("radio");
+      return dispId.selectCompany;
+    } else {
+      return 'null'
+    }
   }
 
-  save(data:any){
-    if(data != undefined){
+  save(data: any) {
+    if (data != undefined) {
       localStorage.setItem('getDataDisp', JSON.stringify(data))
     }
     console.log(data)
 
   }
 
-  disable(data:any){
-    var desired = this.getDataHmc!.replace(/[""]/gi, '')
+  disable(data: any) {
+    const desired = this.companie?.megaCode;
     console.log(desired)
-    
+
     console.log(data.selectCompany)
-    if(desired == data.selectCompany){
+    if (desired == data.selectCompany) {
       console.log('same')
     }
   }
 
-   openPopup(idPop:any) {
+  openPopup(idPop: any) {
 
-    console.log('_______',idPop)
-   this.displayStyle = "block"
-   this.tableStyle = "none"
+    console.log('_______', idPop)
+    this.displayStyle = "block"
+    this.tableStyle = "none"
 
-   }
+  }
 
   openPopup2() {
 
-   this.displayStyle2 = "block"
-      this.tableStyle = "none";
-      this.displayStyle = "none"  
+    this.displayStyle2 = "block"
+    this.tableStyle = "none";
+    this.displayStyle = "none";
   }
-  
+
   back() {
-      this.tableStyle = "table";;
-      this.displayStyle = "none"
-      this.displayStyle2 = "none"
+    this.tableStyle = "table";
+    this.displayStyle = "none";
+    this.displayStyle2 = "none";
   }
 
 
@@ -222,46 +195,43 @@ export class UserListComponent implements OnInit {
     }
   }
 
-  csv(dispId: any) {
-      const limit = this.approvalLimit();
-      const branche = this.getDataBranch;
-      const home = this.trueOrFalseHome();
-      const gm= this.getDataGm;
-      //const disp = this.testDisp(dispId);
-
-      const data = [
-        [branche, home, dispId.username, dispId.firstName, dispId.lastName, 'ACTIVE', gm, limit, this.spend_limit, dispId.selectCompany, 'Head of Department']
-      ];
-      console.log('test form', this._fb)
-
-      let options = {
-        fieldSeparator: ';',
-        quoteStrings: '"',
-        decimalseparator: '.',
-        showLabels: true,
-        showTitle: false,
-        useBom: true,
-        headers: ['BranchId', 'HOME', 'Email', 'First Name', 'Last Name', 'State', 'Manager', 'Approval limit', 'Spend_limit', 'Owned Cost Center', 'User type']
-      };
-      console.log('dataFormtoCSV', data)
-
-      new ngxCsv(data, "Accortemplateuserssheet", options)
-    
+  generateCsv(email: string, firstName: string, lastName: string, manager: string) {
+    this.isLoading = true;
+    let options = new CsvFormat(this.companie?.branch?.id?.toString(), 'TRUE', email, firstName, lastName, 'ACTIVE', manager, '0', '0', '', 'Head of Department');
+    this.service.generateExcel(options, this.companie?.id!).subscribe(
+      (response) => {
+        if (response) {
+          if (this.companie) {
+            this.companie.dispacherMail = email;
+          }
+          const url = window.URL.createObjectURL(response?.body!);
+          const a = document.createElement('a');
+          document.body.appendChild(a);
+          a.setAttribute('style', 'display: none');
+          a.href = url;
+          a.download = `Accortemplateuserssheet_${moment().format('DD_MM_YYYY_HH_mm')}.xlsx`;
+          a.click();
+          window.URL.revokeObjectURL(url);
+          a.remove();
+          this.isLoading = false;
+        }
+      },
+      (res: HttpErrorResponse) => {
+        console.log(res.message);
+        this.isLoading = false;
+      }
+    );
   }
 
-  csvdelete(dispId: any) {
-  
+  csv(dispId: any) {
     const limit = this.approvalLimit();
-    const branche = this.getDataBranch;
+    const branche = this.companie?.branch?.id;
     const home = this.trueOrFalseHome();
-    const gm = this.getDataGm;
-    const state = this.trueOrFalseState();
-   // const disp = this.testDisp(dispId);
+    const gm = this.companie?.userGM?.username;
 
     const data = [
-      [branche,home , dispId.username, dispId.firstName, dispId.lastName, state, gm, limit, this.spend_limit, '', 'Head of Department']
+      [branche, home, dispId.username, dispId.firstName, dispId.lastName, 'ACTIVE', gm, limit, this.spend_limit, dispId.selectCompany, 'Head of Department']
     ];
-    
     console.log('test form', this._fb)
 
     let options = {
@@ -276,21 +246,51 @@ export class UserListComponent implements OnInit {
     console.log('dataFormtoCSV', data)
 
     new ngxCsv(data, "Accortemplateuserssheet", options)
-  
-}
+
+  }
+
+  csvdelete(dispId: any) {
+
+    const limit = this.approvalLimit();
+    const branche = this.companie?.branch?.id;
+    const home = this.trueOrFalseHome();
+    const gm = this.companie?.userGM?.username;
+    const state = this.trueOrFalseState();
+    // const disp = this.testDisp(dispId);
+
+    const data = [
+      [branche, home, dispId.username, dispId.firstName, dispId.lastName, state, gm, limit, this.spend_limit, '', 'Head of Department']
+    ];
+
+    console.log('test form', this._fb)
+
+    let options = {
+      fieldSeparator: ';',
+      quoteStrings: '"',
+      decimalseparator: '.',
+      showLabels: true,
+      showTitle: false,
+      useBom: true,
+      headers: ['BranchId', 'HOME', 'Email', 'First Name', 'Last Name', 'State', 'Manager', 'Approval limit', 'Spend_limit', 'Owned Cost Center', 'User type']
+    };
+    console.log('dataFormtoCSV', data)
+
+    new ngxCsv(data, "Accortemplateuserssheet", options)
+
+  }
 
 
   remove(userId: any) {
     // if(confirm('Continue with deletion'))
-     if(confirm('Yes I confirm, and I want to delete the user'))
-    this.service.deleteUser(userId)
-      .subscribe((data: any) => {
-        this.users = this.users?.filter((user: { id: any; }) => userId !== user.id);
-        alert("deleted user");
-        window.location.reload()
-        console.log('this.users', this.users)
-      })
-   }
+    if (confirm('Yes I confirm, and I want to delete the user'))
+      this.service.deleteUser(userId)
+        .subscribe(() => {
+          this.users = this.users?.filter((user: { id: any; }) => userId !== user.id);
+          alert("deleted user");
+          window.location.reload()
+          console.log('this.users', this.users)
+        })
+  }
 }
 
 

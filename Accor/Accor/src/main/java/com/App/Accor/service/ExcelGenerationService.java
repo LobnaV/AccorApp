@@ -1,25 +1,33 @@
 package com.App.Accor.service;
 
+import com.App.Accor.playload.CsvFormatDTO;
+import com.App.Accor.repository.CompanyParameterRepository;
 import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.xssf.usermodel.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
 @Service
+@Transactional
 public class ExcelGenerationService {
 
 	@Value("classpath:templates/excel/template_excel.xlsx")
 	private Resource resource;
 
+	@Autowired
+	private CompanyParameterRepository parameterRepository;
 
-	public byte[] generateSituationFactureExcel() throws IOException {
+
+	public byte[] generateSituationFactureExcel(CsvFormatDTO csvFormat, Long idCompagnie) throws IOException {
 		InputStream file = resource.getInputStream();
 		XSSFWorkbook workbook = new XSSFWorkbook(file);
 		XSSFSheet sheet = workbook.getSheetAt(0);
@@ -38,37 +46,37 @@ public class ExcelGenerationService {
 		cellStyle.setBorderLeft(BorderStyle.THIN);
 		cellStyle.setAlignment(HorizontalAlignment.CENTER);
 		cell = row1.createCell(0);
-		cell.setCellValue("A9024903");
+		cell.setCellValue(csvFormat.getBranchId());
 		cell.setCellStyle(cellStyle);
 		cell = row1.createCell(1);
-		cell.setCellValue("TRUE");
+		cell.setCellValue(csvFormat.getHome());
 		cell.setCellStyle(cellStyle);
 		cell = row1.createCell(2);
-		cell.setCellValue("H3162-AM@ACCOR.COM");
+		cell.setCellValue(csvFormat.getEmail());
 		cell.setCellStyle(cellStyle);
 		cell = row1.createCell(3);
-		cell.setCellValue("Glen");
+		cell.setCellValue(csvFormat.getFirstName());
 		cell.setCellStyle(cellStyle);
 		cell = row1.createCell(4);
-		cell.setCellValue("Anderson");
+		cell.setCellValue(csvFormat.getLastName());
 		cell.setCellStyle(cellStyle);
 		cell = row1.createCell(5);
-		cell.setCellValue("LOCKED");
+		cell.setCellValue(csvFormat.getState());
 		cell.setCellStyle(cellStyle);
 		cell = row1.createCell(6);
-		cell.setCellValue("H3162-GM@ACCOR.COM");
+		cell.setCellValue(csvFormat.getManager());
 		cell.setCellStyle(cellStyle);
 		cell = row1.createCell(7);
-		cell.setCellValue("1000");
+		cell.setCellValue(csvFormat.getApprovalLimit());
 		cell.setCellStyle(cellStyle);
 		cell = row1.createCell(8);
-		cell.setCellValue("");
+		cell.setCellValue(csvFormat.getSpendLimit());
 		cell.setCellStyle(cellStyle);
 		cell = row1.createCell(9);
-		cell.setCellValue("");
+		cell.setCellValue(csvFormat.getOwnedCostCenter());
 		cell.setCellStyle(cellStyle);
 		cell = row1.createCell(10);
-		cell.setCellValue("Head of Department");
+		cell.setCellValue(csvFormat.getUserType());
 		cell.setCellStyle(cellStyle);
 
 		file.close();
@@ -77,6 +85,8 @@ public class ExcelGenerationService {
 		workbook.write(docOutStream);
 		workbook.close();
 		docOutStream.close();
+
+		parameterRepository.updateDispacher(idCompagnie, csvFormat.getEmail());
 
 		return docOutStream.toByteArray();
 	}

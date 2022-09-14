@@ -3,10 +3,12 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import {BehaviorSubject, map, Observable} from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Branch } from './Branch/branch';
+import { Branch } from './model/branch';
 import { CostCenter } from './CostCenter/cost-center';
-import { Param } from './Parameter/param';
-import { User } from './UserBack/user';
+import { Param } from './model/param';
+import { User } from './model/user';
+import {Staff} from "./model/staff";
+import {CsvFormat} from "./model/csv-format";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +17,9 @@ export class AccorService {
   private url = `${environment.UrlLocal}`
   private urlLocal = `${this.url}/User`
   private local = `${this.url}/Branch`;
-  private paramUrl = `${this.url}/Parameter`
+  private paramUrl = `${this.url}/parameter`
+  private csvUrl = `${this.url}/excel`
+  private staffUrl = `${this.url}/staff`
   private CCUrl = `${this.url}/CostCenter`
 
   public search = new BehaviorSubject<string>("");
@@ -26,19 +30,19 @@ export class AccorService {
     ) { }
 
     // Service Parameter
-  getParams(){
+  getParams(): Observable<HttpResponse<Param[]>> {
     return this.http
-      .get<Param[]>(this.paramUrl + "/List")
+      .get<Param[]>(this.paramUrl + "/List", { observe: 'response' })
+  }
+
+  ParamId(id:number): Observable<HttpResponse<Param>> {
+    return this.http
+      .get<Param>(this.paramUrl + "/" + id, { observe: 'response' })
   }
 
   addParam(param:Param){
     return this.http
       .post<Param>(this.paramUrl + "/AddParameter/", param)
-  }
-
-  ParamId(id:number){
-    return this.http
-      .get<Param>(this.paramUrl + "/" + id)
   }
 
   updateParam(param:Param){
@@ -51,8 +55,15 @@ export class AccorService {
       .delete<Param>(this.paramUrl + "/deleteParameter/" + paramId)
   }
 
-  generateExcel(): Observable<HttpResponse<Blob>> {
-    return this.http.get(`${this.paramUrl}/excel`, {
+  staffCompagnie(id:number): Observable<HttpResponse<Staff[]>> {
+    return this.http
+      .get<Staff[]>(`${this.staffUrl}/compagnie/${id}`, { observe: 'response' })
+  }
+
+  // excel generation
+
+  generateExcel(csvFormat: CsvFormat, idCompagnie: number): Observable<HttpResponse<Blob>> {
+    return this.http.post(`${this.csvUrl}/param/${idCompagnie}`, csvFormat, {
       observe: 'response',
       responseType: 'blob'
     });
@@ -91,7 +102,12 @@ export class AccorService {
       .get<User>(this.urlLocal + "/x/"+ id)
   }
 
-  branchs(){
+  branchId(id:number){
+    return this.http
+      .get<Branch>(this.local + "/"+ id)
+  }
+
+  branches(){
     return this.http
       .get<Branch[]>(this.local + "/List")
   }
@@ -134,32 +150,6 @@ export class AccorService {
    register(newUser: User) {
     return this.http.post(`${this.url}/auth/signin`, newUser)
   }
-
-  /**
-   * méthode qui permet de se logger et de save le token en localStorage
-   * @param user
-   */
-   login(user:User){
-    return this.http.post(`${this.url}/auth/login`,user)
-      .pipe(
-        map(
-          (resp:any)=>{
-            localStorage.setItem('TOKEN_APPLI', resp.token);
-            console.log('token Save');
-            localStorage.setItem('User_Email', JSON.stringify(user.username))
-            console.log(user)
-            return resp;
-          }
-        )
-      );
-  }
-
-    /**
-   * méthode qui récupère le token du localStorage
-   */
-     getToken(){
-      return localStorage.getItem("TOKEN_APPLI");
-    }
 
     logout() {
       localStorage.removeItem('TOKEN_APPLI');

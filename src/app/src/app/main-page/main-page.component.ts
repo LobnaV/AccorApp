@@ -1,7 +1,8 @@
-import { Component,Input,OnInit, Output } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AccorService } from '../accor.service';
+import {Component, OnInit} from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
+import {AccorService} from '../accor.service';
+import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
+import {Param} from "../model/param";
 
 @Component({
   selector: 'app-main-page',
@@ -10,83 +11,41 @@ import { AccorService } from '../accor.service';
 
 })
 export class MainPageComponent implements OnInit {
-  selectedCompanies: any;
-  selectedBranch = [];
-  companies: any = [];
-  radioTitle: string;
-  model   = this.companies.general_manager;
-
-   data!: number;
-
-   getUserEmail = localStorage.getItem('User_Email');
+  selectedCompanie?: Param;
+  selectedBranch?: any;
+  companies: Param[] | null = [];
+  branches: any = [];
 
 
   constructor(
     private service: AccorService,
-    private router: Router
-    ) {
-    this.radioTitle = 'select company';
-    }
-
-    element:any;
-    dataB:any;
+    public translate: TranslateService
+  ) {
+    // Register translation languages
+    translate.addLangs(['en', 'fr']);
+    // Set default language
+    translate.setDefaultLang('en');
+  }
 
   ngOnInit(): void {
+    this.service.getParams().subscribe(
+      (res: HttpResponse<Param[]>) => {
+        console.log(res.body);
+        this.companies = res.body;
+      },
+      (res: HttpErrorResponse) => console.log(res.message)
+    );
 
-    this.getUserEmail  = this.getUserEmail !.replace(/[""]/gi, '')
-    console.log(this.getUserEmail )
-
-
-    this.service.getParams()
-    .subscribe(data => {
-      this.companies = data;
-      console.log(this.companies)
-
-      for (let i = 0; i < data.length; i++) {
-        this.element = data[i];
-        console.log('test1', this.element.general_manager)
-      }
-
-
-    })
+    this.service.branches()
+      .subscribe(data => {
+        this.branches = [];
+      });
   }
 
-
- ValueChange(event:any){
-  console.log("selected value");
-  console.log(event?.target.value);
- }
-
-  save(){
-    const data: {hmc: string, hn: string ,gm: string, branch: string} = this.selectedCompanies;
-    console.log('data');
-    console.log(data.hmc);
-
-    localStorage.setItem('getDataHmc', JSON.stringify(data.hmc))
-    localStorage.setItem('getDataHn', JSON.stringify(data.hn))
-    localStorage.setItem('getDataGm', JSON.stringify(data.gm))
-    localStorage.setItem('getDataBranch', JSON.stringify(data.branch))
-
-    console.log('save data',data);
-
-
-    this.router.navigate(["UserList"]);
-
+  //Switch language
+  translateLanguageTo(lang: string) {
+    this.translate.use(lang);
   }
-
-
-  saveB(dataB:any){
-    dataB = this.selectedBranch;
-
-    localStorage.setItem('getDataBranch', JSON.stringify(dataB.branch))
-    console.log(dataB.branch)
-    localStorage.setItem('getDataBranchName', JSON.stringify(dataB.nameBranch))
-
-
-    this.router.navigate(["Parameter"]);
-
-  }
-
 
 
 }
