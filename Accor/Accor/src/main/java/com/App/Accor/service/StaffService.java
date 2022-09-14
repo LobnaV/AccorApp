@@ -16,7 +16,6 @@ public class StaffService {
 	@Autowired
 	private StaffRepository staffRepository;
 
-
 	public List<Staff> findByCompagnie(Long idCompagnie) {
 		return staffRepository.findByCompanyParameterId(idCompagnie);
 	}

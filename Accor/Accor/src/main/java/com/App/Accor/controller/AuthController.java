@@ -1,6 +1,7 @@
 package com.App.Accor.controller;
 
 import com.App.Accor.model.User;
+import com.App.Accor.model.UserDetails;
 import com.App.Accor.playload.request.LoginRequest;
 import com.App.Accor.playload.request.SignupRequest;
 import com.App.Accor.playload.response.JwtResponse;
@@ -8,7 +9,6 @@ import com.App.Accor.playload.response.MessageResponse;
 import com.App.Accor.repository.RoleRepository;
 import com.App.Accor.repository.UserRepository;
 import com.App.Accor.security.JwtUtils;
-import com.App.Accor.model.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
