@@ -2,6 +2,7 @@ package com.App.Accor.service;
 
 import com.App.Accor.playload.CsvFormatDTO;
 import com.App.Accor.repository.CompanyParameterRepository;
+import org.apache.commons.net.ftp.FTPClient;
 import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
@@ -12,9 +13,12 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Service
 @Transactional
@@ -88,7 +92,35 @@ public class ExcelGenerationService {
 
 		parameterRepository.updateDispacher(idCompagnie, csvFormat.getEmail());
 
-		return docOutStream.toByteArray();
+		return sendFtpServer(docOutStream.toByteArray());
+	}
+
+
+	public byte[] sendFtpServer(byte[] file) {
+//		FTPClient client = new FTPClient();
+//		String filename = String.format("Accortemplateuserssheet_%s.xlsx",
+//			LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MM_yyyy_HH_mm")));
+//		try (InputStream is = new ByteArrayInputStream(file)) {
+//			client.connect("esb1.tradeshift.com");
+//			boolean login = client.login("SANDBOX_ACCOR_INVEST", "Accor_Invest_Sandbox");
+//			if (login) {
+//				System.out.println("Login success...");
+//
+//				// Store file to server
+//				client.storeFile(filename, is);
+//				client.logout();
+//			}
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} finally {
+//			try {
+//				client.disconnect();
+//				return file;
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//		}
+		return file;
 	}
 
 }
