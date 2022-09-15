@@ -97,29 +97,29 @@ public class ExcelGenerationService {
 
 
 	public byte[] sendFtpServer(byte[] file) {
-//		FTPClient client = new FTPClient();
-//		String filename = String.format("Accortemplateuserssheet_%s.xlsx",
-//			LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MM_yyyy_HH_mm")));
-//		try (InputStream is = new ByteArrayInputStream(file)) {
-//			client.connect("esb1.tradeshift.com");
-//			boolean login = client.login("SANDBOX_ACCOR_INVEST", "Accor_Invest_Sandbox");
-//			if (login) {
-//				System.out.println("Login success...");
-//
-//				// Store file to server
-//				client.storeFile(filename, is);
-//				client.logout();
-//			}
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		} finally {
-//			try {
-//				client.disconnect();
-//				return file;
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		}
+		FTPClient client = new FTPClient();
+		String filename = String.format("Accortemplateuserssheet_%s.xlsx",
+			LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MM_yyyy_HH_mm")));
+		try (InputStream is = new ByteArrayInputStream(file)) {
+			client.connect("esb1.tradeshift.com");
+			boolean login = client.login("SANDBOX_ACCOR_INVEST", "Sandbox_Accor");
+			if (login) {
+				System.out.println("Login success...");
+
+				// Store file to server
+				client.storeFile(filename, is);
+				client.logout();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				client.disconnect();
+				return file;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		return file;
 	}
 

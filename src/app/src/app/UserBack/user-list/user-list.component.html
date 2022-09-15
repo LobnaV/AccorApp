@@ -31,7 +31,7 @@
       <td> <button [routerLink]="['/edit', tabUserGM?.id]" class="btn btn-edit" style="margin-left: 10px;">Edit</button>
       </tr>
     </tbody>
-  </table>
+  </table> 
 
   <div class="container">
     <button (click)="NewUser()" class="btn add_Btn">Add User</button>
@@ -60,7 +60,7 @@
         <th scope="row">{{data?.firstName}}</th>
         <th >{{data?.lastName}}</th>
         <td>{{data?.mail}}</td>
-        <td> <button [routerLink]="['/edit', data?.id]" class="btn btn-edit" style="margin-left: 10px;">Edit</button>
+        <td> <button [routerLink]="['/editstaff', data?.id]" class="btn btn-edit" style="margin-left: 10px;">Edit</button>
         </td>
         <!-- <td> <button [disabled]="dispatcher == false" (click)="remove(data.id); csvdelete(data)"
               class="btn btn-delete" style="margin-left: 10px;">Delete</button> </td> -->
@@ -79,6 +79,7 @@
     deletion</button>
   <button (click)="back()" class="btn btn-info" style="margin-left: 10px;">Cancel</button>
 </div>
+
 <div class="popup2" [ngStyle]="{'display':displayStyle2}">
   <p class="popup">Can you confirm there are not more pending tasks in the task manager for this user?  If no, please
     reassign the pending tasks before deleting the user.</p>

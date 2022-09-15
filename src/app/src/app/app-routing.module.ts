@@ -25,6 +25,7 @@ const routes: Routes = [
     {path: 'Home', component:MainPageComponent},
     { path:'signup',component:SignupComponent},
 
+  {path: 'UserList', component:UserListComponent},
   {path: 'UserList/:id', component:UserListComponent},
   {path: 'x/:dispId', component:UserListComponent},
   {path: 'Parameter/:id', component:ParameterComponent},
@@ -32,6 +33,7 @@ const routes: Routes = [
   {path: 'editParameter/:paramId', component:EditParamComponent},
   {path: 'addUser', component:AddUserComponent},
   {path: 'edit/:userId', component:EditUserComponent},
+  {path: 'editstaff/:staffId', component:EditUserComponent},
   {path: 'branchs/:id', component:ListBranchComponent},
   {path: 'addBranch', component:AddBranchComponent},
   {path: 'listCostCenter', component:ListCcComponent},

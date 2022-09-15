@@ -26,7 +26,7 @@ public class StaffController {
 		return ResponseEntity.created(new URI("/api/staff/" + result.getId())).body(result);
 	}
 
-	@PutMapping
+	@PutMapping("/{id}")
 	public ResponseEntity<Staff> updateStaff(@Valid @RequestBody Staff Staff) throws Exception {
 		if (Staff.getId() == null) {
 			throw new Exception("Invalid id");

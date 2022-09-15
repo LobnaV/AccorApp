@@ -55,9 +55,22 @@ export class AccorService {
       .delete<Param>(this.paramUrl + "/deleteParameter/" + paramId)
   }
 
+  //staff
+
+
   staffCompagnie(id:number): Observable<HttpResponse<Staff[]>> {
     return this.http
       .get<Staff[]>(`${this.staffUrl}/compagnie/${id}`, { observe: 'response' })
+  }
+
+  staffId(id: number){
+    return this.http
+      .get<Staff>(this.staffUrl + "/" + id )
+  }
+  
+  updateStaff(staff:Staff){
+    return this.http
+      .put<Staff>(this.staffUrl + "/" + staff?.id,  staff);
   }
 
   // excel generation
@@ -153,12 +166,6 @@ export class AccorService {
 
     logout() {
       localStorage.removeItem('TOKEN_APPLI');
-      localStorage.removeItem('User_Email');
-      localStorage.removeItem('getDataHmc');
-      localStorage.removeItem('getDataHn');
-      localStorage.removeItem('getDataGm');
-      localStorage.removeItem('getDataBranch');
-      localStorage.removeItem('getDataBranchName')
       console.log('déconnecter');
       this.router.navigate(['/login']);
     }

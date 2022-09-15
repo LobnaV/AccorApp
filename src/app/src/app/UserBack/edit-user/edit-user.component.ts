@@ -1,10 +1,11 @@
-import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ngxCsv } from 'ngx-csv';
 import { AccorService } from 'src/app/accor.service';
+import { Staff } from 'src/app/model/staff';
 import { User } from '../../model/user';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-edit-user',
@@ -19,13 +20,6 @@ export class EditUserComponent implements OnInit {
   params:any;
   parameters: any;
 
-  branch = [
-    { name: "primaryBranch" }
-  ];
-
-
-  getDataGm = localStorage.getItem('getDataGm');
-  getDataBranch = localStorage.getItem('getDataBranch');
 
   selectedCompanies = [];
   displayStyle = "none";
@@ -34,32 +28,39 @@ export class EditUserComponent implements OnInit {
   user: User = new User();
 
   userForm = new FormGroup({
+    id: new FormControl(''),
     selectCompany: new FormControl,
     primaryBranch: new FormControl,
-   id: new FormControl(''),
    firstName: new FormControl(''),
    lastName: new FormControl(''),
    username: new FormControl(''),
+   mail: new FormControl(''),
+   companyParameter: new FormControl(''),
   })
 
   constructor(
     private service: AccorService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
 
-
-    this.getDataGm = this.getDataGm!.replace(/[""]/gi, '')
-    this.getDataBranch = this.getDataBranch!.replace(/[""]/gi, '')
-
     const userId = this.route.snapshot.params['userId'];
+    const staffId = this.route.snapshot.params['staffId']
 
-    this.service.UserId(userId)
+    // this.service.UserId(userId)
+    //   .subscribe(
+    //     (user:User) => {
+    //       this.userForm.patchValue(user)
+    //     }
+    //   )
+
+      this.service.staffId(staffId)
       .subscribe(
-        (user:User) => {
-          this.userForm.patchValue(user)
+        (staff:Staff) => {
+          this.userForm.patchValue(staff)
         }
       )
 
@@ -86,38 +87,49 @@ export class EditUserComponent implements OnInit {
     }
   }
 
+  back(){
+    if(confirm("Are you sure you want to leave this page without saving your changes ? ")) {
+      this.location.back()
+    }
+  }
+
   Update() {
     const updateForm = this.userForm.value;
-    this.service.updateUsertest(updateForm)
+    // this.service.updateUsertest(updateForm)
+    //   .subscribe(
+    //    (user: User) => {
+    //     console.log("update ok");
+    //     this.router.navigate(["UserList"]);
+    //   })
+
+      this.service.updateStaff(updateForm)
       .subscribe(
-       (user: User) => {
+       (staff:Staff) => {
         console.log("update ok");
-        this.router.navigate(["UserList"]);
+       this.location.back()
       })
 
-      const limit = this.approvalLimit();
-      const branche = this.getDataBranch;
-      const home = this.trueOrFalse();
-      const gm = this.getDataGm;
+  //     const limit = this.approvalLimit();
+  //     const home = this.trueOrFalse();
 
-      const data = [
-        [branche, home, this.userForm.value.username, this.userForm.value.firstName, this.userForm.value.lastName, 'ACTIVE', gm, limit, this.spend_limit, 'null','Head of Department']
-      ];
-      console.log('test form', this._fb)
+  //     const data = [
+  //       ['branche', home, this.userForm.value.username, this.userForm.value.firstName, this.userForm.value.lastName, 'ACTIVE', 'gm', limit, this.spend_limit, 'null','Head of Department']
+  //     ];
+  //     console.log('test form', this._fb)
 
-      let options = {
-        fieldSeparator: ';',
-        quoteStrings: '"',
-        decimalseparator: '.',
-        showLabels: true,
-        showTitle: false,
-        useBom: true,
-        headers: ['BranchId', 'HOME', 'Email', 'First Name', 'Last Name', 'State', 'Manager', 'Approval limit', 'Spend_limit', 'Owned Cost Center', 'User type']
-      };
-      console.log('dataFormtoCSV', data)
+  //     let options = {
+  //       fieldSeparator: ';',
+  //       quoteStrings: '"',
+  //       decimalseparator: '.',
+  //       showLabels: true,
+  //       showTitle: false,
+  //       useBom: true,
+  //       headers: ['BranchId', 'HOME', 'Email', 'First Name', 'Last Name', 'State', 'Manager', 'Approval limit', 'Spend_limit', 'Owned Cost Center', 'User type']
+  //     };
+  //     console.log('dataFormtoCSV', data)
 
-      new ngxCsv(data, "Accortemplateuserssheet", options)
+  //     new ngxCsv(data, "Accortemplateuserssheet", options)
 
-  }
+   }
 
 }

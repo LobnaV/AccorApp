@@ -24,7 +24,6 @@ export class UserListComponent implements OnInit {
 
   @Input() pdata: any;
   form: any;
-  type = 'Head of Department';
   spend_limit = 0;
   params: any;
   parameters: any;
@@ -45,6 +44,7 @@ export class UserListComponent implements OnInit {
   companie?: Param | null;
   tabUserGM?: User | null;
   staffs?: Staff[] | null = [];
+
   userForm = new FormGroup({
     selectCompany: new FormControl,
     primaryBranch: new FormControl,
@@ -55,7 +55,6 @@ export class UserListComponent implements OnInit {
   })
   role: any = [];
   roleName: string = "";
-  private _fb: any;
   isLoading = false;
 
   constructor(
@@ -86,6 +85,7 @@ export class UserListComponent implements OnInit {
         (res: HttpResponse<Staff[]>) => {
           console.log(res.body);
           this.staffs = res.body;
+          
         },
         (res: HttpErrorResponse) => console.log(res.message)
       );
@@ -95,46 +95,6 @@ export class UserListComponent implements OnInit {
       this.searchKey = val;
     })
 
-  }
-
-
-  trueOrFalseDispatcher() {
-    if (document.getElementById('dispatcher')) {
-      localStorage.setItem('dispatcher', JSON.stringify(this.dispatcher))
-      console.log(this.dispatcher)
-      return true
-    } else {
-      return false
-    }
-  }
-
-
-  testDisp(dispId: any) {
-    if (this.trueOrFalseDispatcher()) {
-      console.log(document.getElementById('radioCheck')!.ariaChecked)
-      //document.getElementById('radioCheck')!.ariaChecked = localStorage.getItem("radio");
-      return dispId.selectCompany;
-    } else {
-      return 'null'
-    }
-  }
-
-  save(data: any) {
-    if (data != undefined) {
-      localStorage.setItem('getDataDisp', JSON.stringify(data))
-    }
-    console.log(data)
-
-  }
-
-  disable(data: any) {
-    const desired = this.companie?.megaCode;
-    console.log(desired)
-
-    console.log(data.selectCompany)
-    if (desired == data.selectCompany) {
-      console.log('same')
-    }
   }
 
   openPopup(idPop: any) {
@@ -169,24 +129,6 @@ export class UserListComponent implements OnInit {
     this.router.navigate(["addUser"]);
   }
 
-  approvalLimit() {
-    if (this.type === 'Head of Department') {
-      return '0'
-    } else {
-      return false
-    }
-  }
-
-
-  trueOrFalseHome() {
-    if (this.userForm.value.primaryBranch == true) {
-      console.log(this.userForm.value.primaryBranch)
-      return 'TRUE'
-    } else {
-      return 'FALSE'
-    }
-  }
-
   trueOrFalseState() {
     if (this.userForm.value.primaryBranch == true) {
       return 'Delete'
@@ -195,9 +137,27 @@ export class UserListComponent implements OnInit {
     }
   }
 
+  type() {
+    for(let data of this.staffs!)
+    if (this.tabUserGM?.username === this.companie?.dispacherMail ) {
+      return "Manger"
+    } else if(data.mail === this.companie?.dispacherMail) {
+      return "Head of Department"
+    }
+    return ;
+  }
+
+ 
+
+    
+
   generateCsv(email: string, firstName: string, lastName: string, manager: string) {
+
+
+    let type = this.type();
+    let  approvalLimit = "";
     this.isLoading = true;
-    let options = new CsvFormat(this.companie?.branch?.id?.toString(), 'TRUE', email, firstName, lastName, 'ACTIVE', manager, '0', '0', '', 'Head of Department');
+    let options = new CsvFormat(this.companie?.branch?.id?.toString(), 'TRUE', email, firstName, lastName, 'ACTIVE', manager, approvalLimit, '0', '', type);
     this.service.generateExcel(options, this.companie?.id!).subscribe(
       (response) => {
         if (response) {
@@ -223,66 +183,65 @@ export class UserListComponent implements OnInit {
     );
   }
 
-  csv(dispId: any) {
-    const limit = this.approvalLimit();
-    const branche = this.companie?.branch?.id;
-    const home = this.trueOrFalseHome();
-    const gm = this.companie?.userGM?.username;
+  // csv(dispId: any) {
+  //   const limit = this.approvalLimit();
+  //   const branche = this.companie?.branch?.id;
+  //   const home = this.trueOrFalseHome();
+  //   const gm = this.companie?.userGM?.username;
 
-    const data = [
-      [branche, home, dispId.username, dispId.firstName, dispId.lastName, 'ACTIVE', gm, limit, this.spend_limit, dispId.selectCompany, 'Head of Department']
-    ];
-    console.log('test form', this._fb)
+  //   const data = [
+  //     [branche, home, dispId.username, dispId.firstName, dispId.lastName, 'ACTIVE', gm, limit, this.spend_limit, dispId.selectCompany, 'Head of Department']
+  //   ];
+  //   console.log('test form', this._fb)
 
-    let options = {
-      fieldSeparator: ';',
-      quoteStrings: '"',
-      decimalseparator: '.',
-      showLabels: true,
-      showTitle: false,
-      useBom: true,
-      headers: ['BranchId', 'HOME', 'Email', 'First Name', 'Last Name', 'State', 'Manager', 'Approval limit', 'Spend_limit', 'Owned Cost Center', 'User type']
-    };
-    console.log('dataFormtoCSV', data)
+  //   let options = {
+  //     fieldSeparator: ';',
+  //     quoteStrings: '"',
+  //     decimalseparator: '.',
+  //     showLabels: true,
+  //     showTitle: false,
+  //     useBom: true,
+  //     headers: ['BranchId', 'HOME', 'Email', 'First Name', 'Last Name', 'State', 'Manager', 'Approval limit', 'Spend_limit', 'Owned Cost Center', 'User type']
+  //   };
+  //   console.log('dataFormtoCSV', data)
 
-    new ngxCsv(data, "Accortemplateuserssheet", options)
+  //   new ngxCsv(data, "Accortemplateuserssheet", options)
 
-  }
+  // }
 
-  csvdelete(dispId: any) {
+  // csvdelete(dispId: any) {
 
-    const limit = this.approvalLimit();
-    const branche = this.companie?.branch?.id;
-    const home = this.trueOrFalseHome();
-    const gm = this.companie?.userGM?.username;
-    const state = this.trueOrFalseState();
-    // const disp = this.testDisp(dispId);
+  //   const limit = this.approvalLimit();
+  //   const branche = this.companie?.branch?.id;
+  //   const home = this.trueOrFalseHome();
+  //   const gm = this.companie?.userGM?.username;
+  //   const state = this.trueOrFalseState();
+  //   // const disp = this.testDisp(dispId);
 
-    const data = [
-      [branche, home, dispId.username, dispId.firstName, dispId.lastName, state, gm, limit, this.spend_limit, '', 'Head of Department']
-    ];
+  //   const data = [
+  //     [branche, home, dispId.username, dispId.firstName, dispId.lastName, state, gm, limit, this.spend_limit, '', 'Head of Department']
+  //   ];
 
-    console.log('test form', this._fb)
+  //   console.log('test form', this._fb)
 
-    let options = {
-      fieldSeparator: ';',
-      quoteStrings: '"',
-      decimalseparator: '.',
-      showLabels: true,
-      showTitle: false,
-      useBom: true,
-      headers: ['BranchId', 'HOME', 'Email', 'First Name', 'Last Name', 'State', 'Manager', 'Approval limit', 'Spend_limit', 'Owned Cost Center', 'User type']
-    };
-    console.log('dataFormtoCSV', data)
+  //   let options = {
+  //     fieldSeparator: ';',
+  //     quoteStrings: '"',
+  //     decimalseparator: '.',
+  //     showLabels: true,
+  //     showTitle: false,
+  //     useBom: true,
+  //     headers: ['BranchId', 'HOME', 'Email', 'First Name', 'Last Name', 'State', 'Manager', 'Approval limit', 'Spend_limit', 'Owned Cost Center', 'User type']
+  //   };
+  //   console.log('dataFormtoCSV', data)
 
-    new ngxCsv(data, "Accortemplateuserssheet", options)
+  //   new ngxCsv(data, "Accortemplateuserssheet", options)
 
-  }
+  // }
 
 
   remove(userId: any) {
-    // if(confirm('Continue with deletion'))
-    if (confirm('Yes I confirm, and I want to delete the user'))
+    if (confirm('Can you confirm there are not more pending tasks in the task manager for this user?  If no, please reassign the pending tasks before deleting the user')){
       this.service.deleteUser(userId)
         .subscribe(() => {
           this.users = this.users?.filter((user: { id: any; }) => userId !== user.id);
@@ -290,6 +249,7 @@ export class UserListComponent implements OnInit {
           window.location.reload()
           console.log('this.users', this.users)
         })
+    }
   }
 }
 
