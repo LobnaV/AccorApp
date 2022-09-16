@@ -57,20 +57,24 @@ export class AccorService {
 
   //staff
 
-
   staffCompagnie(id:number): Observable<HttpResponse<Staff[]>> {
     return this.http
       .get<Staff[]>(`${this.staffUrl}/compagnie/${id}`, { observe: 'response' })
   }
 
-  staffId(id: number){
+  staffId(id: number): Observable<HttpResponse<Staff>> {
     return this.http
-      .get<Staff>(this.staffUrl + "/" + id )
+      .get<Staff>(`${this.staffUrl}/${id}`, { observe: 'response' } )
   }
-  
-  updateStaff(staff:Staff){
+
+  updateStaff(staff:Staff): Observable<HttpResponse<Staff>> {
     return this.http
-      .put<Staff>(this.staffUrl + "/" + staff?.id,  staff);
+      .put<Staff>(this.staffUrl,  staff, { observe: 'response' });
+  }
+
+
+  deleteStaff(id: number): Observable<HttpResponse<void>> {
+    return this.http.delete<void>(`${this.staffUrl}/${id}`, { observe: 'response' });
   }
 
   // excel generation
