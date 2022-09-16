@@ -28,6 +28,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { ForgotPasswordFormComponent } from './forgot-password-form/forgot-password-form.component';
 import {AuthInterceptor} from "./Account/login/auth.interceptor";
+import {ConfirmationDialogComponent} from "./UserBack/confirmation-dialog/confirmation-dialog.component";
 
 // Factory function required during AOT compilation
 export function httpTranslateLoaderFactory(http: HttpClient) {
@@ -56,6 +57,7 @@ export function httpTranslateLoaderFactory(http: HttpClient) {
     SignupComponent,
     LayoutComponent,
     ForgotPasswordFormComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,

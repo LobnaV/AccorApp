@@ -33,7 +33,7 @@ const routes: Routes = [
   {path: 'editParameter/:paramId', component:EditParamComponent},
   {path: 'addUser', component:AddUserComponent},
   {path: 'edit/:userId', component:EditUserComponent},
-  {path: 'editstaff/:staffId', component:EditUserComponent},
+  {path: 'staff/:id/edit', component:EditUserComponent},
   {path: 'branchs/:id', component:ListBranchComponent},
   {path: 'addBranch', component:AddBranchComponent},
   {path: 'listCostCenter', component:ListCcComponent},

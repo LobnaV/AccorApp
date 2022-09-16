@@ -1,7 +1,6 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ngxCsv} from 'ngx-csv';
 import {AccorService} from 'src/app/accor.service';
 import {User} from '../../model/user';
 import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
@@ -9,6 +8,7 @@ import {Param} from "../../model/param";
 import {Staff} from "../../model/staff";
 import {CsvFormat} from "../../model/csv-format";
 import * as moment from 'moment';
+import {ConfirmationDialogService} from "../confirmation-dialog/confirmation-dialog.service";
 
 
 @Component({
@@ -61,7 +61,8 @@ export class UserListComponent implements OnInit {
     private service: AccorService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    public theDispatcher: AccorService
+    public theDispatcher: AccorService,
+    private confirmationDialogService: ConfirmationDialogService
   ) {
   }
 
@@ -81,14 +82,7 @@ export class UserListComponent implements OnInit {
         },
         (res: HttpErrorResponse) => console.log(res.message)
       );
-      this.service.staffCompagnie(params['id']).subscribe(
-        (res: HttpResponse<Staff[]>) => {
-          console.log(res.body);
-          this.staffs = res.body;
-          
-        },
-        (res: HttpErrorResponse) => console.log(res.message)
-      );
+      this.loadStaff(params['id'])
     });
 
     this.service.search.subscribe((val: any) => {
@@ -97,12 +91,38 @@ export class UserListComponent implements OnInit {
 
   }
 
-  openPopup(idPop: any) {
+  loadStaff(idComapgnie: number) {
+    this.service.staffCompagnie(idComapgnie).subscribe(
+      (res: HttpResponse<Staff[]>) => {
+        console.log(res.body);
+        this.staffs = res.body;
 
-    console.log('_______', idPop)
-    this.displayStyle = "block"
-    this.tableStyle = "none"
+      },
+      (res: HttpErrorResponse) => console.log(res.message)
+    );
+  }
 
+  deleteStaff(idStaff: number) {
+    this.confirmationDialogService.confirm('Confirmation', 'If you need to temporarily delete a user, we advise you use the delegation rule option within\n' +
+      '    Tradeshift (holiday, maternity leave, sick leave) to temporarily delegate tasks to another colleague.')
+      .then((confirmed) =>
+        this.confirmationDialogService.confirm('Confirmation', 'Can you confirm there are not more pending tasks in the task manager for this user? If no, please reassign the pending tasks before deleting the user.')
+          .then(() => this.remove(idStaff))
+          .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'))
+      )
+      .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+
+  }
+
+
+  remove(idStaff: number) {
+    this.service.deleteStaff(idStaff).subscribe(
+      () => {
+        console.log("update ok");
+        this.loadStaff(this.companie?.id!);
+      },
+      (res: HttpErrorResponse) => console.log(res.message)
+    );
   }
 
   openPopup2() {
@@ -129,14 +149,6 @@ export class UserListComponent implements OnInit {
     this.router.navigate(["addUser"]);
   }
 
-  trueOrFalseState() {
-    if (this.userForm.value.primaryBranch == true) {
-      return 'Delete'
-    } else {
-      return 'Remove'
-    }
-  }
-
   type() {
     for(let data of this.staffs!)
     if (this.tabUserGM?.username === this.companie?.dispacherMail ) {
@@ -147,14 +159,9 @@ export class UserListComponent implements OnInit {
     return ;
   }
 
- 
-
-    
-
   generateCsv(email: string, firstName: string, lastName: string, manager: string) {
 
-
-    let type = this.type();
+    const type = this.type();
     let  approvalLimit = "";
     this.isLoading = true;
     let options = new CsvFormat(this.companie?.branch?.id?.toString(), 'TRUE', email, firstName, lastName, 'ACTIVE', manager, approvalLimit, '0', '', type);
@@ -181,75 +188,6 @@ export class UserListComponent implements OnInit {
         this.isLoading = false;
       }
     );
-  }
-
-  // csv(dispId: any) {
-  //   const limit = this.approvalLimit();
-  //   const branche = this.companie?.branch?.id;
-  //   const home = this.trueOrFalseHome();
-  //   const gm = this.companie?.userGM?.username;
-
-  //   const data = [
-  //     [branche, home, dispId.username, dispId.firstName, dispId.lastName, 'ACTIVE', gm, limit, this.spend_limit, dispId.selectCompany, 'Head of Department']
-  //   ];
-  //   console.log('test form', this._fb)
-
-  //   let options = {
-  //     fieldSeparator: ';',
-  //     quoteStrings: '"',
-  //     decimalseparator: '.',
-  //     showLabels: true,
-  //     showTitle: false,
-  //     useBom: true,
-  //     headers: ['BranchId', 'HOME', 'Email', 'First Name', 'Last Name', 'State', 'Manager', 'Approval limit', 'Spend_limit', 'Owned Cost Center', 'User type']
-  //   };
-  //   console.log('dataFormtoCSV', data)
-
-  //   new ngxCsv(data, "Accortemplateuserssheet", options)
-
-  // }
-
-  // csvdelete(dispId: any) {
-
-  //   const limit = this.approvalLimit();
-  //   const branche = this.companie?.branch?.id;
-  //   const home = this.trueOrFalseHome();
-  //   const gm = this.companie?.userGM?.username;
-  //   const state = this.trueOrFalseState();
-  //   // const disp = this.testDisp(dispId);
-
-  //   const data = [
-  //     [branche, home, dispId.username, dispId.firstName, dispId.lastName, state, gm, limit, this.spend_limit, '', 'Head of Department']
-  //   ];
-
-  //   console.log('test form', this._fb)
-
-  //   let options = {
-  //     fieldSeparator: ';',
-  //     quoteStrings: '"',
-  //     decimalseparator: '.',
-  //     showLabels: true,
-  //     showTitle: false,
-  //     useBom: true,
-  //     headers: ['BranchId', 'HOME', 'Email', 'First Name', 'Last Name', 'State', 'Manager', 'Approval limit', 'Spend_limit', 'Owned Cost Center', 'User type']
-  //   };
-  //   console.log('dataFormtoCSV', data)
-
-  //   new ngxCsv(data, "Accortemplateuserssheet", options)
-
-  // }
-
-
-  remove(userId: any) {
-    if (confirm('Can you confirm there are not more pending tasks in the task manager for this user?  If no, please reassign the pending tasks before deleting the user')){
-      this.service.deleteUser(userId)
-        .subscribe(() => {
-          this.users = this.users?.filter((user: { id: any; }) => userId !== user.id);
-          alert("deleted user");
-          window.location.reload()
-          console.log('this.users', this.users)
-        })
-    }
   }
 }
 
