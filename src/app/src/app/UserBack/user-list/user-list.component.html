@@ -6,7 +6,7 @@
   </div>
 </div>
 
-<div class="tables" [ngStyle]="{'display':tableStyle}">
+<div class="tables">
 <table class="table" >
   <thead class="thead-dark">
     <tr>
@@ -50,7 +50,7 @@
 </thead>
     <tbody class="data" [formGroup]="userForm" *ngFor="let data of staffs | filter: searchKey:'firstName'">
       <tr>
-        <th scope="row" #myNameElem>
+        <th scope="row">
           <input type="radio" id="radioCheck" name="dispatcher"
                  [value]="data?.mail === companie?.dispacherMail"
                  [checked]="data?.mail === companie?.dispacherMail"

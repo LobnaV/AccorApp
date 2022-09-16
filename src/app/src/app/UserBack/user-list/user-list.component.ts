@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AccorService} from 'src/app/accor.service';
@@ -18,29 +18,9 @@ import {ConfirmationDialogService} from "../confirmation-dialog/confirmation-dia
 })
 export class UserListComponent implements OnInit {
 
-  @ViewChild("dispatcher") myNameElem!: ElementRef;
-  val = localStorage.getItem('dispatcher');
-
-
-  @Input() pdata: any;
-  form: any;
-  spend_limit = 0;
-  params: any;
-  parameters: any;
-  branch = [
-    {name: "primaryBranch"}
-  ];
-  users: any;
-  tabcc: any = [];
   searchKey: string = "";
   searchTerm: string = "";
-  displayStyle = "none";
-  displayStyle2 = "none";
-  displayHome = 'none';
-  tableStyle = "table";
-  dispatcher: any;
-  t: any;
-  tabi: any = [];
+
   companie?: Param | null;
   tabUserGM?: User | null;
   staffs?: Staff[] | null = [];
@@ -53,22 +33,19 @@ export class UserListComponent implements OnInit {
     lastName: new FormControl(''),
     email: new FormControl(''),
   })
-  role: any = [];
-  roleName: string = "";
+
   isLoading = false;
 
   constructor(
     private service: AccorService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    public theDispatcher: AccorService,
     private confirmationDialogService: ConfirmationDialogService
   ) {
   }
 
   ngOnInit(): void {
 
-    this.displayStyle = "none";
 
     console.log('****');
 
@@ -114,7 +91,6 @@ export class UserListComponent implements OnInit {
 
   }
 
-
   remove(idStaff: number) {
     this.service.deleteStaff(idStaff).subscribe(
       () => {
@@ -125,20 +101,6 @@ export class UserListComponent implements OnInit {
     );
   }
 
-  openPopup2() {
-
-    this.displayStyle2 = "block"
-    this.tableStyle = "none";
-    this.displayStyle = "none";
-  }
-
-  back() {
-    this.tableStyle = "table";
-    this.displayStyle = "none";
-    this.displayStyle2 = "none";
-  }
-
-
   Search(event: any) {
     this.searchTerm = (event.target as HTMLInputElement).value;
     console.log(this.searchTerm);
@@ -146,7 +108,7 @@ export class UserListComponent implements OnInit {
   }
 
   NewUser() {
-    this.router.navigate(["addUser"]);
+    this.router.navigate(["addUser/companie/", this.companie?.id]);
   }
 
   type() {

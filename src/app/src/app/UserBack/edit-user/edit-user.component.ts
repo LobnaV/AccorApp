@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ngxCsv } from 'ngx-csv';
+import { ActivatedRoute } from '@angular/router';
 import { AccorService } from 'src/app/accor.service';
 import { Staff } from 'src/app/model/staff';
 import { User } from '../../model/user';
 import { Location } from '@angular/common';
 import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
-import {Param} from "../../model/param";
+import { ConfirmationDialogService } from '../confirmation-dialog/confirmation-dialog.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -15,14 +14,8 @@ import {Param} from "../../model/param";
   styleUrls: ['./edit-user.component.scss']
 })
 export class EditUserComponent implements OnInit {
-  private _fb: any;
-  form: any;
-  type = 'Head of Department';
   params:any;
   parameters: any;
-
-  displayStyle = "none";
-
 
   user: User = new User();
   staff?: Staff;
@@ -35,9 +28,10 @@ export class EditUserComponent implements OnInit {
 
   constructor(
     private service: AccorService,
-    private router: Router,
     private activatedRoute: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private confirmationDialogService: ConfirmationDialogService,
+
   ) { }
 
   ngOnInit(): void {
@@ -58,18 +52,18 @@ export class EditUserComponent implements OnInit {
     });
   }
 
-  trueOrFalse(){
-    if(this.userForm.value.primaryBranch == 'true'){
-      return 'TRUE'
-    }else{
-      return 'FALSE'
-    }
-  }
+  // trueOrFalse(){
+  //   if(this.userForm.value.primaryBranch == 'true'){
+  //     return 'TRUE'
+  //   }else{
+  //     return 'FALSE'
+  //   }
+  // }
 
   back(){
-    if(confirm("Are you sure you want to leave this page without saving your changes ? ")) {
-      this.location.back()
-    }
+    this.confirmationDialogService.confirm('Confirmation', 'Are you sure you want to leave this page without saving your changes ?')
+    .then(() => this.location.back())
+    .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'))     
   }
 
   Update() {
@@ -80,12 +74,12 @@ export class EditUserComponent implements OnInit {
       this.userForm.get('lastName')?.value,
       this.staff?.companyParameter);
 
-      this.service.updateStaff(updateForm).subscribe(
+      this.service.updateStaff(updateForm)
+      .subscribe(
         (res: HttpResponse<Staff>) => {
           console.log("update ok");
           console.log(res.body);
           this.location.back();
-
         },
         (res: HttpErrorResponse) => console.log(res.message)
       );

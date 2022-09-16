@@ -16,6 +16,6 @@ public class ChannelSftp {
 		Session jschSession = jsch.getSession(username, remoteHost);
 		jschSession.setPassword(password);
 		jschSession.connect();
-		return (ChannelSftp) jschSession.openChannel("sftp");
+		return null;// (ChannelSftp) jschSession.openChannel("sftp");
 	}
 }

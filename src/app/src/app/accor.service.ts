@@ -77,6 +77,11 @@ export class AccorService {
     return this.http.delete<void>(`${this.staffUrl}/${id}`, { observe: 'response' });
   }
 
+  createStaff(staff:Staff): Observable<HttpResponse<Staff>>{
+    return this.http
+      .post<Staff>(this.staffUrl , staff, { observe: 'response' })
+  }
+
   // excel generation
 
   generateExcel(csvFormat: CsvFormat, idCompagnie: number): Observable<HttpResponse<Blob>> {

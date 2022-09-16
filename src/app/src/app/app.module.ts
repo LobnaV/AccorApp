@@ -1,6 +1,5 @@
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -29,6 +28,7 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 import { ForgotPasswordFormComponent } from './forgot-password-form/forgot-password-form.component';
 import {AuthInterceptor} from "./Account/login/auth.interceptor";
 import {ConfirmationDialogComponent} from "./UserBack/confirmation-dialog/confirmation-dialog.component";
+import { BrowserModule } from '@angular/platform-browser';
 
 // Factory function required during AOT compilation
 export function httpTranslateLoaderFactory(http: HttpClient) {
