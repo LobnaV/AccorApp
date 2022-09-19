@@ -1,6 +1,6 @@
 package com.App.Accor.service;
 
-import com.App.Accor.Config.ChannelSftp;
+import com.App.Accor.Config.UploadGateway;
 import com.App.Accor.playload.CsvFormatDTO;
 import com.App.Accor.repository.CompanyParameterRepository;
 import org.apache.commons.io.FileUtils;
@@ -18,7 +18,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
 
 @Service
 @Transactional
@@ -31,27 +30,27 @@ public class ExcelGenerationService {
 	private CompanyParameterRepository parameterRepository;
 
 	@Autowired
-	private ChannelSftp.UploadGateway uploadGateway;
+	private UploadGateway uploadGateway;
 
 
 	public byte[] generateSituationFactureExcel(CsvFormatDTO csvFormat, Long idCompagnie) throws IOException {
 		InputStream file = resource.getInputStream();
-//		XSSFWorkbook workbook = new XSSFWorkbook(file);
-//		XSSFSheet sheet = workbook.getSheetAt(0);
-//		//Update the value of cell
-//		int startRow = 2;
-//		XSSFRow row1 = sheet.createRow(startRow);
-//		XSSFCell cell;
-//		XSSFCellStyle cellStyle = workbook.createCellStyle();
-//		XSSFFont hSSFFont = workbook.createFont();
-//		hSSFFont.setFontName(HSSFFont.FONT_ARIAL);
-//		hSSFFont.setFontHeightInPoints((short) 9);
-//		cellStyle.setFont(hSSFFont);
-//		cellStyle.setBorderBottom(BorderStyle.THIN);
-//		cellStyle.setBorderTop(BorderStyle.THIN);
-//		cellStyle.setBorderRight(BorderStyle.THIN);
-//		cellStyle.setBorderLeft(BorderStyle.THIN);
-//		cellStyle.setAlignment(HorizontalAlignment.CENTER);
+		XSSFWorkbook workbook = new XSSFWorkbook(file);
+		XSSFSheet sheet = workbook.getSheetAt(0);
+		//Update the value of cell
+		int startRow = 2;
+		XSSFRow row1 = sheet.createRow(startRow);
+		XSSFCell cell;
+		XSSFCellStyle cellStyle = workbook.createCellStyle();
+		XSSFFont hSSFFont = workbook.createFont();
+		hSSFFont.setFontName(HSSFFont.FONT_ARIAL);
+		hSSFFont.setFontHeightInPoints((short) 9);
+		cellStyle.setFont(hSSFFont);
+		cellStyle.setBorderBottom(BorderStyle.THIN);
+		cellStyle.setBorderTop(BorderStyle.THIN);
+		cellStyle.setBorderRight(BorderStyle.THIN);
+		cellStyle.setBorderLeft(BorderStyle.THIN);
+		cellStyle.setAlignment(HorizontalAlignment.CENTER);
 
 //		cell = row1.createCell(0);
 //		cell.setCellValue(csvFormat.getBranchId());
@@ -87,27 +86,42 @@ public class ExcelGenerationService {
 //		cell.setCellValue(csvFormat.getUserType());
 //		cell.setCellStyle(cellStyle);
 
-//		file.close();
+		file.close();
 
-//		ByteArrayOutputStream docOutStream = new ByteArrayOutputStream();
-//		workbook.write(docOutStream);
-//		workbook.close();
-//		docOutStream.close();
+		ByteArrayOutputStream docOutStream = new ByteArrayOutputStream();
+		workbook.write(docOutStream);
+		workbook.close();
+		docOutStream.close();
 
 		parameterRepository.updateDispacher(idCompagnie, csvFormat.getEmail());
 
-//		File targetFile = new File("D:\\viggo\\AccorApp\\Accortemplateuserssheet.xlsx");
+//		File targetFile = new File("D:\\telechargement\\Accortemplateuserssheet.xlsx");
 
-//		FileUtils.writeByteArrayToFile(targetFile, docOutStream.toByteArray());
+//		try {
+//			uploadGateway.upload(targetFile);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//
+//		if (targetFile.exists())
+
 //		Files.readFileToByteArray(docOutStream, targetFile);
 
-		return sendFtpServer(file);
+
+		File targetFile = new File("Accortemplateuserssheet.xlsx");
+		FileUtils.writeByteArrayToFile(targetFile, docOutStream.toByteArray());
+
+		uploadGateway.upload(targetFile);
+
+		targetFile.delete();
+
+		return null;
 	}
 
 
 	public byte[] sendFtpServer(InputStream file) throws IOException {
-		uploadGateway.sendToSftp("Accortemplateuserssheet.xlsx", file);
-		file.close();
+//		uploadGateway.sendToSftp("Accortemplateuserssheet.xlsx", file);
+//		file.close();
 		return null;
 	}
 

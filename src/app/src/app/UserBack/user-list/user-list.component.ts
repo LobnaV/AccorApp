@@ -51,15 +51,8 @@ export class UserListComponent implements OnInit {
 
     this.activatedRoute.params.subscribe(params => {
       console.log(params['id']);
-      this.service.ParamId(params['id']).subscribe(
-        (res: HttpResponse<Param>) => {
-          console.log(res.body);
-          this.companie = res.body;
-          this.tabUserGM = this.companie?.userGM;
-        },
-        (res: HttpErrorResponse) => console.log(res.message)
-      );
-      this.loadStaff(params['id'])
+      this.loadGM(params['id']);
+      this.loadStaff(params['id']);
     });
 
     this.service.search.subscribe((val: any) => {
@@ -68,12 +61,22 @@ export class UserListComponent implements OnInit {
 
   }
 
+  loadGM(idCompagnie: number) {
+    this.service.ParamId(idCompagnie).subscribe(
+      (res: HttpResponse<Param>) => {
+        console.log(res.body);
+        this.companie = res.body;
+        this.tabUserGM = this.companie?.userGM;
+      },
+      (res: HttpErrorResponse) => console.log(res.message)
+    );
+  }
+
   loadStaff(idComapgnie: number) {
     this.service.staffCompagnie(idComapgnie).subscribe(
       (res: HttpResponse<Staff[]>) => {
         console.log(res.body);
         this.staffs = res.body;
-
       },
       (res: HttpErrorResponse) => console.log(res.message)
     );
@@ -103,6 +106,7 @@ export class UserListComponent implements OnInit {
       () => {
         console.log("update ok");
         this.loadStaff(this.companie?.id!);
+        this.loadGM(this.companie?.id!);
       },
       (res: HttpErrorResponse) => console.log(res.message)
     );
@@ -136,21 +140,7 @@ export class UserListComponent implements OnInit {
     let options = new CsvFormat(this.companie?.branch?.id?.toString(), 'TRUE', email, firstName, lastName, 'ACTIVE', manager, approvalLimit, '0', '', type);
     this.service.generateExcel(options, this.companie?.id!).subscribe(
       (response) => {
-        if (response) {
-          if (this.companie) {
-            this.companie.dispacherMail = email;
-          }
-          const url = window.URL.createObjectURL(response?.body!);
-          const a = document.createElement('a');
-          document.body.appendChild(a);
-          a.setAttribute('style', 'display: none');
-          a.href = url;
-          a.download = `Accortemplateuserssheet_${moment().format('DD_MM_YYYY_HH_mm')}.xlsx`;
-          a.click();
-          window.URL.revokeObjectURL(url);
-          a.remove();
-          this.isLoading = false;
-        }
+        this.isLoading = false;
       },
       (res: HttpErrorResponse) => {
         console.log(res.message);
