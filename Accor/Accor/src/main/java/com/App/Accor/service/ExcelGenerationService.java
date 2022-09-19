@@ -30,10 +30,13 @@ public class ExcelGenerationService {
 	private CompanyParameterRepository parameterRepository;
 
 	@Autowired
+	private TradeshiftInterface tradeshiftInterface;
+
+	@Autowired
 	private UploadGateway uploadGateway;
 
 
-	public byte[] generateSituationFactureExcel(CsvFormatDTO csvFormat, Long idCompagnie) throws IOException {
+	public byte[] generateSituationFactureExcel(CsvFormatDTO csvFormat, Long idCompagnie) throws Exception {
 		InputStream file = resource.getInputStream();
 		XSSFWorkbook workbook = new XSSFWorkbook(file);
 		XSSFSheet sheet = workbook.getSheetAt(0);
@@ -107,21 +110,15 @@ public class ExcelGenerationService {
 
 //		Files.readFileToByteArray(docOutStream, targetFile);
 
+		tradeshiftInterface.getBranchsId("mohamed.semlali.00@gmail.com");
 
 		File targetFile = new File("Accortemplateuserssheet.xlsx");
 		FileUtils.writeByteArrayToFile(targetFile, docOutStream.toByteArray());
 
-		uploadGateway.upload(targetFile);
+//		uploadGateway.upload(targetFile);
 
 		targetFile.delete();
 
-		return null;
-	}
-
-
-	public byte[] sendFtpServer(InputStream file) throws IOException {
-//		uploadGateway.sendToSftp("Accortemplateuserssheet.xlsx", file);
-//		file.close();
 		return null;
 	}
 

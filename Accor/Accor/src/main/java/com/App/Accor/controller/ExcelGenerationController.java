@@ -18,7 +18,7 @@ public class ExcelGenerationController {
 	private ExcelGenerationService excelGenerationService;
 
 	@PostMapping("/param/{idCompagnie}")
-	public ResponseEntity<byte[]> generateSituationExcel(@RequestBody CsvFormatDTO csvFormat, @PathVariable Long idCompagnie) throws IOException {
+	public ResponseEntity<byte[]> generateSituationExcel(@RequestBody CsvFormatDTO csvFormat, @PathVariable Long idCompagnie) throws Exception {
 
 		return ResponseEntity.status(HttpStatus.OK).header("Content-Disposition", "attachment;")
 			.contentType(MediaType.valueOf("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"))
