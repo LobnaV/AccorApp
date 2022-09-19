@@ -82,10 +82,17 @@ export class UserListComponent implements OnInit {
   deleteStaff(idStaff: number) {
     this.confirmationDialogService.confirm('Confirmation', 'If you need to temporarily delete a user, we advise you use the delegation rule option within\n' +
       '    Tradeshift (holiday, maternity leave, sick leave) to temporarily delegate tasks to another colleague.')
-      .then((confirmed) =>
-        this.confirmationDialogService.confirm('Confirmation', 'Can you confirm there are not more pending tasks in the task manager for this user? If no, please reassign the pending tasks before deleting the user.')
-          .then(() => this.remove(idStaff))
-          .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'))
+      .then((confirmed) => {
+          if (confirmed) {
+            this.confirmationDialogService.confirm('Confirmation', 'Can you confirm there are not more pending tasks in the task manager for this user? If no, please reassign the pending tasks before deleting the user.')
+              .then(() => {
+                if (confirmed) {
+                  this.remove(idStaff);
+                }
+              })
+              .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+          }
+        }
       )
       .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
 
@@ -112,19 +119,19 @@ export class UserListComponent implements OnInit {
   }
 
   type() {
-    for(let data of this.staffs!)
-    if (this.tabUserGM?.username === this.companie?.dispacherMail ) {
-      return "Manger"
-    } else if(data.mail === this.companie?.dispacherMail) {
-      return "Head of Department"
-    }
-    return ;
+    for (let data of this.staffs!)
+      if (this.tabUserGM?.username === this.companie?.dispacherMail) {
+        return "Manger"
+      } else if (data.mail === this.companie?.dispacherMail) {
+        return "Head of Department"
+      }
+    return;
   }
 
   generateCsv(email: string, firstName: string, lastName: string, manager: string) {
 
     const type = this.type();
-    let  approvalLimit = "";
+    let approvalLimit = "";
     this.isLoading = true;
     let options = new CsvFormat(this.companie?.branch?.id?.toString(), 'TRUE', email, firstName, lastName, 'ACTIVE', manager, approvalLimit, '0', '', type);
     this.service.generateExcel(options, this.companie?.id!).subscribe(

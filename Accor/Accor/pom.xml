@@ -110,10 +110,11 @@
 			<version>3.8.0</version>
 		</dependency>
 		<dependency>
-			<groupId>com.jcraft</groupId>
-			<artifactId>jsch</artifactId>
-			<version>0.1.55</version>
+			<groupId>org.springframework.integration</groupId>
+			<artifactId>spring-integration-sftp</artifactId>
+			<version>5.5.14</version>
 		</dependency>
+
 	</dependencies>
 
 	<build>

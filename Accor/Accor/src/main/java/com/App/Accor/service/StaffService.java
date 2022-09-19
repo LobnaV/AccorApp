@@ -1,5 +1,6 @@
 package com.App.Accor.service;
 
+import com.App.Accor.model.CompanyParameter;
 import com.App.Accor.model.Staff;
 import com.App.Accor.repository.StaffRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ public class StaffService {
 	@Autowired
 	private StaffRepository staffRepository;
 
+	@Autowired
+	private CompanyParamService companyParamService;
+
 	public List<Staff> findByCompagnie(Long idCompagnie) {
 		return staffRepository.findByCompanyParameterId(idCompagnie);
 	}
@@ -31,6 +35,12 @@ public class StaffService {
 	}
 
 	public void delete(Long id) {
+		Staff staff = findById(id);
+		CompanyParameter companyParameter = staff.getCompanyParameter();
+		if (staff.getMail().equals(companyParameter.getDispacherMail())) {
+			companyParameter.setDispacherMail(companyParameter.getUserGM().getUsername());
+			companyParamService.save(companyParameter);
+		}
 		staffRepository.deleteById(id);
 	}
 }
