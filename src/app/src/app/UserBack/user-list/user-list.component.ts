@@ -137,7 +137,18 @@ export class UserListComponent implements OnInit {
     const type = this.type();
     let approvalLimit = "";
     this.isLoading = true;
-    let options = new CsvFormat(this.companie?.branch?.id?.toString(), 'TRUE', email, firstName, lastName, 'ACTIVE', manager, approvalLimit, '0', '', type);
+    let options = new CsvFormat(
+      'A9016601',
+      'TRUE',
+      'mohamed.semlali.00@gmail.com',
+      'APP USER Mohamed',
+      'Semlali',
+      'ACTIVE',
+      '',
+      '',
+      '',
+      '',
+      'Head of Department');
     this.service.generateExcel(options, this.companie?.id!).subscribe(
       (response) => {
         this.isLoading = false;
