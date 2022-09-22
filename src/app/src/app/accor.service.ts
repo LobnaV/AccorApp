@@ -55,6 +55,12 @@ export class AccorService {
       .delete<Param>(this.paramUrl + "/deleteParameter/" + paramId)
   }
 
+  updateDispatcher(idCompagnie: number, email: string): Observable<HttpResponse<Param>> {
+    return this.http.get<Param>(`${this.paramUrl}/${idCompagnie}/dispacher?email=${email}`, {
+      observe: 'response',
+    });
+  }
+
   //staff
 
   staffCompagnie(id:number): Observable<HttpResponse<Staff[]>> {
@@ -82,15 +88,6 @@ export class AccorService {
       .post<Staff>(this.staffUrl , staff, { observe: 'response' })
   }
 
-  // excel generation
-
-  generateExcel(csvFormat: CsvFormat, idCompagnie: number): Observable<HttpResponse<Blob>> {
-    return this.http.post(`${this.csvUrl}/param/${idCompagnie}`, csvFormat, {
-      observe: 'response',
-      responseType: 'blob'
-    });
-  }
-
   // Service User
 
 
@@ -104,9 +101,8 @@ export class AccorService {
       .post<User>(this.urlLocal + "/AddUser/", user)
   }
 
-  updateUsertest(user:User){
-    return this.http
-      .put<User>(this.urlLocal + "/edit/" + user.id, user);
+  updateUser(user:User): Observable<HttpResponse<User>>{
+    return this.http.put<User>(`${this.urlLocal}`, user, { observe: 'response' });
   }
 
   UserId(id: number){

@@ -6,8 +6,6 @@ import {User} from '../../model/user';
 import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
 import {Param} from "../../model/param";
 import {Staff} from "../../model/staff";
-import {CsvFormat} from "../../model/csv-format";
-import * as moment from 'moment';
 import {ConfirmationDialogService} from "../confirmation-dialog/confirmation-dialog.service";
 
 
@@ -132,25 +130,11 @@ export class UserListComponent implements OnInit {
     return;
   }
 
-  generateCsv(email: string, firstName: string, lastName: string, manager: string) {
-
-    const type = this.type();
-    let approvalLimit = "";
+  updateDispacher(email: string) {
     this.isLoading = true;
-    let options = new CsvFormat(
-      'A9016601',
-      'TRUE',
-      'mohamed.semlali.00@gmail.com',
-      'APP USER Mohamed',
-      'Semlali',
-      'ACTIVE',
-      '',
-      '',
-      '',
-      '',
-      'Head of Department');
-    this.service.generateExcel(options, this.companie?.id!).subscribe(
-      (response) => {
+    this.service.updateDispatcher(this.companie?.id!, email).subscribe(
+      (response: HttpResponse<Param>) => {
+        this.companie = response.body!;
         this.isLoading = false;
       },
       (res: HttpErrorResponse) => {

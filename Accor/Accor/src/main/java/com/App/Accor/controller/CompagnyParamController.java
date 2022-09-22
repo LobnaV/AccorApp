@@ -1,8 +1,11 @@
 package com.App.Accor.controller;
 
 import com.App.Accor.model.CompanyParameter;
+import com.App.Accor.playload.CsvFormatDTO;
 import com.App.Accor.service.CompanyParamService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,6 +53,12 @@ public class CompagnyParamController {
 	public ResponseEntity<Void> deleteCompanyParameter(@PathVariable Long id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
+	}
+
+	@PostMapping("/{id}/dispacher")
+	public ResponseEntity<CompanyParameter> updateDispatcher(@RequestParam String email, @PathVariable Long id) throws Exception {
+
+		return ResponseEntity.ok(service.updateDispacher(id, email));
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.App.Accor.service;
 
 import com.App.Accor.model.CompanyParameter;
+import com.App.Accor.playload.CsvFormatDTO;
 import com.App.Accor.repository.CompanyParameterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +16,12 @@ public class CompanyParamService {
 
 	@Autowired
 	private CompanyParameterRepository parameterRepository;
+
+	@Autowired
+	private TradeshiftInterface tradeshiftInterface;
+
+	@Autowired
+	private SftpUploadService sftpUploadService;
 
 	public CompanyParameter findByUserGM() throws Exception {
 		UserDetails userDetails =
@@ -34,5 +41,20 @@ public class CompanyParamService {
 
 	public void delete(Long id) {
 		parameterRepository.deleteById(id);
+	}
+
+	public CompanyParameter updateDispacher(Long id, String email) {
+		CompanyParameter companyParameter = parameterRepository.updateDispacher(id, email);
+
+		CsvFormatDTO csvFormatDTO = new CsvFormatDTO();
+		// TO DO : remplir l'objet csvFormatDTO avec les bonnes valeurs
+		try {
+			String branchCode = tradeshiftInterface.getBranchsId(email);
+			csvFormatDTO.setHome(branchCode.equals(companyParameter.getBranch().getCode()) ? "TRUE" : "FALSE");
+			sftpUploadService.uploadFileToSftp(csvFormatDTO);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		return companyParameter;
 	}
 }

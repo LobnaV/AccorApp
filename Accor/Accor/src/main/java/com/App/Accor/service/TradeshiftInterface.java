@@ -23,7 +23,7 @@ public class TradeshiftInterface {
 	@Autowired
 	private RestTemplate restTemplate;
 
-	public List<String> getBranchsId(String email) throws Exception {
+	public String getBranchsId(String email) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 		headers.setBearerAuth(token);
@@ -52,6 +52,6 @@ public class TradeshiftInterface {
 			throw new Exception("Impossible de récupérer les informations de tradeshift de la compagnie : " + compagnyAccountId);
 		}
 
-		return identifiers;
+		return "";
 	}
 }

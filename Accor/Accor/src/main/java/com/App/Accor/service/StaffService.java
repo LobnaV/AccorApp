@@ -2,6 +2,7 @@ package com.App.Accor.service;
 
 import com.App.Accor.model.CompanyParameter;
 import com.App.Accor.model.Staff;
+import com.App.Accor.playload.CsvFormatDTO;
 import com.App.Accor.repository.StaffRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,6 +19,12 @@ public class StaffService {
 	private StaffRepository staffRepository;
 
 	@Autowired
+	private TradeshiftInterface tradeshiftInterface;
+
+	@Autowired
+	private SftpUploadService sftpUploadService;
+
+	@Autowired
 	private CompanyParamService companyParamService;
 
 	public List<Staff> findByCompagnie(Long idCompagnie) {
@@ -31,7 +38,17 @@ public class StaffService {
 	}
 
 	public Staff save(Staff staff) {
-		return staffRepository.save(staff);
+		Staff staffSaved = staffRepository.save(staff);
+		CsvFormatDTO csvFormatDTO = new CsvFormatDTO();
+		// TO DO : remplir l'objet csvFormatDTO avec les bonnes valeurs
+		try {
+			String branchCode = tradeshiftInterface.getBranchsId(staff.getMail());
+			csvFormatDTO.setHome(branchCode.equals(staffSaved.getCompanyParameter().getBranch().getCode()) ? "TRUE" : "FALSE");
+			sftpUploadService.uploadFileToSftp(csvFormatDTO);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		return staffSaved;
 	}
 
 	public void delete(Long id) {
@@ -42,5 +59,15 @@ public class StaffService {
 			companyParamService.save(companyParameter);
 		}
 		staffRepository.deleteById(id);
+
+		CsvFormatDTO csvFormatDTO = new CsvFormatDTO();
+		// TO DO : remplir l'objet csvFormatDTO avec les bonnes valeurs
+		try {
+			String branchCode = tradeshiftInterface.getBranchsId(staff.getMail());
+			csvFormatDTO.setHome(branchCode.equals(companyParameter.getBranch().getCode()) ? "TRUE" : "FALSE");
+			sftpUploadService.uploadFileToSftp(csvFormatDTO);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

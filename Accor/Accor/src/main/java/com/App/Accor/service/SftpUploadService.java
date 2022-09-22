@@ -8,19 +8,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
 @Service
 @Transactional
-public class CsvGenerationService {
+public class SftpUploadService {
 
 	private final String DELIMITER = ";";
-
-	@Autowired
-	private CompanyParameterRepository parameterRepository;
-
-	@Autowired
-	private TradeshiftInterface tradeshiftInterface;
 
 	@Autowired
 	private UploadGateway uploadGateway;
@@ -74,26 +69,18 @@ public class CsvGenerationService {
 			"USER_TYPE";
 	}
 
-	public byte[] generateSituationFactureExcel(CsvFormatDTO csvFormat, Long idCompagnie) throws Exception {
-
+	public void uploadFileToSftp(CsvFormatDTO csvFormat) throws FileNotFoundException {
 		File csvOutputFile = new File("Accortemplateuserssheet.csv");
 		try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
 			pw.println(headerCsv());
 			pw.println(convertToCSV(csvFormat));
 		}
 
-
-		parameterRepository.updateDispacher(idCompagnie, csvFormat.getEmail());
-
-		tradeshiftInterface.getBranchsId("mohamed.semlali.00@gmail.com");
-
 		uploadGateway.upload(csvOutputFile);
 
 		if (csvOutputFile.exists()) {
 			csvOutputFile.delete();
 		}
-
-		return null;
 	}
 
 }

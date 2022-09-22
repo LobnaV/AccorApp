@@ -17,5 +17,5 @@ public interface CompanyParameterRepository extends JpaRepository<CompanyParamet
 
 	@Modifying
 	@Query("update CompanyParameter u set u.dispacherMail = :mail where u.id = :id")
-	void updateDispacher(@Param("id") Long id, @Param("mail") String mail);
+	CompanyParameter updateDispacher(@Param("id") Long id, @Param("mail") String mail);
 }

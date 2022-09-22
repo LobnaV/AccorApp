@@ -23,7 +23,7 @@
                              [value]="tabUserGM?.username === companie?.dispacherMail"
                              [checked]="tabUserGM?.username === companie?.dispacherMail"
                              [disabled]="isLoading"
-                             (click)="generateCsv(tabUserGM?.username!, tabUserGM?.firstName!, tabUserGM?.username!, tabUserGM?.username!)" >
+                             (click)="updateDispacher(tabUserGM?.username!)" >
       </th>
       <th scope="row">{{tabUserGM?.firstName}}</th>
       <th>{{tabUserGM?.lastName}}</th>
@@ -55,7 +55,7 @@
                  [value]="data?.mail === companie?.dispacherMail"
                  [checked]="data?.mail === companie?.dispacherMail"
                  [disabled]="isLoading"
-                 (click)="generateCsv(data?.mail!, data?.firstName!, data?.lastName!, data?.companyParameter?.userGM?.username!)">
+                 (click)="updateDispacher(data?.mail!)">
         </th>
         <th scope="row">{{data?.firstName}}</th>
         <th >{{data?.lastName}}</th>

@@ -3,6 +3,7 @@ package com.App.Accor.controller;
 import com.App.Accor.model.User;
 import com.App.Accor.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,10 +31,9 @@ public class UserController {
 		return service.userListId(id);
 	}
 
-	@PutMapping(path = {"/edit/{id}"})
-	public User edit(@RequestBody User user, @PathVariable("id") Long id) {
-		user.setId(id);
-		return service.edit(user);
+	@PutMapping
+	public ResponseEntity<User> edit(@RequestBody User user) {
+		return ResponseEntity.ok(service.edit(user));
 	}
 
 	@DeleteMapping(path = {"/delete/{id}"})
