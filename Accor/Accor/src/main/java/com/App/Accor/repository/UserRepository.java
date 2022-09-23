@@ -13,14 +13,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	@Override
 	List<User> findAll();
 
-	@Query("SELECT x FROM User x WHERE x.username = ?1")
-	User findByEmail(String username);
-
 	Optional<User> findByUsername(String username);
 
 	Boolean existsByUsername(String username);
 
-	User findByResetPasswordToken(String token);
-
-
+	Optional<User> findOneByResetKey(String key);
 }
