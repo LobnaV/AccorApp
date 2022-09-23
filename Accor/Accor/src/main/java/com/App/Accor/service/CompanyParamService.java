@@ -50,7 +50,7 @@ public class CompanyParamService {
 		CsvFormatDTO csvFormatDTO = new CsvFormatDTO();
 		// TO DO : remplir l'objet csvFormatDTO avec les bonnes valeurs
 		try {
-//			String branchCode = tradeshiftInterface.getBranchsId(email);
+//			String branchCode = tradeshiftInterface.getPrimaryBranchUser(email);
 //			csvFormatDTO.setHome(branchCode.equals(companyParameter.getBranch().getCode()) ? "TRUE" : "FALSE");
 //			sftpUploadService.uploadFileToSftp(csvFormatDTO);
 		} catch (Exception e) {

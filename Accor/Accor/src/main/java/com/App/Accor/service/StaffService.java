@@ -42,7 +42,7 @@ public class StaffService {
 		CsvFormatDTO csvFormatDTO = new CsvFormatDTO();
 		// TO DO : remplir l'objet csvFormatDTO avec les bonnes valeurs
 		try {
-//			String branchCode = tradeshiftInterface.getBranchsId(staff.getMail());
+//			String branchCode = tradeshiftInterface.getPrimaryBranchUser(staff.getMail());
 //			csvFormatDTO.setHome(branchCode.equals(staffSaved.getCompanyParameter().getBranch().getCode()) ? "TRUE" : "FALSE");
 //			sftpUploadService.uploadFileToSftp(csvFormatDTO);
 		} catch (Exception e) {
@@ -63,7 +63,7 @@ public class StaffService {
 		CsvFormatDTO csvFormatDTO = new CsvFormatDTO();
 		// TO DO : remplir l'objet csvFormatDTO avec les bonnes valeurs
 		try {
-//			String branchCode = tradeshiftInterface.getBranchsId(staff.getMail());
+//			String branchCode = tradeshiftInterface.getPrimaryBranchUser(staff.getMail());
 //			csvFormatDTO.setHome(branchCode.equals(companyParameter.getBranch().getCode()) ? "TRUE" : "FALSE");
 //			sftpUploadService.uploadFileToSftp(csvFormatDTO);
 		} catch (Exception e) {

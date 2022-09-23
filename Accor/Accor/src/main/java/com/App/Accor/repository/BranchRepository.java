@@ -7,18 +7,11 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Repository
 public interface BranchRepository extends JpaRepository<Branch, Long> {
 
-//	@Query(
-//		value = "SELECT * FROM company c " +
-//			"INNER JOIN branch_companies bc " +
-//			"ON c.hotel_mega_code = bc.companies_hotel_mega_code " +
-//			"INNER JOIN branch b " +
-//			"ON b.branch_id = bc.branch_branch_id " +
-//			"WHERE hotel_mega_code IN :hotelMegaCodes",
-//		nativeQuery = true)
-//	List<Branch> findBranchByCompany(@Param("hotelMegaCodes") List<String> hotelMegaCodes);
+	Optional<Branch> findByUuid(String uuid);
 }

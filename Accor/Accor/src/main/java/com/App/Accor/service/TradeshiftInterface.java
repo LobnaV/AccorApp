@@ -1,18 +1,13 @@
 package com.App.Accor.service;
 
 import com.App.Accor.model.BranchTradeshift;
-import com.App.Accor.model.BranchTradeshiftDetails;
-import com.App.Accor.model.IdentifierTradeShift;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Service
 public class TradeshiftInterface {
@@ -23,7 +18,10 @@ public class TradeshiftInterface {
 	@Autowired
 	private RestTemplate restTemplate;
 
-	public String getBranchsId(String email) throws Exception {
+	@Autowired
+	private BranchService branchService;
+
+	public String getPrimaryBranchUser(String email) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 		headers.setBearerAuth(token);
@@ -41,17 +39,6 @@ public class TradeshiftInterface {
 			throw new Exception("Impossible de récupérer les informations de tradeshift de l'utilisateur : " + email);
 		}
 
-		ResponseEntity<BranchTradeshiftDetails> responseEntityBranchDetails = restTemplate.exchange(String.format("%s/account/%s", url, compagnyAccountId), HttpMethod.GET, entity, BranchTradeshiftDetails.class);
-
-		BranchTradeshiftDetails branchTradeshiftDetails = Objects.requireNonNull(responseEntityBranchDetails.getBody());
-
-		List<String> identifiers = branchTradeshiftDetails.getIdentifiers()
-			.stream().map(IdentifierTradeShift::getValue).collect(Collectors.toList());
-
-		if (CollectionUtils.isEmpty(identifiers)) {
-			throw new Exception("Impossible de récupérer les informations de tradeshift de la compagnie : " + compagnyAccountId);
-		}
-
-		return "";
+		return branchService.findByUuid(compagnyAccountId).getCode();
 	}
 }

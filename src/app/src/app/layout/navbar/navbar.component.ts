@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AccorService } from 'src/app/accor.service';
+import { TokenStorageService } from '../../Account/login/token-storage.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,20 +11,22 @@ import { AccorService } from 'src/app/accor.service';
 export class NavbarComponent implements OnInit {
 
   constructor(
-    private service:AccorService,
-    public translate: TranslateService
-
-  ) { }
+    private service: AccorService,
+    public translate: TranslateService,
+    private tokenStorage: TokenStorageService,
+  ) {
+  }
 
   ngOnInit(): void {
   }
 
   onClickLogout() {
-    this.service.logout();
+    this.tokenStorage.signOut();
+    window.location.reload();
   }
 
-   //Switch language
-   translateLanguageTo(lang: string) {
+  //Switch language
+  translateLanguageTo(lang: string) {
     this.translate.use(lang);
   }
 

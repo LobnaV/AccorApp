@@ -3,6 +3,7 @@ package com.App.Accor.service;
 import com.App.Accor.model.Branch;
 import com.App.Accor.repository.BranchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +23,11 @@ public class BranchService {
 
 	public Optional<Branch> listId(Long id) {
 		return branchR.findById(id);
+	}
+
+	public Branch findByUuid(String uuid) {
+		return branchR.findByUuid(uuid)
+			.orElseThrow(() -> new UsernameNotFoundException("Branch Not Found with uuid : " + uuid));
 	}
 
 	public Branch add(Branch branch) {

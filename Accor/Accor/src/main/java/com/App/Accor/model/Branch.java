@@ -18,6 +18,10 @@ public class Branch implements Serializable {
 
 	@Column(unique = true)
 	@NotNull
+	private String uuid;
+
+	@Column(unique = true)
+	@NotNull
 	private String code;
 
 	private String name;
