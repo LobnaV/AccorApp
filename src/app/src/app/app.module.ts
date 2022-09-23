@@ -29,6 +29,8 @@ import {ConfirmationDialogComponent} from "./UserBack/confirmation-dialog/confir
 import { BrowserModule } from '@angular/platform-browser';
 import {UpdateStaffComponent} from "./UserBack/update-staff/update-staff.component";
 import {UpdateUserGmComponent} from "./UserBack/update-user/update-user-gm.component";
+import {PasswordResetInitComponent} from "./password-reset/init/password-reset-init.component";
+import {PasswordResetFinishComponent} from "./password-reset/finish/password-reset-finish.component";
 
 // Factory function required during AOT compilation
 export function httpTranslateLoaderFactory(http: HttpClient) {
@@ -57,7 +59,9 @@ export function httpTranslateLoaderFactory(http: HttpClient) {
     ForgotPasswordFormComponent,
     ConfirmationDialogComponent,
     UpdateStaffComponent,
-    UpdateUserGmComponent
+    UpdateUserGmComponent,
+    PasswordResetInitComponent,
+    PasswordResetFinishComponent
   ],
   imports: [
     BrowserModule,

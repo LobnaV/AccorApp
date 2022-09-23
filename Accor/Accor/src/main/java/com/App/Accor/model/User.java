@@ -1,12 +1,15 @@
 package com.App.Accor.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Collection;
 
 @Data
@@ -32,7 +35,10 @@ public class User implements Serializable {
 
 	private String primaryBranch;
 
-	private String resetPasswordToken;
+	@JsonIgnore
+	private String resetKey;
+
+	private Instant resetDate = null;
 
 	@ManyToMany
 	@JoinTable(

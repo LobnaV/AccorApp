@@ -16,9 +16,17 @@ import {ParameterComponent} from './Parameter/parameter/parameter.component';
 import {UserListComponent} from './UserBack/user-list/user-list.component';
 import {UpdateStaffComponent} from "./UserBack/update-staff/update-staff.component";
 import {UpdateUserGmComponent} from "./UserBack/update-user/update-user-gm.component";
+import {passwordResetFinishRoute} from "./password-reset/finish/password-reset-finish.route";
+import {passwordResetInitRoute} from "./password-reset/init/password-reset-init.route";
+
+const ACCOUNT_ROUTES = [
+  passwordResetFinishRoute,
+  passwordResetInitRoute
+];
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
+  {path: '', children: ACCOUNT_ROUTES},
   {path: 'login', component: LoginComponent},
   {
     path: '', canActivate: [AccorGuard], component: LayoutComponent, children: [
