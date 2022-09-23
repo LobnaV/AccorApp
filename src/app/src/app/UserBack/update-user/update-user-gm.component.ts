@@ -2,27 +2,27 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {AccorService} from 'src/app/accor.service';
-import {Staff} from 'src/app/model/staff';
 import {Location} from '@angular/common';
 import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
 import {ConfirmationDialogService} from '../confirmation-dialog/confirmation-dialog.service';
 import {Param} from "../../model/param";
+import {User} from "../../model/user";
 
 @Component({
-  selector: 'app-update-staff',
-  templateUrl: './update-staff.component.html',
+  selector: 'app-update-user-gm',
+  templateUrl: './update-user-gm.component.html',
   styleUrls: ['../user.component.scss']
 })
-export class UpdateStaffComponent implements OnInit {
+export class UpdateUserGmComponent implements OnInit {
 
-  staff?: Staff;
+  user?: User;
   companie?: Param;
 
-  staffForm = new FormGroup({
+  userForm = new FormGroup({
     id: new FormControl(''),
     firstName: new FormControl(''),
     lastName: new FormControl(''),
-    mail: new FormControl(''),
+    username: new FormControl({value: '', disabled: true}),
   })
 
   constructor(
@@ -44,22 +44,22 @@ export class UpdateStaffComponent implements OnInit {
         (res: HttpErrorResponse) => console.log(res.message)
       );
 
-      const idStaff = params['staffId'];
-      if (idStaff) {
-        this.service.staffId(idStaff).subscribe(
-          (res: HttpResponse<Staff>) => {
-            this.staff = res.body!;
-            this.staffForm.patchValue({
-              id: this.staff?.id,
-              firstName: this.staff?.firstName,
-              lastName: this.staff?.lastName,
-              mail: this.staff?.mail
+      const userId = params['userId'];
+      if (userId) {
+        this.service.userId(userId).subscribe(
+          (res: HttpResponse<User>) => {
+            this.user = res.body!;
+            this.userForm.patchValue({
+              id: this.user?.id,
+              firstName: this.user?.firstName,
+              lastName: this.user?.lastName,
+              username: this.user?.username
             });
           },
           (res: HttpErrorResponse) => console.log(res.message)
         );
       } else {
-        this.staff = new Staff();
+        this.user = new User();
       }
     });
   }
@@ -73,30 +73,18 @@ export class UpdateStaffComponent implements OnInit {
   }
 
   Update() {
-    const updateForm = new Staff(
-      this.staffForm.get('id')?.value,
-      this.staffForm.get('mail')?.value,
-      this.staffForm.get('firstName')?.value,
-      this.staffForm.get('lastName')?.value,
-      this.companie);
-
-    if (this.staff?.id) {
-      this.service.updateStaff(updateForm)
-        .subscribe(
-          (res: HttpResponse<Staff>) => {
-            this.location.back();
-          },
-          (res: HttpErrorResponse) => console.log(res.message)
-        );
-    } else {
-      this.service.createStaff(updateForm)
-        .subscribe(
-          (res: HttpResponse<Staff>) => {
-            this.location.back();
-          },
-          (res: HttpErrorResponse) => console.log(res.message)
-        );
-    }
+    const updateForm = new User(
+      this.userForm.get('id')?.value,
+      this.userForm.get('username')?.value,
+      this.userForm.get('firstName')?.value,
+      this.userForm.get('lastName')?.value);
+    this.service.updateUserName(updateForm)
+      .subscribe(
+        (res: HttpResponse<User>) => {
+          this.location.back();
+        },
+        (res: HttpErrorResponse) => console.log(res.message)
+      );
   }
 
 }

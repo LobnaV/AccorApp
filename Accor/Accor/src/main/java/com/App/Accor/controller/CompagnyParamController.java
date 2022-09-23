@@ -55,7 +55,7 @@ public class CompagnyParamController {
 		return ResponseEntity.noContent().build();
 	}
 
-	@PostMapping("/{id}/dispacher")
+	@GetMapping("/{id}/dispacher")
 	public ResponseEntity<CompanyParameter> updateDispatcher(@RequestParam String email, @PathVariable Long id) throws Exception {
 
 		return ResponseEntity.ok(service.updateDispacher(id, email));

@@ -13,9 +13,9 @@ import {MainPageComponent} from './main-page/main-page.component';
 import {AddParamComponent} from './Parameter/add-param/add-param.component';
 import {EditParamComponent} from './Parameter/edit-param/edit-param.component';
 import {ParameterComponent} from './Parameter/parameter/parameter.component';
-import {AddUserComponent} from './UserBack/add-user/add-user.component';
-import {EditUserComponent} from './UserBack/edit-user/edit-user.component';
 import {UserListComponent} from './UserBack/user-list/user-list.component';
+import {UpdateStaffComponent} from "./UserBack/update-staff/update-staff.component";
+import {UpdateUserGmComponent} from "./UserBack/update-user/update-user-gm.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -25,15 +25,18 @@ const routes: Routes = [
       {path: 'Home', component: MainPageComponent},
       {path: 'signup', component: SignupComponent},
 
+
+      {path: 'compagny-param/:id', component: UserListComponent},
+      {path: 'compagny-param/:id/staff/add', component: UpdateStaffComponent},
+      {path: 'compagny-param/:id/staff/:staffId/edit', component: UpdateStaffComponent},
+      {path: 'compagny-param/:id/user-gm/:userId/edit', component: UpdateUserGmComponent},
+
       {path: 'UserList', component: UserListComponent},
       {path: 'UserList/:id', component: UserListComponent},
       {path: 'x/:dispId', component: UserListComponent},
       {path: 'Parameter/:id', component: ParameterComponent},
       {path: 'AddParam', component: AddParamComponent},
       {path: 'editParameter/:paramId', component: EditParamComponent},
-      {path: 'addUser/companie/:id', component: AddUserComponent},
-      {path: 'edit/:userId', component: EditUserComponent},
-      {path: 'staff/:id/edit', component: EditUserComponent},
       {path: 'branchs/:id', component: ListBranchComponent},
       {path: 'addBranch', component: AddBranchComponent},
       {path: 'listCostCenter', component: ListCcComponent},

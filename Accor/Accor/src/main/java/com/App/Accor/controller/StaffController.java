@@ -35,15 +35,15 @@ public class StaffController {
 		return ResponseEntity.ok(result);
 	}
 
+	@GetMapping("/{id}")
+	public ResponseEntity<Staff> getStaff(@PathVariable Long id) {
+		return ResponseEntity.ok(service.findById(id));
+	}
+
 
 	@GetMapping("/compagnie/{idCompagnie}")
 	public ResponseEntity<List<Staff>> getAllStaffscompagnie(@PathVariable Long idCompagnie) {
 		return ResponseEntity.ok().body(service.findByCompagnie(idCompagnie));
-	}
-
-	@GetMapping("/{id}")
-	public ResponseEntity<Staff> getStaff(@PathVariable Long id) {
-		return ResponseEntity.ok(service.findById(id));
 	}
 
 	@DeleteMapping("/{id}")

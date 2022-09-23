@@ -20,21 +20,21 @@
   <tbody class="data" [formGroup]="userForm">
     <tr>
       <th scope="row"><input type="radio" id="radioCheck" name="dispatcher"
-                             [value]="tabUserGM?.username === companie?.dispacherMail"
-                             [checked]="tabUserGM?.username === companie?.dispacherMail"
+                             [value]="userGM?.username === companie?.dispacherMail"
+                             [checked]="userGM?.username === companie?.dispacherMail"
                              [disabled]="isLoading"
-                             (click)="updateDispacher(tabUserGM?.username!)" >
+                             (click)="updateDispacher(userGM?.username!)" >
       </th>
-      <th scope="row">{{tabUserGM?.firstName}}</th>
-      <th>{{tabUserGM?.lastName}}</th>
-      <td>{{tabUserGM?.username}}</td>
-      <td> <button [routerLink]="['/edit', tabUserGM?.id]" class="btn btn-edit" style="margin-left: 10px;">Edit</button>
+      <th scope="row">{{userGM?.firstName}}</th>
+      <th>{{userGM?.lastName}}</th>
+      <td>{{userGM?.username}}</td>
+      <td> <button [routerLink]="['user-gm', userGM?.id, 'edit']" class="btn btn-edit" style="margin-left: 10px;">Edit</button>
       </tr>
     </tbody>
   </table>
 
   <div class="container">
-    <button (click)="NewUser()" class="btn add_Btn">Add User</button>
+    <button [routerLink]="['staff/add']" class="btn add_Btn">Add User</button>
   </div>
 
 <table class="table" *ngIf="staffs">
@@ -60,7 +60,7 @@
         <th scope="row">{{data?.firstName}}</th>
         <th >{{data?.lastName}}</th>
         <td>{{data?.mail}}</td>
-        <td> <button [routerLink]="['/staff', data?.id, 'edit']" class="btn btn-edit" style="margin-left: 10px;">Edit</button>
+        <td> <button [routerLink]="['staff', data?.id, 'edit']" class="btn btn-edit" style="margin-left: 10px;">Edit</button>
         </td>
         <td><button (click)="deleteStaff(data?.id)" class="btn btn-delete" style="margin-left: 10px;">Delete</button></td>
         </tr>

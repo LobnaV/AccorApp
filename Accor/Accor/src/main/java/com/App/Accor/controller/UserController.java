@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/User")
@@ -26,17 +25,28 @@ public class UserController {
 		return service.add(user);
 	}
 
-	@GetMapping(path = {"/{id}"})
-	public Optional<User> userListId(@PathVariable("id") Long id) {
-		return service.userListId(id);
+	@GetMapping("/{id}")
+	public ResponseEntity<User> userListId(@PathVariable Long id) {
+		return ResponseEntity.ok(service.findById(id));
 	}
 
 	@PutMapping
-	public ResponseEntity<User> edit(@RequestBody User user) {
+	public ResponseEntity<User> edit(@RequestBody User user) throws Exception {
+		if (user.getId() == null) {
+			throw new Exception("Invalid id");
+		}
 		return ResponseEntity.ok(service.edit(user));
 	}
 
-	@DeleteMapping(path = {"/delete/{id}"})
+	@PutMapping("/name")
+	public ResponseEntity<User> editName(@RequestBody User user) throws Exception {
+		if (user.getId() == null) {
+			throw new Exception("Invalid id");
+		}
+		return ResponseEntity.ok(service.updateName(user));
+	}
+
+	@DeleteMapping("/delete/{id}")
 	public void delete(@PathVariable long id) {
 		service.delete(id);
 	}

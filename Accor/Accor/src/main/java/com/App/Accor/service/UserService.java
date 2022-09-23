@@ -5,6 +5,7 @@ import com.App.Accor.model.UserNotFoundException;
 import com.App.Accor.playload.CsvFormatDTO;
 import com.App.Accor.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,20 +29,12 @@ public class UserService {
 		return userRepository.findAll();
 	}
 
-	public Optional<User> userListId(Long id) {
-		return userRepository.findById(id);
+	public User findById(Long id) {
+		return userRepository.findById(id)
+			.orElseThrow(() -> new UsernameNotFoundException("Staff Not Found with id : " + id));
 	}
 
 	public User add(User user) {
- /*       Set<Company> companyList = user.getCompanies();
-        for (var company:companyList) {
-            if (company.getBranch().getPerimeter() == EPerimeter.NE && !user.getCostCenters().isEmpty()){
-                return userRepository.save(user);
-
-            }else if (company.getBranch().getPerimeter() == EPerimeter.SE && user.getCostCenters().isEmpty())
-                return userRepository.save(user);
-
-        }return null;*/
 		return userRepository.save(user);
 
 	}
@@ -51,9 +44,9 @@ public class UserService {
 		CsvFormatDTO csvFormatDTO = new CsvFormatDTO();
 		// TO DO : remplir l'objet csvFormatDTO avec les bonnes valeurs
 		try {
-			String branchCode = tradeshiftInterface.getBranchsId(userSaved.getUsername());
-			csvFormatDTO.setHome(branchCode.equals(userSaved.getPrimaryBranch()) ? "TRUE" : "FALSE");
-			sftpUploadService.uploadFileToSftp(csvFormatDTO);
+//			String branchCode = tradeshiftInterface.getBranchsId(userSaved.getUsername());
+//			csvFormatDTO.setHome(branchCode.equals(userSaved.getPrimaryBranch()) ? "TRUE" : "FALSE");
+//			sftpUploadService.uploadFileToSftp(csvFormatDTO);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -86,5 +79,13 @@ public class UserService {
 
 		user.setResetPasswordToken(null);
 		userRepository.save(user);
+	}
+
+	public User updateName(User user) {
+		User userSaved = findById(user.getId());
+		userSaved.setFirstName(user.getFirstName());
+		userSaved.setLastName(user.getLastName());
+
+		return edit(userSaved);
 	}
 }

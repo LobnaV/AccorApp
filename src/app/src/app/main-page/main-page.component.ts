@@ -30,7 +30,6 @@ export class MainPageComponent implements OnInit {
   ngOnInit(): void {
     this.service.getParams().subscribe(
       (res: HttpResponse<Param[]>) => {
-        console.log(res.body);
         this.companies = res.body;
       },
       (res: HttpErrorResponse) => console.log(res.message)

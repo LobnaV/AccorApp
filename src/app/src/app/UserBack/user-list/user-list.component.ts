@@ -20,7 +20,7 @@ export class UserListComponent implements OnInit {
   searchTerm: string = "";
 
   companie?: Param | null;
-  tabUserGM?: User | null;
+  userGM?: User | null;
   staffs?: Staff[] | null = [];
 
   userForm = new FormGroup({
@@ -44,11 +44,7 @@ export class UserListComponent implements OnInit {
 
   ngOnInit(): void {
 
-
-    console.log('****');
-
     this.activatedRoute.params.subscribe(params => {
-      console.log(params['id']);
       this.loadGM(params['id']);
       this.loadStaff(params['id']);
     });
@@ -62,9 +58,8 @@ export class UserListComponent implements OnInit {
   loadGM(idCompagnie: number) {
     this.service.ParamId(idCompagnie).subscribe(
       (res: HttpResponse<Param>) => {
-        console.log(res.body);
         this.companie = res.body;
-        this.tabUserGM = this.companie?.userGM;
+        this.userGM = this.companie?.userGM;
       },
       (res: HttpErrorResponse) => console.log(res.message)
     );
@@ -73,7 +68,6 @@ export class UserListComponent implements OnInit {
   loadStaff(idComapgnie: number) {
     this.service.staffCompagnie(idComapgnie).subscribe(
       (res: HttpResponse<Staff[]>) => {
-        console.log(res.body);
         this.staffs = res.body;
       },
       (res: HttpErrorResponse) => console.log(res.message)
@@ -102,7 +96,6 @@ export class UserListComponent implements OnInit {
   remove(idStaff: number) {
     this.service.deleteStaff(idStaff).subscribe(
       () => {
-        console.log("update ok");
         this.loadStaff(this.companie?.id!);
         this.loadGM(this.companie?.id!);
       },
@@ -112,17 +105,12 @@ export class UserListComponent implements OnInit {
 
   Search(event: any) {
     this.searchTerm = (event.target as HTMLInputElement).value;
-    console.log(this.searchTerm);
     this.service.search.next(this.searchTerm);
-  }
-
-  NewUser() {
-    this.router.navigate(["addUser/companie/", this.companie?.id]);
   }
 
   type() {
     for (let data of this.staffs!)
-      if (this.tabUserGM?.username === this.companie?.dispacherMail) {
+      if (this.userGM?.username === this.companie?.dispacherMail) {
         return "Manger"
       } else if (data.mail === this.companie?.dispacherMail) {
         return "Head of Department"

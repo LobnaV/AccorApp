@@ -44,14 +44,15 @@ public class CompanyParamService {
 	}
 
 	public CompanyParameter updateDispacher(Long id, String email) {
-		CompanyParameter companyParameter = parameterRepository.updateDispacher(id, email);
+		parameterRepository.updateDispacher(id, email);
+		CompanyParameter companyParameter = findById(id);
 
 		CsvFormatDTO csvFormatDTO = new CsvFormatDTO();
 		// TO DO : remplir l'objet csvFormatDTO avec les bonnes valeurs
 		try {
-			String branchCode = tradeshiftInterface.getBranchsId(email);
-			csvFormatDTO.setHome(branchCode.equals(companyParameter.getBranch().getCode()) ? "TRUE" : "FALSE");
-			sftpUploadService.uploadFileToSftp(csvFormatDTO);
+//			String branchCode = tradeshiftInterface.getBranchsId(email);
+//			csvFormatDTO.setHome(branchCode.equals(companyParameter.getBranch().getCode()) ? "TRUE" : "FALSE");
+//			sftpUploadService.uploadFileToSftp(csvFormatDTO);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

@@ -8,7 +8,6 @@ import { CostCenter } from './CostCenter/cost-center';
 import { Param } from './model/param';
 import { User } from './model/user';
 import {Staff} from "./model/staff";
-import {CsvFormat} from "./model/csv-format";
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +17,6 @@ export class AccorService {
   private urlLocal = `${this.url}/User`
   private local = `${this.url}/Branch`;
   private paramUrl = `${this.url}/parameter`
-  private csvUrl = `${this.url}/excel`
   private staffUrl = `${this.url}/staff`
   private CCUrl = `${this.url}/CostCenter`
 
@@ -101,13 +99,16 @@ export class AccorService {
       .post<User>(this.urlLocal + "/AddUser/", user)
   }
 
-  updateUser(user:User): Observable<HttpResponse<User>>{
+  updateUser(user:User): Observable<HttpResponse<User>> {
     return this.http.put<User>(`${this.urlLocal}`, user, { observe: 'response' });
   }
 
-  UserId(id: number){
-    return this.http
-      .get<User>(this.urlLocal + "/" + id)
+  updateUserName(user:User): Observable<HttpResponse<User>> {
+    return this.http.put<User>(`${this.urlLocal}/name`, user, { observe: 'response' });
+  }
+
+  userId(id: number): Observable<HttpResponse<User>> {
+    return this.http.get<User>(`${this.urlLocal}/${id}`, { observe: 'response' })
   }
 
   deleteUser(userId:User){
