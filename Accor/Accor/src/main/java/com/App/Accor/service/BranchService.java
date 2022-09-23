@@ -1,7 +1,9 @@
 package com.App.Accor.service;
 
 import com.App.Accor.model.Branch;
-import com.App.Accor.model.CompanyParameter;
+import com.App.Accor.repository.BranchRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,19 +11,38 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public interface BranchService {
-    List<Branch> branchList();
-    Optional<Branch> listId(Long id);
-    Branch add(Branch branch );
-    Branch edit(Branch  branch );
-    void deleteBranch(Long id);
+@Transactional
+public class BranchService {
 
-    //placement provisoire
+	@Autowired
+	private BranchRepository branchR;
 
-   /* List<CompanyParameter> companyList();
-    Optional<CompanyParameter> listIdCompany(Long id);
-    CompanyParameter addCompany(CompanyParameter company );
-    CompanyParameter editCompany(CompanyParameter company);
-    void deleteCompany(Long id);*/
+	public List<Branch> branchList() {
+		return branchR.findAll();
+	}
+
+	public Optional<Branch> listId(Long id) {
+		return branchR.findById(id);
+	}
+
+	public Branch findByUuid(String uuid) {
+		return branchR.findByUuid(uuid)
+			.orElseThrow(() -> new UsernameNotFoundException("Branch Not Found with uuid : " + uuid));
+	}
+
+	public Branch add(Branch branch) {
+		return branchR.save(branch);
+	}
+
+	public Branch edit(Branch branch) {
+		return branchR.save(branch);
+	}
+
+	public void deleteBranch(final Long id) {
+		Optional<Branch> branch = branchR.findById(id);
+		branch.ifPresent(value -> branchR.delete(value));
+
+	}
+
 
 }

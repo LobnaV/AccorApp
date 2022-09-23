@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ngxCsv } from 'ngx-csv';
 import { AccorService } from 'src/app/accor.service';
-import { User } from 'src/app/UserBack/user';
+import { User } from 'src/app/model/user';
 
 @Component({
   selector: 'app-signup',
@@ -11,7 +11,7 @@ import { User } from 'src/app/UserBack/user';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
-  registerForm = new FormGroup({ 
+  registerForm = new FormGroup({
     selectCompany: new FormControl,
     primaryBranch: new FormControl,
     //email: new FormControl('', [Validators.required]),
@@ -51,7 +51,7 @@ export class SignupComponent implements OnInit {
    // console.log(localStorage.getItem(this.dataSource))
    //console.log(localStorage.getItem( this.dataSource))
    }
-  
+
 
   onRegister() {
     const newUser = this.registerForm.value;

@@ -1,6 +1,6 @@
 package com.App.Accor.security;
 
-import com.App.Accor.service.serviceImpl.detailsImpl.UserDetailsImpl;
+import com.App.Accor.model.UserDetails;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +22,7 @@ public class JwtUtils {
 
 	public String generateJwtToken(Authentication authentication) {
 
-		UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
+		UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
 
 		return Jwts.builder()
 			.setSubject((userPrincipal.getUsername()))

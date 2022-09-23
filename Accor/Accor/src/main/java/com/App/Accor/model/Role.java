@@ -1,22 +1,20 @@
 package com.App.Accor.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Table(name = "roles")
+@Table
 public class Role {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer idRole;
 
-	@Enumerated(EnumType.STRING)
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+
 	@Column(length = 20)
+	@Enumerated(EnumType.STRING)
 	private ERole name;
 }

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AccorService } from 'src/app/accor.service';
+import {Param} from "../../model/param";
+import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-parameter',
@@ -13,13 +15,13 @@ export class ParameterComponent implements OnInit {
   parameters: any;
   searchKey: string = "";
   searchTerm: string = "";
-
-  getDataBranch = localStorage.getItem('getDataBranch');
-  getDataBranchName = localStorage.getItem('getDataBranchName');
+  branche?:any;
 
   constructor(
     private service:AccorService,
-    private router:Router
+    private router:Router,
+    private activatedRoute: ActivatedRoute,
+
   ) { }
 
   companyParamForm = new FormGroup({
@@ -31,22 +33,28 @@ export class ParameterComponent implements OnInit {
     email_m_gm: new FormControl('',[Validators.required,Validators.email]),
     portfolio: new FormControl('',[Validators.email]),
     mm_gm: new FormControl('',[Validators.email]),
-    mmm_gm: new FormControl('',[Validators.email]), 
+    mmm_gm: new FormControl('',[Validators.email]),
     // branch: new FormControl('')
-    
+
   })
 
   ngOnInit(): void {
 
-    this.getDataBranch = this.getDataBranch!.replace(/[""]/gi, '')
-    this.getDataBranchName = this.getDataBranchName!.replace(/[""]/gi, '')
+    this.activatedRoute.params.subscribe(params => {
+      console.log(params['id']);
+      this.service.branchId(params['id']).subscribe(data => {
+        this.branche = data;
+        console.log(data);
+      });
+    });
 
-
-    this.service.getParams()
-    .subscribe(data => {
-      this.parameters = data;
-      console.log(this.parameters)
-    })
+    this.service.getParams().subscribe(
+      (res: HttpResponse<Param[]>) => {
+        this.parameters = res.body;
+        console.log(this.parameters)
+      },
+      (res: HttpErrorResponse) => console.log(res.message)
+    );
 
   this.service.search.subscribe((val: any) => {
     this.searchKey = val;
@@ -72,8 +80,8 @@ export class ParameterComponent implements OnInit {
          this.router.navigate(["Parameter"]);
      })
   }
- 
-  
+
+
  }
 
 

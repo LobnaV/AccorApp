@@ -32,7 +32,6 @@
 		"koa-session": "5.13.1",
 		"koa-views": "6.2.1",
 		"ngrok": "3.2.7",
-		"ngx-csv": "0.3.2",
 		"object-hash": "2.0.3",
 		"passport-oauth2": "1.6.1",
 		"request": "2.88.2",

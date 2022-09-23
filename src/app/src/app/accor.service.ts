@@ -1,24 +1,24 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, map} from 'rxjs';
+import {BehaviorSubject, map, Observable} from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Branch } from './Branch/branch';
+import { Branch } from './model/branch';
 import { CostCenter } from './CostCenter/cost-center';
-import { Param } from './Parameter/param';
-import { User } from './UserBack/user';
+import { Param } from './model/param';
+import { User } from './model/user';
+import {Staff} from "./model/staff";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccorService {
   private url = `${environment.UrlLocal}`
-  private urlLocal = `${environment.UrlLocal}/User`
-  private local = `${environment.UrlLocal}/Branch`;
-  private paramUrl = `${environment.UrlLocal}/Parameter`
-  private CCUrl = `${environment.UrlLocal}/CostCenter`
-
-
+  private urlLocal = `${this.url}/User`
+  private local = `${this.url}/Branch`;
+  private paramUrl = `${this.url}/parameter`
+  private staffUrl = `${this.url}/staff`
+  private CCUrl = `${this.url}/CostCenter`
 
   public search = new BehaviorSubject<string>("");
 
@@ -28,9 +28,14 @@ export class AccorService {
     ) { }
 
     // Service Parameter
-  getParams(){
+  getParams(): Observable<HttpResponse<Param[]>> {
     return this.http
-      .get<Param[]>(this.paramUrl + "/List")
+      .get<Param[]>(this.paramUrl + "/List", { observe: 'response' })
+  }
+
+  ParamId(id:number): Observable<HttpResponse<Param>> {
+    return this.http
+      .get<Param>(this.paramUrl + "/" + id, { observe: 'response' })
   }
 
   addParam(param:Param){
@@ -38,11 +43,6 @@ export class AccorService {
       .post<Param>(this.paramUrl + "/AddParameter/", param)
   }
 
-  ParamId(id:number){
-    return this.http
-      .get<Param>(this.paramUrl + "/" + id)
-  }
-  
   updateParam(param:Param){
     return this.http
       .put<Param>(this.paramUrl + "/editParameter/" + param.id, param);
@@ -51,6 +51,39 @@ export class AccorService {
   deleteParam(paramId:Param){
     return this.http
       .delete<Param>(this.paramUrl + "/deleteParameter/" + paramId)
+  }
+
+  updateDispatcher(idCompagnie: number, email: string): Observable<HttpResponse<Param>> {
+    return this.http.get<Param>(`${this.paramUrl}/${idCompagnie}/dispacher?email=${email}`, {
+      observe: 'response',
+    });
+  }
+
+  //staff
+
+  staffCompagnie(id:number): Observable<HttpResponse<Staff[]>> {
+    return this.http
+      .get<Staff[]>(`${this.staffUrl}/compagnie/${id}`, { observe: 'response' })
+  }
+
+  staffId(id: number): Observable<HttpResponse<Staff>> {
+    return this.http
+      .get<Staff>(`${this.staffUrl}/${id}`, { observe: 'response' } )
+  }
+
+  updateStaff(staff:Staff): Observable<HttpResponse<Staff>> {
+    return this.http
+      .put<Staff>(this.staffUrl,  staff, { observe: 'response' });
+  }
+
+
+  deleteStaff(id: number): Observable<HttpResponse<void>> {
+    return this.http.delete<void>(`${this.staffUrl}/${id}`, { observe: 'response' });
+  }
+
+  createStaff(staff:Staff): Observable<HttpResponse<Staff>>{
+    return this.http
+      .post<Staff>(this.staffUrl , staff, { observe: 'response' })
   }
 
   // Service User
@@ -66,14 +99,16 @@ export class AccorService {
       .post<User>(this.urlLocal + "/AddUser/", user)
   }
 
-  updateUsertest(user:User){
-    return this.http
-      .put<User>(this.urlLocal + "/edit/" + user.id, user);
+  updateUser(user:User): Observable<HttpResponse<User>> {
+    return this.http.put<User>(`${this.urlLocal}`, user, { observe: 'response' });
   }
 
-  UserId(id: number){
-    return this.http
-      .get<User>(this.urlLocal + "/" + id)
+  updateUserName(user:User): Observable<HttpResponse<User>> {
+    return this.http.put<User>(`${this.urlLocal}/name`, user, { observe: 'response' });
+  }
+
+  userId(id: number): Observable<HttpResponse<User>> {
+    return this.http.get<User>(`${this.urlLocal}/${id}`, { observe: 'response' })
   }
 
   deleteUser(userId:User){
@@ -81,12 +116,17 @@ export class AccorService {
       .delete<User>(this.urlLocal + "/delete/" + userId)
   }
 
-  dispId(id:number){  
+  dispId(id:number){
     return this.http
       .get<User>(this.urlLocal + "/x/"+ id)
   }
 
-  branchs(){
+  branchId(id:number){
+    return this.http
+      .get<Branch>(this.local + "/"+ id)
+  }
+
+  branches(){
     return this.http
       .get<Branch[]>(this.local + "/List")
   }
@@ -121,7 +161,7 @@ export class AccorService {
       .delete<CostCenter>(this.CCUrl + "/deleteCostCenter/" + ccId)
   }
 
-  
+
   /**
    * méthode qui pérmet de s'enregistrer
    * @param newUser
@@ -130,46 +170,14 @@ export class AccorService {
     return this.http.post(`${this.url}/auth/signin`, newUser)
   }
 
-  /**
-   * méthode qui permet de se logger et de save le token en localStorage
-   * @param user
-   */
-   login(user:User){
-    return this.http.post(`${this.url}/auth/login`,user)
-      .pipe(
-        map(
-          (resp:any)=>{
-            localStorage.setItem('TOKEN_APPLI', resp.token);
-            console.log('token Save');
-            localStorage.setItem('User_Email', JSON.stringify(user.username))
-            console.log(user)
-            return resp;
-          }
-        )
-      );
-  }
-
-    /**
-   * méthode qui récupère le token du localStorage
-   */
-     getToken(){
-      return localStorage.getItem("TOKEN_APPLI");
-    }
-  
     logout() {
       localStorage.removeItem('TOKEN_APPLI');
-      localStorage.removeItem('User_Email');
-      localStorage.removeItem('getDataHmc');
-      localStorage.removeItem('getDataHn');
-      localStorage.removeItem('getDataGm');
-      localStorage.removeItem('getDataBranch');
-      localStorage.removeItem('getDataBranchName')
       console.log('déconnecter');
       this.router.navigate(['/login']);
     }
 
 
-  
+
 }
 
 

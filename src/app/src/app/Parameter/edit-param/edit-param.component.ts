@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AccorService } from 'src/app/accor.service';
-import { Param } from '../param';
+import { Param } from '../../model/param';
+import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-edit-param',
@@ -20,25 +21,25 @@ export class EditParamComponent implements OnInit {
     general_manager: new FormControl(''),
     portfolio: new FormControl(''),
     mm_gm: new FormControl(''),
-    mmm_gm: new FormControl(''), 
+    mmm_gm: new FormControl(''),
     // branch: new FormControl('')
-    
+
   })
   constructor(
     private service: AccorService,
-    private router: Router, 
+    private router: Router,
     private route: ActivatedRoute
     ) { }
 
   ngOnInit(): void {
     const paramId = this.route.snapshot.params['paramId'];
-    this.service.ParamId(paramId)
-      .subscribe(
-        (param:Param) => {
-          this.editCompanyParamForm.patchValue(param)
-          console.log(param)
-        }
-      )
+    this.service.ParamId(paramId).subscribe(
+      (res: HttpResponse<Param>) => {
+        console.log(res.body);
+        // this.editCompanyParamForm.patchValue({res.body});
+      },
+      (res: HttpErrorResponse) => console.log(res.message)
+    );
   }
 
   UpdateParam(){

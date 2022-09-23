@@ -8,39 +8,38 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "*",maxAge = 3600)
 @RestController
 @RequestMapping("/api/CostCenter")
 public class CostCenterController {
 
-    @Autowired
-    private CostCenterService service;
+	@Autowired
+	private CostCenterService service;
 
-    @GetMapping("/List")
-    public List<CostCenter> costCentersList(){
-        return service.costCenterList();
-    }
+	@GetMapping("/List")
+	public List<CostCenter> costCentersList() {
+		return service.costCenterList();
+	}
 
-    @PostMapping("/AddCostCenter")
-    public CostCenter add(@RequestBody CostCenter costCenter){
-        return service.add(costCenter);
-    }
+	@PostMapping("/AddCostCenter")
+	public CostCenter add(@RequestBody CostCenter costCenter) {
+		return service.add(costCenter);
+	}
 
-    @GetMapping({"/{id}"})
-    public Optional<CostCenter> costCenterListId(@PathVariable("id") String id){
-        return service.costCenterListId(id);
-    }
+	@GetMapping({"/{id}"})
+	public Optional<CostCenter> costCenterListId(@PathVariable("id") String id) {
+		return service.costCenterListId(id);
+	}
 
-    @PutMapping({"/editCostCenter/{id}"})
-    public CostCenter edit (@RequestBody CostCenter costCenter, @PathVariable("id")String id){
-        costCenter.setMegaCode_CostCenter_ID(id);
-        return service.edit(costCenter);
-    }
+	@PutMapping({"/editCostCenter/{id}"})
+	public CostCenter edit(@RequestBody CostCenter costCenter, @PathVariable("id") String id) {
+		costCenter.setMegaCode_CostCenter_ID(id);
+		return service.edit(costCenter);
+	}
 
-    @DeleteMapping({"/deleteCostCenter/{id}"})
-    public void delete(@PathVariable String id ){
-        service.delete(id);
-    }
+	@DeleteMapping({"/deleteCostCenter/{id}"})
+	public void delete(@PathVariable String id) {
+		service.delete(id);
+	}
 
 
 }

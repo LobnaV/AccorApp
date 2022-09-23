@@ -26,7 +26,7 @@ export class ListBranchComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.service.branchs()
+    this.service.branches()
       .subscribe(data =>{
         this.branchs = data;
         console.log(this.branchs  )

@@ -1,11 +1,12 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ngxCsv } from 'ngx-csv';
-import { AccorService } from 'src/app/accor.service';
-import { User } from '../user';
-import { Location } from '@angular/common'
-import { checkServerIdentity } from 'tls';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AccorService} from 'src/app/accor.service';
+import {User} from '../../model/user';
+import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
+import {Param} from "../../model/param";
+import {Staff} from "../../model/staff";
+import {ConfirmationDialogService} from "../confirmation-dialog/confirmation-dialog.service";
 
 
 @Component({
@@ -15,46 +16,12 @@ import { checkServerIdentity } from 'tls';
 })
 export class UserListComponent implements OnInit {
 
-  @ViewChild("dispatcher") myNameElem!: ElementRef;
-  val = localStorage.getItem('dispatcher');
-
-  
-  @Input() pdata:any;
-  
-  private _fb: any;
-  form: any;
-  type = 'Head of Department';
-  spend_limit = 0;
-  params: any;
-  parameters: any;
-  
-  branch = [
-    { name: "primaryBranch" }
-  ];
-  
-  users: any;
-  // tabUser: User[] = [];
-  tabUsersGM: User[] = [];
-  tabUsersOther: User[] = [];
-  tabcc: any = [];
   searchKey: string = "";
   searchTerm: string = "";
-  
-  displayStyle = "none";
-  displayStyle2 = "none";
-  displayHome = 'none';
-  tableStyle = "table";
-  
-  dispatcher :any;
-  t:any;
-  tabi : any = [];
 
-  getDataHmc = localStorage.getItem('getDataHmc');
-  getDataHn = localStorage.getItem('getDataHn');
-  getDataGm = localStorage.getItem('getDataGm');
-  getDataBranch = localStorage.getItem('getDataBranch');
-
-
+  companie?: Param | null;
+  userGM?: User | null;
+  staffs?: Staff[] | null = [];
 
   userForm = new FormGroup({
     selectCompany: new FormControl,
@@ -65,232 +32,105 @@ export class UserListComponent implements OnInit {
     email: new FormControl(''),
   })
 
-  idPop:any;
-
-  role:any =[];
-  roleName:string ="";
+  isLoading = false;
 
   constructor(
     private service: AccorService,
     private router: Router,
-    public theDispatcher: AccorService
-  ) { }
+    private activatedRoute: ActivatedRoute,
+    private confirmationDialogService: ConfirmationDialogService
+  ) {
+  }
 
   ngOnInit(): void {
 
-    this.displayStyle = "none";
+    this.activatedRoute.params.subscribe(params => {
+      this.loadGM(params['id']);
+      this.loadStaff(params['id']);
+    });
 
-
-   this.getDataHmc = this.getDataHmc!.replace(/[""]/gi, '')
-   console.log(this.getDataHmc)
-   this.getDataGm = this.getDataGm!.replace(/[""]/gi, '')
-   console.log(this.getDataGm)
-   this.getDataBranch = this.getDataBranch!.replace(/[""]/gi, '')
-   this.getDataHn = this.getDataHn!.replace(/[""]/gi, '')
-
-
-
-
-   this.service.users()
-      .subscribe((data: User[]) => {
-        console.log(data)
-        for (let user of data) {
-          if (user.roles?.map(role => role.name).includes('ROLE_GM')) {
-            this.tabUsersGM.push(user);
-          } else {
-            this.tabUsersOther.push(user);
-          }
-        }
-      })
-      
     this.service.search.subscribe((val: any) => {
       this.searchKey = val;
     })
 
-    this.service.getParams()
-      .subscribe(data => {
-        this.parameters = data;
-        console.log('param', this.parameters)
-      })
-
-      this.trueOrFalseHome
-      this.roleName
-      //console.log(this.roleName)
-
-}
-
-
-
-
-
-
-  trueOrFalseDispatcher() {
-    if (document.getElementById('dispatcher') ) {
-      localStorage.setItem('dispatcher', JSON.stringify(this.dispatcher))
-      console.log(this.dispatcher)
-      return true
-    } else {
-      return false
-    }
   }
 
-
-
-  testDisp(dispId: any) {
-          if(this.trueOrFalseDispatcher() == true){ 
-            console.log(document.getElementById('radioCheck')!.ariaChecked )
-            //document.getElementById('radioCheck')!.ariaChecked = localStorage.getItem("radio"); 
-            return dispId.selectCompany;
-          } else {
-            return 'null'
-          }         
+  loadGM(idCompagnie: number) {
+    this.service.ParamId(idCompagnie).subscribe(
+      (res: HttpResponse<Param>) => {
+        this.companie = res.body;
+        this.userGM = this.companie?.userGM;
+      },
+      (res: HttpErrorResponse) => console.log(res.message)
+    );
   }
 
-  save(data:any){
-    if(data != undefined){
-      localStorage.setItem('getDataDisp', JSON.stringify(data))
-    }
-    console.log(data)
+  loadStaff(idComapgnie: number) {
+    this.service.staffCompagnie(idComapgnie).subscribe(
+      (res: HttpResponse<Staff[]>) => {
+        this.staffs = res.body;
+      },
+      (res: HttpErrorResponse) => console.log(res.message)
+    );
+  }
+
+  deleteStaff(idStaff: number) {
+    this.confirmationDialogService.confirm('Confirmation', 'If you need to temporarily delete a user, we advise you use the delegation rule option within\n' +
+      '    Tradeshift (holiday, maternity leave, sick leave) to temporarily delegate tasks to another colleague.')
+      .then((confirmed) => {
+          if (confirmed) {
+            this.confirmationDialogService.confirm('Confirmation', 'Can you confirm there are not more pending tasks in the task manager for this user? If no, please reassign the pending tasks before deleting the user.')
+              .then(() => {
+                if (confirmed) {
+                  this.remove(idStaff);
+                }
+              })
+              .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+          }
+        }
+      )
+      .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
 
   }
 
-  disable(data:any){
-    var desired = this.getDataHmc!.replace(/[""]/gi, '')
-    console.log(desired)
-    
-    console.log(data.selectCompany)
-    if(desired == data.selectCompany){
-      console.log('same')
-    }
+  remove(idStaff: number) {
+    this.service.deleteStaff(idStaff).subscribe(
+      () => {
+        this.loadStaff(this.companie?.id!);
+        this.loadGM(this.companie?.id!);
+      },
+      (res: HttpErrorResponse) => console.log(res.message)
+    );
   }
-
-   openPopup(idPop:any) {
-
-    console.log('_______',idPop)
-   this.displayStyle = "block"
-   this.tableStyle = "none"
-
-   }
-
-  openPopup2() {
-
-   this.displayStyle2 = "block"
-      this.tableStyle = "none";
-      this.displayStyle = "none"  
-  }
-  
-  back() {
-      this.tableStyle = "table";;
-      this.displayStyle = "none"
-      this.displayStyle2 = "none"
-  }
-
 
   Search(event: any) {
     this.searchTerm = (event.target as HTMLInputElement).value;
-    console.log(this.searchTerm);
     this.service.search.next(this.searchTerm);
   }
 
-  NewUser() {
-    this.router.navigate(["addUser"]);
+  type() {
+    for (let data of this.staffs!)
+      if (this.userGM?.username === this.companie?.dispacherMail) {
+        return "Manger"
+      } else if (data.mail === this.companie?.dispacherMail) {
+        return "Head of Department"
+      }
+    return;
   }
 
-  approvalLimit() {
-    if (this.type === 'Head of Department') {
-      return '0'
-    } else {
-      return false
-    }
+  updateDispacher(email: string) {
+    this.isLoading = true;
+    this.service.updateDispatcher(this.companie?.id!, email).subscribe(
+      (response: HttpResponse<Param>) => {
+        this.companie = response.body!;
+        this.isLoading = false;
+      },
+      (res: HttpErrorResponse) => {
+        console.log(res.message);
+        this.isLoading = false;
+      }
+    );
   }
-
-
-  trueOrFalseHome() {
-    if (this.userForm.value.primaryBranch == true) {
-      console.log(this.userForm.value.primaryBranch)
-      return 'TRUE'
-    } else {
-      return 'FALSE'
-    }
-  }
-
-  trueOrFalseState() {
-    if (this.userForm.value.primaryBranch == true) {
-      return 'Delete'
-    } else {
-      return 'Remove'
-    }
-  }
-
-  csv(dispId: any) {
-      const limit = this.approvalLimit();
-      const branche = this.getDataBranch;
-      const home = this.trueOrFalseHome();
-      const gm= this.getDataGm;
-      //const disp = this.testDisp(dispId);
-
-      const data = [
-        [branche, home, dispId.username, dispId.firstName, dispId.lastName, 'ACTIVE', gm, limit, this.spend_limit, dispId.selectCompany, 'Head of Department']
-      ];
-      console.log('test form', this._fb)
-
-      let options = {
-        fieldSeparator: ';',
-        quoteStrings: '"',
-        decimalseparator: '.',
-        showLabels: true,
-        showTitle: false,
-        useBom: true,
-        headers: ['BranchId', 'HOME', 'Email', 'First Name', 'Last Name', 'State', 'Manager', 'Approval limit', 'Spend_limit', 'Owned Cost Center', 'User type']
-      };
-      console.log('dataFormtoCSV', data)
-
-      new ngxCsv(data, "Accortemplateuserssheet", options)
-    
-  }
-
-  csvdelete(dispId: any) {
-  
-    const limit = this.approvalLimit();
-    const branche = this.getDataBranch;
-    const home = this.trueOrFalseHome();
-    const gm = this.getDataGm;
-    const state = this.trueOrFalseState();
-   // const disp = this.testDisp(dispId);
-
-    const data = [
-      [branche,home , dispId.username, dispId.firstName, dispId.lastName, state, gm, limit, this.spend_limit, '', 'Head of Department']
-    ];
-    
-    console.log('test form', this._fb)
-
-    let options = {
-      fieldSeparator: ';',
-      quoteStrings: '"',
-      decimalseparator: '.',
-      showLabels: true,
-      showTitle: false,
-      useBom: true,
-      headers: ['BranchId', 'HOME', 'Email', 'First Name', 'Last Name', 'State', 'Manager', 'Approval limit', 'Spend_limit', 'Owned Cost Center', 'User type']
-    };
-    console.log('dataFormtoCSV', data)
-
-    new ngxCsv(data, "Accortemplateuserssheet", options)
-  
-}
-
-
-  remove(userId: any) {
-    // if(confirm('Continue with deletion'))
-     if(confirm('Yes I confirm, and I want to delete the user'))
-    this.service.deleteUser(userId)
-      .subscribe((data: any) => {
-        this.users = this.users?.filter((user: { id: any; }) => userId !== user.id);
-        alert("deleted user");
-        window.location.reload()
-        console.log('this.users', this.users)
-      })
-   }
 }
 
 
