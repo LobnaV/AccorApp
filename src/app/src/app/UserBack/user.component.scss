@@ -15,8 +15,12 @@
     .form-group{    
         display: flex;
         align-items: center;
+        width: 80%;
         label{
             margin: 1rem;
+        }
+        input{
+            margin-left: 1rem;
         }
     }
     .save{

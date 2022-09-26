@@ -7,6 +7,7 @@ import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
 import {Param} from "../../model/param";
 import {Staff} from "../../model/staff";
 import {ConfirmationDialogService} from "../confirmation-dialog/confirmation-dialog.service";
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -38,7 +39,9 @@ export class UserListComponent implements OnInit {
     private service: AccorService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private confirmationDialogService: ConfirmationDialogService
+    private confirmationDialogService: ConfirmationDialogService,
+    public translate: TranslateService
+
   ) {
   }
 
@@ -64,6 +67,11 @@ export class UserListComponent implements OnInit {
       (res: HttpErrorResponse) => console.log(res.message)
     );
   }
+
+    //Switch language
+    translateLanguageTo(lang: string) {
+      this.translate.use(lang);
+    }
 
   loadStaff(idComapgnie: number) {
     this.service.staffCompagnie(idComapgnie).subscribe(

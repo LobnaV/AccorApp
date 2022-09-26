@@ -50,8 +50,8 @@ public class UserService {
 		CsvFormatDTO csvFormatDTO = new CsvFormatDTO();
 		// TO DO : remplir l'objet csvFormatDTO avec les bonnes valeurs
 		try {
-//			String branchCode = tradeshiftInterface.getPrimaryBranchUser(userSaved.getUsername());
-//			csvFormatDTO.setHome(branchCode.equals(userSaved.getPrimaryBranch()) ? "TRUE" : "FALSE");
+			String branchCode = tradeshiftInterface.getPrimaryBranchUser(userSaved.getUsername());
+			csvFormatDTO.setHome(branchCode.equals(userSaved.getPrimaryBranch()) ? "TRUE" : "FALSE");
 //			sftpUploadService.uploadFileToSftp(csvFormatDTO);
 		} catch (Exception e) {
 			throw new RuntimeException(e);

@@ -21,7 +21,7 @@
     </div>
     <div class="listeDeroulante">
         <select [(ngModel)]="selectedCompanie">
-            <option [ngValue]="null" disabled>Select hotel</option>
+            <option [ngValue]="null" disabled>{{'SELECTHOTEL' | translate}}</option>
             <option *ngFor="let compagnie of companies" [ngValue]="compagnie">
                 {{compagnie.megaCode}} - {{compagnie.name}}
             </option>
@@ -42,7 +42,7 @@
     </div>
     <div class="listeDeroulante">
         <select [(ngModel)]="selectedBranch">
-            <option [ngValue]="null" disabled>Select hotel</option>
+            <option [ngValue]="null" disabled>{{'SELECTBRANCH' | translate}}</option>
             <option *ngFor="let branche of branches" [ngValue]="branche">
                 {{branche.branch_Id}} - {{branche.branch_Name}}
             </option>

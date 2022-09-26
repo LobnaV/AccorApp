@@ -1,5 +1,5 @@
 <div class="form-group col-md-8 " id="searchBar">
-  <div>Megacode {{companie?.megaCode}} - Hotel name {{companie?.name}}</div>
+  <div>Megacode {{companie?.megaCode}} - {{'HOTELNAME' | translate}} {{companie?.name}}</div>
   <div class="btn_searchbar">
     <input class="form-control" type="text" [(ngModel)]="searchTerm" (keyup)="Search($event)" placeholder="rechercher">
     <img type="button" class="cursor-pointer" src="">
@@ -10,9 +10,9 @@
 <table class="table" >
   <thead class="thead-dark">
     <tr>
-      <th scope="col">Dispatcher</th>
-      <th scope="col">First name</th>
-      <th scope="col">Last name</th>
+      <th scope="col">{{'HEADER.DISPATCHER' | translate}}</th>
+      <th scope="col">{{'HEADER.FIRSTNAME' | translate}}</th>
+      <th scope="col">{{'HEADER.LASTNAME' | translate}}</th>
       <th scope="col">Email </th>
       <th></th>
     </tr>
@@ -28,21 +28,21 @@
       <th scope="row">{{userGM?.firstName}}</th>
       <th>{{userGM?.lastName}}</th>
       <td>{{userGM?.username}}</td>
-      <td> <button [routerLink]="['user-gm', userGM?.id, 'edit']" class="btn btn-edit" style="margin-left: 10px;">Edit</button>
+      <td> <button [routerLink]="['user-gm', userGM?.id, 'edit']" class="btn btn-edit" style="margin-left: 10px;">{{'BUTTONS.EDITUSER' | translate}}</button>
       </tr>
     </tbody>
   </table>
 
   <div class="container">
-    <button [routerLink]="['staff/add']" class="btn add_Btn">Add User</button>
+    <button [routerLink]="['staff/add']" class="btn add_Btn">{{'BUTTONS.ADDUSER' | translate}}</button>
   </div>
 
 <table class="table" *ngIf="staffs">
   <thead class="thead-dark">
   <tr>
-    <th scope="col">Dispatcher</th>
-      <th scope="col">First name</th>
-      <th scope="col">Last name</th>
+    <th scope="col">{{'HEADER.DISPATCHER' | translate}}</th>
+    <th scope="col">{{'HEADER.FIRSTNAME' | translate}}</th>
+    <th scope="col">{{'HEADER.LASTNAME' | translate}}</th>
       <th scope="col">Email </th>
       <th></th>
       <th></th>
@@ -60,9 +60,9 @@
         <th scope="row">{{data?.firstName}}</th>
         <th >{{data?.lastName}}</th>
         <td>{{data?.mail}}</td>
-        <td> <button [routerLink]="['staff', data?.id, 'edit']" class="btn btn-edit" style="margin-left: 10px;">Edit</button>
+        <td> <button [routerLink]="['staff', data?.id, 'edit']" class="btn btn-edit" style="margin-left: 10px;">{{'BUTTONS.EDITUSER' | translate}}</button>
         </td>
-        <td><button (click)="deleteStaff(data?.id)" class="btn btn-delete" style="margin-left: 10px;">Delete</button></td>
+        <td><button (click)="deleteStaff(data?.id)" class="btn btn-delete" style="margin-left: 10px;">{{'BUTTONS.DELETEUSER' | translate}}</button></td>
         </tr>
     </tbody>
 </table>

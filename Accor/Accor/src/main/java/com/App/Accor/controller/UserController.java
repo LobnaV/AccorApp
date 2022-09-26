@@ -20,11 +20,6 @@ public class UserController {
 		return service.userList();
 	}
 
-	@PostMapping("/AddUser")
-	public User add(@RequestBody User user) {
-		return service.add(user);
-	}
-
 	@GetMapping("/{id}")
 	public ResponseEntity<User> userListId(@PathVariable Long id) {
 		return ResponseEntity.ok(service.findById(id));

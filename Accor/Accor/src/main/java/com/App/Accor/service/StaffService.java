@@ -44,7 +44,7 @@ public class StaffService {
 		try {
 //			String branchCode = tradeshiftInterface.getPrimaryBranchUser(staff.getMail());
 //			csvFormatDTO.setHome(branchCode.equals(staffSaved.getCompanyParameter().getBranch().getCode()) ? "TRUE" : "FALSE");
-//			sftpUploadService.uploadFileToSftp(csvFormatDTO);
+			sftpUploadService.uploadFileToSftp(csvFormatDTO);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
