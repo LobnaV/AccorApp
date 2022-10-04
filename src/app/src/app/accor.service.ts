@@ -121,15 +121,24 @@ export class AccorService {
       .get<User>(this.urlLocal + "/x/"+ id)
   }
 
-  branchId(id:number){
-    return this.http
-      .get<Branch>(this.local + "/"+ id)
+  // branchId(id:number){
+  //   return this.http
+  //     .get<Branch>(this.local + "/"+ id)
+  // }
+
+     branchId(id:number): Observable<HttpResponse<Branch>>{
+    return this.http.get<Branch>(`${this.local}/${id}`, { observe: 'response' })
   }
 
-  branches(){
+
+  branches(): Observable<HttpResponse<Branch[]>> {
     return this.http
-      .get<Branch[]>(this.local + "/List")
+      .get<Branch[]>(this.local + "/List", { observe: 'response' })
   }
+  // branches(){
+  //   return this.http
+  //     .get<Branch[]>(this.local + "/List")
+  // }
 
   addBranch(branch:Branch){
     return this.http

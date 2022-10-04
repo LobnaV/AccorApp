@@ -39,11 +39,25 @@ public class StaffService {
 
 	public Staff save(Staff staff) {
 		Staff staffSaved = staffRepository.save(staff);
+		CompanyParameter companyParameter = staff.getCompanyParameter();
 		CsvFormatDTO csvFormatDTO = new CsvFormatDTO();
 		// TO DO : remplir l'objet csvFormatDTO avec les bonnes valeurs
+		csvFormatDTO.setBranchId(companyParameter.getBranch().getCode());
+	//	csvFormatDTO.setHome(csvFormatDTO.getHome());
+		csvFormatDTO.setEmail(staffSaved.getMail());
+		csvFormatDTO.setFirstName(staffSaved.getFirstName());
+		csvFormatDTO.setLastName(staffSaved.getLastName());
+		csvFormatDTO.setState("ACTIVE");
+		csvFormatDTO.setManager(companyParameter.getDispacherMail());
+		csvFormatDTO.setApprovalLimit("0");
+		csvFormatDTO.setSpendLimit("0");
+		csvFormatDTO.setOwnedCostCenter(companyParameter.getMegaCode());
+		csvFormatDTO.setUserType("Head of Department");
 		try {
-//			String branchCode = tradeshiftInterface.getPrimaryBranchUser(staff.getMail());
-//			csvFormatDTO.setHome(branchCode.equals(staffSaved.getCompanyParameter().getBranch().getCode()) ? "TRUE" : "FALSE");
+			//String branchCode = tradeshiftInterface.getPrimaryBranchUser(staff.getMail());
+			//csvFormatDTO.setHome(branchCode.equals(staffSaved.getCompanyParameter().getBranch().getCode()) ? "TRUE" : "FALSE");
+			//A verifier avec Mohamed
+			csvFormatDTO.setOwnedCostCenter(staffSaved.getMail().equals(companyParameter.getDispacherMail())? companyParameter.getMegaCode() : "");
 			sftpUploadService.uploadFileToSftp(csvFormatDTO);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -62,10 +76,23 @@ public class StaffService {
 
 		CsvFormatDTO csvFormatDTO = new CsvFormatDTO();
 		// TO DO : remplir l'objet csvFormatDTO avec les bonnes valeurs
+		csvFormatDTO.setBranchId(companyParameter.getBranch().getCode());
+		//csvFormatDTO.setHome(tradeshiftInterface.getPrimaryBranchUser(staff.getMail()));
+		csvFormatDTO.setEmail(staff.getMail());
+		csvFormatDTO.setFirstName(staff.getFirstName());
+		csvFormatDTO.setLastName(staff.getLastName());
+		csvFormatDTO.setState("ACTIVE");
+		csvFormatDTO.setManager(companyParameter.getDispacherMail());
+		csvFormatDTO.setApprovalLimit("0");
+		csvFormatDTO.setSpendLimit("0");
+		csvFormatDTO.setOwnedCostCenter(companyParameter.getMegaCode());
+		csvFormatDTO.setUserType("Head of Department");
 		try {
-//			String branchCode = tradeshiftInterface.getPrimaryBranchUser(staff.getMail());
-//			csvFormatDTO.setHome(branchCode.equals(companyParameter.getBranch().getCode()) ? "TRUE" : "FALSE");
-//			sftpUploadService.uploadFileToSftp(csvFormatDTO);
+		//	String branchCode = tradeshiftInterface.getPrimaryBranchUser(staff.getMail());
+		//	csvFormatDTO.setHome(branchCode.equals(companyParameter.getBranch().getCode()) ? "TRUE" : "FALSE");
+			//A verifier avec Mohamed
+			csvFormatDTO.setOwnedCostCenter(staff.getMail().equals(companyParameter.getDispacherMail())? companyParameter.getMegaCode() : "");
+			sftpUploadService.uploadFileToSftp(csvFormatDTO);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

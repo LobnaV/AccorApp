@@ -1,6 +1,7 @@
 package com.App.Accor.service;
 
 import com.App.Accor.model.CompanyParameter;
+import com.App.Accor.model.Staff;
 import com.App.Accor.playload.CsvFormatDTO;
 import com.App.Accor.repository.CompanyParameterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -49,10 +52,21 @@ public class CompanyParamService {
 
 		CsvFormatDTO csvFormatDTO = new CsvFormatDTO();
 		// TO DO : remplir l'objet csvFormatDTO avec les bonnes valeurs
+		csvFormatDTO.setBranchId(companyParameter.getBranch().getCode());
+		//csvFormatDTO.setHome(tradeshiftInterface.getPrimaryBranchUser(staff.getMail()));
+		csvFormatDTO.setEmail(email);
+		csvFormatDTO.setFirstName(csvFormatDTO.getFirstName());
+		csvFormatDTO.setLastName(csvFormatDTO.getLastName());
+		csvFormatDTO.setState("ACTIVE");
+		csvFormatDTO.setManager(companyParameter.getDispacherMail());
+		//csvFormatDTO.setApprovalLimit();
+		//csvFormatDTO.setSpendLimit();
+		csvFormatDTO.setOwnedCostCenter(companyParameter.getMegaCode());
+		//csvFormatDTO.setUserType();
 		try {
-			String branchCode = tradeshiftInterface.getPrimaryBranchUser(email);
-			csvFormatDTO.setHome(branchCode.equals(companyParameter.getBranch().getCode()) ? "TRUE" : "FALSE");
-//			sftpUploadService.uploadFileToSftp(csvFormatDTO);
+		//	String branchCode = tradeshiftInterface.getPrimaryBranchUser(email);
+		//	csvFormatDTO.setHome(branchCode.equals(companyParameter.getBranch().getCode()) ? "TRUE" : "FALSE");
+			sftpUploadService.uploadFileToSftp(csvFormatDTO);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

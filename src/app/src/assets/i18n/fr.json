@@ -15,7 +15,8 @@
     },
     "SELECTHOTEL":"Sélectionner un hôtel",
     "SELECTBRANCH":"électionner une branche",
-    "HOTELNAME": "Nom de l'hotel",
+    "HOTELNAME": "Nom de l'hôtel",
+    "BRANCHNAME": "Nom de la branche",
     "HEADER":{
         "DISPATCHER":"Dispatcher", 
         "FIRSTNAME":"Prénom", 
@@ -23,9 +24,12 @@
         "EMAIL":"Email"
     },
     "BUTTONS":{
+        "SEARCH":"Rechercher",
         "ADDUSER":"Ajouter un utilisateur",
-        "EDITUSER":"Modifier",
-        "DELETEUSER":"Supprimer"
+        "EDIT":"Modifier",
+        "DELETE":"Supprimer",
+        "ADDPARAMETER":"Créer un parametre"
+
     }
 
     

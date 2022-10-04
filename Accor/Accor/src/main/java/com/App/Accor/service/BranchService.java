@@ -1,8 +1,12 @@
 package com.App.Accor.service;
 
 import com.App.Accor.model.Branch;
+import com.App.Accor.model.CompanyParameter;
+import com.App.Accor.model.Staff;
 import com.App.Accor.repository.BranchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +33,12 @@ public class BranchService {
 		return branchR.findByUuid(uuid)
 			.orElseThrow(() -> new UsernameNotFoundException("Branch Not Found with uuid : " + uuid));
 	}
+
+/*	public CompanyParameter findByUserGM() throws Exception {
+		UserDetails userDetails =
+			(UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return parameterRepository.findByUserGMUsername(userDetails.getUsername()).orElseThrow(() -> new Exception("Impossible de trouver l'hotel associé"));
+	}*/
 
 	public Branch add(Branch branch) {
 		return branchR.save(branch);

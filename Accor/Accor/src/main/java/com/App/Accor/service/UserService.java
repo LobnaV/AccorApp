@@ -1,13 +1,12 @@
 package com.App.Accor.service;
 
+import com.App.Accor.model.CompanyParameter;
 import com.App.Accor.model.User;
-import com.App.Accor.model.UserNotFoundException;
 import com.App.Accor.playload.CsvFormatDTO;
 import com.App.Accor.repository.UserRepository;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,12 +46,26 @@ public class UserService {
 
 	public User edit(User user) {
 		User userSaved = userRepository.save(user);
+	//	CompanyParameter companyParameter;
 		CsvFormatDTO csvFormatDTO = new CsvFormatDTO();
 		// TO DO : remplir l'objet csvFormatDTO avec les bonnes valeurs
+		//csvFormatDTO.setBranchId(companyParameter.getBranch().getCode());
+		//csvFormatDTO.setHome(userSaved.getPrimaryBranch());
+		csvFormatDTO.setEmail(userSaved.getUsername());
+		csvFormatDTO.setFirstName(userSaved.getFirstName());
+		csvFormatDTO.setLastName(userSaved.getLastName());
+		csvFormatDTO.setState("ACTIVE");
+		csvFormatDTO.setManager(userSaved.getRoles().toString());
+		//csvFormatDTO.setApprovalLimit();
+		//csvFormatDTO.setSpendLimit();
+	//	csvFormatDTO.setOwnedCostCenter(companyParameter.getMegaCode());
+		//csvFormatDTO.setUserType();
 		try {
-			String branchCode = tradeshiftInterface.getPrimaryBranchUser(userSaved.getUsername());
-			csvFormatDTO.setHome(branchCode.equals(userSaved.getPrimaryBranch()) ? "TRUE" : "FALSE");
-//			sftpUploadService.uploadFileToSftp(csvFormatDTO);
+		//	String branchCode = tradeshiftInterface.getPrimaryBranchUser(userSaved.getUsername());
+		//	csvFormatDTO.setHome(branchCode.equals(userSaved.getPrimaryBranch()) ? "TRUE" : "FALSE");
+			//A verifier avec Mohamed
+			//csvFormatDTO.setOwnedCostCenter(userSaved.getUsername().equals(companyParameter.getDispacherMail())? companyParameter.getMegaCode() : "");
+			sftpUploadService.uploadFileToSftp(csvFormatDTO);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

@@ -3,6 +3,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {AccorService} from '../accor.service';
 import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
 import {Param} from "../model/param";
+import { Branch } from '../model/branch';
 
 @Component({
   selector: 'app-main-page',
@@ -36,8 +37,9 @@ export class MainPageComponent implements OnInit {
     );
 
     this.service.branches()
-      .subscribe(data => {
-        this.branches = [];
+      .subscribe((data: HttpResponse<Branch[]>)  => {
+        this.branches = data.body;
+        (res: HttpErrorResponse) => console.log(res.message)
       });
   }
 

@@ -1,7 +1,7 @@
 <div class="form-group col-md-8 " id="searchBar">
   <div>Megacode {{companie?.megaCode}} - {{'HOTELNAME' | translate}} {{companie?.name}}</div>
   <div class="btn_searchbar">
-    <input class="form-control" type="text" [(ngModel)]="searchTerm" (keyup)="Search($event)" placeholder="rechercher">
+    <input class="form-control" type="text" [(ngModel)]="searchTerm" (keyup)="Search($event)" placeholder="{{'BUTTONS.SEARCH' | translate}}">
     <img type="button" class="cursor-pointer" src="">
   </div>
 </div>
@@ -28,7 +28,7 @@
       <th scope="row">{{userGM?.firstName}}</th>
       <th>{{userGM?.lastName}}</th>
       <td>{{userGM?.username}}</td>
-      <td> <button [routerLink]="['user-gm', userGM?.id, 'edit']" class="btn btn-edit" style="margin-left: 10px;">{{'BUTTONS.EDITUSER' | translate}}</button>
+      <td> <button [routerLink]="['user-gm', userGM?.id, 'edit']" class="btn btn-edit" style="margin-left: 10px;">{{'BUTTONS.EDIT' | translate}}</button>
       </tr>
     </tbody>
   </table>
@@ -60,9 +60,9 @@
         <th scope="row">{{data?.firstName}}</th>
         <th >{{data?.lastName}}</th>
         <td>{{data?.mail}}</td>
-        <td> <button [routerLink]="['staff', data?.id, 'edit']" class="btn btn-edit" style="margin-left: 10px;">{{'BUTTONS.EDITUSER' | translate}}</button>
+        <td> <button [routerLink]="['staff', data?.id, 'edit']" class="btn btn-edit" style="margin-left: 10px;">{{'BUTTONS.EDIT' | translate}}</button>
         </td>
-        <td><button (click)="deleteStaff(data?.id)" class="btn btn-delete" style="margin-left: 10px;">{{'BUTTONS.DELETEUSER' | translate}}</button></td>
+        <td><button (click)="deleteStaff(data?.id)" class="btn btn-delete" style="margin-left: 10px;">{{'BUTTONS.DELETE' | translate}}</button></td>
         </tr>
     </tbody>
 </table>

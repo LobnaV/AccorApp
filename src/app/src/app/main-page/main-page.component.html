@@ -44,7 +44,7 @@
         <select [(ngModel)]="selectedBranch">
             <option [ngValue]="null" disabled>{{'SELECTBRANCH' | translate}}</option>
             <option *ngFor="let branche of branches" [ngValue]="branche">
-                {{branche.branch_Id}} - {{branche.branch_Name}}
+                {{branche.code}} - {{branche.name}}
             </option>
         </select>
 

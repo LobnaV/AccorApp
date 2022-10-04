@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AccorService } from 'src/app/accor.service';
 import {Param} from "../../model/param";
 import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
+import { TranslateService } from '@ngx-translate/core';
+import { Branch } from 'src/app/model/branch';
 
 @Component({
   selector: 'app-parameter',
@@ -21,6 +23,7 @@ export class ParameterComponent implements OnInit {
     private service:AccorService,
     private router:Router,
     private activatedRoute: ActivatedRoute,
+    public translate: TranslateService
 
   ) { }
 
@@ -37,6 +40,9 @@ export class ParameterComponent implements OnInit {
     // branch: new FormControl('')
 
   })
+
+  branch? : Branch|null
+  companie?: Param | null;
 
   ngOnInit(): void {
 
@@ -62,10 +68,25 @@ export class ParameterComponent implements OnInit {
 
   }
 
+
+  loadComapnies(idBranch: number) {
+    this.service.branchId(idBranch).subscribe(
+      (res: HttpResponse<Branch>) => {
+        this.companie = res.body;
+      },
+      (res: HttpErrorResponse) => console.log(res.message)
+    );
+  }
+
   Search(event: any) {
     this.searchTerm = (event.target as HTMLInputElement).value;
     console.log(this.searchTerm);
     this.service.search.next(this.searchTerm);
+  }
+
+   //Switch language
+   translateLanguageTo(lang: string) {
+    this.translate.use(lang);
   }
 
   NewParam(){

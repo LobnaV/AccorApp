@@ -13,8 +13,7 @@ import java.util.Objects;
 public class TradeshiftInterface {
 
 	private final String url = "https://api-sandbox.tradeshift.com/tradeshift/rest/external";
-	private final String token = "EWv/hdnqkwCbGQpZP8+5JG90IcdJhh+tkkW1KSlBX60iRAB6QoACBJS7dZHf0aH/GXqpeQI3AzquvmGr4wL6hWU7fg83/MicHakb3zwnPJgvITEs49oaMsgUc4EeVKpYgE59CSCpFBu0io/JhRHGzVykx3o561YcFfOb4MFSjxKKvCegOAebjhf2lMv0Q/oM0+PQF6ZDIAWrxg+QjbmqZcNk8zaHf9t4WlKNAEISfb50tgTKJsEXuFlGK+XHc0JHPRx1iN6cwHpsW89aYPtXObMnoVz15IzZmGqLbxbF5NzadZod8IppoadbxathzejJkgKtnIYsW3Mp44qfW2W0beCfE4wt10R+SXlaF5lUtjEk92qnBe/5Wp13/jIcSN7JgC9AkT0hKkjAzsaZBlAAWgIAAWDoycaZBg==";
-
+	private final String token = "ETfENXYJiTijGQdNeZJqQvt7If9gciDLThazKepPDTSa/n5aQoACVm5Y/qGjdJpIyO+ic7FX1JonsJOZ+NablwKAOhHV4wIUh01rqxZizD+d1EGVYAbL4qu4W1GEut6bZ1PhWoRVDxl4EG2lNaGwhPdyXmrtadFXy32NudUhu+sjzXs2m8ARfWOK/Su+LC6j5gH/JAk4xbKVU9v3/xK9YpZLNGzbrSIl53L0R7Q/wa9Q+q1UwPjK234ylUxf7IpRtNy6d17RaTnk8AJvEuXp4Vnni+lwQprED21l9uFKGmwj1RIMQbwVro8gCLV0lqw0pmkvpd+GZF/EuVgoUKTJXfrQFVEKFF0tKH+FCHGoZM4uJEeZqYgdFa637IP0CsQsVKpmxRC7ZEjn/++ZBlAAWgIAAWCP+++ZBg==";
 	@Autowired
 	private RestTemplate restTemplate;
 

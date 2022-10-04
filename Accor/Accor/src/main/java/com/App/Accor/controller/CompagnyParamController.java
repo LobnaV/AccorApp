@@ -1,6 +1,8 @@
 package com.App.Accor.controller;
 
+import com.App.Accor.model.Branch;
 import com.App.Accor.model.CompanyParameter;
+import com.App.Accor.model.Staff;
 import com.App.Accor.playload.CsvFormatDTO;
 import com.App.Accor.service.CompanyParamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,7 @@ public class CompagnyParamController {
 	public ResponseEntity<List<CompanyParameter>> findByCompagnie() throws Exception {
 		return ResponseEntity.ok(Collections.singletonList(service.findByUserGM()));
 	}
+
 
 	@PostMapping
 	public ResponseEntity<CompanyParameter> createCompanyParameter(@Valid @RequestBody CompanyParameter CompanyParameter) throws Exception {

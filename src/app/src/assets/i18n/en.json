@@ -16,14 +16,18 @@
     "SELECTHOTEL":"Select hotel",
     "SELECTBRANCH":"Select branch",
     "HOTELNAME": "Hotel name",
+    "BRANCHNAME": "Branch name",
     "HEADER":{
         "DISPATCHER":"Dispatcher", 
         "FIRSTNAME":"First name", 
         "LASTNAME":"Last name"
     },
     "BUTTONS":{
+        "SEARCH":"Search",
         "ADDUSER":"Add user",
-        "EDITUSER":"edit",
-        "DELETEUSER":"Delete"
+        "EDIT":"Edit",
+        "DELETE":"Delete",
+        "ADDPARAMETER":"Create new parameter"
+
     }
 }

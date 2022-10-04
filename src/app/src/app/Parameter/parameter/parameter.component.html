@@ -1,15 +1,15 @@
 
 <div class="form-group col-md-8" id="searchBar">
   <div class="btn_searchbar">
-    <input class="form-control" type="text" [(ngModel)]="searchTerm" (keyup)="Search($event)" placeholder="rechercher">
+    <input class="form-control" type="text" [(ngModel)]="searchTerm" (keyup)="Search($event)" placeholder="{{'BUTTONS.SEARCH' | translate}}">
     <div class="container">
-      <button (click)="NewParam()" class="btn add_Btn">Create new parameter</button>
+      <button (click)="NewParam()" class="btn add_Btn">{{'BUTTONS.ADDPARAMETER' | translate}}</button>
     </div>
   </div>
 </div>
 
 <div class="brancheName" >
- Branche {{branche?.branch_Id}} - Branche Name {{branche?.branch_Name}}
+ Branche {{branche?.code}} - {{'BRANCHNAME' | translate}} {{branche?.name}}
 </div>
 
 <div style="margin: auto; width: 90%;">
@@ -38,8 +38,8 @@
       <!--<td>{{param.portfolio}}</td>
       <td>{{param.mmm_gm}}</td>-->
       <td><button [routerLink]="['/editParameter', param.id]" class="btn btn-edit"
-          style="margin-left: 10px;">Edit</button></td>
-      <td><button (click)="remove(param.id)" class="btn btn-delete" style="margin-left: 10px;">Delete</button></td>
+          style="margin-left: 10px;">{{'BUTTONS.EDIT' | translate}}</button></td>
+      <td><button (click)="remove(param.id)" class="btn btn-delete" style="margin-left: 10px;">{{'BUTTONS.DELETE' | translate}}</button></td>
     </tr>
   </tbody>
 </table>
