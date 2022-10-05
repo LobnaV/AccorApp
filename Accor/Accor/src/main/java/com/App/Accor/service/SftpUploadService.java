@@ -78,9 +78,9 @@ public class SftpUploadService {
 
 		uploadGateway.upload(csvOutputFile);
 
-		if (csvOutputFile.exists()) {
+	/*	if (csvOutputFile.exists()) {
 			csvOutputFile.delete();
-		}
+		}*/
 	}
 
 }

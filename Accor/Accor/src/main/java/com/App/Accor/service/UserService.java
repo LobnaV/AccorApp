@@ -3,6 +3,7 @@ package com.App.Accor.service;
 import com.App.Accor.model.CompanyParameter;
 import com.App.Accor.model.User;
 import com.App.Accor.playload.CsvFormatDTO;
+import com.App.Accor.repository.CompanyParameterRepository;
 import com.App.Accor.repository.UserRepository;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ import java.util.Optional;
 public class UserService {
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private CompanyParameterRepository companyParameterRepository;
 
 	@Autowired
 	private TradeshiftInterface tradeshiftInterface;
@@ -46,25 +50,29 @@ public class UserService {
 
 	public User edit(User user) {
 		User userSaved = userRepository.save(user);
-	//	CompanyParameter companyParameter;
+		Optional<CompanyParameter> companyParameter = companyParameterRepository.findByUserGMUsername(userSaved.getUsername()) ;
+
 		CsvFormatDTO csvFormatDTO = new CsvFormatDTO();
 		// TO DO : remplir l'objet csvFormatDTO avec les bonnes valeurs
-		//csvFormatDTO.setBranchId(companyParameter.getBranch().getCode());
-		//csvFormatDTO.setHome(userSaved.getPrimaryBranch());
-		csvFormatDTO.setEmail(userSaved.getUsername());
-		csvFormatDTO.setFirstName(userSaved.getFirstName());
+		csvFormatDTO.setBranchId(companyParameter.get().getBranch().getCode());
+		csvFormatDTO.setHome("TRUE");//Valeur Primary branch test
+		csvFormatDTO.setEmail(user.getUsername());
+		csvFormatDTO.setFirstName(user.getFirstName());
 		csvFormatDTO.setLastName(userSaved.getLastName());
 		csvFormatDTO.setState("ACTIVE");
-		csvFormatDTO.setManager(userSaved.getRoles().toString());
-		//csvFormatDTO.setApprovalLimit();
-		//csvFormatDTO.setSpendLimit();
-	//	csvFormatDTO.setOwnedCostCenter(companyParameter.getMegaCode());
-		//csvFormatDTO.setUserType();
+		csvFormatDTO.setManager(companyParameter.get().getUserGM().getUsername());
+		csvFormatDTO.setApprovalLimit(user.getApprovalLimit());
+		csvFormatDTO.setSpendLimit(user.getSpendLimit());
+		csvFormatDTO.setUserType("General Manager");
+
+
+		System.out.println("user branchID : "+ csvFormatDTO.getBranchId());
+		System.out.println("user type : "+ csvFormatDTO.getUserType());
 		try {
 		//	String branchCode = tradeshiftInterface.getPrimaryBranchUser(userSaved.getUsername());
 		//	csvFormatDTO.setHome(branchCode.equals(userSaved.getPrimaryBranch()) ? "TRUE" : "FALSE");
 			//A verifier avec Mohamed
-			//csvFormatDTO.setOwnedCostCenter(userSaved.getUsername().equals(companyParameter.getDispacherMail())? companyParameter.getMegaCode() : "");
+			csvFormatDTO.setOwnedCostCenter(userSaved.getUsername().equals(companyParameter.get().getDispacherMail())? companyParameter.get().getMegaCode() : "");
 			sftpUploadService.uploadFileToSftp(csvFormatDTO);
 		} catch (Exception e) {
 			throw new RuntimeException(e);

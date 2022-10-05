@@ -15,6 +15,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/parameter")
@@ -28,6 +29,10 @@ public class CompagnyParamController {
 		return ResponseEntity.ok(Collections.singletonList(service.findByUserGM()));
 	}
 
+	@GetMapping("/branch/{idBranch}")
+	public ResponseEntity<List<CompanyParameter>> getAllCompaniesbranch(@PathVariable Long idBranch) {
+		return ResponseEntity.ok().body(service.findByBranch(idBranch));
+	}
 
 	@PostMapping
 	public ResponseEntity<CompanyParameter> createCompanyParameter(@Valid @RequestBody CompanyParameter CompanyParameter) throws Exception {

@@ -23,6 +23,7 @@ export class UpdateUserGmComponent implements OnInit {
     firstName: new FormControl(''),
     lastName: new FormControl(''),
     username: new FormControl({value: '', disabled: true}),
+    
   })
 
   constructor(
@@ -53,7 +54,7 @@ export class UpdateUserGmComponent implements OnInit {
               id: this.user?.id,
               firstName: this.user?.firstName,
               lastName: this.user?.lastName,
-              username: this.user?.username
+              username: this.user?.username,
             });
           },
           (res: HttpErrorResponse) => console.log(res.message)
@@ -77,7 +78,8 @@ export class UpdateUserGmComponent implements OnInit {
       this.userForm.get('id')?.value,
       this.userForm.get('username')?.value,
       this.userForm.get('firstName')?.value,
-      this.userForm.get('lastName')?.value);
+      this.userForm.get('lastName')?.value,
+      );
     this.service.updateUserName(updateForm)
       .subscribe(
         (res: HttpResponse<User>) => {

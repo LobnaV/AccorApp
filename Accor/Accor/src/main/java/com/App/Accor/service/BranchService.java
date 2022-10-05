@@ -34,6 +34,20 @@ public class BranchService {
 			.orElseThrow(() -> new UsernameNotFoundException("Branch Not Found with uuid : " + uuid));
 	}
 
+	@Transactional(readOnly = true)
+	public Branch findById(Long id){
+		return branchR.findById(id)
+			.orElseThrow();
+
+	}
+
+/*	@Transactional(readOnly = true)
+	public CompanyParameter findById(Long id) {
+		return parameterRepository.findById(id)
+			.orElseThrow(() -> new UsernameNotFoundException("Staff Not Found with id : " + id));
+	}*/
+
+
 /*	public CompanyParameter findByUserGM() throws Exception {
 		UserDetails userDetails =
 			(UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

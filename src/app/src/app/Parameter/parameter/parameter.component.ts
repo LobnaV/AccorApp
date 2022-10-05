@@ -42,9 +42,13 @@ export class ParameterComponent implements OnInit {
   })
 
   branch? : Branch|null
-  companie?: Param | null;
+  companies?: Param[]|any = [];
 
   ngOnInit(): void {
+
+    this.activatedRoute.params.subscribe(params => {
+      this.loadCompanies(params['id']);
+    });
 
     this.activatedRoute.params.subscribe(params => {
       console.log(params['id']);
@@ -68,11 +72,11 @@ export class ParameterComponent implements OnInit {
 
   }
 
-
-  loadComapnies(idBranch: number) {
-    this.service.branchId(idBranch).subscribe(
-      (res: HttpResponse<Branch>) => {
-        this.companie = res.body;
+  loadCompanies(idBranch: number) {
+    this.service.companieBranch(idBranch).subscribe(
+      (res: HttpResponse<Param[]>) => {
+        this.companies = res.body;
+        console.log(this.companies)
       },
       (res: HttpErrorResponse) => console.log(res.message)
     );

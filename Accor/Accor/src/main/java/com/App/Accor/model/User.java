@@ -40,6 +40,10 @@ public class User implements Serializable {
 
 	private Instant resetDate = null;
 
+	private String approvalLimit ;
+
+	private String spendLimit ;
+
 	@ManyToMany
 	@JoinTable(
 		name = "users_roles",

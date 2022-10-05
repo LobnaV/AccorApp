@@ -39,12 +39,13 @@ const routes: Routes = [
       {path: 'compagny-param/:id/staff/:staffId/edit', component: UpdateStaffComponent},
       {path: 'compagny-param/:id/user-gm/:userId/edit', component: UpdateUserGmComponent},
 
+      {path: 'Parameter/:id', component: ParameterComponent},
+      {path: 'compagny-param/:paramId/edit', component: EditParamComponent},
+
       //{path: 'UserList', component: UserListComponent},
       {path: 'UserList/:id', component: UserListComponent},
       {path: 'x/:dispId', component: UserListComponent},
-      {path: 'Parameter/:id', component: ParameterComponent},
       {path: 'AddParam', component: AddParamComponent},
-      {path: 'editParameter/:paramId', component: EditParamComponent},
       {path: 'branchs/:id', component: ListBranchComponent},
       {path: 'addBranch', component: AddBranchComponent},
       {path: 'listCostCenter', component: ListCcComponent},

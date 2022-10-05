@@ -37,32 +37,43 @@ public class StaffService {
 			.orElseThrow(() -> new UsernameNotFoundException("Staff Not Found with id : " + id));
 	}
 
-	public Staff save(Staff staff) {
+	public Staff save(Staff staff) throws Exception {
 		Staff staffSaved = staffRepository.save(staff);
 		CompanyParameter companyParameter = staff.getCompanyParameter();
 		CsvFormatDTO csvFormatDTO = new CsvFormatDTO();
 		// TO DO : remplir l'objet csvFormatDTO avec les bonnes valeurs
 		csvFormatDTO.setBranchId(companyParameter.getBranch().getCode());
-	//	csvFormatDTO.setHome(csvFormatDTO.getHome());
-		csvFormatDTO.setEmail(staffSaved.getMail());
-		csvFormatDTO.setFirstName(staffSaved.getFirstName());
+		csvFormatDTO.setHome("TRUE");
+		csvFormatDTO.setEmail(staff.getMail());
+		csvFormatDTO.setFirstName(staff.getFirstName());
 		csvFormatDTO.setLastName(staffSaved.getLastName());
 		csvFormatDTO.setState("ACTIVE");
-		csvFormatDTO.setManager(companyParameter.getDispacherMail());
+		csvFormatDTO.setManager(companyParameter.getUserGM().getUsername());
 		csvFormatDTO.setApprovalLimit("0");
 		csvFormatDTO.setSpendLimit("0");
-		csvFormatDTO.setOwnedCostCenter(companyParameter.getMegaCode());
 		csvFormatDTO.setUserType("Head of Department");
+
+
+		System.out.println("staff saved mail: "+staffSaved.getMail());
+		System.out.println("disp: "+ companyParameter.getDispacherMail());
+		System.out.println("staff csv: " + csvFormatDTO.getOwnedCostCenter());
+
+
+
 		try {
-			//String branchCode = tradeshiftInterface.getPrimaryBranchUser(staff.getMail());
-			//csvFormatDTO.setHome(branchCode.equals(staffSaved.getCompanyParameter().getBranch().getCode()) ? "TRUE" : "FALSE");
+//			String branchCode = tradeshiftInterface.getPrimaryBranchUser(staff.getMail());
+		//	System.out.println("staff saved mail: "+ branchCode);
+
+	//		csvFormatDTO.setHome(branchCode.equals(staffSaved.getCompanyParameter().getBranch().getCode()) ? "TRUE" : "FALSE");
 			//A verifier avec Mohamed
-			csvFormatDTO.setOwnedCostCenter(staffSaved.getMail().equals(companyParameter.getDispacherMail())? companyParameter.getMegaCode() : "");
+			csvFormatDTO.setOwnedCostCenter(staffSaved.getMail().equals(companyParameter.getDispacherMail()) ? companyParameter.getMegaCode() : "" );
 			sftpUploadService.uploadFileToSftp(csvFormatDTO);
+
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 		return staffSaved;
+
 	}
 
 	public void delete(Long id) {
@@ -77,19 +88,20 @@ public class StaffService {
 		CsvFormatDTO csvFormatDTO = new CsvFormatDTO();
 		// TO DO : remplir l'objet csvFormatDTO avec les bonnes valeurs
 		csvFormatDTO.setBranchId(companyParameter.getBranch().getCode());
-		//csvFormatDTO.setHome(tradeshiftInterface.getPrimaryBranchUser(staff.getMail()));
+		//csvFormatDTO.setHome("TRUE");
 		csvFormatDTO.setEmail(staff.getMail());
 		csvFormatDTO.setFirstName(staff.getFirstName());
 		csvFormatDTO.setLastName(staff.getLastName());
 		csvFormatDTO.setState("ACTIVE");
-		csvFormatDTO.setManager(companyParameter.getDispacherMail());
+		csvFormatDTO.setManager(companyParameter.getUserGM().getUsername());
 		csvFormatDTO.setApprovalLimit("0");
 		csvFormatDTO.setSpendLimit("0");
 		csvFormatDTO.setOwnedCostCenter(companyParameter.getMegaCode());
+		csvFormatDTO.setOwnedCostCenter(staff.getMail().equals(companyParameter.getDispacherMail())? companyParameter.getMegaCode() : "NVLL");
 		csvFormatDTO.setUserType("Head of Department");
 		try {
 		//	String branchCode = tradeshiftInterface.getPrimaryBranchUser(staff.getMail());
-		//	csvFormatDTO.setHome(branchCode.equals(companyParameter.getBranch().getCode()) ? "TRUE" : "FALSE");
+			//csvFormatDTO.setHome(branchCode.equals(companyParameter.getBranch().getCode()) ? "TRUE" : "FALSE");
 			//A verifier avec Mohamed
 			csvFormatDTO.setOwnedCostCenter(staff.getMail().equals(companyParameter.getDispacherMail())? companyParameter.getMegaCode() : "");
 			sftpUploadService.uploadFileToSftp(csvFormatDTO);

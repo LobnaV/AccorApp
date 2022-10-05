@@ -2,23 +2,23 @@
     <div class="card">
         <div class="card-body">
             <form [formGroup]="editCompanyParamForm" (ngSubmit)='UpdateParam()'>
+            <div class="branch">
+              Branch ID: {{param?.branch?.code}}
+              Branch name: {{param?.branch?.name}}
+            </div>
                 <div class="form-group">
-                    <label for="Perimeter">perimeter:</label>
-                    <input type="text" id='Perimeter' class="form-control" formControlName="perimeter">
+                    <label for="megaCode">Hotel MegaCode:</label>
+                    <input type="text" id='megaCode' class="form-control" formControlName="megaCode" readonly>
                 </div>
                 <div class="form-group">
-                    <label for="HotelMegaCode">HotelMegaCode:</label>
-                    <input type="text" id='HotelMegaCode' class="form-control" formControlName="hotel_MegaCode">
-                </div>
+                  <label for="name">Hotel name:</label>
+                  <input type="text" id='name' class="form-control" formControlName="name" readonly>
+              </div>
                 <div class="form-group">
-                    <label for="hotel_Name">HotelName:</label>
-                    <input type="text" id='hotel_Name' class="form-control" formControlName="hotel_Name">
+                    <label class="form-label" for="userGM">GM</label>
+                    <input type="email" id='userGM' class="form-control" formControlName="userGM"> 
                 </div>
-                <div class="form-group">
-                    <label class="form-label" for="general_manager">GM</label>
-                    <input type="email" id='GeneralManager' class="form-control" formControlName="general_manager">
-                </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label for="Portfolio">Portfolio</label>
                   <input type="email" id='Portfolio' class="form-control" formControlName="portfolio">
               </div>
@@ -29,10 +29,6 @@
               <div class="form-group">
                 <label for="MMM_GM">MMM_GM:</label>
                 <input type="email" id='MMM_GM' class="form-control" formControlName="mmm_gm">
-              </div>
-              <!-- <div class="form-group">
-                <label for="branch">branch:</label>
-                <input type="text" id='branch' class="form-control" formControlName="branch">
               </div> -->
                 <button  type="submit" class="btn btn-danger" [disabled]="editCompanyParamForm.invalid">Add</button>
             </form>

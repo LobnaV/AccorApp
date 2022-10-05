@@ -1,6 +1,7 @@
 package com.App.Accor.controller;
 
 import com.App.Accor.model.Branch;
+import com.App.Accor.model.CompanyParameter;
 import com.App.Accor.model.Staff;
 import com.App.Accor.service.BranchService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +28,14 @@ public class BranchController {
 		return service.add(branch);
 	}
 
+//	@GetMapping({"/{id}"})
+//	public Optional<Branch> listId(@PathVariable("id") Long id) {
+//		return service.listId(id);
+//	}
+
 	@GetMapping({"/{id}"})
-	public Optional<Branch> listId(@PathVariable("id") Long id) {
-		return service.listId(id);
+	public ResponseEntity<Branch> getBranch (@PathVariable Long id){
+		return ResponseEntity.ok(service.findById(id));
 	}
 
 	@PutMapping({"/edit/{id}"})
