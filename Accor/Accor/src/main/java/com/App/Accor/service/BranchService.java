@@ -48,11 +48,11 @@ public class BranchService {
 	}*/
 
 
-/*	public CompanyParameter findByUserGM() throws Exception {
+	public Branch findByUserMGM() throws Exception {
 		UserDetails userDetails =
 			(UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		return parameterRepository.findByUserGMUsername(userDetails.getUsername()).orElseThrow(() -> new Exception("Impossible de trouver l'hotel associé"));
-	}*/
+		return branchR.findByUserMGMUsername(userDetails.getUsername()).orElseThrow(() -> new Exception("Impossible de trouver la branche associée"));
+	}
 
 	public Branch add(Branch branch) {
 		return branchR.save(branch);

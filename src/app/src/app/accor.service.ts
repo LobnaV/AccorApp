@@ -126,11 +126,12 @@ export class AccorService {
   //     .get<Branch>(this.local + "/"+ id)
   // }
   branchId(id:number) : Observable<HttpResponse<Branch>>{
-    return this.http.get<Branch>(this.local + "/"+ id, { observe: 'response' })
+    return this.http.get<Branch>(`${this.local}/${id}`, { observe: 'response' })
   }
 
   companieBranch(id:number): Observable<HttpResponse<Param[]>>{
-    return this.http.get<Param[]>(`${this.paramUrl}/branch/${id}`, { observe: 'response' })
+    return this.http
+      .get<Param[]>(`${this.paramUrl}/branch/${id}`, { observe: 'response' })
   }
 
 

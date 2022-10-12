@@ -47,7 +47,6 @@
                 {{branche.code}} - {{branche.name}}
             </option>
         </select>
-
-        <button [disabled]="!selectedBranch" [routerLink]="['/Parameter', selectedBranch?.id]"> Go</button>
+        <button [disabled]="!selectedBranch" [routerLink]="['/branch', selectedBranch?.id]"> Go</button>
     </div>
 </div>

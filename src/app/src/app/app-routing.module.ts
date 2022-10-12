@@ -39,7 +39,7 @@ const routes: Routes = [
       {path: 'compagny-param/:id/staff/:staffId/edit', component: UpdateStaffComponent},
       {path: 'compagny-param/:id/user-gm/:userId/edit', component: UpdateUserGmComponent},
 
-      {path: 'Parameter/:id', component: ParameterComponent},
+      {path: 'branch/:id', component: ParameterComponent},
       {path: 'compagny-param/:paramId/edit', component: EditParamComponent},
 
       //{path: 'UserList', component: UserListComponent},

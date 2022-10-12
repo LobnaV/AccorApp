@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,8 +20,8 @@ public class BranchController {
 	private BranchService service;
 
 	@GetMapping("/List")
-	public List<Branch> branchList() {
-		return service.branchList();
+	public ResponseEntity<List<Branch>> branchList() throws Exception {
+		return ResponseEntity.ok(Collections.singletonList(service.findByUserMGM()));
 	}
 
 	@PostMapping("/AddBranch")

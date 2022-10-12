@@ -9,7 +9,7 @@
 </div>
 
 <div class="brancheName" >
- Branche {{branche?.body.code}} - {{'BRANCHNAME' | translate}} {{branche?.name}}
+ Branche {{branche?.body.code}} - {{'BRANCHNAME' | translate}} {{branche?.body.name}}
 </div>
 
 <div style="margin: auto; width: 90%;">
@@ -33,7 +33,7 @@
     <tr >
       <td>{{param.megaCode}}</td>
       <td>{{param.userGM?.username}}</td>
-      <td>{{param.branch?.userMGM}}</td>
+      <td>{{param.branch?.userMGM.username}}</td>
       <td>{{param.mm_gm}}</td>
       <!--<td>{{param.portfolio}}</td>
       <td>{{param.mmm_gm}}</td>-->

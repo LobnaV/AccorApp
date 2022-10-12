@@ -35,7 +35,7 @@ export class UpdateStaffComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
-
+      
       const idCompagnie = params['id'];
       this.service.ParamId(idCompagnie).subscribe(
         (res: HttpResponse<Param>) => {

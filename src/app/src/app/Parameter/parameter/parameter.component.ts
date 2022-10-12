@@ -6,6 +6,7 @@ import {Param} from "../../model/param";
 import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
 import { TranslateService } from '@ngx-translate/core';
 import { Branch } from 'src/app/model/branch';
+import { User } from 'src/app/model/user';
 
 @Component({
   selector: 'app-parameter',
@@ -43,10 +44,12 @@ export class ParameterComponent implements OnInit {
 
   branch? : Branch|null
   companies?: Param[]|any = [];
+  userMGM?: User | null;
 
   ngOnInit(): void {
 
     this.activatedRoute.params.subscribe(params => {
+      this.loadMGM(params['id']);
       this.loadCompanies(params['id']);
     });
 
@@ -71,6 +74,17 @@ export class ParameterComponent implements OnInit {
   })
 
   }
+
+  loadMGM(idBranch: number) {
+    this.service.branchId(idBranch).subscribe(
+      (res: HttpResponse<Branch>) => {
+        this.branch = res.body;
+        this.userMGM = this.branch?.userMGM;
+      },
+      (res: HttpErrorResponse) => console.log(res.message)
+    );
+  }
+
 
   loadCompanies(idBranch: number) {
     this.service.companieBranch(idBranch).subscribe(
