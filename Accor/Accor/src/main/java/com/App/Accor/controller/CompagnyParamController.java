@@ -1,13 +1,9 @@
 package com.App.Accor.controller;
 
-import com.App.Accor.model.Branch;
 import com.App.Accor.model.CompanyParameter;
-import com.App.Accor.model.Staff;
 import com.App.Accor.playload.CsvFormatDTO;
 import com.App.Accor.service.CompanyParamService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +11,6 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/parameter")
@@ -64,9 +59,9 @@ public class CompagnyParamController {
 	}
 
 	@GetMapping("/{id}/dispacher")
-	public ResponseEntity<CompanyParameter> updateDispatcher(@RequestParam String email, @PathVariable Long id) throws Exception {
+	public ResponseEntity<CompanyParameter> updateDispatcher(@RequestParam String email, @PathVariable Long id, @RequestParam boolean isStaff) throws Exception {
 
-		return ResponseEntity.ok(service.updateDispacher(id, email));
+		return ResponseEntity.ok(service.updateDispacher(id, email, isStaff));
 	}
 
 }

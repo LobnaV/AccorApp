@@ -41,6 +41,8 @@ export class MainPageComponent implements OnInit {
         this.branches = data.body;
         (res: HttpErrorResponse) => console.log(res.message)
       });
+
+      
   }
 
   //Switch language

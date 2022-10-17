@@ -119,16 +119,16 @@ export class UserListComponent implements OnInit {
   type() {
     for (let data of this.staffs!)
       if (this.userGM?.username === this.companie?.dispacherMail) {
-        return "Manger"
+        return "Manager"
       } else if (data.mail === this.companie?.dispacherMail) {
         return "Head of Department"
       }
     return;
   }
 
-  updateDispacher(email: string) {
+  updateDispacher(email: string, isStaff: boolean) {
     this.isLoading = true;
-    this.service.updateDispatcher(this.companie?.id!, email).subscribe(
+    this.service.updateDispatcher(this.companie?.id!, email, isStaff).subscribe(
       (response: HttpResponse<Param>) => {
         this.companie = response.body!;
         this.isLoading = false;

@@ -53,26 +53,21 @@ public class UserService {
 		Optional<CompanyParameter> companyParameter = companyParameterRepository.findByUserGMUsername(userSaved.getUsername()) ;
 
 		CsvFormatDTO csvFormatDTO = new CsvFormatDTO();
-		// TO DO : remplir l'objet csvFormatDTO avec les bonnes valeurs
-		csvFormatDTO.setBranchId(companyParameter.get().getBranch().getCode());
+		csvFormatDTO.setBranchId("A9016601");
 		csvFormatDTO.setHome("TRUE");//Valeur Primary branch test
-		csvFormatDTO.setEmail(user.getUsername());
-		csvFormatDTO.setFirstName(user.getFirstName());
-		csvFormatDTO.setLastName(userSaved.getLastName());
+		csvFormatDTO.setEmail("mohamed.semlali.00@gmail.com");
+		csvFormatDTO.setFirstName("lobna");
+		csvFormatDTO.setLastName("Semlali");
 		csvFormatDTO.setState("ACTIVE");
-		csvFormatDTO.setManager(companyParameter.get().getUserGM().getUsername());
-		csvFormatDTO.setApprovalLimit(user.getApprovalLimit());
-		csvFormatDTO.setSpendLimit(user.getSpendLimit());
-		csvFormatDTO.setUserType("General Manager");
-
-
-		System.out.println("user branchID : "+ csvFormatDTO.getBranchId());
-		System.out.println("user type : "+ csvFormatDTO.getUserType());
+		csvFormatDTO.setManager("");
+		csvFormatDTO.setApprovalLimit("");
+		csvFormatDTO.setSpendLimit("");
+		csvFormatDTO.setUserType("Head of Department");//A modifier
 		try {
 		//	String branchCode = tradeshiftInterface.getPrimaryBranchUser(userSaved.getUsername());
 		//	csvFormatDTO.setHome(branchCode.equals(userSaved.getPrimaryBranch()) ? "TRUE" : "FALSE");
 			//A verifier avec Mohamed
-			csvFormatDTO.setOwnedCostCenter(userSaved.getUsername().equals(companyParameter.get().getDispacherMail())? companyParameter.get().getMegaCode() : "");
+			csvFormatDTO.setOwnedCostCenter(userSaved.getUsername().equals(companyParameter.get().getDispacherMail())? "" : "");
 			sftpUploadService.uploadFileToSftp(csvFormatDTO);
 		} catch (Exception e) {
 			throw new RuntimeException(e);

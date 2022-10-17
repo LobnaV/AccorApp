@@ -13,7 +13,7 @@ import java.util.Objects;
 public class TradeshiftInterface {
 
 	private final String url = "https://api-sandbox.tradeshift.com/tradeshift/rest/external";
-	private final String token = "ETfENXYJiTijGQdNeZJqQvt7If9gciDLThazKepPDTSa/n5aQoACjheSlHfzHRk0xUuS4LVetWfK8xpOxRaJAXuh1TFz/1BhGjhE1mMOLT7pSJmQQyHj3RDrnkK711kRogJhqUvNED4e+FHWYHy9iAX9kvCmoJx7KuS1Y+vLLQI4sWnHkHDbUIT6agp6xIkHaNAeKsK02/GGdsI/RMxloZs01qqwJGSyQ7Jv4c3JEwb2NkqHj+CGk6zjmVojFhVuyvRAAbCx+OY2vfdIPCvdoHd4B1aHRr1dDzVNDAZGLw0BtHcxXYSgDr/tDixsLtE5WHDSnzbqfdWgL4z2dNyvr0WpaqgNB9+YmDNHCXwdqsPJKEMDG+DvSMuV96kFHzTknEeczHhGY0jkjfaZBlAAWgIAAWCMifaZBg==";
+	private final String token = "EWv/hdnqkwCbGQpZP8+5JG90IcdJhh+tkkW1KSlBX60iRAB6QoACOuJZBSmzdx5N8TFj+Pxe5kwIgSdS7IjWHciW4QgFICZacwUc8xvf3zajFlV3Rc1WrLtlP2i4dZrkkPcDtb2ypWR/epqf2BQicRYUkzdYiPCV3Yrq+/K5VhQkcPu2lAopXCD78uOdMAL/hLEOvQAQSimoU5/XsqTFir3b9jYe8fgJHF7jI2CDFOLaNKJmj5wKIjRo8Ze9MmnBFUr7sVTTftyCgM7AyassGQ0gXZGrjXiIbcLdlZqO83BJDV8mfbFqX/Rjl1W7XVRf9NYBCFS4/EeroJCe1pElUMpinYgrbaJj9yuPE2UahWUbts3wWha4+LIEWz2EpYonayICFWSUCkimz7WaBlAAWgIAAWDOyrWaBg==";
 	@Autowired
 	private RestTemplate restTemplate;
 
@@ -22,7 +22,6 @@ public class TradeshiftInterface {
 
 	public String getPrimaryBranchUser(String email) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
-		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 		headers.setBearerAuth(token);
 		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 
@@ -38,6 +37,19 @@ public class TradeshiftInterface {
 			throw new Exception("Impossible de récupérer les informations de tradeshift de l'utilisateur : " + email);
 		}
 
-		return branchService.findByUuid(compagnyAccountId).getCode();
+		HttpHeaders headers2 = new HttpHeaders();
+		headers2.setBearerAuth(token);
+		headers2.setAccept(Collections.singletonList(MediaType.TEXT_PLAIN));
+
+		HttpEntity<String> entity2 = new HttpEntity<>(null, headers2);
+		ResponseEntity<String> response = restTemplate.exchange(String.format("%s/external/%s/properties/CustomerAssignedId", url, compagnyAccountId), HttpMethod.GET, entity2, String.class);
+
+		String branchId = Objects.requireNonNull(response.getBody());
+
+		if (branchId == null) {
+			throw new Exception("Impossible de récupérer les informations de tradeshift de l'utilisateur : " + email);
+		}
+
+		return branchId;
 	}
 }

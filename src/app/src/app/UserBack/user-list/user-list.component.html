@@ -23,7 +23,7 @@
                              [value]="userGM?.username === companie?.dispacherMail"
                              [checked]="userGM?.username === companie?.dispacherMail"
                              [disabled]="isLoading"
-                             (click)="updateDispacher(userGM?.username!)" >
+                             (click)="updateDispacher(userGM?.username!, false)" >
       </th>
       <th scope="row">{{userGM?.firstName}}</th>
       <th>{{userGM?.lastName}}</th>
@@ -55,7 +55,7 @@
                  [value]="data?.mail === companie?.dispacherMail"
                  [checked]="data?.mail === companie?.dispacherMail"
                  [disabled]="isLoading"
-                 (click)="updateDispacher(data?.mail!)">
+                 (click)="updateDispacher(data?.mail!, true)">
         </th>
         <th scope="row">{{data?.firstName}}</th>
         <th >{{data?.lastName}}</th>

@@ -41,9 +41,8 @@ public class StaffService {
 		Staff staffSaved = staffRepository.save(staff);
 		CompanyParameter companyParameter = staff.getCompanyParameter();
 		CsvFormatDTO csvFormatDTO = new CsvFormatDTO();
-		// TO DO : remplir l'objet csvFormatDTO avec les bonnes valeurs
 		csvFormatDTO.setBranchId(companyParameter.getBranch().getCode());
-		csvFormatDTO.setHome("TRUE");
+		csvFormatDTO.setHome("TRUE");//juste pour le test
 		csvFormatDTO.setEmail(staff.getMail());
 		csvFormatDTO.setFirstName(staff.getFirstName());
 		csvFormatDTO.setLastName(staffSaved.getLastName());
@@ -52,18 +51,8 @@ public class StaffService {
 		csvFormatDTO.setApprovalLimit("0");
 		csvFormatDTO.setSpendLimit("0");
 		csvFormatDTO.setUserType("Head of Department");
-
-
-		System.out.println("staff saved mail: "+staffSaved.getMail());
-		System.out.println("disp: "+ companyParameter.getDispacherMail());
-		System.out.println("staff csv: " + csvFormatDTO.getOwnedCostCenter());
-
-
-
 		try {
 //			String branchCode = tradeshiftInterface.getPrimaryBranchUser(staff.getMail());
-		//	System.out.println("staff saved mail: "+ branchCode);
-
 	//		csvFormatDTO.setHome(branchCode.equals(staffSaved.getCompanyParameter().getBranch().getCode()) ? "TRUE" : "FALSE");
 			//A verifier avec Mohamed
 			csvFormatDTO.setOwnedCostCenter(staffSaved.getMail().equals(companyParameter.getDispacherMail()) ? companyParameter.getMegaCode() : "" );
@@ -86,18 +75,15 @@ public class StaffService {
 		staffRepository.deleteById(id);
 
 		CsvFormatDTO csvFormatDTO = new CsvFormatDTO();
-		// TO DO : remplir l'objet csvFormatDTO avec les bonnes valeurs
 		csvFormatDTO.setBranchId(companyParameter.getBranch().getCode());
-		//csvFormatDTO.setHome("TRUE");
 		csvFormatDTO.setEmail(staff.getMail());
 		csvFormatDTO.setFirstName(staff.getFirstName());
 		csvFormatDTO.setLastName(staff.getLastName());
-		csvFormatDTO.setState("ACTIVE");
+		csvFormatDTO.setState("DELETE");//Ou remove ajouter la condition
 		csvFormatDTO.setManager(companyParameter.getUserGM().getUsername());
 		csvFormatDTO.setApprovalLimit("0");
 		csvFormatDTO.setSpendLimit("0");
 		csvFormatDTO.setOwnedCostCenter(companyParameter.getMegaCode());
-		csvFormatDTO.setOwnedCostCenter(staff.getMail().equals(companyParameter.getDispacherMail())? companyParameter.getMegaCode() : "NVLL");
 		csvFormatDTO.setUserType("Head of Department");
 		try {
 		//	String branchCode = tradeshiftInterface.getPrimaryBranchUser(staff.getMail());

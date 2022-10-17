@@ -37,6 +37,11 @@ export class AccorService {
     return this.http
       .get<Param>(`${this.paramUrl}/${id}`, { observe: 'response' })
   }
+  
+  companieBranch(id:number): Observable<HttpResponse<Param[]>>{
+    return this.http
+      .get<Param[]>(`${this.paramUrl}/branch/${id}`, { observe: 'response' })
+  }
 
   addParam(param:Param){
     return this.http
@@ -53,8 +58,8 @@ export class AccorService {
       .delete<Param>(this.paramUrl + "/deleteParameter/" + paramId)
   }
 
-  updateDispatcher(idCompagnie: number, email: string): Observable<HttpResponse<Param>> {
-    return this.http.get<Param>(`${this.paramUrl}/${idCompagnie}/dispacher?email=${email}`, {
+  updateDispatcher(idCompagnie: number, email: string, isStaff: boolean): Observable<HttpResponse<Param>> {
+    return this.http.get<Param>(`${this.paramUrl}/${idCompagnie}/dispacher?email=${email}&isStaff=${isStaff}`, {
       observe: 'response',
     });
   }
@@ -129,20 +134,10 @@ export class AccorService {
     return this.http.get<Branch>(`${this.local}/${id}`, { observe: 'response' })
   }
 
-  companieBranch(id:number): Observable<HttpResponse<Param[]>>{
-    return this.http
-      .get<Param[]>(`${this.paramUrl}/branch/${id}`, { observe: 'response' })
-  }
-
-
   branches(): Observable<HttpResponse<Branch[]>> {
     return this.http
       .get<Branch[]>(this.local + "/List", { observe: 'response' })
   }
-  // branches(){
-  //   return this.http
-  //     .get<Branch[]>(this.local + "/List")
-  // }
 
   addBranch(branch:Branch){
     return this.http

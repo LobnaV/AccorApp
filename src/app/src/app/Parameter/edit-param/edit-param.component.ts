@@ -51,6 +51,7 @@ export class EditParamComponent implements OnInit {
           this.param = res.body!;
           console.log(res.body);
           this.paramForm.patchValue({
+            id: this.branch?.id,
             megaCode: this.param?.megaCode,
             name: this.param?.name,
             userGM: this.param.userGM?.username
@@ -62,7 +63,7 @@ export class EditParamComponent implements OnInit {
     })
   }
 
-  UpdateParam() {
+  Update() {
    // const updateForm = this.paramForm.value;
    const updateForm = new Param(
     this.paramForm.get('id')?.value,
@@ -75,7 +76,6 @@ export class EditParamComponent implements OnInit {
       .subscribe(
         (res: HttpResponse<Param>) => {
           console.log('update ok')
-          //this.router.navigate(["Parameter"])
           this.location.back();
         },
         (res: HttpErrorResponse) => console.log(res.message)

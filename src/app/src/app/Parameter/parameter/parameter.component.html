@@ -37,7 +37,7 @@
       <td>{{param.mm_gm}}</td>
       <!--<td>{{param.portfolio}}</td>
       <td>{{param.mmm_gm}}</td>-->
-      <td><button [routerLink]="['/compagny-param', param.id, 'edit']" class="btn btn-edit"
+      <td><button [routerLink]="['compagny-param', param?.id, 'edit']" class="btn btn-edit"
           style="margin-left: 10px;">{{'BUTTONS.EDIT' | translate}}</button></td>
       <td><button (click)="remove(param.id)" class="btn btn-delete" style="margin-left: 10px;">{{'BUTTONS.DELETE' | translate}}</button></td>
     </tr>
