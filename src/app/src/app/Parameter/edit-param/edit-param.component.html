@@ -1,36 +1,46 @@
-<!--Upadate Param-->
-    <div class="card">
-        <div class="card-body">
-            <form [formGroup]="paramForm" (ngSubmit)='Update()'>
-            <div class="branch">
-              Branch ID: {{param?.branch?.code}}
-              Branch name: {{param?.branch?.name}}
-            </div>
-                <div class="form-group">
-                    <label for="megaCode">Hotel MegaCode:</label>
-                    <input type="text" id='megaCode' class="form-control" formControlName="megaCode" readonly>
-                </div>
-                <div class="form-group">
-                  <label for="name">Hotel name:</label>
-                  <input type="text" id='name' class="form-control" formControlName="name" >
-              </div>
-                <div class="form-group">
-                    <label class="form-label" for="userGM">GM</label>
-                    <input type="email" id='userGM' class="form-control" formControlName="userGM"> 
-                </div>
-                <!-- <div class="form-group">
-                  <label for="Portfolio">Portfolio</label>
-                  <input type="email" id='Portfolio' class="form-control" formControlName="portfolio">
-              </div>
-              <div class="form-group">
-                <label for="MM_GM">MM_GM:</label>
-                <input type="email" id='MM_GM' class="form-control" formControlName="mm_gm">
-              </div>
-              <div class="form-group">
-                <label for="MMM_GM">MMM_GM:</label>
-                <input type="email" id='MMM_GM' class="form-control" formControlName="mmm_gm">
-              </div> -->
-                <button  type="submit" class="btn btn-danger" [disabled]="paramForm.invalid">Add</button>
-            </form>
+<div class="card">  
+  <div class="card-body">
+    <h4 *ngIf="this.param?.id"> Update parameter</h4>
+    <h4 *ngIf="this.param?.id == null"> Create new parameter</h4>
+    <form [formGroup]="paramForm" (ngSubmit)='Update()'>
+      <input type="text" formControlName="id" hidden>
+      <div class="branch">
+         <h6>Branch ID: {{branch?.code}}</h6>
+        <h6>Branch name: {{branch?.name}}</h6>
+      </div>
+      <div class="form-group" *ngIf="this.param?.id readonly">
+        <label for="megaCode">Hotel MegaCode:</label>
+        <input type="text" id='megaCode' class="form-control" formControlName="megaCode" readonly>
+      </div>
+      <div class="form-group" *ngIf="this.param?.id == null">
+        <label for="megaCode">Hotel MegaCode:</label>
+        <input type="text" id='megaCode' class="form-control" formControlName="megaCode">
+      </div>
+      <div class="form-group">
+        <label for="name">Hotel name:</label>
+        <input type="text" id='name' class="form-control" formControlName="name">
+      </div>
+      <div formGroupName="userGM">
+        <div class="form-group">
+          <label class="form-label" for="userGM">Email GM</label>
+          <input type="email" id='userGM' class="form-control" formControlName="username">
         </div>
-    </div>
+        <div class="form-group">
+          <label class="form-label" for="firstNameGM">firstName GM</label>
+          <input type="email" id='firstNameGM' class="form-control" formControlName="firstName">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="lastNameGM">lastNameGM GM</label>
+          <input type="email" id='lastNameGM' class="form-control" formControlName="lastName">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="userMGM">Email GM</label>
+        <input type="email" id='userMGM' class="form-control" formControlName="userMGM">
+      </div>
+      <div class="save">
+        <button type="submit" class="btn bnt-Save" [disabled]="paramForm.invalid">{{this.param?.id ? 'edit' : 'add'}}</button>
+      </div>
+    </form>
+  </div>
+</div>

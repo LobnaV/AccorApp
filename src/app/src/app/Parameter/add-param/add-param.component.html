@@ -1,14 +1,9 @@
-<!--Add Param test-->
+<!-- Add Param test
 <div class="container">
     <h6>Create new Parameter</h6>
     <div class="card-body">
-        <form [formGroup]="companyParamForm" (ngSubmit)='Ajouter()'>
-            <!-- <div class="form-group">
-                    <label for="Perimeter">perimeter:</label>
-                    <input type="text" validate="required=true"
-                    [ngClass]="{'is-invalid': (companyParamForm .get('perimeter')?.dirty || companyParamForm .get('perimeter')?.touched) && companyParamForm .get('perimeter')?.invalid }"
-                    id='Perimeter' class="form-control" formControlName="perimeter">
-                </div> -->
+        <form [formGroup]="companyParamForm" >
+   
             <div class="branches">
                 <div class="form-group">
                     <label for="branchID"> branchID : </label>
@@ -71,18 +66,10 @@
                     [ngClass]="{'is-invalid': (companyParamForm .get('lastName_m_gm')?.dirty || companyParamForm .get('lastName_m_gm')?.touched) && companyParamForm .get('lastName_m_gm')?.invalid }"
                     id='lastName_m_gm' class="form-control" formControlName="lastName_m_gm">
             </div>
-            <!-- <div class="form-group">
-                <label for="branch">branch:</label>
-                <input type="text" id='branch' class="form-control" formControlName="branch">
-              </div> -->
-            <!-- <select>
-                <option *ngFor="let test of rolesParam, let i = index" value="{{test.rolesParam}}" selected="i == 0">
-                    {{test.rolesParam}}
-                </option>
-            </select> -->
+
             <div class="save">
                 <button type="submit" class="btn-Save" [disabled]="companyParamForm.invalid">Save</button>
             </div>
         </form>
     </div>
-</div>
+</div> -->

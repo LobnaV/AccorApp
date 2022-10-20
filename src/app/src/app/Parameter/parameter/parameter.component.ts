@@ -25,22 +25,7 @@ export class ParameterComponent implements OnInit {
     private router:Router,
     private activatedRoute: ActivatedRoute,
     public translate: TranslateService
-
   ) { }
-
-  companyParamForm = new FormGroup({
-    hotel_MegaCode: new FormControl(''),
-    hotel_Name: new FormControl(''),
-    branchID: new FormControl(''),
-    perimeter: new FormControl(''),
-    general_manager: new FormControl('',[Validators.required,Validators.email]),
-    email_m_gm: new FormControl('',[Validators.required,Validators.email]),
-    portfolio: new FormControl('',[Validators.email]),
-    mm_gm: new FormControl('',[Validators.email]),
-    mmm_gm: new FormControl('',[Validators.email]),
-    // branch: new FormControl('')
-
-  })
 
   branch? : Branch|null
   companies?: Param[]|any = [];
@@ -105,10 +90,6 @@ export class ParameterComponent implements OnInit {
    //Switch language
    translateLanguageTo(lang: string) {
     this.translate.use(lang);
-  }
-
-  NewParam(){
-    this.router.navigate(["AddParam"]);
   }
 
   remove(paramId:any){

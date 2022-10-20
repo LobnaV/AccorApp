@@ -46,7 +46,32 @@ public class CompanyParamService {
 	}
 
 	public CompanyParameter save(CompanyParameter companyParameter) {
-		return parameterRepository.save(companyParameter);
+		companyParameter.setUserGM(userRepository.save(companyParameter.getUserGM()));
+		CompanyParameter paramSaved = parameterRepository.save(companyParameter);
+
+		CsvFormatDTO csvFormatDTO = new CsvFormatDTO();
+		csvFormatDTO.setBranchId(paramSaved.getBranch().getCode());
+		csvFormatDTO.setEmail(paramSaved.getUserGM().getUsername());
+		csvFormatDTO.setFirstName(paramSaved.getUserGM().getFirstName());
+		csvFormatDTO.setLastName(paramSaved.getUserGM().getLastName());
+		csvFormatDTO.setState("ACTIVE");
+		csvFormatDTO.setManager(paramSaved.getUserGM().getUsername());
+		csvFormatDTO.setApprovalLimit("0");
+		csvFormatDTO.setSpendLimit("0");
+		csvFormatDTO.setUserType("");
+
+		System.out.println(paramSaved.getUserGM().getUsername());
+		try {
+//			String branchCode = tradeshiftInterface.getPrimaryBranchUser(companyParameter.getUserGM().getUsername());
+//			csvFormatDTO.setHome(branchCode.equals(paramSaved.getBranch().getCode()) ? "TRUE" : "FALSE");
+			//csvFormatDTO.setOwnedCostCenter(paramSaved.getMail().equals(companyParameter.getDispacherMail()) ? companyParameter.getMegaCode() : "" );
+//			sftpUploadService.uploadFileToSftp(csvFormatDTO);
+
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+
+		return paramSaved;
 	}
 
 	@Transactional(readOnly = true)
@@ -72,13 +97,13 @@ public class CompanyParamService {
 				.orElseThrow(() -> new UsernameNotFoundException("Staff Not Found with mail : " + email));
 			nom = staff.getLastName();
 			prenom = staff.getFirstName();
-			userType = "";
+			userType = "Head of Department";
 		} else {
 			User user = userRepository.findByUsername(email)
 				.orElseThrow(() -> new UsernameNotFoundException("User Not Found with mail : " + email));
 			nom = user.getLastName();
 			prenom = user.getFirstName();
-			userType = "";
+			userType = "General Manager";
 		}
 
 		CsvFormatDTO csvFormatDTO = new CsvFormatDTO();

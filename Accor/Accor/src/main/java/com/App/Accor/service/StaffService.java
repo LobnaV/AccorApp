@@ -42,7 +42,6 @@ public class StaffService {
 		CompanyParameter companyParameter = staff.getCompanyParameter();
 		CsvFormatDTO csvFormatDTO = new CsvFormatDTO();
 		csvFormatDTO.setBranchId(companyParameter.getBranch().getCode());
-		csvFormatDTO.setHome("TRUE");//juste pour le test
 		csvFormatDTO.setEmail(staff.getMail());
 		csvFormatDTO.setFirstName(staff.getFirstName());
 		csvFormatDTO.setLastName(staffSaved.getLastName());
@@ -52,9 +51,8 @@ public class StaffService {
 		csvFormatDTO.setSpendLimit("0");
 		csvFormatDTO.setUserType("Head of Department");
 		try {
-//			String branchCode = tradeshiftInterface.getPrimaryBranchUser(staff.getMail());
-	//		csvFormatDTO.setHome(branchCode.equals(staffSaved.getCompanyParameter().getBranch().getCode()) ? "TRUE" : "FALSE");
-			//A verifier avec Mohamed
+			String branchCode = tradeshiftInterface.getPrimaryBranchUser(companyParameter.getUserGM().getUsername());
+			csvFormatDTO.setHome(branchCode.equals(staffSaved.getCompanyParameter().getBranch().getCode()) ? "TRUE" : "FALSE");
 			csvFormatDTO.setOwnedCostCenter(staffSaved.getMail().equals(companyParameter.getDispacherMail()) ? companyParameter.getMegaCode() : "" );
 			sftpUploadService.uploadFileToSftp(csvFormatDTO);
 
@@ -83,13 +81,12 @@ public class StaffService {
 		csvFormatDTO.setManager(companyParameter.getUserGM().getUsername());
 		csvFormatDTO.setApprovalLimit("0");
 		csvFormatDTO.setSpendLimit("0");
-		csvFormatDTO.setOwnedCostCenter(companyParameter.getMegaCode());
+		csvFormatDTO.setOwnedCostCenter(companyParameter.getMegaCode());//vide pas de dispatcher supprimer
 		csvFormatDTO.setUserType("Head of Department");
 		try {
-		//	String branchCode = tradeshiftInterface.getPrimaryBranchUser(staff.getMail());
-			//csvFormatDTO.setHome(branchCode.equals(companyParameter.getBranch().getCode()) ? "TRUE" : "FALSE");
-			//A verifier avec Mohamed
-			csvFormatDTO.setOwnedCostCenter(staff.getMail().equals(companyParameter.getDispacherMail())? companyParameter.getMegaCode() : "");
+			String branchCode = tradeshiftInterface.getPrimaryBranchUser(companyParameter.getUserGM().getUsername());
+			csvFormatDTO.setHome(branchCode.equals(companyParameter.getBranch().getCode()) ? "TRUE" : "FALSE");
+			//csvFormatDTO.setOwnedCostCenter(staff.getMail().equals(companyParameter.getDispacherMail())? companyParameter.getMegaCode() : "");
 			sftpUploadService.uploadFileToSftp(csvFormatDTO);
 		} catch (Exception e) {
 			throw new RuntimeException(e);

@@ -6,6 +6,7 @@ import { Param } from '../../model/param';
 import { Location } from '@angular/common';
 import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
 import { Branch } from 'src/app/model/branch';
+import { User } from 'src/app/model/user';
 
 @Component({
   selector: 'app-edit-param',
@@ -17,18 +18,21 @@ export class EditParamComponent implements OnInit {
   param?: Param;
   branch?: Branch;
 
+
   paramForm = new FormGroup({
+    id: new FormControl(''),
     megaCode: new FormControl(''),
     name: new FormControl(''),
-    userGM: new FormControl(''),
-    // portfolio: new FormControl(''),
-    // mm_gm: new FormControl(''),
-    // mmm_gm: new FormControl(''),
-
+    userGM: new FormGroup({
+      username: new FormControl(''),
+      firstName: new FormControl(''),
+      lastName: new FormControl(''),
+    }),
+    userMGM: new FormControl('')
   })
+
   constructor(
     private service: AccorService,
-    private router: Router,
     private route: ActivatedRoute,
     private location: Location
   ) { }
@@ -42,36 +46,49 @@ export class EditParamComponent implements OnInit {
           this.branch = res.body!;
         },
         (res: HttpErrorResponse) => console.log(res.message)
-      )
+      );
 
 
       const paramId = params['paramId'];
-      this.service.ParamId(paramId).subscribe(
-        (res: HttpResponse<Param>) => {
-          this.param = res.body!;
-          console.log(res.body);
-          this.paramForm.patchValue({
-            id: this.branch?.id,
-            megaCode: this.param?.megaCode,
-            name: this.param?.name,
-            userGM: this.param.userGM?.username
-
-          });
-        },
-        (res: HttpErrorResponse) => console.log(res.message)
-      );
+      if(paramId){
+        this.service.ParamId(paramId).subscribe(
+          (res: HttpResponse<Param>) => {
+            this.param = res.body!;
+            this.paramForm.patchValue({
+              id: this.param?.id,
+              megaCode: this.param?.megaCode,
+              name: this.param?.name,
+              userGM: {
+                username: this.param.userGM?.username,
+                firstName: this.param.userGM?.firstName,
+                lastName: this.param.userGM?.lastName, 
+              },
+              userMGM: this.branch?.userMGM?.username
+            });
+          },
+          (res: HttpErrorResponse) => console.log(res.message)
+        );
+      } else {
+        this.param = new Param();
+      }
     })
   }
 
   Update() {
-   // const updateForm = this.paramForm.value;
-   const updateForm = new Param(
-    this.paramForm.get('id')?.value,
-    this.paramForm.get('megaCode')?.value,
-    this.paramForm.get('name')?.value,
-    this.paramForm.get('userGM')?.value,
-    this.branch);
+    //const updateForm = this.paramForm.value;
+   const updateForm = {
+    ...new Param(),
+    id: this.paramForm.get('id')?.value,
+    megaCode: this.paramForm.get('megaCode')?.value,
+    name: this.paramForm.get('name')?.value,
+    userGM: this.paramForm.get('userGM')?.value,
+    branch: this.branch,
+    dispacherMail: this.paramForm.get('userGM.username')?.value
+   };
 
+    console.log(updateForm);
+
+  if(this.param?.id){
     this.service.updateParam(updateForm)
       .subscribe(
         (res: HttpResponse<Param>) => {
@@ -79,7 +96,16 @@ export class EditParamComponent implements OnInit {
           this.location.back();
         },
         (res: HttpErrorResponse) => console.log(res.message)
-      )
+      );
+    }else{
+      this.service.addParam(updateForm)
+        .subscribe(
+          (res:HttpResponse<Param>) => {
+            this.location.back();
+          },
+          (res: HttpErrorResponse) => console.log(res.message)
+        );
+    }
   }
 
 }

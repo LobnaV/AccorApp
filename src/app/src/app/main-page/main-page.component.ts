@@ -4,6 +4,7 @@ import {AccorService} from '../accor.service';
 import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
 import {Param} from "../model/param";
 import { Branch } from '../model/branch';
+import { LoginComponent } from '../Account/login/login.component';
 
 @Component({
   selector: 'app-main-page',
@@ -21,7 +22,8 @@ export class MainPageComponent implements OnInit {
   constructor(
     private service: AccorService,
     public translate: TranslateService
-  ) {
+    ) {
+
     // Register translation languages
     translate.addLangs(['en', 'fr']);
     // Set default language
@@ -42,7 +44,6 @@ export class MainPageComponent implements OnInit {
         (res: HttpErrorResponse) => console.log(res.message)
       });
 
-      
   }
 
   //Switch language

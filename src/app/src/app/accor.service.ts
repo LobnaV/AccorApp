@@ -43,9 +43,9 @@ export class AccorService {
       .get<Param[]>(`${this.paramUrl}/branch/${id}`, { observe: 'response' })
   }
 
-  addParam(param:Param){
+  addParam(param:Param): Observable<HttpResponse<Param>>{
     return this.http
-      .post<Param>(this.paramUrl + "/AddParameter/", param)
+      .post<Param>(this.paramUrl, param, { observe: 'response' })
   }
 
   updateParam(param:Param): Observable<HttpResponse<Param>>{

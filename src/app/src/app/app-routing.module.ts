@@ -40,6 +40,7 @@ const routes: Routes = [
       {path: 'compagny-param/:id/user-gm/:userId/edit', component: UpdateUserGmComponent},
 
       {path: 'branch/:id', component: ParameterComponent},
+      {path: 'branch/:id/compagny-param/add', component:EditParamComponent},
       {path: 'branch/:id/compagny-param/:paramId/edit', component: EditParamComponent},
 
       {path: 'UserList/:id', component: UserListComponent},
