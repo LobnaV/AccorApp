@@ -17,20 +17,7 @@ export class AddParamComponent implements OnInit {
   getDataBranch = localStorage.getItem('getDataBranch');
   getDataBranchName = localStorage.getItem('getDataBranchName');
 
-  companyParamForm = new FormGroup({
-    hotel_MegaCode: new FormControl(''),
-    hotel_Name: new FormControl(''),
-    branchID: new FormControl(''),
-    branchName:new FormControl(''),
-    perimeter: new FormControl(''),
-    general_manager: new FormControl('',[Validators.required,Validators.email]),
-    lastName_gm: new FormControl('',[Validators.required]),
-    firstName_gm: new FormControl('',[Validators.required]),
-    email_m_gm: new FormControl('',[Validators.required,Validators.email]),
-    lastName_m_gm: new FormControl('',[Validators.required]),
-    firstName_m_gm: new FormControl('',[Validators.required]),
-    // branch: new FormControl('')
-  })
+ 
 
   constructor(
     private service: AccorService,

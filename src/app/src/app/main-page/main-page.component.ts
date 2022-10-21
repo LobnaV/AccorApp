@@ -5,6 +5,8 @@ import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
 import {Param} from "../model/param";
 import { Branch } from '../model/branch';
 import { LoginComponent } from '../Account/login/login.component';
+import { User } from '../model/user';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-main-page',
@@ -18,10 +20,10 @@ export class MainPageComponent implements OnInit {
   companies: Param[] | null = [];
   branches: any = [];
 
-
   constructor(
     private service: AccorService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private activatedRoute: ActivatedRoute,
     ) {
 
     // Register translation languages
@@ -31,6 +33,7 @@ export class MainPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.service.getParams().subscribe(
       (res: HttpResponse<Param[]>) => {
         this.companies = res.body;

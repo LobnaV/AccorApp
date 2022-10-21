@@ -6,6 +6,7 @@ import { Param } from '../../model/param';
 import { Location } from '@angular/common';
 import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
 import { Branch } from 'src/app/model/branch';
+import { TestBed } from '@angular/core/testing';
 import { User } from 'src/app/model/user';
 
 @Component({
@@ -17,13 +18,14 @@ export class EditParamComponent implements OnInit {
 
   param?: Param;
   branch?: Branch;
-
+  user?:User;
 
   paramForm = new FormGroup({
     id: new FormControl(''),
     megaCode: new FormControl(''),
     name: new FormControl(''),
     userGM: new FormGroup({
+      id: new FormControl(''),
       username: new FormControl(''),
       firstName: new FormControl(''),
       lastName: new FormControl(''),
@@ -48,7 +50,6 @@ export class EditParamComponent implements OnInit {
         (res: HttpErrorResponse) => console.log(res.message)
       );
 
-
       const paramId = params['paramId'];
       if(paramId){
         this.service.ParamId(paramId).subscribe(
@@ -58,12 +59,13 @@ export class EditParamComponent implements OnInit {
               id: this.param?.id,
               megaCode: this.param?.megaCode,
               name: this.param?.name,
-              userGM: {
+              userGM: { 
+                id: this.param.userGM?.id,
                 username: this.param.userGM?.username,
                 firstName: this.param.userGM?.firstName,
                 lastName: this.param.userGM?.lastName, 
               },
-              userMGM: this.branch?.userMGM?.username
+              userMGM: this.branch?.userMGM?.username,
             });
           },
           (res: HttpErrorResponse) => console.log(res.message)
@@ -109,3 +111,4 @@ export class EditParamComponent implements OnInit {
   }
 
 }
+
