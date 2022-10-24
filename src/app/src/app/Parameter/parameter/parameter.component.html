@@ -15,7 +15,6 @@
 <div style="margin: auto; width: 90%;">
 <table class="table" >
   <thead class="thead-dark">
-    <!-- les noms à modifier  (avec ceux de accor)! avec Alice  -->
     <tr>
       <th scope="col">HotelMegaCode </th>
       <th scope="col">General manager</th>
@@ -38,7 +37,7 @@
       <!--<td>{{param.portfolio}}</td>
       <td>{{param.mmm_gm}}</td>-->
       <td><button [routerLink]="['compagny-param', param?.id, 'edit']" class="btn btn-edit"     style="margin-left: 10px;">{{'BUTTONS.EDIT' | translate}}</button></td>
-      <td><button (click)="remove(param.id)" class="btn btn-delete" style="margin-left: 10px;">{{'BUTTONS.DELETE' | translate}}</button></td>
+      <td><button (click)="deleteParam(param.id, param.name)" class="btn btn-delete" style="margin-left: 10px;">{{'BUTTONS.DELETE' | translate}}</button></td>
     </tr>
   </tbody>
 </table>

@@ -28,6 +28,12 @@
         "EDIT":"Edit",
         "DELETE":"Delete",
         "ADDPARAMETER":"Create new parameter"
-
+    },
+    "PARAM":{
+        "UPDATE_PARAMETER":"Update parameter",
+        "BRANCH_ID":"Branche ID",
+        "BRANCH_NAME":"Branch name",
+        "EMAIL_GM":"Email General Manager"
     }
+
 }

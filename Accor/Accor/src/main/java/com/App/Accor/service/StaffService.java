@@ -63,7 +63,7 @@ public class StaffService {
 
 	}
 
-	public void delete(Long id) {
+	public void delete(Long id) throws Exception {
 		Staff staff = findById(id);
 		CompanyParameter companyParameter = staff.getCompanyParameter();
 		if (staff.getMail().equals(companyParameter.getDispacherMail())) {

@@ -30,6 +30,12 @@
         "DELETE":"Supprimer",
         "ADDPARAMETER":"Créer un parametre"
 
+    },
+    "PARAM":{
+        "UPDATE_PARAMETER":"Modifier les parametres",
+        "BRANCH_ID":"Branche ID",
+        "BRANCH_NAME":"Nom de la branche",
+        "EMAIL_GM":"Email Général Manager"
     }
 
     

@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -45,8 +46,17 @@ public class CompanyParamService {
 		return parameterRepository.findByUserGMUsername(userDetails.getUsername()).orElseThrow(() -> new Exception("Impossible de trouver l'hotel associé"));
 	}
 
-	public CompanyParameter save(CompanyParameter companyParameter) {
-		companyParameter.setUserGM(userRepository.save(companyParameter.getUserGM()));
+	public CompanyParameter save(CompanyParameter companyParameter) throws Exception {
+		User user = companyParameter.getUserGM();
+		if (user.getId() != null) {
+			User oldUser = userRepository.findById(user.getId())
+				.orElseThrow(() -> new Exception("Impossible de trouver l'utilisateur associé"));
+			oldUser.setFirstName(user.getFirstName());
+			oldUser.setLastName(user.getLastName());
+			oldUser.setUsername(user.getUsername());
+			user = oldUser;
+		}
+		companyParameter.setUserGM(userRepository.save(user));
 		CompanyParameter paramSaved = parameterRepository.save(companyParameter);
 
 		CsvFormatDTO csvFormatDTO = new CsvFormatDTO();
@@ -62,11 +72,33 @@ public class CompanyParamService {
 		csvFormatDTO.setOwnedCostCenter(paramSaved.getMegaCode());
 		csvFormatDTO.setUserType("General Manager");
 
+		// mettre ici le csv qui est generer pour ts les HOD a la modif d un info de leur GM?? a verifier avec Mohamed
+
+		List<CsvFormatDTO> staffCsv = new ArrayList<>();
+		List<Staff> staffs = staffRepository.findByCompanyParameterId(1l);
+		staffs.forEach(staff -> {
+		//CsvFormatDTO csvFormatDTO = new CsvFormatDTO();
+			csvFormatDTO.setBranchId(paramSaved.getBranch().getCode());
+			csvFormatDTO.setHome("TRUE");
+			csvFormatDTO.setEmail(staff.getMail());
+			csvFormatDTO.setFirstName(staff.getFirstName());
+			csvFormatDTO.setLastName(staff.getLastName());
+			csvFormatDTO.setState("ACTIVE");
+			csvFormatDTO.setManager(paramSaved.getUserGM().getUsername());
+			csvFormatDTO.setApprovalLimit("10000");
+			csvFormatDTO.setSpendLimit("10000");
+			csvFormatDTO.setOwnedCostCenter(paramSaved.getMegaCode());
+			csvFormatDTO.setUserType("General Manager");
+			staffCsv.add(csvFormatDTO);
+		});
+
+
 		try {
 		//	String branchCode = tradeshiftInterface.getPrimaryBranchUser(companyParameter.getUserGM().getUsername());
 		//	csvFormatDTO.setHome(branchCode.equals(paramSaved.getBranch().getCode()) ? "TRUE" : "FALSE");
 			//csvFormatDTO.setOwnedCostCenter(paramSaved.getMail().equals(companyParameter.getDispacherMail()) ? companyParameter.getMegaCode() : "" );
-			sftpUploadService.uploadFileToSftp(csvFormatDTO);
+			sftpUploadService.uploadFileToSftp(staffCsv);
+
 
 		} catch (Exception e) {
 			throw new RuntimeException(e);

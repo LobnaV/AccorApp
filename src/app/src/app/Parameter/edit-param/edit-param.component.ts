@@ -6,7 +6,6 @@ import { Param } from '../../model/param';
 import { Location } from '@angular/common';
 import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
 import { Branch } from 'src/app/model/branch';
-import { TestBed } from '@angular/core/testing';
 import { User } from 'src/app/model/user';
 
 @Component({
@@ -36,7 +35,7 @@ export class EditParamComponent implements OnInit {
   constructor(
     private service: AccorService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
   ) { }
 
   ngOnInit(): void {
@@ -109,6 +108,9 @@ export class EditParamComponent implements OnInit {
         );
     }
   }
+
+ 
+
 
 }
 

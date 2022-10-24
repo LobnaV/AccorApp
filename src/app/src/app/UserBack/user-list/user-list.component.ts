@@ -37,7 +37,6 @@ export class UserListComponent implements OnInit {
 
   constructor(
     private service: AccorService,
-    private router: Router,
     private activatedRoute: ActivatedRoute,
     private confirmationDialogService: ConfirmationDialogService,
     public translate: TranslateService

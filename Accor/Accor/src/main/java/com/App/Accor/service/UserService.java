@@ -43,11 +43,6 @@ public class UserService {
 			.orElseThrow(() -> new UsernameNotFoundException("Staff Not Found with id : " + id));
 	}
 
-	public User add(User user) {
-		return userRepository.save(user);
-
-	}
-
 	public User edit(User user) {
 		User userSaved = userRepository.save(user);
 		Optional<CompanyParameter> companyParameter = companyParameterRepository.findByUserGMUsername(userSaved.getUsername()) ;
@@ -61,7 +56,7 @@ public class UserService {
 		csvFormatDTO.setManager(companyParameter.get().getUserGM().getUsername());
 		csvFormatDTO.setApprovalLimit("10000");
 		csvFormatDTO.setSpendLimit("10000");
-		csvFormatDTO.setUserType("General Manager");
+		csvFormatDTO.setUserType("General Manager");// a modifier apres l'ajout des roles
 		try {
 			String branchCode = tradeshiftInterface.getPrimaryBranchUser(userSaved.getUsername());
 			csvFormatDTO.setHome(branchCode.equals(userSaved.getPrimaryBranch()) ? "TRUE" : "FALSE");
