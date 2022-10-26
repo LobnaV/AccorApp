@@ -62,7 +62,7 @@
         <td>{{data?.mail}}</td>
         <td> <button [routerLink]="['staff', data?.id, 'edit']" class="btn btn-edit" style="margin-left: 10px;">{{'BUTTONS.EDIT' | translate}}</button>
         </td>
-        <td><button (click)="deleteStaff(data?.id)" class="btn btn-delete" style="margin-left: 10px;">{{'BUTTONS.DELETE' | translate}}</button></td>
+        <td><button [disabled]="data?.mail === companie?.dispacherMail" (click)="deleteStaff(data?.id)" class="btn btn-delete" style="margin-left: 10px;">{{'BUTTONS.DELETE' | translate}}</button></td>
         </tr>
     </tbody>
 </table>
