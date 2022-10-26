@@ -74,10 +74,11 @@ public class StaffService {
 
 		CsvFormatDTO csvFormatDTO = new CsvFormatDTO();
 		csvFormatDTO.setBranchId(companyParameter.getBranch().getCode());
+
 		csvFormatDTO.setEmail(staff.getMail());
 		csvFormatDTO.setFirstName(staff.getFirstName());
 		csvFormatDTO.setLastName(staff.getLastName());
-		csvFormatDTO.setState("DELETE");//Ou remove ajouter la condition
+		csvFormatDTO.setState("LOCKED");//condition dans le try a voir avec Mohamed
 		csvFormatDTO.setManager(companyParameter.getUserGM().getUsername());
 		csvFormatDTO.setApprovalLimit("0");
 		csvFormatDTO.setSpendLimit("0");
@@ -86,7 +87,8 @@ public class StaffService {
 		try {
 			String branchCode = tradeshiftInterface.getPrimaryBranchUser(companyParameter.getUserGM().getUsername());
 			csvFormatDTO.setHome(branchCode.equals(companyParameter.getBranch().getCode()) ? "TRUE" : "FALSE");
-			//csvFormatDTO.setOwnedCostCenter(staff.getMail().equals(companyParameter.getDispacherMail())? companyParameter.getMegaCode() : "");
+			csvFormatDTO.setOwnedCostCenter(staff.getMail().equals(companyParameter.getDispacherMail())? companyParameter.getMegaCode() : "");
+			//csvFormatDTO.setState(staff.getHome.equals("TRUE")? "LOCKED" : "REMOVE");
 			sftpUploadService.uploadFileToSftp(csvFormatDTO);
 		} catch (Exception e) {
 			throw new RuntimeException(e);

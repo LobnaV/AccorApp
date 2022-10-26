@@ -23,7 +23,8 @@
         "LASTNAME":"Last name"
     },
     "BUTTONS":{
-        "SEARCH":"Search",
+        "SEARCH_USER":"Search by first name",
+        "SEARCH":"Search by megaCode ",
         "ADDUSER":"Add user",
         "EDIT":"Edit",
         "DELETE":"Delete",

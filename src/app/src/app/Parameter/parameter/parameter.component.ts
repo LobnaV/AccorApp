@@ -57,9 +57,9 @@ export class ParameterComponent implements OnInit {
       (res: HttpErrorResponse) => console.log(res.message)
     );
 
-  this.service.search.subscribe((val: any) => {
-    this.searchKey = val;
-  })
+    this.service.search.subscribe((val: any) => {
+      this.searchKey = val;
+    })
 
   }
 
@@ -82,7 +82,7 @@ export class ParameterComponent implements OnInit {
       },
       (res: HttpErrorResponse) => console.log(res.message)
     );
-  }
+  } 
 
   Search(event: any) {
     this.searchTerm = (event.target as HTMLInputElement).value;

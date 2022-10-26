@@ -2,6 +2,7 @@
 <div class="form-group col-md-8" id="searchBar">
   <div class="btn_searchbar">
     <input class="form-control" type="text" [(ngModel)]="searchTerm" (keyup)="Search($event)" placeholder="{{'BUTTONS.SEARCH' | translate}}">
+    <img type="button" class="cursor-pointer" src="">
     <div class="container">
       <button [routerLink]="['compagny-param/add']" class="btn add_Btn">{{'BUTTONS.ADDPARAMETER' | translate}}</button>
     </div>
@@ -28,11 +29,11 @@
         <th scope="col">N+1 Line manager </th> -->
     </tr>
   </thead>
-  <tbody class="data"  *ngFor="let param of companies | filter: searchKey:'hotel_MegaCode'">
+  <tbody class="data"  *ngFor="let param of companies | filter: searchKey:'megaCode'">
     <tr >
       <td>{{param.megaCode}}</td>
       <td>{{param.userGM?.username}}</td>
-      <td>{{param.branch?.userMGM.username}}</td>
+      <td>{{param.mm_gm}}</td>
       <td>{{param.mm_gm}}</td>
       <!--<td>{{param.portfolio}}</td>
       <td>{{param.mmm_gm}}</td>-->

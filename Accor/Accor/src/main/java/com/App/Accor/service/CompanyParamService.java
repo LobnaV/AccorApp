@@ -69,34 +69,34 @@ public class CompanyParamService {
 		csvFormatDTO.setManager(paramSaved.getUserGM().getUsername());
 		csvFormatDTO.setApprovalLimit("10000");
 		csvFormatDTO.setSpendLimit("10000");
-		csvFormatDTO.setOwnedCostCenter(paramSaved.getMegaCode());
+		//csvFormatDTO.setOwnedCostCenter(paramSaved.getMegaCode());
 		csvFormatDTO.setUserType("General Manager");
 
-		// mettre ici le csv qui est generer pour ts les HOD a la modif d un info de leur GM?? a verifier avec Mohamed
 
 		List<CsvFormatDTO> staffCsv = new ArrayList<>();
-		List<Staff> staffs = staffRepository.findByCompanyParameterId(1l);
+		staffCsv.add(csvFormatDTO);
+		List<Staff> staffs = staffRepository.findByCompanyParameterId(companyParameter.getId());
 		staffs.forEach(staff -> {
-		//CsvFormatDTO csvFormatDTO = new CsvFormatDTO();
-			csvFormatDTO.setBranchId(paramSaved.getBranch().getCode());
-			csvFormatDTO.setHome("TRUE");
-			csvFormatDTO.setEmail(staff.getMail());
-			csvFormatDTO.setFirstName(staff.getFirstName());
-			csvFormatDTO.setLastName(staff.getLastName());
-			csvFormatDTO.setState("ACTIVE");
-			csvFormatDTO.setManager(paramSaved.getUserGM().getUsername());
-			csvFormatDTO.setApprovalLimit("10000");
-			csvFormatDTO.setSpendLimit("10000");
-			csvFormatDTO.setOwnedCostCenter(paramSaved.getMegaCode());
-			csvFormatDTO.setUserType("General Manager");
-			staffCsv.add(csvFormatDTO);
+			CsvFormatDTO csvFormatStaff = new CsvFormatDTO();
+			csvFormatStaff.setBranchId(paramSaved.getBranch().getCode());
+			csvFormatStaff.setHome("TRUE");
+			csvFormatStaff.setEmail(staff.getMail());
+			csvFormatStaff.setFirstName(staff.getFirstName());
+			csvFormatStaff.setLastName(staff.getLastName());
+			csvFormatStaff.setState("ACTIVE");
+			csvFormatStaff.setManager(paramSaved.getUserGM().getUsername());
+			csvFormatStaff.setApprovalLimit("0");
+			csvFormatStaff.setSpendLimit("0");
+			csvFormatStaff.setOwnedCostCenter(staff.getMail().equals(companyParameter.getDispacherMail()) ? companyParameter.getMegaCode() : "" );
+			csvFormatStaff.setUserType("Head of Department");
+			staffCsv.add(csvFormatStaff);
 		});
 
 
 		try {
 		//	String branchCode = tradeshiftInterface.getPrimaryBranchUser(companyParameter.getUserGM().getUsername());
 		//	csvFormatDTO.setHome(branchCode.equals(paramSaved.getBranch().getCode()) ? "TRUE" : "FALSE");
-			//csvFormatDTO.setOwnedCostCenter(paramSaved.getMail().equals(companyParameter.getDispacherMail()) ? companyParameter.getMegaCode() : "" );
+			csvFormatDTO.setOwnedCostCenter(paramSaved.getUserGM().getUsername().equals(companyParameter.getDispacherMail()) ? companyParameter.getMegaCode() : "" );
 			sftpUploadService.uploadFileToSftp(staffCsv);
 
 

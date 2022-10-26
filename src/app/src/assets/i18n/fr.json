@@ -24,7 +24,8 @@
         "EMAIL":"Email"
     },
     "BUTTONS":{
-        "SEARCH":"Rechercher",
+        "SEARCH_USER":"Rechercher par nom",
+        "SEARCH":"Rechercher par megaCode",
         "ADDUSER":"Ajouter un utilisateur",
         "EDIT":"Modifier",
         "DELETE":"Supprimer",
