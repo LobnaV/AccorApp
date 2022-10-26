@@ -42,7 +42,7 @@ router.get('/', async (ctx) => {
 
 
 	// render the message in the view
-	await ctx.render('../src/app/src/app/Account/login/login.component.html');
+	await ctx.render('../src/app/src/');
 });
 
 // add routes to the app
