@@ -135,9 +135,20 @@ export class AccorService {
       .get<Branch[]>(this.local + "/List", { observe: 'response' })
   }
 
-  addBranch(branch:Branch){
+  addBranch(branch:Branch): Observable<HttpResponse<Branch>>{
     return this.http
-      .post<Branch>(this.local + "/AddBranch/", branch)
+      .post<Branch>(this.local, branch, { observe: 'response'})
+  }
+
+  //*
+  allBranchesSE(): Observable<HttpResponse<Branch[]>>{
+    return this.http
+      .get<Branch[]>(`${this.local}/AllBranchesSE`, { observe: 'response'})
+  }
+
+  allBranchesNE(): Observable<HttpResponse<Branch[]>>{
+    return this.http
+      .get<Branch[]>(`${this.local}/AllBranchesNE`, { observe: 'response'})
   }
 
   costCenterList(){

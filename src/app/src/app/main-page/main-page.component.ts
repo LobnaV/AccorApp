@@ -4,9 +4,6 @@ import {AccorService} from '../accor.service';
 import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
 import {Param} from "../model/param";
 import { Branch } from '../model/branch';
-import { LoginComponent } from '../Account/login/login.component';
-import { User } from '../model/user';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-main-page',
@@ -19,11 +16,16 @@ export class MainPageComponent implements OnInit {
   selectedBranch?: any;
   companies: Param[] | null = [];
   branches: any = [];
+  allbranchesSE: any = [];
+  allbranchesNE: any = [];
+
+
+  searchKey: string = "";
+  searchTerm: string = "";
 
   constructor(
     private service: AccorService,
     public translate: TranslateService,
-    private activatedRoute: ActivatedRoute,
     ) {
 
     // Register translation languages
@@ -34,6 +36,11 @@ export class MainPageComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.service.search.subscribe((val: any) => {
+      this.searchKey = val;
+    })
+
+    //Vu General Manager
     this.service.getParams().subscribe(
       (res: HttpResponse<Param[]>) => {
         this.companies = res.body;
@@ -41,17 +48,40 @@ export class MainPageComponent implements OnInit {
       (res: HttpErrorResponse) => console.log(res.message)
     );
 
+    //Vu Company Admin
     this.service.branches()
       .subscribe((data: HttpResponse<Branch[]>)  => {
         this.branches = data.body;
         (res: HttpErrorResponse) => console.log(res.message)
       });
 
+      //Vu Master
+      this.service.allBranchesSE()
+      .subscribe((data: HttpResponse<Branch[]>)  => {
+        this.allbranchesSE = data.body;
+        console.log(this.allbranchesSE[0]);
+        this.allbranchesSE = this.allbranchesSE[0];
+        (res: HttpErrorResponse) => console.log(res.message)
+      });
+
+      this.service.allBranchesNE()
+      .subscribe((data: HttpResponse<Branch[]>)  => {
+        this.allbranchesNE = data.body;
+        console.log(this.allbranchesNE);
+        this.allbranchesNE = this.allbranchesNE[0];
+        (res: HttpErrorResponse) => console.log(res.message)
+      });
   }
 
   //Switch language
   translateLanguageTo(lang: string) {
     this.translate.use(lang);
+  }
+
+  Search(event: any) {
+    this.searchTerm = (event.target as HTMLInputElement).value;
+    console.log(this.searchTerm);
+    this.service.search.next(this.searchTerm);
   }
 
 

@@ -1,6 +1,8 @@
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 import { AccorService } from 'src/app/accor.service';
 import { Branch } from '../../model/branch';
 
@@ -11,46 +13,70 @@ import { Branch } from '../../model/branch';
 })
 export class AddBranchComponent implements OnInit {
 
-  //private companies: any = [];
+  branch?: Branch;
+  selectedPerimeter?: any;
+  perimeters?:any = ['SE','NE'];
 
+  branchForm =  new FormGroup({
+    id: new FormControl(''),
+    code: new FormControl(''),
+    name: new FormControl(''),
+    perimeter: new FormControl(''),
+    uuid: new FormControl('')
+  })
 
   constructor(
-    private service:AccorService,
-    private router:Router,
-    private fb: FormBuilder
+    private service: AccorService,
+    private route: ActivatedRoute,
+    private location: Location,
   ) { }
 
-  branchForm = this.fb.group({
-    branch_Id:new FormControl('',[Validators.required]),
-    branch_Name:new FormControl('',[Validators.required]),
-    country_Code:new  FormControl('',[Validators.required]),
-    perimeter:new FormControl('',[Validators.required]),
-  })
-  companies = this.fb.group({
-    hotel_MegaCode: new FormControl('',[Validators.required]),
-    hotel_Name: new FormControl('', [Validators.required]),
-  })
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+
+      // const idBranch = params['id'];
+      // this.service.branchId(idBranch).subscribe(
+      //   (res: HttpResponse<Branch>) => {
+      //     this.branch = res.body!;
+      //   },
+      //   (res: HttpErrorResponse) => console.log(res.message)
+      // );
+
+      const branchId = params['branchId'];
+      if(branchId){
+        this.service.ParamId(branchId).subscribe(
+          (res: HttpResponse<Branch>) => {
+            this.branch = res.body!;
+            this.branchForm.patchValue({
+              id: this.branch?.id,
+              code: this.branch?.code,
+              name: this.branch?.name,
+              perimeter: this.selectedPerimeter,
+              uuid: this.branch?.uuid,
+            });
+          },
+          (res: HttpErrorResponse) => console.log(res.message)
+        );
+      } else {
+        this.branch = new Branch();
+      }
+    })
   }
 
-  Ajouter(){
-    const NewBranch = this.branchForm.value;
-    const NewCompanyInBranch = this.companies.value;
-    console.log(NewBranch, NewCompanyInBranch)
-    this.service.addBranch(NewBranch)
-      .subscribe(
-        (branch:Branch) => {
-          this.service.addBranch(NewCompanyInBranch)
-            .subscribe(
-              (branchCompany:Branch) =>{
+  Update(){
 
-                alert("Add Succesfully")
-                this.router.navigate(['branchs'])
-              }
-            )
-        }
-      )
+    const updateForm = this.branchForm.value;
+
+    this.service.addBranch(updateForm)
+    .subscribe(
+      (res:HttpResponse<Branch>) => {
+        console.log('create branch OK')
+        this.location.back();
+      },
+      (res: HttpErrorResponse) => console.log(res.message)
+    );
   }
 
+  
 }

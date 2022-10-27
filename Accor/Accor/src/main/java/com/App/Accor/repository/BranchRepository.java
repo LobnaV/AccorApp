@@ -2,6 +2,7 @@ package com.App.Accor.repository;
 
 import com.App.Accor.model.Branch;
 import com.App.Accor.model.CompanyParameter;
+import com.App.Accor.model.EPerimeter;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,5 +17,6 @@ public interface BranchRepository extends JpaRepository<Branch, Long> {
 
 	Optional<Branch> findByUuid(String uuid);
 	Optional<Branch> findByUserMGMUsername(String username);
+	List<Branch> findByPerimeter (EPerimeter perimeter);
 
 }

@@ -10,9 +10,7 @@ import { FilterPipe } from './Pipe/filter.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserListComponent } from './UserBack/user-list/user-list.component';
 import { ParameterComponent } from './Parameter/parameter/parameter.component';
-import { AddParamComponent } from './Parameter/add-param/add-param.component';
 import { EditParamComponent } from './Parameter/edit-param/edit-param.component';
-import { ListBranchComponent } from './Branch/list-branch/list-branch.component';
 import { AddBranchComponent } from './Branch/add-branch/add-branch.component';
 import { ListCcComponent } from './CostCenter/list-cc/list-cc.component';
 import { AddCostCenterComponent } from './CostCenter/add-cost-center/add-cost-center.component';
@@ -46,9 +44,7 @@ export function httpTranslateLoaderFactory(http: HttpClient) {
     FilterPipe,
     UserListComponent,
     ParameterComponent,
-    AddParamComponent,
     EditParamComponent,
-    ListBranchComponent,
     AddBranchComponent,
     ListCcComponent,
     AddCostCenterComponent,

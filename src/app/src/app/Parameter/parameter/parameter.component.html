@@ -2,7 +2,6 @@
 <div class="form-group col-md-8" id="searchBar">
   <div class="btn_searchbar">
     <input class="form-control" type="text" [(ngModel)]="searchTerm" (keyup)="Search($event)" placeholder="{{'BUTTONS.SEARCH' | translate}}">
-    <img type="button" class="cursor-pointer" src="">
     <div class="container">
       <button [routerLink]="['compagny-param/add']" class="btn add_Btn">{{'BUTTONS.ADDPARAMETER' | translate}}</button>
     </div>
