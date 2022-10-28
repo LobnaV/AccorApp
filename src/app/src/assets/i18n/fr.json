@@ -35,7 +35,7 @@
         "EDIT":"Modifier",
         "DELETE":"Supprimer",
         "ADDPARAMETER":"Créer un parametre",
-        "ADDBRANCH":"Créer une branche",
+        "ADDBRANCH":"Création d'une nouvelle branche",
         "EDIT_BRANCH":"Modifier la branche",
         "EDITMANAGERS":"Modifier le Managers",
         "EDIT_APPROVAL_LIMIT":"Modifier les limites d'approbation",

@@ -1,7 +1,10 @@
 <div class="card">  
     <div class="card-body">
-      <h4 *ngIf="this.branch?.id"> {{'BUTTONS.EDIT_BRANCH' | translate}}</h4>
-      <h4 *ngIf="this.branch?.id == null">{{'BUTTONS.ADDBRANCH' | translate}}</h4>
+      <h5 *ngIf="this.branch?.id"> {{'BUTTONS.EDIT_BRANCH' | translate}}</h5>
+      <h5 *ngIf="this.branch?.id == null">{{'BUTTONS.ADDBRANCH' | translate}}</h5>
+      <div class="details">
+        <p>Branch details</p>
+      </div>
       <form [formGroup]="branchForm" (ngSubmit)='Update()'>
         <input type="text" formControlName="id" hidden>
         <div class="form-group">
@@ -21,7 +24,7 @@
           <input type="text" id='perimeter' class="form-control" formControlName="perimeter">
         </div>
         <div class="save">
-          <button type="submit" class="btn bnt-Save" [disabled]="branchForm.invalid">{{this.branch?.id ? 'edit' : 'add'}}</button>
+          <button type="submit" class="btn btn-Save" [disabled]="branchForm.invalid">{{this.branch?.id ? 'edit' : 'Save'}}</button>
         </div>
         <!-- <div class="form-group">
           <select [(ngModel)]="selectedPerimeter">

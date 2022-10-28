@@ -1,5 +1,2 @@
 BRANCH_ID;HOME;EMAIL;FIRST_NAME;LAST_NAME;STATE;MANAGER;APPROVAL LIMIT;SPEND_LIMIT;COST_CENTER_OWNER;USER_TYPE
-A9016601;TRUE;mohamed.semlali.00@gmail.com;LobnaMtsr1;Tls1;ACTIVE;mohamed.semlali.00@gmail.com;10000;10000;02320.H1032;General Manager;
-A9016601;TRUE;Dispatcher515@test.com;Dispatcher5152;Dispatcher5152;ACTIVE;mohamed.semlali.00@gmail.com;0;0;;Head of Department;
-A9016601;TRUE;Lobna1@test.com;Lobna1;Lobna1;ACTIVE;mohamed.semlali.00@gmail.com;0;0;;Head of Department;
-A9016601;TRUE;Mtsr@tls.com;Mtsr;Tls;ACTIVE;mohamed.semlali.00@gmail.com;0;0;;Head of Department;
+A9016601;TRUE;kharratlobna12@gmail.com;Lobna2;kharrat2;ACTIVE;kharratlobna12@gmail.com;10000;10000;02320.H22;General Manager;

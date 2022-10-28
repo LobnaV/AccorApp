@@ -33,7 +33,7 @@ public class BranchController {
 		Branch result = service.save(Branch);
 		return ResponseEntity.created(new URI("/api/branch" + result.getId())).body(result);
 	}
-
+// a verifier avec Mohamed 28/10; comment faire le lien avec le user? avec la mise en place des roles?
 	@GetMapping("/AllBranchesSE")
 	public ResponseEntity<List<List<Branch>>> allBranchesSE() throws Exception {
 		return ResponseEntity.ok(Collections.singletonList(service.branchList(EPerimeter.SE)));
@@ -43,8 +43,6 @@ public class BranchController {
 	public ResponseEntity<List<List<Branch>>> allBranchesNE() throws Exception {
 		return ResponseEntity.ok(Collections.singletonList(service.branchList(EPerimeter.NE)));
 	}
-
-
 
 	@GetMapping({"/{id}"})
 	public ResponseEntity<Branch> getBranch (@PathVariable Long id){

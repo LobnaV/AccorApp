@@ -83,6 +83,7 @@
         </tr>
       </thead>
       <tbody class="data" >
+        <!-- rechercher par branche name, confirmer avec Alice -->
         <tr *ngFor="let branche of allbranchesSE | filter: searchKey:'code'">
           <td>{{branche.perimeter}}</td>
           <td>{{branche.code}}</td>
