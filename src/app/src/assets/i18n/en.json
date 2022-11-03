@@ -13,6 +13,9 @@
         "RULE2":"If some changes are temporary (holiday, maternity leave, sick leave), we encourage you use the delegation rules in place in Tradeshift instead of performing permanent changes.",
         "RULE3":"If you need to change the name of one of your user (and keep the same email address), please edit directly the user in the corresponding field and do not delete the user to recreate one."
     },
+    "TITLE_CA":"The Accor User app for Company admins:",
+    "DESCRIPTION_CA":"The app will allow you to manage the hotel perimeter inside the branches you are permitted to operate in.",
+    "CONDITION_CA":"If you need to delete or add some accounting users, please use the Tradeshift tool directly. The hotel user creation must be performed by the general manager, in the User app.",
     "SELECTHOTEL":"Select hotel",
     "SELECTBRANCH":"Select branch",
     "HOTELNAME": "Hotel name",
@@ -22,12 +25,28 @@
         "FIRSTNAME":"First name", 
         "LASTNAME":"Last name"
     },
+    "TITLE_MA":"Manage branches",
     "BUTTONS":{
-        "SEARCH":"Search",
+        "SEARCH_USER":"Search by first name",
+        "SEARCH":"Search by megaCode ",
+        "SEARCH_CODE":"Search by branch ID",
         "ADDUSER":"Add user",
         "EDIT":"Edit",
         "DELETE":"Delete",
-        "ADDPARAMETER":"Create new parameter"
-
+        "ADDPARAMETER":"Create new parameter",
+        "ADDBRANCH":"New branch creation",
+        "EDIT_BRANCH":"Update branch",
+        "EDITMANAGERS":"Edit Managers",
+        "EDIT_APPROVAL_LIMIT":"Edit Approval limits",
+        "EDIT_ACCESS":"Edit Access"
+    },
+    "PARAM":{
+        "UPDATE_PARAMETER":"Update parameter",
+        "BRANCH_ID":"Branche ID",
+        "BRANCH_NAME":"Branch name",
+        "EMAIL_GM":"Email General Manager",
+        "PERIMETER":"Perimeter"
+        
     }
+
 }

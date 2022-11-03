@@ -2,6 +2,7 @@ package com.App.Accor.service;
 
 import com.App.Accor.model.Branch;
 import com.App.Accor.model.CompanyParameter;
+import com.App.Accor.model.EPerimeter;
 import com.App.Accor.model.Staff;
 import com.App.Accor.repository.BranchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,9 @@ public class BranchService {
 	@Autowired
 	private BranchRepository branchR;
 
-	public List<Branch> branchList() {
-		return branchR.findAll();
+	public List<Branch> branchList(EPerimeter perimeter) {
+		//return branchR.findAll();
+		return branchR.findByPerimeter(perimeter);
 	}
 
 	public Optional<Branch> listId(Long id) {
@@ -38,15 +40,12 @@ public class BranchService {
 	public Branch findById(Long id){
 		return branchR.findById(id)
 			.orElseThrow();
-
 	}
-
-/*	@Transactional(readOnly = true)
-	public CompanyParameter findById(Long id) {
-		return parameterRepository.findById(id)
-			.orElseThrow(() -> new UsernameNotFoundException("Staff Not Found with id : " + id));
+/*
+	public Branch findByPerimeter(EPerimeter perimeter){
+		return branchR.findByPerimeter(perimeter)
+			.orElseThrow();
 	}*/
-
 
 	public Branch findByUserMGM() throws Exception {
 		UserDetails userDetails =
@@ -54,18 +53,14 @@ public class BranchService {
 		return branchR.findByUserMGMUsername(userDetails.getUsername()).orElseThrow(() -> new Exception("Impossible de trouver la branche associée"));
 	}
 
-	public Branch add(Branch branch) {
-		return branchR.save(branch);
-	}
-
-	public Branch edit(Branch branch) {
-		return branchR.save(branch);
+	public Branch save(Branch branch) {
+		Branch branchSaved = branchR.save(branch);
+		return branchSaved;
 	}
 
 	public void deleteBranch(final Long id) {
 		Optional<Branch> branch = branchR.findById(id);
 		branch.ifPresent(value -> branchR.delete(value));
-
 	}
 
 

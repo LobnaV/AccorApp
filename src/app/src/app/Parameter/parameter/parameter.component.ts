@@ -7,6 +7,7 @@ import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
 import { TranslateService } from '@ngx-translate/core';
 import { Branch } from 'src/app/model/branch';
 import { User } from 'src/app/model/user';
+import { ConfirmationDialogService } from 'src/app/UserBack/confirmation-dialog/confirmation-dialog.service';
 
 @Component({
   selector: 'app-parameter',
@@ -24,23 +25,10 @@ export class ParameterComponent implements OnInit {
     private service:AccorService,
     private router:Router,
     private activatedRoute: ActivatedRoute,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private confirmationDialogService: ConfirmationDialogService,
 
   ) { }
-
-  companyParamForm = new FormGroup({
-    hotel_MegaCode: new FormControl(''),
-    hotel_Name: new FormControl(''),
-    branchID: new FormControl(''),
-    perimeter: new FormControl(''),
-    general_manager: new FormControl('',[Validators.required,Validators.email]),
-    email_m_gm: new FormControl('',[Validators.required,Validators.email]),
-    portfolio: new FormControl('',[Validators.email]),
-    mm_gm: new FormControl('',[Validators.email]),
-    mmm_gm: new FormControl('',[Validators.email]),
-    // branch: new FormControl('')
-
-  })
 
   branch? : Branch|null
   companies?: Param[]|any = [];
@@ -69,9 +57,9 @@ export class ParameterComponent implements OnInit {
       (res: HttpErrorResponse) => console.log(res.message)
     );
 
-  this.service.search.subscribe((val: any) => {
-    this.searchKey = val;
-  })
+    this.service.search.subscribe((val: any) => {
+      this.searchKey = val;
+    })
 
   }
 
@@ -94,7 +82,7 @@ export class ParameterComponent implements OnInit {
       },
       (res: HttpErrorResponse) => console.log(res.message)
     );
-  }
+  } 
 
   Search(event: any) {
     this.searchTerm = (event.target as HTMLInputElement).value;
@@ -107,10 +95,6 @@ export class ParameterComponent implements OnInit {
     this.translate.use(lang);
   }
 
-  NewParam(){
-    this.router.navigate(["AddParam"]);
-  }
-
   remove(paramId:any){
     this.service.deleteParam(paramId)
      .subscribe( (data:any) =>{
@@ -118,6 +102,25 @@ export class ParameterComponent implements OnInit {
          alert("deleted param");
          this.router.navigate(["Parameter"]);
      })
+  }
+
+  deleteParam(idParam: number, name: string) {
+    this.confirmationDialogService.confirm('Confirmation', 'Deleting a hotel here means you will delete the hotel from the Company admin Dashboard, but does not mean that users will be deleted from Tradeshift production environment. If you need to delete a particular user in Tradeshift, as a company admin: If the user is a hotel member, you can ask the general manager to do it directly from his ' + name + ' session. This will delete the user from Tradeshift You can also delete the user directly from the Tradeshift app, please contact : astore.einvoicing.support@accor.com')
+      .then((confirmed) => {
+          if (confirmed) {
+            this.confirmationDialogService.confirm('Confirmation', 'Yes I will delete users that need to be deleted, directly on Tradeshift, and I wish to delete this hotel from the dashboard.')
+              .then(() => {
+                if (confirmed) {
+                 // this.remove(idParam);
+                 console.log('remove ok')      
+                }
+              })
+              .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+          }
+        }
+      )
+      .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+
   }
 
 

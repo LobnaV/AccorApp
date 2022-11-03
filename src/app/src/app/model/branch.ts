@@ -6,6 +6,7 @@ export class Branch {
     public code?: string,
     public name?: string,
     public userMGM?: User,
-    public perimeter?:string
+    public perimeter?:string,
+    public uuid?: string
   ) {}
 }

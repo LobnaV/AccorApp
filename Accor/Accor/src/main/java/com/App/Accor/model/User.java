@@ -53,7 +53,6 @@ public class User implements Serializable {
 			name = "role_id", referencedColumnName = "id"))
 	private Collection<Role> roles;
 
-
 	public User(String username, String encode, String firstName, String lastName) {
 		this.username = username;
 		this.password = encode;

@@ -43,9 +43,9 @@ export class AccorService {
       .get<Param[]>(`${this.paramUrl}/branch/${id}`, { observe: 'response' })
   }
 
-  addParam(param:Param){
+  addParam(param:Param): Observable<HttpResponse<Param>>{
     return this.http
-      .post<Param>(this.paramUrl + "/AddParameter/", param)
+      .post<Param>(this.paramUrl, param, { observe: 'response' })
   }
 
   updateParam(param:Param): Observable<HttpResponse<Param>>{
@@ -126,10 +126,6 @@ export class AccorService {
       .get<User>(this.urlLocal + "/x/"+ id)
   }
 
-  // branchId(id:number){
-  //   return this.http
-  //     .get<Branch>(this.local + "/"+ id)
-  // }
   branchId(id:number) : Observable<HttpResponse<Branch>>{
     return this.http.get<Branch>(`${this.local}/${id}`, { observe: 'response' })
   }
@@ -139,9 +135,20 @@ export class AccorService {
       .get<Branch[]>(this.local + "/List", { observe: 'response' })
   }
 
-  addBranch(branch:Branch){
+  addBranch(branch:Branch): Observable<HttpResponse<Branch>>{
     return this.http
-      .post<Branch>(this.local + "/AddBranch/", branch)
+      .post<Branch>(this.local, branch, { observe: 'response'})
+  }
+
+  //*
+  allBranchesSE(): Observable<HttpResponse<Branch[]>>{
+    return this.http
+      .get<Branch[]>(`${this.local}/AllBranchesSE`, { observe: 'response'})
+  }
+
+  allBranchesNE(): Observable<HttpResponse<Branch[]>>{
+    return this.http
+      .get<Branch[]>(`${this.local}/AllBranchesNE`, { observe: 'response'})
   }
 
   costCenterList(){

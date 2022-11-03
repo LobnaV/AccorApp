@@ -3,7 +3,7 @@
   <div class="btn_searchbar">
     <input class="form-control" type="text" [(ngModel)]="searchTerm" (keyup)="Search($event)" placeholder="{{'BUTTONS.SEARCH' | translate}}">
     <div class="container">
-      <button (click)="NewParam()" class="btn add_Btn">{{'BUTTONS.ADDPARAMETER' | translate}}</button>
+      <button [routerLink]="['compagny-param/add']" class="btn add_Btn">{{'BUTTONS.ADDPARAMETER' | translate}}</button>
     </div>
   </div>
 </div>
@@ -15,7 +15,6 @@
 <div style="margin: auto; width: 90%;">
 <table class="table" >
   <thead class="thead-dark">
-    <!-- les noms à modifier  (avec ceux de accor)! avec Alice  -->
     <tr>
       <th scope="col">HotelMegaCode </th>
       <th scope="col">General manager</th>
@@ -29,17 +28,16 @@
         <th scope="col">N+1 Line manager </th> -->
     </tr>
   </thead>
-  <tbody class="data"  *ngFor="let param of companies | filter: searchKey:'hotel_MegaCode'">
+  <tbody class="data"  *ngFor="let param of companies | filter: searchKey:'megaCode'">
     <tr >
       <td>{{param.megaCode}}</td>
       <td>{{param.userGM?.username}}</td>
-      <td>{{param.branch?.userMGM.username}}</td>
+      <td>{{param.mm_gm}}</td>
       <td>{{param.mm_gm}}</td>
       <!--<td>{{param.portfolio}}</td>
       <td>{{param.mmm_gm}}</td>-->
-      <td><button [routerLink]="['compagny-param', param?.id, 'edit']" class="btn btn-edit"
-          style="margin-left: 10px;">{{'BUTTONS.EDIT' | translate}}</button></td>
-      <td><button (click)="remove(param.id)" class="btn btn-delete" style="margin-left: 10px;">{{'BUTTONS.DELETE' | translate}}</button></td>
+      <td><button [routerLink]="['compagny-param', param?.id, 'edit']" class="btn btn-edit"     style="margin-left: 10px;">{{'BUTTONS.EDIT' | translate}}</button></td>
+      <td><button (click)="deleteParam(param.id, param.name)" class="btn btn-delete" style="margin-left: 10px;">{{'BUTTONS.DELETE' | translate}}</button></td>
     </tr>
   </tbody>
 </table>

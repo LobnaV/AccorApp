@@ -16,12 +16,18 @@ export class MainPageComponent implements OnInit {
   selectedBranch?: any;
   companies: Param[] | null = [];
   branches: any = [];
+  allbranchesSE: any = [];
+  allbranchesNE: any = [];
 
+
+  searchKey: string = "";
+  searchTerm: string = "";
 
   constructor(
     private service: AccorService,
-    public translate: TranslateService
-  ) {
+    public translate: TranslateService,
+    ) {
+
     // Register translation languages
     translate.addLangs(['en', 'fr']);
     // Set default language
@@ -29,6 +35,12 @@ export class MainPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.service.search.subscribe((val: any) => {
+      this.searchKey = val;
+    })
+
+    //Vu General Manager
     this.service.getParams().subscribe(
       (res: HttpResponse<Param[]>) => {
         this.companies = res.body;
@@ -36,18 +48,40 @@ export class MainPageComponent implements OnInit {
       (res: HttpErrorResponse) => console.log(res.message)
     );
 
+    //Vu Company Admin
     this.service.branches()
       .subscribe((data: HttpResponse<Branch[]>)  => {
         this.branches = data.body;
         (res: HttpErrorResponse) => console.log(res.message)
       });
 
-      
+      //Vu Master
+      this.service.allBranchesSE()
+      .subscribe((data: HttpResponse<Branch[]>)  => {
+        this.allbranchesSE = data.body;
+        console.log(this.allbranchesSE[0]);
+        this.allbranchesSE = this.allbranchesSE[0];
+        (res: HttpErrorResponse) => console.log(res.message)
+      });
+
+      this.service.allBranchesNE()
+      .subscribe((data: HttpResponse<Branch[]>)  => {
+        this.allbranchesNE = data.body;
+        console.log(this.allbranchesNE);
+        this.allbranchesNE = this.allbranchesNE[0];
+        (res: HttpErrorResponse) => console.log(res.message)
+      });
   }
 
   //Switch language
   translateLanguageTo(lang: string) {
     this.translate.use(lang);
+  }
+
+  Search(event: any) {
+    this.searchTerm = (event.target as HTMLInputElement).value;
+    console.log(this.searchTerm);
+    this.service.search.next(this.searchTerm);
   }
 
 

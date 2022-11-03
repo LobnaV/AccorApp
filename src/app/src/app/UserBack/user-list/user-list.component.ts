@@ -37,7 +37,6 @@ export class UserListComponent implements OnInit {
 
   constructor(
     private service: AccorService,
-    private router: Router,
     private activatedRoute: ActivatedRoute,
     private confirmationDialogService: ConfirmationDialogService,
     public translate: TranslateService
@@ -113,6 +112,7 @@ export class UserListComponent implements OnInit {
 
   Search(event: any) {
     this.searchTerm = (event.target as HTMLInputElement).value;
+    console.log(this.searchTerm);
     this.service.search.next(this.searchTerm);
   }
 

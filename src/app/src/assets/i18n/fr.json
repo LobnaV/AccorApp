@@ -13,6 +13,9 @@
         "RULE2":"Si certains changements sont temporaires (vacances, congé de maternité, congé de maladie), nous vous encourageons à utiliser les règles de délégation en place dans Tradeshift au lieu d'effectuer des changements permanents.",
         "RULE3":"Si vous avez besoin de changer le nom d'un de vos utilisateurs (et de conserver la même adresse email), merci d'éditer directement l'utilisateur dans le champ correspondant et de ne pas supprimer l'utilisateur pour en recréer un."
     },
+    "TITLE_CA":"L'application utilisateur Accor pour les administrateurs d'entreprise :",
+    "DESCRIPTION_CA":"l'application vous permettra de gérer le périmètre de l'hôtel à l'intérieur des agences dans lesquelles vous êtes autorisé à opérer.",
+    "CONDITION_CA":"Si vous avez besoin de supprimer ou d'ajouter des utilisateurs comptables, veuillez utiliser directement l'outil Tradeshift. La création de l'utilisateur de l'hôtel doit être effectuée par le directeur général, dans l'application utilisateur.",
     "SELECTHOTEL":"Sélectionner un hôtel",
     "SELECTBRANCH":"électionner une branche",
     "HOTELNAME": "Nom de l'hôtel",
@@ -23,14 +26,27 @@
         "LASTNAME":"Nom",
         "EMAIL":"Email"
     },
+    "TITLE_MA":"Gérer les branches",
     "BUTTONS":{
-        "SEARCH":"Rechercher",
+        "SEARCH_USER":"Rechercher par nom",
+        "SEARCH":"Rechercher par megaCode",
+        "SEARCH_CODE":"Rechercher par branche ID",
         "ADDUSER":"Ajouter un utilisateur",
         "EDIT":"Modifier",
         "DELETE":"Supprimer",
-        "ADDPARAMETER":"Créer un parametre"
-
+        "ADDPARAMETER":"Créer un parametre",
+        "ADDBRANCH":"Création d'une nouvelle branche",
+        "EDIT_BRANCH":"Modifier la branche",
+        "EDITMANAGERS":"Modifier le Managers",
+        "EDIT_APPROVAL_LIMIT":"Modifier les limites d'approbation",
+        "EDIT_ACCESS":"Modifier les accès"
+    },
+    "PARAM":{
+        "UPDATE_PARAMETER":"Modifier les parametres",
+        "BRANCH_ID":"Branche ID",
+        "BRANCH_NAME":"Nom de la branche",
+        "EMAIL_GM":"Email Général Manager",
+        "PERIMETER":"Périmètre"
     }
-
     
 }

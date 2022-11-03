@@ -47,9 +47,8 @@ public class StaffController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deleteStaff(@PathVariable Long id) {
+	public ResponseEntity<Void> deleteStaff(@PathVariable Long id) throws Exception {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 }
-

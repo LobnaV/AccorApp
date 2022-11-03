@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.List;
 
 @Service
 @Transactional
@@ -81,6 +82,17 @@ public class SftpUploadService {
 	/*	if (csvOutputFile.exists()) {
 			csvOutputFile.delete();
 		}*/
+	}
+
+	public void uploadFileToSftp(List<CsvFormatDTO> csvFormats) throws FileNotFoundException {
+		File csvOutputFile = new File("Accortemplateuserssheet.csv");
+		try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
+			pw.println(headerCsv());
+			csvFormats.forEach(csvFormatDto -> pw.println(convertToCSV(csvFormatDto)));
+		}
+
+		uploadGateway.upload(csvOutputFile);
+
 	}
 
 }
