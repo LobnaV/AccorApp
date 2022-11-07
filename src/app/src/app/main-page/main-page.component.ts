@@ -23,6 +23,8 @@ export class MainPageComponent implements OnInit {
   searchKey: string = "";
   searchTerm: string = "";
 
+  isVueGm = true;
+
   constructor(
     private service: AccorService,
     public translate: TranslateService,
