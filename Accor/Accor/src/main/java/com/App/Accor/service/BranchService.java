@@ -31,11 +31,6 @@ public class BranchService {
 		return branchR.findById(id);
 	}
 
-	public Branch findByUuid(String uuid) {
-		return branchR.findByUuid(uuid)
-			.orElseThrow(() -> new UsernameNotFoundException("Branch Not Found with uuid : " + uuid));
-	}
-
 	@Transactional(readOnly = true)
 	public Branch findById(Long id){
 		return branchR.findById(id)
