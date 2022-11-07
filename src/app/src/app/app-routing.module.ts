@@ -16,6 +16,7 @@ import {UpdateStaffComponent} from "./UserBack/update-staff/update-staff.compone
 import {UpdateUserGmComponent} from "./UserBack/update-user/update-user-gm.component";
 import {passwordResetFinishRoute} from "./password-reset/finish/password-reset-finish.route";
 import {passwordResetInitRoute} from "./password-reset/init/password-reset-init.route";
+import { EditManagerComponent } from './Branch/edit-manager/edit-manager.component';
 
 const ACCOUNT_ROUTES = [
   passwordResetFinishRoute,
@@ -40,6 +41,8 @@ const routes: Routes = [
       {path: 'branch/:id', component: ParameterComponent},
       {path: 'branch/:id/compagny-param/add', component:EditParamComponent},
       {path: 'branch/:id/compagny-param/:paramId/edit', component: EditParamComponent},
+
+      {path: 'Home/branch/:id/edit-manager', component:EditManagerComponent},
 
       {path: 'UserList/:id', component: UserListComponent},
       {path: 'create/branch', component: AddBranchComponent},

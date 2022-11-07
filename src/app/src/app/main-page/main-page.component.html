@@ -89,7 +89,7 @@
           <td>{{branche.code}}</td>
           <td>{{branche.name}}</td>
           <!-- <td>{{branche.uuid}}</td> -->
-          <td><button class="btn">{{'BUTTONS.EDITMANAGERS' | translate}}</button></td>
+          <td><button [routerLink]="['branch', branche?.id, 'edit-manager']" class="btn">{{'BUTTONS.EDITMANAGERS' | translate}}</button></td>
           <td><button class="btn">{{'BUTTONS.EDIT_APPROVAL_LIMIT' | translate}}</button></td>
           <td><button class="btn">{{'BUTTONS.EDIT_ACCESS' | translate}}</button></td>
         </tr>

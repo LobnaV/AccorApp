@@ -1,0 +1,28 @@
+<div class="card">
+    <div class="card-body">
+        <form [formGroup]="managerForm" (ngSubmit)='Update()'>
+            <input type="text" formControlName="id" hidden>
+            <div class="branch">
+                <h6>Edit COO of : {{branch?.name}}</h6>
+            </div>
+            <div formGroupName="userMGM">
+                <input type="text" formControlName="id" hidden>
+                <div class="form-group">
+                    <label class="form-label" for="userMGM">{{'PARAM.EMAIL_GM' | translate}}</label>
+                    <input type="email" id='userMGM' class="form-control" formControlName="username">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="firstNameGM">{{'HEADER.FIRSTNAME' | translate}}</label>
+                    <input type="texte" id='firstNameMGM' class="form-control" formControlName="firstName">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="lastNameGM">{{'HEADER.LASTNAME' | translate}}</label>
+                    <input type="texte" id='lastNameMGM' class="form-control" formControlName="lastName">
+                </div>
+            </div>
+            <div class="save">
+                <button type="submit" class="btn bnt-Save" [disabled]="managerForm.invalid"> Save</button>
+            </div>
+        </form>
+    </div>
+</div>

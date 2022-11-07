@@ -99,7 +99,7 @@ export class AccorService {
       .get<User[]>(this.urlLocal + "/List")
   }
 
-  addUser(user:User){
+  addUser(user:User){       
     return this.http
       .post<User>(this.urlLocal + "/AddUser/", user)
   }
