@@ -1,11 +1,14 @@
 package com.App.Accor.controller;
 
+import com.App.Accor.model.CompanyParameter;
 import com.App.Accor.model.User;
 import com.App.Accor.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @RestController

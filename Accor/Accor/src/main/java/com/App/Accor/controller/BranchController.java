@@ -28,12 +28,22 @@ public class BranchController {
 	@PostMapping
 	public ResponseEntity<Branch> createBranch(@Valid @RequestBody Branch Branch) throws Exception {
 		if(Branch.getId() != null){
-			throw new Exception("A new branch cannot already have an ID");
+			throw new Exception("A new user cannot already have an ID");
 		}
 		Branch result = service.save(Branch);
 		return ResponseEntity.created(new URI("/api/branch" + result.getId())).body(result);
 	}
-// a verifier avec Mohamed 28/10; comment faire le lien avec le user? avec la mise en place des roles?
+
+	@PutMapping
+	public ResponseEntity<Branch> updateBranch(@Valid @RequestBody Branch branch) throws Exception {
+		if (branch.getId() == null) {
+			throw new Exception("Invalid id");
+		}
+		Branch result = service.save(branch);
+		return ResponseEntity.ok(result);
+	}
+
+	//*
 	@GetMapping("/AllBranchesSE")
 	public ResponseEntity<List<List<Branch>>> allBranchesSE() throws Exception {
 		return ResponseEntity.ok(Collections.singletonList(service.branchList(EPerimeter.SE)));

@@ -17,6 +17,7 @@ import {UpdateUserGmComponent} from "./UserBack/update-user/update-user-gm.compo
 import {passwordResetFinishRoute} from "./password-reset/finish/password-reset-finish.route";
 import {passwordResetInitRoute} from "./password-reset/init/password-reset-init.route";
 import { EditManagerComponent } from './Branch/edit-manager/edit-manager.component';
+import { EditApprovalLimitComponent } from './Branch/edit-approval-limit/edit-approval-limit.component';
 
 const ACCOUNT_ROUTES = [
   passwordResetFinishRoute,
@@ -43,6 +44,7 @@ const routes: Routes = [
       {path: 'branch/:id/compagny-param/:paramId/edit', component: EditParamComponent},
 
       {path: 'Home/branch/:id/edit-manager', component:EditManagerComponent},
+      {path: 'Home/branch/:id/edit-approval_limit', component:EditApprovalLimitComponent},
 
       {path: 'UserList/:id', component: UserListComponent},
       {path: 'create/branch', component: AddBranchComponent},

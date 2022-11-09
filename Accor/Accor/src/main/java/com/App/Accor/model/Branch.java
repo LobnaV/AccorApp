@@ -24,7 +24,7 @@ public class Branch implements Serializable {
 
 	private String countryCode;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private User userMGM;
 
 	//* à verififer avec Mohamed, commment faire le lien entre le perimetre de la branche

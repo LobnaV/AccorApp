@@ -8,35 +8,50 @@
          <h6>{{'PARAM.BRANCH_ID' | translate}}: {{branch?.code}}</h6>
         <h6>{{'PARAM.BRANCH_NAME' | translate}}: {{branch?.name}}</h6>
       </div>
-      <div class="form-group" *ngIf="this.param?.id readonly">
-        <label for="megaCode">Hotel MegaCode:</label>
-        <input type="text" id='megaCode' class="form-control" formControlName="megaCode" readonly>
+      <div class="form-group row" *ngIf="this.param?.id readonly">
+        <label class="col-sm-2 col-form-label" for="megaCode">Hotel MegaCode:</label>
+        <div class="col-sm-6">
+          <input type="text" id='megaCode' class="form-control" formControlName="megaCode" readonly>
+        </div>
       </div>
-      <div class="form-group" *ngIf="this.param?.id == null">
-        <label for="megaCode">Hotel MegaCode:</label>
-        <input type="text" id='megaCode' class="form-control" formControlName="megaCode">
+      <div class="form-group row" *ngIf="this.param?.id == null">
+        <label class="col-sm-2 col-form-label" for="megaCode">Hotel MegaCode:</label>
+        <div class="col-sm-6">
+          <input type="text" id='megaCode' class="form-control" formControlName="megaCode">
+        </div>
       </div>
-      <div class="form-group">
-        <label for="name">{{'HOTELNAME' | translate}}:</label>
-        <input type="text" id='name' class="form-control" formControlName="name">
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="name">{{'HOTELNAME' | translate}}:</label>
+        <div class="col-sm-6">
+          <input type="text" id='name' class="form-control" formControlName="name">
+        </div>
       </div>
       <div formGroupName="userGM">
         <input type="text" formControlName="id" hidden>
-        <div class="form-group">
-          <label class="form-label" for="userGM">{{'PARAM.EMAIL_GM' | translate}}</label>
-          <input type="email" id='userGM' class="form-control" formControlName="username">
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" for="userGM">{{'PARAM.EMAIL_GM' | translate}}</label>
+         <div class="col-sm-6">
+           <input type="email" id='userGM' class="form-control" formControlName="username">
+         </div>
         </div>
-        <div class="form-group">
-          <label class="form-label" for="firstNameGM">{{'HEADER.FIRSTNAME' | translate}}</label>
-          <input type="email" id='firstNameGM' class="form-control" formControlName="firstName">
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" for="firstNameGM">{{'HEADER.FIRSTNAME' | translate}}</label>
+          <div class="col-sm-6">
+            <input type="email" id='firstNameGM' class="form-control" formControlName="firstName">
+          </div>
         </div>
-        <div class="form-group">
-          <label class="form-label" for="lastNameGM">{{'HEADER.LASTNAME' | translate}}</label>
-          <input type="email" id='lastNameGM' class="form-control" formControlName="lastName">
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" for="lastNameGM">{{'HEADER.LASTNAME' | translate}}</label>
+          <div class="col-sm-6">
+            <input type="email" id='lastNameGM' class="form-control" formControlName="lastName">
+          </div>
         </div>
       </div>
-      <div class="form-group">
-        <label class="form-label" for="userMGM">{{'PARAM.EMAIL_GM' | translate}} N+1</label>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="userMGM">{{'PARAM.EMAIL_GM' | translate}} N+1</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control">
+        </div>
         <!-- <input type="email" id='userMGM' class="form-control" formControlName=""> -->
       </div>
       <div class="save">

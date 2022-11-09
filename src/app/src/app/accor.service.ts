@@ -99,14 +99,16 @@ export class AccorService {
       .get<User[]>(this.urlLocal + "/List")
   }
 
-  addUser(user:User){       
+  addUser(user:User): Observable<HttpResponse<User>> {       
     return this.http
-      .post<User>(this.urlLocal + "/AddUser/", user)
+      .post<User>(`${this.urlLocal}`, user, { observe: 'response' });
   }
 
   updateUser(user:User): Observable<HttpResponse<User>> {
     return this.http.put<User>(`${this.urlLocal}`, user, { observe: 'response' });
   }
+
+
 
   updateUserName(user:User): Observable<HttpResponse<User>> {
     return this.http.put<User>(`${this.urlLocal}/name`, user, { observe: 'response' });
@@ -121,11 +123,6 @@ export class AccorService {
       .delete<User>(this.urlLocal + "/delete/" + userId)
   }
 
-  dispId(id:number){
-    return this.http
-      .get<User>(this.urlLocal + "/x/"+ id)
-  }
-
   branchId(id:number) : Observable<HttpResponse<Branch>>{
     return this.http.get<Branch>(`${this.local}/${id}`, { observe: 'response' })
   }
@@ -138,6 +135,11 @@ export class AccorService {
   addBranch(branch:Branch): Observable<HttpResponse<Branch>>{
     return this.http
       .post<Branch>(this.local, branch, { observe: 'response'})
+  }
+  
+  updateBranch(branch:Branch): Observable<HttpResponse<Branch>>{
+    return this.http
+      .put<Branch>(this.local, branch, { observe: 'response'})
   }
 
   //*

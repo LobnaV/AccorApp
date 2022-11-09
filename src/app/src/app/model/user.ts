@@ -7,7 +7,8 @@ export class User {
     public firstName?: string,
     public lastName?: string,
     public password?: string,
-    public roles?: Role[]
+    public roles?: Role[],
+    public approval_limit?:string
   ) {
   }
 }

@@ -30,6 +30,7 @@ import {UpdateUserGmComponent} from "./UserBack/update-user/update-user-gm.compo
 import {PasswordResetInitComponent} from "./password-reset/init/password-reset-init.component";
 import {PasswordResetFinishComponent} from "./password-reset/finish/password-reset-finish.component";
 import { EditManagerComponent } from './Branch/edit-manager/edit-manager.component';
+import { EditApprovalLimitComponent } from './Branch/edit-approval-limit/edit-approval-limit.component';
 
 // Factory function required during AOT compilation
 export function httpTranslateLoaderFactory(http: HttpClient) {
@@ -59,7 +60,8 @@ export function httpTranslateLoaderFactory(http: HttpClient) {
     UpdateUserGmComponent,
     PasswordResetInitComponent,
     PasswordResetFinishComponent,
-    EditManagerComponent
+    EditManagerComponent,
+    EditApprovalLimitComponent
   ],
   imports: [
     BrowserModule,

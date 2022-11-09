@@ -8,15 +8,15 @@ import { Branch } from 'src/app/model/branch';
 import { User } from 'src/app/model/user';
 
 @Component({
-  selector: 'app-edit-manager',
-  templateUrl: './edit-manager.component.html',
-  styleUrls: ['./edit-manager.component.scss']
+  selector: 'app-edit-approval-limit',
+  templateUrl: './edit-approval-limit.component.html',
+  styleUrls: ['./edit-approval-limit.component.scss']
 })
-export class EditManagerComponent implements OnInit {
-
+export class EditApprovalLimitComponent implements OnInit {
   branch?: Branch;
   user?: User;
 
+  
   managerForm = new FormGroup({
     id: new FormControl(''),
     code: new FormControl(''),
@@ -26,11 +26,13 @@ export class EditManagerComponent implements OnInit {
       username: new FormControl(''),
       firstName: new FormControl(''),
       lastName: new FormControl(''),
+      approval_limit: new FormControl(''),
     }),
     perimeter: new FormControl(''),
 
   })
 
+  
   constructor(
     private service: AccorService,
     private route: ActivatedRoute,
@@ -61,6 +63,7 @@ export class EditManagerComponent implements OnInit {
                 username: this.branch?.userMGM?.username,
                 firstName: this.branch?.userMGM?.firstName,
                 lastName: this.branch?.userMGM?.lastName,
+                approval_limit: this.branch?.userMGM?.approval_limit,
               },
               perimeter: this.branch?.perimeter,
             });
@@ -74,6 +77,7 @@ export class EditManagerComponent implements OnInit {
 
   }
 
+  
   Update() {
     const updateForm = {
       ...new Branch(),
@@ -105,5 +109,10 @@ export class EditManagerComponent implements OnInit {
     }
 
   }
+
+  back(){
+    this.location.back()
+  }
+
 
 }

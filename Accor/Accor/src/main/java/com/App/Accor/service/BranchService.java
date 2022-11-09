@@ -1,10 +1,9 @@
 package com.App.Accor.service;
 
-import com.App.Accor.model.Branch;
-import com.App.Accor.model.CompanyParameter;
-import com.App.Accor.model.EPerimeter;
-import com.App.Accor.model.Staff;
+import com.App.Accor.model.*;
+import com.App.Accor.playload.CsvFormatDTO;
 import com.App.Accor.repository.BranchRepository;
+import com.App.Accor.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,6 +20,12 @@ public class BranchService {
 
 	@Autowired
 	private BranchRepository branchR;
+
+	@Autowired
+	private UserRepository userRepository;
+
+	@Autowired
+	private SftpUploadService sftpUploadService;
 
 	public List<Branch> branchList(EPerimeter perimeter) {
 		//return branchR.findAll();
@@ -48,8 +53,39 @@ public class BranchService {
 		return branchR.findByUserMGMUsername(userDetails.getUsername()).orElseThrow(() -> new Exception("Impossible de trouver la branche associée"));
 	}
 
-	public Branch save(Branch branch) {
+	public Branch save(Branch branch) throws Exception {
+		User user = branch.getUserMGM();
+		if (user.getId() != null) {
+			User oldUser = userRepository.findById(user.getId())
+				.orElseThrow(() -> new Exception("Impossible de trouver l'utilisateur associé"));
+			oldUser.setFirstName(user.getFirstName());
+			oldUser.setLastName(user.getLastName());
+			oldUser.setUsername(user.getUsername());
+			user = oldUser;
+		}
+		branch.setUserMGM(userRepository.save(user));
 		Branch branchSaved = branchR.save(branch);
+
+		CsvFormatDTO csvFormatDTO = new CsvFormatDTO();
+		csvFormatDTO.setBranchId(branchSaved.getCode());
+		csvFormatDTO.setHome("TRUE");
+		csvFormatDTO.setEmail(branchSaved.getUserMGM().getUsername());
+		csvFormatDTO.setFirstName(branchSaved.getUserMGM().getFirstName());
+		csvFormatDTO.setLastName(branchSaved.getUserMGM().getLastName());
+		csvFormatDTO.setState("ACTIVE");
+		csvFormatDTO.setManager(branchSaved.getUserMGM().getUsername());
+		csvFormatDTO.setApprovalLimit("10000");
+		csvFormatDTO.setSpendLimit("10000");
+		csvFormatDTO.setOwnedCostCenter("test");
+		csvFormatDTO.setUserType("General Manager");
+		try {
+			//	String branchCode = tradeshiftInterface.getPrimaryBranchUser(companyParameter.getUserGM().getUsername());
+			//	csvFormatDTO.setHome(branchCode.equals(paramSaved.getBranch().getCode()) ? "TRUE" : "FALSE");
+			//csvFormatDTO.setOwnedCostCenter(branchSaved.getUserMGM().getUsername().equals(branch.getDispacherMail()) ? companyParameter.getMegaCode() : "" );
+			sftpUploadService.uploadFileToSftp(csvFormatDTO);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 		return branchSaved;
 	}
 

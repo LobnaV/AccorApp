@@ -1,7 +1,17 @@
-.btn{
-    border: none;
-    border-radius: 5%;
-    width: 6rem;
-    background-color: #B9E9A2;
-    margin: 2rem;
+
+.form-group{
+    display: flex;
+    padding-bottom: 0.5rem;
+    .form-control{
+        width: 70%;
+        margin-left: 1rem
+    }
+}
+.save{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 8rem;
+    .btn{
+        background-color: #B9E9A2;
+    }
 }

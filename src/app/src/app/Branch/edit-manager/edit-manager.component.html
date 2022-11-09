@@ -2,22 +2,99 @@
     <div class="card-body">
         <form [formGroup]="managerForm" (ngSubmit)='Update()'>
             <input type="text" formControlName="id" hidden>
+            <input type="text" formControlName="code" hidden>
+            <input type="text" formControlName="name" hidden>
+            <input type="text" formControlName="perimeter" hidden>
             <div class="branch">
                 <h6>Edit COO of : {{branch?.name}}</h6>
             </div>
             <div formGroupName="userMGM">
                 <input type="text" formControlName="id" hidden>
-                <div class="form-group">
-                    <label class="form-label" for="userMGM">{{'PARAM.EMAIL_GM' | translate}}</label>
-                    <input type="email" id='userMGM' class="form-control" formControlName="username">
+
+                <div class="categories d-flex justify-content-center">
+                    <label classe="categorie" style="margin-left: 14rem;"> Catégorie ECO</label>
+                    <label classe="categorie" style="margin-right: 6rem;"> Catégorie LUXE </label>
+                    <label classe="categorie" style="margin-right: 15rem;"> Catégorie LUXE ++</label>
                 </div>
-                <div class="form-group">
-                    <label class="form-label" for="firstNameGM">{{'HEADER.FIRSTNAME' | translate}}</label>
-                    <input type="texte" id='firstNameMGM' class="form-control" formControlName="firstName">
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="userMGM">{{'PARAM.EMAIL_GM' | translate}} N+1</label>
+                    <div class="col-sm-3">
+                        <input type="email" id='userMGM' class="form-control" formControlName="username">
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="email" id='userMGM' class="form-control" formControlName="username">
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="email" id='userMGM' class="form-control" formControlName="username">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-label" for="lastNameGM">{{'HEADER.LASTNAME' | translate}}</label>
-                    <input type="texte" id='lastNameMGM' class="form-control" formControlName="lastName">
+
+                <div class="form-group row"> 
+                    <label class="col-sm-2 col-form-label" for="firstNameGM">{{'HEADER.FIRSTNAME' | translate}}</label>
+                    <div class="col-sm-3">
+                        <input type="texte" id='firstNameMGM' class="form-control" formControlName="firstName">
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="texte" id='firstNameMGM' class="form-control" formControlName="firstName">
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="texte" id='firstNameMGM' class="form-control" formControlName="firstName">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="lastNameGM">{{'HEADER.LASTNAME' | translate}}</label>
+                    <div class="col-sm-3">
+                        <input type="texte" id='lastNameMGM' class="form-control" formControlName="lastName">
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="texte" id='lastNameMGM' class="form-control" formControlName="lastName">
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="texte" id='lastNameMGM' class="form-control" formControlName="lastName">
+                    </div>
+                </div>
+
+                <!-- GM N+2 -->
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">{{'PARAM.EMAIL_GM' | translate}} N+2</label>
+                    <div class="col-sm-3">
+                        <input type="email" class="form-control">
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="email" class="form-control">
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="email" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group row"> 
+                    <label class="col-sm-2 col-form-label">{{'HEADER.FIRSTNAME' | translate}}</label>
+                    <div class="col-sm-3">
+                        <input type="texte" class="form-control">
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="texte" class="form-control">
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="texte" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">{{'HEADER.LASTNAME' | translate}}</label>
+                    <div class="col-sm-3">
+                        <input type="texte" class="form-control">
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="texte" class="form-control">
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="texte" class="form-control">
+                    </div>
                 </div>
             </div>
             <div class="save">
