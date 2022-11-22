@@ -7,7 +7,9 @@ import { Branch } from './model/branch';
 import { CostCenter } from './CostCenter/cost-center';
 import { Param } from './model/param';
 import { User } from './model/user';
-import {Staff} from "./model/staff";
+import { Staff } from './model/staff';
+
+declare function
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +39,7 @@ export class AccorService {
     return this.http
       .get<Param>(`${this.paramUrl}/${id}`, { observe: 'response' })
   }
-  
+
   companieBranch(id:number): Observable<HttpResponse<Param[]>>{
     return this.http
       .get<Param[]>(`${this.paramUrl}/branch/${id}`, { observe: 'response' })
@@ -59,7 +61,7 @@ export class AccorService {
   }
 
   updateDispatcher(idCompagnie: number, email: string, isStaff: boolean): Observable<HttpResponse<Param>> {
-    return this.http.get<Param>(`${this.paramUrl}/${idCompagnie}/dispacher?email=${email}&isStaff=${isStaff}`, {
+    return this.http.get<Param>(`${this.paramUrl}/${idCompagnie}/dispacher?email=${encodeURIComponent(email)}&isStaff=${isStaff}`, {
       observe: 'response',
     });
   }

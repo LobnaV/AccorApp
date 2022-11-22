@@ -1,8 +1,12 @@
 package com.App.Accor.service;
 
+import com.App.Accor.Config.AuthorizationCodeTokenService;
+import com.App.Accor.Config.OAuth2Token;
 import com.App.Accor.model.BranchTradeshift;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
+import org.springframework.security.oauth2.client.OAuth2RestOperations;
+import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -13,15 +17,20 @@ import java.util.Objects;
 public class TradeshiftInterface {
 
 	private final String url = "https://api-sandbox.tradeshift.com/tradeshift/rest/external";
-	private final String token = "PmS4pRk4KYb8mQRNccQ81PQjspKCvDRFUu0eB6dPebH547VQ2nLQ0gUkGqzysa61SKB6vQ8JAtkSPhlciQjFDQ8Mu5k4mSLukBGZWvDrEK5VXaFzVyTyPZFjGH3maPctYtW+uzOs0aGHPJp7AG5zPpJldaP1i7sYPdfa1JYJbIVRCFA5Cbw9W9U4fPSgeiULQYeUmVtPG5c5RttnXqIyRuIY40ifpt+aBlAAWgIAAWDHod+aBg==";
+//	private final String token = "PmS4pRk4KYb8mQRNccQ81PQjspKCvDRFUu0eB6dPebH547VQ2nLQ0gUkGqzysa61SKB6vQ8JAtkSPhlciQjFDQ8Mu5k4mSLukBGZWvDrEK5VXaFzVyTyPZFjGH3maPctYtW+uzOs0aGHPJp7AG5zPpJldaP1i7sYPdfa1JYJbIVRCFA5Cbw9W9U4fPSgeiULQYeUmVtPG5c5RttnXqIyRuIY40ifpt+aBlAAWgIAAWDHod+aBg==";
 
 	@Autowired
 	private RestTemplate restTemplate;
 
+	@Autowired
+	private AuthorizationCodeTokenService authorizationCodeTokenService;
+
 	public String getPrimaryBranchUser(String email) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
-		headers.setBearerAuth(token);
+//		String code = authorizationCodeTokenService.getAuthorizationEndpoint();
+		OAuth2Token token = authorizationCodeTokenService.getToken(authorizationCodeTokenService.getAuthorizationEndpoint());
+//		headers.setBearerAuth(token);
 		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 
 		HttpEntity<String> entity = new HttpEntity<>(null, headers);
@@ -37,7 +46,7 @@ public class TradeshiftInterface {
 		}
 
 		HttpHeaders headers2 = new HttpHeaders();
-		headers2.setBearerAuth(token);
+//		headers2.setBearerAuth(token);
 		headers2.setContentType(MediaType.TEXT_PLAIN);
 		headers2.setAccept(Collections.singletonList(MediaType.TEXT_PLAIN));
 
@@ -52,4 +61,5 @@ public class TradeshiftInterface {
 
 		return branchId;
 	}
+
 }
