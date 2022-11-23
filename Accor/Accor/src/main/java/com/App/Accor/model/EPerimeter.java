@@ -1,6 +1,9 @@
 package com.App.Accor.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public enum EPerimeter {
-    NE,
-    SE
+	@JsonProperty("Northern Europe")Northern_Europe,
+	@JsonProperty("Southern Europe")Southern_Europe;
+
 }

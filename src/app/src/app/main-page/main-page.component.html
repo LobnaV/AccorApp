@@ -1,4 +1,4 @@
-<!-- Vu General Manager -->
+<!-- Vue General Manager -->
 <div class="container d-flex justify-content-center">
   <button (click)="isVueGm = !isVueGm" class="btn btn-primary">{{isVueGm ? 'GM' : 'Master'}}</button>
 </div>
@@ -35,9 +35,9 @@
 </div>
 
 
-<!-- Vu Company Admin -->
+<!-- Vue Company Admin -->
 
-<!-- <div class="container-fluid">
+<div class="container-fluid">
     <div class="contenue">
         <h5>{{'TITLE_CA' | translate}}</h5>
 
@@ -54,10 +54,10 @@
         </select>
         <button [disabled]="!selectedBranch" [routerLink]="['/branch', selectedBranch?.id]"> Go</button>
     </div>
-</div> -->
+</div>
 
 
-<!-- Vu Master Admin -->
+<!-- Vue Master Admin -->
 
 <div *ngIf="!isVueGm" class="container-fluid">
   <div class="contenue">
@@ -87,15 +87,13 @@
         </tr>
       </thead>
       <tbody class="data" >
-        <!-- rechercher par branche name, confirmer avec Alice -->
-        <tr *ngFor="let branche of allbranchesSE | filter: searchKey:'code'">
+        <tr *ngFor="let branche of allBranches | filter: searchKey:'code'">
           <td>{{branche.perimeter}}</td>
           <td>{{branche.code}}</td>
           <td>{{branche.name}}</td>
-          <!-- <td>{{branche.uuid}}</td> -->
           <td><button [routerLink]="['branch', branche?.id, 'edit-manager']" class="btn">{{'BUTTONS.EDITMANAGERS' | translate}}</button></td>
           <td><button [routerLink]="['branch', branche?.id, 'edit-approval_limit']" class="btn">{{'BUTTONS.EDIT_APPROVAL_LIMIT' | translate}}</button></td>
-          <td><button class="btn">{{'BUTTONS.EDIT_ACCESS' | translate}}</button></td>
+          <td><button [routerLink]="['branch', branche?.id, 'access']" class="btn">{{'BUTTONS.EDIT_ACCESS' | translate}}</button></td>
         </tr>
       </tbody>
     </table>

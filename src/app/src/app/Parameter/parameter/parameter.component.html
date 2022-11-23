@@ -22,20 +22,14 @@
       <th scope="col">General manager N+2</th>
       <th></th>
       <th></th>
-      <!-- <th scope="col">GM </th>
-        <th scope="col">Portfolio </th>
-        <th scope="col">gm line manager </th>
-        <th scope="col">N+1 Line manager </th> -->
     </tr>
   </thead>
   <tbody class="data"  *ngFor="let param of companies | filter: searchKey:'megaCode'">
     <tr >
       <td>{{param.megaCode}}</td>
       <td>{{param.userGM?.username}}</td>
-      <td>{{param.mm_gm}}</td>
-      <td>{{param.mm_gm}}</td>
-      <!--<td>{{param.portfolio}}</td>
-      <td>{{param.mmm_gm}}</td>-->
+      <td>{{param.generalManagerN1}}</td>
+      <td>{{param.generalManagerN2}}</td>
       <td><button [routerLink]="['compagny-param', param?.id, 'edit']" class="btn btn-edit"     style="margin-left: 10px;">{{'BUTTONS.EDIT' | translate}}</button></td>
       <td><button (click)="deleteParam(param.id, param.name)" class="btn btn-delete" style="margin-left: 10px;">{{'BUTTONS.DELETE' | translate}}</button></td>
     </tr>

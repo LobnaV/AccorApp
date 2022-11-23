@@ -25,6 +25,12 @@ public class BranchController {
 		return ResponseEntity.ok(Collections.singletonList(service.findByUserMGM()));
 	}
 
+	@GetMapping("/allBranches")
+	public ResponseEntity<List<Branch>> allBranches() throws Exception {
+		return ResponseEntity.ok(service.findAll());
+	}
+
+
 	@PostMapping
 	public ResponseEntity<Branch> createBranch(@Valid @RequestBody Branch Branch) throws Exception {
 		if(Branch.getId() != null){
@@ -43,7 +49,7 @@ public class BranchController {
 		return ResponseEntity.ok(result);
 	}
 
-	//*
+/*
 	@GetMapping("/AllBranchesSE")
 	public ResponseEntity<List<List<Branch>>> allBranchesSE() throws Exception {
 		return ResponseEntity.ok(Collections.singletonList(service.branchList(EPerimeter.SE)));
@@ -52,7 +58,7 @@ public class BranchController {
 	@GetMapping("/AllBranchesNE")
 	public ResponseEntity<List<List<Branch>>> allBranchesNE() throws Exception {
 		return ResponseEntity.ok(Collections.singletonList(service.branchList(EPerimeter.NE)));
-	}
+	}*/
 
 	@GetMapping({"/{id}"})
 	public ResponseEntity<Branch> getBranch (@PathVariable Long id){

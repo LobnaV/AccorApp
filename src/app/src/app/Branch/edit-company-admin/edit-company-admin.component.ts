@@ -4,29 +4,31 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { AccorService } from 'src/app/accor.service';
-import { Branch } from '../../model/branch';
+import { Branch } from 'src/app/model/branch';
+import { User } from 'src/app/model/user';
 
 @Component({
-  selector: 'app-add-branch',
-  templateUrl: './add-branch.component.html',
-  styleUrls: ['./add-branch.component.scss']
+  selector: 'app-edit-company-admin',
+  templateUrl: './edit-company-admin.component.html',
+  styleUrls: ['./edit-company-admin.component.scss']
 })
-export class AddBranchComponent implements OnInit {
+export class EditCompanyAdminComponent implements OnInit {
+
 
   branch?: Branch;
-  selectedPerimeter?: any;
-  perimeters?:any = ['Southern Europe','Northern Europe'];
+  user?: User;
+  userCA: any;
 
-  branchForm =  new FormGroup({
+  managerForm = new FormGroup({
     id: new FormControl(''),
     code: new FormControl(''),
     name: new FormControl(''),
     userMGM: new FormGroup({
       id: new FormControl(''),
       username: new FormControl(''),
-      // roles: new FormControl (''),
     }),
     perimeter: new FormControl(''),
+
   })
 
   constructor(
@@ -35,25 +37,29 @@ export class AddBranchComponent implements OnInit {
     private location: Location,
   ) { }
 
-
   ngOnInit(): void {
     this.route.params.subscribe(params => {
 
-      const idBranch = params['branchId'];
+      const idBranch = params['id'];
+      this.service.branchId(idBranch).subscribe(
+        (res: HttpResponse<Branch>) => {
+          this.branch = res.body!;
+          this.userCA = this.branch?.userMGM
+        },
+        (res: HttpErrorResponse) => console.log(res.message)
+      );
+
       if (idBranch) {
         this.service.branchId(idBranch).subscribe(
           (res: HttpResponse<Branch>) => {
             this.branch = res.body!;
-            this.branchForm.patchValue({
+            this.managerForm.patchValue({
               id: this.branch?.id,
               code: this.branch?.code,
               name: this.branch?.name,
               userMGM: {
                 id: this.branch?.userMGM?.id,
                 username: this.branch?.userMGM?.username,
-                firstName: this.branch?.userMGM?.firstName,
-                lastName: this.branch?.userMGM?.lastName,
-                // roles: this.branch?.userMGM?.roles
               },
               perimeter: this.branch?.perimeter,
             });
@@ -64,17 +70,17 @@ export class AddBranchComponent implements OnInit {
         this.branch = new Branch()
       }
     })
+
   }
 
-  Update(){
-
+  Update() {
     const updateForm = {
       ...new Branch(),
-      id: this.branchForm.get('id')?.value,
-      code: this.branchForm.get('code')?.value,
-      name: this.branchForm.get('name')?.value,
-      userMGM: this.branchForm.get('userMGM')?.value,
-      perimeter: this.branchForm.get('perimeter')?.value,
+      id: this.managerForm.get('id')?.value,
+      code: this.managerForm.get('code')?.value,
+      name: this.managerForm.get('name')?.value,
+      userMGM: this.managerForm.get('userMGM')?.value,
+      perimeter: this.managerForm.get('perimeter')?.value,
     };
     console.log(updateForm);
 
@@ -96,7 +102,16 @@ export class AddBranchComponent implements OnInit {
           (res: HttpErrorResponse) => console.log(res.message)
         );
     }
+
   }
 
-  
+  remove(userId:any) {
+    this.service.deleteUser(userId)
+    .subscribe((data:any) =>{
+      this.userCA = this.userCA?.filter((userx: { id: any; }) => userId !== userx.id);
+        console.log("utilisateur supprimé");
+    }
+    );
+  }
+
 }

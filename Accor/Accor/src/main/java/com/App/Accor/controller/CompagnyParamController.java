@@ -1,7 +1,6 @@
 package com.App.Accor.controller;
 
 import com.App.Accor.model.CompanyParameter;
-import com.App.Accor.playload.CsvFormatDTO;
 import com.App.Accor.service.CompanyParamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

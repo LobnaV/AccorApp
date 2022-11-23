@@ -14,7 +14,7 @@
             <div formGroupName="userMGM">
                 <input type="text" formControlName="id" hidden>
 
-                <div class="categories d-flex" style="margin: 0.5rem;">
+                <!-- <div class="categories d-flex" style="margin: 0.5rem;">
                     <p classe="categorie" style="margin-left: 3rem;"> Manager Type</p>
                     <p classe="categorie" style="margin-left: 8rem;">Approval Limit</p>
                 </div>
@@ -38,7 +38,7 @@
                     <div class="col-sm-3">
                         <input type="texte" class="form-control" formControlName="approval_limit">
                     </div>
-                </div>
+                </div> -->
 
                 <div class="categories d-flex" style="margin: 0.5rem;">
                     <p classe="categorie" style="margin-left: 3rem;"> Exceptions</p>
@@ -47,12 +47,17 @@
 
                 <div class="form-group row">
                     <label style="color: red;"> liste deroulante => ts les GM (tt niveaux)</label> 
-                    <select type="texte" class="col-sm-2" formControlName="approval_limit" ></select>
+                    <select class="col-sm-2" [(ngModel)]="selectedUser" formControlName="username">
+                        <option [ngValue]="null" disabled>Select COO</option>
+                        <option *ngFor="let user of users" [ngValue]="user">
+                            {{user.username}}
+                        </option>
+                    </select>
                     <div class="col-sm-3">
-                        <input type="texte" class="form-control" formControlName="approval_limit" placeholder="approval limit [Free txt]">
+                        <input type="texte" class="form-control" formControlName="approval_limit">
                     </div>
                 </div>
-                                
+
             </div>
             <div class="save">
                 <button type="submit" class="btn bnt-Save" [disabled]="managerForm.invalid"> Save</button>
@@ -60,3 +65,72 @@
         </form>
     </div>
 </div>
+
+
+<!-- vu approval limit -->
+
+<!-- <div class="card">
+    <div class="card-body">
+        <form [formGroup]="managerForm" (ngSubmit)='Update()'>
+            <input type="text" formControlName="id" hidden>
+            <input type="text" formControlName="code" hidden>
+            <input type="text" formControlName="name" hidden>
+            <input type="text" formControlName="perimeter" hidden>
+            <div class="branch">
+                <h6>Edit COO of : {{branch?.name}}</h6>
+            </div>
+            <div formGroupName="userMGM">
+                <input type="text" formControlName="id" hidden>
+
+                <div class="categories d-flex justify-content-center">
+                    <label classe="categorie" style="margin-left: 14rem;"> Catégorie ECO</label>
+                    <label classe="categorie" style="margin-right: 6rem;"> Catégorie LUXE </label>
+                    <label classe="categorie" style="margin-right: 15rem;"> Catégorie LUXE ++</label>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="userMGM">General Manager</label>
+                    <div class="col-sm-3">
+                        <input type="email" id='userMGM' class="form-control">
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="email" id='userMGM' class="form-control">
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="email" id='userMGM' class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group row"> 
+                    <label class="col-sm-2 col-form-label" for="firstNameGM">Manager N+1</label>
+                    <div class="col-sm-3">
+                        <input type="texte" id='firstNameMGM' class="form-control" >
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="texte" id='firstNameMGM' class="form-control" >
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="texte" id='firstNameMGM' class="form-control" >
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="lastNameGM">Manager N+2</label>
+                    <div class="col-sm-3">
+                        <input type="texte" id='lastNameMGM' class="form-control">
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="texte" id='lastNameMGM' class="form-control">
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="texte" id='lastNameMGM' class="form-control">
+                    </div>
+                </div>
+               
+            </div>
+            <div class="save">
+                <button type="submit" class="btn bnt-Save" [disabled]="managerForm.invalid"> Save</button>
+            </div>
+        </form>
+    </div>
+</div> -->

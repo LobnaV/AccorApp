@@ -1,14 +1,12 @@
 package com.App.Accor.controller;
 
-import com.App.Accor.model.CompanyParameter;
 import com.App.Accor.model.User;
 import com.App.Accor.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.net.URI;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -19,8 +17,8 @@ public class UserController {
 	UserService service;
 
 	@GetMapping("/List")
-	public List<User> userList() {
-		return service.userList();
+	public ResponseEntity<List<User>> userList() throws Exception{
+		return ResponseEntity.ok(service.userList()) ;
 	}
 
 	@GetMapping("/{id}")

@@ -1,8 +1,6 @@
 package com.App.Accor.service;
 
-import com.App.Accor.model.CompanyParameter;
-import com.App.Accor.model.Staff;
-import com.App.Accor.model.User;
+import com.App.Accor.model.*;
 import com.App.Accor.playload.CsvFormatDTO;
 import com.App.Accor.repository.CompanyParameterRepository;
 import com.App.Accor.repository.StaffRepository;

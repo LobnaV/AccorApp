@@ -27,9 +27,12 @@ public class BranchService {
 	@Autowired
 	private SftpUploadService sftpUploadService;
 
-	public List<Branch> branchList(EPerimeter perimeter) {
-		//return branchR.findAll();
-		return branchR.findByPerimeter(perimeter);
+	public List<Branch> branchList() {
+		return branchR.findAll();
+	}
+
+	public List<Branch> findAll() {
+		return branchR.findAll();
 	}
 
 	public Optional<Branch> listId(Long id) {
@@ -41,11 +44,7 @@ public class BranchService {
 		return branchR.findById(id)
 			.orElseThrow();
 	}
-/*
-	public Branch findByPerimeter(EPerimeter perimeter){
-		return branchR.findByPerimeter(perimeter)
-			.orElseThrow();
-	}*/
+
 
 	public Branch findByUserMGM() throws Exception {
 		UserDetails userDetails =
@@ -74,7 +73,7 @@ public class BranchService {
 		csvFormatDTO.setLastName(branchSaved.getUserMGM().getLastName());
 		csvFormatDTO.setState("ACTIVE");
 		csvFormatDTO.setManager(branchSaved.getUserMGM().getUsername());
-		csvFormatDTO.setApprovalLimit("10000");
+		csvFormatDTO.setApprovalLimit(branchSaved.getUserMGM().getApprovalLimit());
 		csvFormatDTO.setSpendLimit("10000");
 		csvFormatDTO.setOwnedCostCenter("test");
 		csvFormatDTO.setUserType("General Manager");

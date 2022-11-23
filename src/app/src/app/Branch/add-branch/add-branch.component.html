@@ -22,28 +22,22 @@
       <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="perimeter">{{'PARAM.PERIMETER' | translate}}:</label>
        <div class="col-sm-6">
-         <input type="text" id='perimeter' class="form-control" formControlName="perimeter">
+        <select class="form-control" formControlName="perimeter" [(ngModel)]="selectedPerimeter" placeholder="Select Perimeter">
+          <option [ngValue]="null" disabled>{{'PARAM.PERIMETER' | translate}}</option>
+          <option *ngFor="let perimeter of perimeters" [ngValue]="perimeter" >
+            {{perimeter}}
+          </option>
+        </select>
        </div>
       </div>
       <div formGroupName="userMGM">
         <input type="text" formControlName="id" hidden>
+        <!-- <input type="text" formControlName="roles" value="ROLE_COMPANYADMIN" ngDefaultControl hidden> -->
         <div class="form-group row">
           <label class="col-sm-2 col-form-label" for="userMGM">{{'PARAM.EMAIL_GM' | translate}}</label>
          <div class="col-sm-6">
            <input type="email" id='userMGM' class="form-control" formControlName="username">
          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-label" for="firstNameGM">{{'HEADER.FIRSTNAME' | translate}}</label>
-         <div class="col-sm-6">
-           <input type="texte" id='firstNameMGM' class="form-control" formControlName="firstName">
-         </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-label" for="lastNameGM">{{'HEADER.LASTNAME' | translate}}</label>
-          <div class="col-sm-6">
-            <input type="texte" id='lastNameMGM' class="form-control" formControlName="lastName">
-          </div>
         </div>
       </div>
       <div class="save">
@@ -51,7 +45,7 @@
           'Save'}}</button>
       </div>
       <!-- <div class="form-group row">
-          <select [(ngModel)]="selectedPerimeter">
+          <select class="col-sm-2" formControlName="perimeter" [(ngModel)]="selectedPerimeter">
             <option [ngValue]="null" disabled>{{'PARAM.PERIMETER' | translate}}</option>
             <option *ngFor="let perimeter of perimeters" [ngValue]="perimeter" formControlName="perimeter">
               {{perimeter}}

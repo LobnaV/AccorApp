@@ -1,10 +1,10 @@
 INSERT INTO branch (`id`, `code`, `name`, `perimeter`)
-VALUES (1, 'A9017301', 'ACCORINVEST SPAIN SA', 'SE'),
-			 (2, 'A9041701', 'MONTREUILLOISE', 'SE'),
-			 (3, 'A9037801', 'SCHE', 'SE'),
-			 (4, 'A9038901', 'SIM', 'SE'),
-			 (5, 'A9027801', 'HOTEXCO', 'NE'),
-			 (6, 'A9016601', 'PORTIS HOTEIS PORTUGUESES', 'NE');
+VALUES (1, 'A9017301', 'ACCORINVEST SPAIN SA', 'Southern_Europe'),
+			 (2, 'A9041701', 'MONTREUILLOISE', 'Southern_Europe'),
+			 (3, 'A9037801', 'SCHE', 'Southern_Europe'),
+			 (4, 'A9038901', 'SIM', 'Southern_Europe'),
+			 (5, 'A9027801', 'HOTEXCO', 'Northern_Europe'),
+			 (6, 'A9016601', 'PORTIS HOTEIS PORTUGUESES', 'Northern_Europe');
 
 
 INSERT INTO `user`(`id`, `first_name`, `last_name`, `password`, `username`, `primary_branch`)
@@ -19,7 +19,9 @@ VALUES (1, 'Belen', 'TOLOSA', '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.
 			 (5, 'Xavier', 'ALARCON', '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu',
 				'ps.accor+H752-GM@gmail.com', 'A9015701'),
 			 (6, 'Sergio', 'BASTOS', '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu',
-				'ps.accor+H3347-GM@gmail.com', 'A9015701');
+				'ps.accor+H3347-GM@gmail.com', 'A9015701'),
+			 (7, 'Roger', 'Ros', '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu',
+        'ps.accor+roger.ros@gmail.com', 'A9015701');
 
 
 

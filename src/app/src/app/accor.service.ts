@@ -81,6 +81,11 @@ export class AccorService {
       .put<Staff>(this.staffUrl,  staff, { observe: 'response' });
   }
 
+  updateManager(staff:Staff): Observable<HttpResponse<Staff>> {
+    return this.http
+      .put<Staff>(`${this.staffUrl}/test`,  staff, { observe: 'response' });
+  }
+
 
   deleteStaff(id: number): Observable<HttpResponse<void>> {
     return this.http.delete<void>(`${this.staffUrl}/${id}`, { observe: 'response' });
@@ -94,10 +99,7 @@ export class AccorService {
   // Service User
 
 
-  users(){
-    return this.http
-      .get<User[]>(this.urlLocal + "/List")
-  }
+
 
   addUser(user:User): Observable<HttpResponse<User>> {       
     return this.http
@@ -118,13 +120,18 @@ export class AccorService {
     return this.http.get<User>(`${this.urlLocal}/${id}`, { observe: 'response' })
   }
 
-  deleteUser(userId:User){
+  deleteUser(userId:number){
     return this.http
       .delete<User>(this.urlLocal + "/delete/" + userId)
   }
 
   branchId(id:number) : Observable<HttpResponse<Branch>>{
     return this.http.get<Branch>(`${this.local}/${id}`, { observe: 'response' })
+  }
+
+  users(): Observable<HttpResponse<User[]>>{
+    return this.http
+      .get<User[]>(this.urlLocal + "/List", { observe: 'response'})
   }
 
   branches(): Observable<HttpResponse<Branch[]>> {
@@ -140,6 +147,11 @@ export class AccorService {
   updateBranch(branch:Branch): Observable<HttpResponse<Branch>>{
     return this.http
       .put<Branch>(this.local, branch, { observe: 'response'})
+  }
+
+  allBranches(): Observable<HttpResponse<Branch[]>>{
+    return this.http
+      .get<Branch[]>(`${this.local}/allBranches`, { observe: 'response'})
   }
 
   //*

@@ -6,6 +6,8 @@ import { Location } from '@angular/common';
 import { AccorService } from 'src/app/accor.service';
 import { Branch } from 'src/app/model/branch';
 import { User } from 'src/app/model/user';
+import { Param } from 'src/app/model/param';
+import { Category } from 'src/app/model/category';
 
 @Component({
   selector: 'app-edit-manager',
@@ -16,28 +18,49 @@ export class EditManagerComponent implements OnInit {
 
   branch?: Branch;
   user?: User;
+  companies?: Param[]|any = [];
+
+
+
+  params:any;
+  branche:any;
+  parameters: any;
 
   managerForm = new FormGroup({
     id: new FormControl(''),
     code: new FormControl(''),
     name: new FormControl(''),
-    userMGM: new FormGroup({
-      id: new FormControl(''),
-      username: new FormControl(''),
-      firstName: new FormControl(''),
-      lastName: new FormControl(''),
+    category: new FormGroup({
+      name: new FormControl(''),
+      approvalLimitGM: new FormControl(''),
+      approvalLimitN1: new FormControl(''),
+      approvalLimitN2: new FormControl('')
     }),
     perimeter: new FormControl(''),
 
   })
+
 
   constructor(
     private service: AccorService,
     private route: ActivatedRoute,
     private location: Location,
   ) { }
-
   ngOnInit(): void {
+    
+    this.route.params.subscribe(params => {
+      this.loadCompanies(params['id']);
+    });
+
+
+    this.route.params.subscribe(params => {
+      console.log(params['id']);
+      this.service.branchId(params['id']).subscribe(data => {
+        this.branche = data;
+        console.log(data);
+      });
+    });
+
     this.route.params.subscribe(params => {
 
       const idBranch = params['id'];
@@ -48,22 +71,36 @@ export class EditManagerComponent implements OnInit {
         (res: HttpErrorResponse) => console.log(res.message)
       );
 
+
       if (idBranch) {
         this.service.branchId(idBranch).subscribe(
           (res: HttpResponse<Branch>) => {
             this.branch = res.body!;
-            this.managerForm.patchValue({
+            this.managerForm.patchValue({   
               id: this.branch?.id,
               code: this.branch?.code,
               name: this.branch?.name,
-              userMGM: {
-                id: this.branch?.userMGM?.id,
-                username: this.branch?.userMGM?.username,
-                firstName: this.branch?.userMGM?.firstName,
-                lastName: this.branch?.userMGM?.lastName,
+              category: {
+                name: this.companies?.category?.name,
+                approvalLimitGM: this.companies?.category?.approvalLimitGM,
+                approvalLimitN1: this.companies?.category?.approvalLimitN1,
+                approvalLimitN2: this.companies?.category?.approvalLimitN2
               },
               perimeter: this.branch?.perimeter,
             });
+
+             let element : any;
+             let el: any;
+
+            for (let i = 0; i < this.companies?.length; i++) {
+              element = this.companies[i];
+              
+              console.log(element.category.name)
+
+              el = element.category.name
+              el++
+            }
+            console.log(element++)            
           },
           (res: HttpErrorResponse) => console.log(res.message)
         );
@@ -74,13 +111,25 @@ export class EditManagerComponent implements OnInit {
 
   }
 
+
+  
+  loadCompanies(idBranch: number) {
+    this.service.companieBranch(idBranch).subscribe(
+      (res: HttpResponse<Param[]>) => {
+        this.companies = res.body;
+        console.log(this.companies)
+      },
+      (res: HttpErrorResponse) => console.log(res.message)
+    );
+  } 
+
   Update() {
     const updateForm = {
       ...new Branch(),
       id: this.managerForm.get('id')?.value,
       code: this.managerForm.get('code')?.value,
       name: this.managerForm.get('name')?.value,
-      userMGM: this.managerForm.get('userMGM')?.value,
+      category: this.managerForm.get('category')?.value,
       perimeter: this.managerForm.get('perimeter')?.value,
     };
     console.log(updateForm);
@@ -103,7 +152,6 @@ export class EditManagerComponent implements OnInit {
           (res: HttpErrorResponse) => console.log(res.message)
         );
     }
-
   }
 
 }

@@ -15,6 +15,10 @@ import { User } from 'src/app/model/user';
 export class EditApprovalLimitComponent implements OnInit {
   branch?: Branch;
   user?: User;
+  users: any = [];
+  selectedUser?: any;
+
+
 
   
   managerForm = new FormGroup({
@@ -40,6 +44,14 @@ export class EditApprovalLimitComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    this.service.users()
+    .subscribe((data: HttpResponse<User[]>)  => {
+      this.users = data.body;
+      (res: HttpErrorResponse) => console.log(res.message)
+      console.log('userssss', this.users)
+    });
+
     this.route.params.subscribe(params => {
 
       const idBranch = params['id'];
@@ -113,6 +125,4 @@ export class EditApprovalLimitComponent implements OnInit {
   back(){
     this.location.back()
   }
-
-
 }

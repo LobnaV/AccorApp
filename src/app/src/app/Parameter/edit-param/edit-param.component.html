@@ -1,11 +1,11 @@
-<div class="card">  
+<div class="card">
   <div class="card-body">
     <h4 *ngIf="this.param?.id"> {{'PARAM.UPDATE_PARAMETER' | translate}}</h4>
     <h4 *ngIf="this.param?.id == null"> Create new parameter</h4>
     <form [formGroup]="paramForm" (ngSubmit)='Update()'>
       <input type="text" formControlName="id" hidden>
       <div class="branch">
-         <h6>{{'PARAM.BRANCH_ID' | translate}}: {{branch?.code}}</h6>
+        <h6>{{'PARAM.BRANCH_ID' | translate}}: {{branch?.code}}</h6>
         <h6>{{'PARAM.BRANCH_NAME' | translate}}: {{branch?.name}}</h6>
       </div>
       <div class="form-group row" *ngIf="this.param?.id readonly">
@@ -26,13 +26,31 @@
           <input type="text" id='name' class="form-control" formControlName="name">
         </div>
       </div>
+
+      <div formGroupName="category">
+        <input type="text" formControlName="id" hidden>
+       
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" for="category">Category</label>
+         <div class="col-sm-6">
+          <select class="form-control" formControlName="name" [(ngModel)]="selectedCategory" placeholder="Select Category">
+            <option [ngValue]="null" disabled>select Category</option>
+            <option *ngFor="let category of categories" [ngValue]="category" >
+              {{category}}
+            </option>
+          </select>
+         </div>
+        </div>
+
+      </div>
+
       <div formGroupName="userGM">
         <input type="text" formControlName="id" hidden>
         <div class="form-group row">
           <label class="col-sm-2 col-form-label" for="userGM">{{'PARAM.EMAIL_GM' | translate}}</label>
-         <div class="col-sm-6">
-           <input type="email" id='userGM' class="form-control" formControlName="username">
-         </div>
+          <div class="col-sm-6">
+            <input type="email" id='userGM' class="form-control" formControlName="username">
+          </div>
         </div>
         <div class="form-group row">
           <label class="col-sm-2 col-form-label" for="firstNameGM">{{'HEADER.FIRSTNAME' | translate}}</label>
@@ -48,14 +66,20 @@
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label" for="userMGM">{{'PARAM.EMAIL_GM' | translate}} N+1</label>
+        <label class="col-sm-2 col-form-label" for="generalManagerN1">{{'PARAM.EMAIL_GM' | translate}} N+1</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control">
+          <input type="text" class="form-control" formControlName="generalManagerN1">
         </div>
-        <!-- <input type="email" id='userMGM' class="form-control" formControlName=""> -->
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="generalManagerN2">{{'PARAM.EMAIL_GM' | translate}} N+2</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" formControlName="generalManagerN2">
+        </div>
       </div>
       <div class="save">
-        <button type="submit" class="btn bnt-Save" [disabled]="paramForm.invalid">{{this.param?.id ? 'edit' : 'add'}}</button>
+        <button type="submit" class="btn bnt-Save" [disabled]="paramForm.invalid">{{this.param?.id ? 'edit' :
+          'add'}}</button>
       </div>
     </form>
   </div>

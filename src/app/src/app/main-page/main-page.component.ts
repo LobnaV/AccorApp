@@ -16,8 +16,7 @@ export class MainPageComponent implements OnInit {
   selectedBranch?: any;
   companies: Param[] | null = [];
   branches: any = [];
-  allbranchesSE: any = [];
-  allbranchesNE: any = [];
+  allBranches: any = [];
 
 
   searchKey: string = "";
@@ -58,21 +57,30 @@ export class MainPageComponent implements OnInit {
       });
 
       //Vu Master
-      this.service.allBranchesSE()
-      .subscribe((data: HttpResponse<Branch[]>)  => {
-        this.allbranchesSE = data.body;
-        console.log(this.allbranchesSE[0]);
-        this.allbranchesSE = this.allbranchesSE[0];
-        (res: HttpErrorResponse) => console.log(res.message)
-      });
 
-      this.service.allBranchesNE()
-      .subscribe((data: HttpResponse<Branch[]>)  => {
-        this.allbranchesNE = data.body;
-        console.log(this.allbranchesNE);
-        this.allbranchesNE = this.allbranchesNE[0];
-        (res: HttpErrorResponse) => console.log(res.message)
-      });
+      this.service.allBranches()
+        .subscribe((data:HttpResponse<Branch[]>) => {
+          this.allBranches = data.body;
+          console.log(this.allBranches);
+          (res: HttpErrorResponse) => console.log(res.message)
+        })
+
+
+      // this.service.allBranchesSE()
+      // .subscribe((data: HttpResponse<Branch[]>)  => {
+      //   this.allbranchesSE = data.body;
+      //   console.log(this.allbranchesSE[0]);
+      //   this.allbranchesSE = this.allbranchesSE[0];
+      //   (res: HttpErrorResponse) => console.log(res.message)
+      // });
+
+      // this.service.allBranchesNE()
+      // .subscribe((data: HttpResponse<Branch[]>)  => {
+      //   this.allbranchesNE = data.body;
+      //   console.log(this.allbranchesNE);
+      //   this.allbranchesNE = this.allbranchesNE[0];
+      //   (res: HttpErrorResponse) => console.log(res.message)
+      // });
   }
 
   //Switch language

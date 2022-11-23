@@ -31,6 +31,7 @@ import {PasswordResetInitComponent} from "./password-reset/init/password-reset-i
 import {PasswordResetFinishComponent} from "./password-reset/finish/password-reset-finish.component";
 import { EditManagerComponent } from './Branch/edit-manager/edit-manager.component';
 import { EditApprovalLimitComponent } from './Branch/edit-approval-limit/edit-approval-limit.component';
+import { EditCompanyAdminComponent } from './Branch/edit-company-admin/edit-company-admin.component';
 
 // Factory function required during AOT compilation
 export function httpTranslateLoaderFactory(http: HttpClient) {
@@ -61,7 +62,8 @@ export function httpTranslateLoaderFactory(http: HttpClient) {
     PasswordResetInitComponent,
     PasswordResetFinishComponent,
     EditManagerComponent,
-    EditApprovalLimitComponent
+    EditApprovalLimitComponent,
+    EditCompanyAdminComponent
   ],
   imports: [
     BrowserModule,

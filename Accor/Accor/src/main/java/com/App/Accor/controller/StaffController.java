@@ -51,4 +51,5 @@ public class StaffController {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
+
 }
