@@ -53,7 +53,7 @@ public class BranchService {
 	}
 
 	public Branch save(Branch branch) throws Exception {
-		User user = branch.getUserMGM();
+		 User user = (User) branch.getUserMGM();
 		if (user.getId() != null) {
 			User oldUser = userRepository.findById(user.getId())
 				.orElseThrow(() -> new Exception("Impossible de trouver l'utilisateur associé"));
@@ -61,7 +61,9 @@ public class BranchService {
 			oldUser.setLastName(user.getLastName());
 			oldUser.setUsername(user.getUsername());
 			user = oldUser;
-		}
+		};
+
+		//branch.setUserMGM(userRepository.save(User<>);
 		branch.setUserMGM(userRepository.save(user));
 		Branch branchSaved = branchR.save(branch);
 

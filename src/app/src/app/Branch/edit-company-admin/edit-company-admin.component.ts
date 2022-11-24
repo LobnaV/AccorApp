@@ -17,7 +17,8 @@ export class EditCompanyAdminComponent implements OnInit {
 
   branch?: Branch;
   user?: User;
-  userCA: any;
+  userCA?:any = [];
+  inputTxt = '';
 
   managerForm = new FormGroup({
     id: new FormControl(''),
@@ -73,6 +74,31 @@ export class EditCompanyAdminComponent implements OnInit {
 
   }
 
+  Add() {
+    let doc = <HTMLElement> document.querySelector(".form")
+    let template =
+  `<div class="template">
+    <input type="text" formControlName="id" hidden>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="userMGM">{{'PARAM.EMAIL_GM' | translate}}</label>
+     <div class="col-sm-3" style="width: 35%;">
+          <input type="email" id='userMGM' class="form-control" formControlName="username">
+          <button (click)="remove(userCA?.id)" class="btn-delete">delete</button>
+      </div>
+    </div>
+   </div>`;
+
+  
+    if(this.inputTxt != ''){
+     // this.list.push(this.inputTxt);
+    }
+  
+
+
+    doc.innerHTML += template
+    return;
+  }
+
   Update() {
     const updateForm = {
       ...new Branch(),
@@ -105,13 +131,13 @@ export class EditCompanyAdminComponent implements OnInit {
 
   }
 
-  remove(userId:any) {
+  remove(userId: any) {
     this.service.deleteUser(userId)
-    .subscribe((data:any) =>{
-      this.userCA = this.userCA?.filter((userx: { id: any; }) => userId !== userx.id);
+      .subscribe((data: any) => {
+        this.userCA = this.userCA?.filter((userx: { id: any; }) => userId !== userx.id);
         console.log("utilisateur supprimé");
-    }
-    );
+      }
+      );
   }
 
 }

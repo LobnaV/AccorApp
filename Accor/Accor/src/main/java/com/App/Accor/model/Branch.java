@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Collection;
 
 
 @Data
@@ -21,6 +22,15 @@ public class Branch implements Serializable {
 	private String code;
 
 	private String name;
+
+	/*@ManyToMany
+		@JoinTable(
+		name = "branches_users",
+		joinColumns = @JoinColumn(
+			name = "branch_id", referencedColumnName = "id"),
+		inverseJoinColumns = @JoinColumn(
+			name = "user_id", referencedColumnName = "id"))
+	private Collection<User> userMGM;*/
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	private User userMGM;

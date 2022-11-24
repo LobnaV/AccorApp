@@ -35,12 +35,14 @@ VALUES (1, 'ps.accor+H3132-GM@gmail.com', '02507.H3132', 'IBIS BARCELONA FIRA DE
 
 
 INSERT INTO `role`(`id`, `name`)
-VALUES (1, 'ROLE_GM');
+VALUES (1, 'ROLE_GM'),
+			 (2, 'ROLE_COMPANYADMIN'),
+			 (3, 'ROLE_MASTERADMIN');
 
 INSERT INTO `users_roles`(`user_id`, `role_id`)
 VALUES (1, 1),
-			 (2, 1),
-			 (3, 1),
+			 (2, 2),
+			 (3, 3),
 			 (4, 1),
 			 (5, 1),
 			 (6, 1);

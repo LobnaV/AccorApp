@@ -4,6 +4,7 @@ import com.App.Accor.model.*;
 import com.App.Accor.service.BranchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -19,18 +20,19 @@ public class BranchController {
 	@Autowired
 	private BranchService service;
 
-
+	@PreAuthorize("hasRole('ROLE_COMPANYADMIN')")
 	@GetMapping("/List")
 	public ResponseEntity<List<Branch>> branchList() throws Exception {
 		return ResponseEntity.ok(Collections.singletonList(service.findByUserMGM()));
 	}
 
+	@PreAuthorize("hasRole('ROLE_MASTERADMIN')")
 	@GetMapping("/allBranches")
 	public ResponseEntity<List<Branch>> allBranches() throws Exception {
 		return ResponseEntity.ok(service.findAll());
 	}
 
-
+	@PreAuthorize("hasRole('ROLE_MASTERADMIN')")
 	@PostMapping
 	public ResponseEntity<Branch> createBranch(@Valid @RequestBody Branch Branch) throws Exception {
 		if(Branch.getId() != null){
@@ -40,6 +42,7 @@ public class BranchController {
 		return ResponseEntity.created(new URI("/api/branch" + result.getId())).body(result);
 	}
 
+	@PreAuthorize("hasRole('ROLE_MASTERADMIN')")
 	@PutMapping
 	public ResponseEntity<Branch> updateBranch(@Valid @RequestBody Branch branch) throws Exception {
 		if (branch.getId() == null) {
@@ -60,6 +63,7 @@ public class BranchController {
 		return ResponseEntity.ok(Collections.singletonList(service.branchList(EPerimeter.NE)));
 	}*/
 
+	@PreAuthorize("hasAnyRole('ROLE_MASTERADMIN', 'ROLE_COMPANYADMIN')")
 	@GetMapping({"/{id}"})
 	public ResponseEntity<Branch> getBranch (@PathVariable Long id){
 		return ResponseEntity.ok(service.findById(id));
@@ -71,6 +75,7 @@ public class BranchController {
 		return service.edit(branch);
 	}*/
 
+	@PreAuthorize("hasRole('ROLE_MASTERADMIN')")
 	@DeleteMapping({"/delete/{id}"})
 	public void delete(@PathVariable Long id) {
 		service.deleteBranch(id);
