@@ -1,88 +1,75 @@
 <div class="container">
-    <!-- <div class="btns">
-        <button class="btnBack" (click)="back()">Back</button>
-    </div> -->
+    <div class="back">
+        <button class="btn btnBack" (click)="back()">Back</button>
+    </div>
 
     <div class="card-body">
-        <h4 *ngIf="this.param?.id"> {{'PARAM.UPDATE_PARAMETER' | translate}}</h4>
-        <h4 *ngIf="this.param?.id == null"> Create new parameter</h4>
+        <h4 *ngIf="this.costcenter?.id">Cost center</h4>
+        <h4 *ngIf="this.costcenter?.id == null"> Create cost center</h4>
         <form [formGroup]="costCenterForm" (ngSubmit)='Update()'>
+            <input type="text" formControlName="id" hidden>
             <div class="branch">
                 <h6>{{'PARAM.BRANCH_ID' | translate}}: {{branch?.code}}</h6>
                 <h6>{{'PARAM.BRANCH_NAME' | translate}}: {{branch?.name}}</h6>
             </div>
-            <input type="text" formControlName="id" hidden>
-            <div class="form-group row">
+                <div formGroupName="company">
+                    <div class="form-group row" >
+                        <label class="col-sm-2 col-form-label" for="megaCode">Hotel MegaCode:</label>
+                        <div class="col-sm-6">
+                            <input type="text" id='megaCode' class="form-control" formControlName="megaCode" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row" >
+                        <label class="col-sm-2 col-form-label" for="name">{{'HOTELNAME' | translate}}:</label>
+                        <div class="col-sm-6">
+                            <input type="text" id='name' class="form-control" formControlName="name" readonly>
+                        </div>
+                    </div>
+                </div>
+
+            <div class="form-group row" >
                 <label class="col-sm-2 col-form-label" for="code">Code:</label>
                 <div class="col-sm-6">
-                    <input type="text" id='code' class="form-control" formControlName="code">
+                    <input type="text" id='code' class="form-control" formControlName="code" >
                 </div>
             </div>
+
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="label">Label:</label>
                 <div class="col-sm-6">
                     <input type="text" id='label' class="form-control" formControlName="label">
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="owner">Owner:</label>
-                <div class="col-sm-6">
-                    <input type="text" id='owner' class="form-control" formControlName="owner">
-                </div>
-            </div>
+            </div>       
 
-            <div formGroupName="company">
-                <div class="form-group row" *ngIf="this.param?.id readonly">
-                    <label class="col-sm-2 col-form-label" for="megaCode">Hotel MegaCode:</label>
-                    <div class="col-sm-6">
-                        <input type="text" id='megaCode' class="form-control" formControlName="megaCode" readonly>
-                    </div>
-                </div>
-                <div class="form-group row" *ngIf="this.param?.id == null">
-                    <label class="col-sm-2 col-form-label" for="megaCode">Hotel MegaCode:</label>
-                    <div class="col-sm-6">
-                        <input type="text" id='megaCode' class="form-control" formControlName="megaCode">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="name">{{'HOTELNAME' | translate}}:</label>
-                    <div class="col-sm-6">
-                        <input type="text" id='name' class="form-control" formControlName="name">
-                    </div>
-                </div>
-                <div class="card-body">
-                    <!--[formGroup]="staffForm" (ngSubmit)='Update()' -->
+                <div class="card-body" formGroupName="company">
                     <div formGroupName="userGM">
                         <input type="text" class="form-control" formControlName="id" hidden>
-    
+
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label" for="firstName">{{'HEADER.FIRSTNAME' |
-                                translate}}:</label>
+                            <label class="col-sm-2 col-form-label" for="firstName" >{{'HEADER.FIRSTNAME' | translate}}:</label>
                             <div class="col-sm-6">
-                                <input classe="input" type="text" id='firstName' class="form-control" formControlName="firstName" >
+                                <input classe="input" type="text" id='firstName' class="form-control" formControlName="firstName">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="lastName">{{'HEADER.LASTNAME' | translate}}:</label>
                             <div class="col-sm-6">
-                                <input classe="input" type="text" id='lastName' class="form-control" formControlName="lastName">
+                                <input classe="input" type="text" id='lastName' class="form-control" formControlName="lastName" >
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="mail">Email:</label>
                             <div class="col-sm-6">
-                                <input type="mail" id='mail' class="form-control" formControlName="username">
+                                <input type="mail" id='mail' class="form-control" formControlName="username" >
                             </div>
                         </div>
                         <div class="save">
-                            <!-- [disabled]="staffForm.invalid" -->
-                            <button type="submit" class="btn-Save"></button>
-                            <!-- {{this.staff?.id ? 'edit' : 'add'}} -->
+                            <button type="submit" class="btn btn-Save">Save</button> 
                         </div>
+                        <br>
+                        <i style="color:#8F1D1D ;">Any modfication here will result in having the General manger becoming the dispatcher automatically. Please don't hesitate to contact the GM to ask him to rearrange the workflow th way he would like to.</i>
                     </div>
                 </div>
-
-            </div>
            
         </form>
     </div>

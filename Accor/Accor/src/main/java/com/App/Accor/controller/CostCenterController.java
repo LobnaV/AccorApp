@@ -11,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,9 +27,14 @@ public class CostCenterController {
 		return service.costCenterList();
 	}
 
-	@PostMapping("/AddCostCenter")
-	public CostCenter add(@RequestBody CostCenter costCenter) {
-		return service.add(costCenter);
+	@PreAuthorize("hasRole('ROLE_COMPANYADMIN')")
+	@PostMapping
+	public ResponseEntity<CostCenter> createCostCenter(@Valid @RequestBody CostCenter costCenter) throws Exception {
+		if (costCenter.getId() != null){
+			throw  new Exception("A new Cost center cannot aready have an ID");
+		}
+		CostCenter result = service.save(costCenter);
+		return ResponseEntity.created(new URI("api/costCenter/" + result.getId())).body(result);
 	}
 
 	@PreAuthorize("hasAnyRole('ROLE_GM', 'ROLE_COMPANYADMIN')")
@@ -37,7 +43,7 @@ public class CostCenterController {
 		return ResponseEntity.ok((service.findById(id)));
 	}
 
-	@PreAuthorize("hasRole('ROLE_GM', 'ROLE_COMPANYADMIN')")
+	@PreAuthorize("hasAnyRole('ROLE_GM', 'ROLE_COMPANYADMIN')")
 	@PutMapping
 	public ResponseEntity<CostCenter> updateCostCenter(@Valid @RequestBody CostCenter costCenter) throws Exception {
 		if (costCenter.getId() == null){

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AccorService } from 'src/app/accor.service';
 import { CostCenter } from 'src/app/model/costCenter';
+import { Param } from 'src/app/model/param';
 
 @Component({
   selector: 'app-list-cc',
@@ -14,6 +15,7 @@ export class ListCcComponent implements OnInit {
   searchKey: string = "";
   searchTerm: string = "";
   costcenters?: CostCenter[] | null = [];
+  company?: Param
 
   constructor(
     private service: AccorService,
@@ -27,9 +29,17 @@ export class ListCcComponent implements OnInit {
   
       this.loadCostCenter(params['id']); 
       console.log(params['id'])
-    });
 
-   
+      const paramId = params['paramId'];
+      this.service.ParamId(paramId).subscribe(
+        (res: HttpResponse<Param>) => {
+          this.company = res.body!;
+          console.log(this.company)
+        },
+        (res: HttpErrorResponse) => console.log(res.message)
+      );
+
+    });   
 
       this.service.search.subscribe((val: any) => {
         this.searchKey = val;

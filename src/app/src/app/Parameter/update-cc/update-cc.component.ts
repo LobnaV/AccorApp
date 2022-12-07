@@ -2,6 +2,7 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 import { AccorService } from 'src/app/accor.service';
 import { Branch } from 'src/app/model/branch';
 import { CostCenter } from 'src/app/model/costCenter';
@@ -17,10 +18,10 @@ import { ConfirmationDialogService } from 'src/app/UserBack/confirmation-dialog/
 export class UpdateCcComponent implements OnInit {
   param?: Param;
   costcenter?: CostCenter;
- // companie?: Param;
+  // companie?: Param;
   userGM?: User | null;
   companie?: Param | null;
-  branch?:Branch;
+  branch?: Branch;
 
   costCenterForm = new FormGroup({
     id: new FormControl(''),
@@ -31,7 +32,7 @@ export class UpdateCcComponent implements OnInit {
       id: new FormControl(''),
       megaCode: new FormControl(''),
       name: new FormControl(''),
-    userGM: new FormGroup({
+      userGM: new FormGroup({
         id: new FormControl(''),
         username: new FormControl(''),
         firstName: new FormControl(''),
@@ -45,7 +46,7 @@ export class UpdateCcComponent implements OnInit {
   constructor(
     private service: AccorService,
     private activatedRoute: ActivatedRoute,
-
+    private location: Location
   ) { }
 
   ngOnInit(): void {
@@ -60,9 +61,9 @@ export class UpdateCcComponent implements OnInit {
           this.branch = res.body!;
         },
         (res: HttpErrorResponse) => console.log(res.message)
-      );  
+      );
 
-      
+
       const idCostCenter = params['costCenterId'];
       this.service.CostCenterId(idCostCenter).subscribe(
         (res: HttpResponse<CostCenter>) => {
@@ -71,26 +72,26 @@ export class UpdateCcComponent implements OnInit {
         },
         (res: HttpErrorResponse) => console.log(res.message)
       )
-            
+
       const paramId = params['paramId'];
-      if(paramId){
+      if (paramId) {
         this.service.ParamId(paramId).subscribe(
           (res: HttpResponse<Param>) => {
             this.param = res.body!;
             this.costCenterForm.patchValue({
-                id: this.costcenter?.id,
-                code: this.costcenter?.code,
-                label: this.costcenter?.label,
-                owner: this.costcenter?.owner,
-              company:{
+              id: this.costcenter?.id,
+              code: this.costcenter?.code,
+              label: this.costcenter?.label,
+              owner: this.costcenter?.owner,
+              company: {
                 id: this.param?.id,
                 megaCode: this.param?.megaCode,
                 name: this.param?.name,
-                userGM: { 
+                userGM: {
                   id: this.param.userGM?.id,
                   username: this.param.userGM?.username,
                   firstName: this.param.userGM?.firstName,
-                  lastName: this.param.userGM?.lastName, 
+                  lastName: this.param.userGM?.lastName,
                 },
               }
             });
@@ -115,7 +116,35 @@ export class UpdateCcComponent implements OnInit {
     );
   }
 
-  Update(){
+  back(){
+    this.location.back()
+  }
 
+  Update() {
+
+    const updateForm = new CostCenter(
+      this.costCenterForm.get('id')?.value,
+      this.costCenterForm.get('code')?.value,
+      this.costCenterForm.get('label')?.value,
+      this.costCenterForm.get('owner')?.value,
+      this.param);
+
+    if (this.costcenter?.id) {
+      this.service.updateCostCenter(updateForm)
+        .subscribe(
+          (res: HttpResponse<CostCenter>) => {
+            this.location.back();
+          },
+          (res: HttpErrorResponse) => console.log(res.message)
+        );
+    } else {
+      this.service.addcostCenter(updateForm)
+        .subscribe(
+          (res: HttpResponse<CostCenter>) => {
+            this.location.back();
+          },
+          (res: HttpErrorResponse) => console.log(res.message)
+        );
+    }
   }
 }

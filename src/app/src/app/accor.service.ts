@@ -152,17 +152,6 @@ export class AccorService {
       .get<Branch[]>(`${this.local}/allBranches`, { observe: 'response'})
   }
 
-  //*
-  allBranchesSE(): Observable<HttpResponse<Branch[]>>{
-    return this.http
-      .get<Branch[]>(`${this.local}/AllBranchesSE`, { observe: 'response'})
-  }
-
-  allBranchesNE(): Observable<HttpResponse<Branch[]>>{
-    return this.http
-      .get<Branch[]>(`${this.local}/AllBranchesNE`, { observe: 'response'})
-  }
-
   // Cost Center
   CostCenterCompany(id: number): Observable<HttpResponse<CostCenter[]>> {
     return this.http
@@ -174,9 +163,9 @@ export class AccorService {
       .get<CostCenter[]>(this.CCUrl + "/List")
   }
 
-  addcostCenter(costCenter:CostCenter){
+  addcostCenter(costCenter:CostCenter): Observable<HttpResponse<CostCenter>>{
     return this.http
-      .post<CostCenter>(this.CCUrl + "/AddCostCenter/", costCenter)
+      .post<CostCenter>(this.CCUrl, costCenter, {observe: 'response'})
   }
 
   CostCenterId(id: string): Observable<HttpResponse<CostCenter>>{
@@ -189,17 +178,6 @@ export class AccorService {
       observe: 'response',
     });
   }
-
-  /**
-   * 
-   * @param costCenter
-   *  updateStaff(staff:Staff): Observable<HttpResponse<Staff>> {
-    return this.http
-      .put<Staff>(this.staffUrl,  staff, { observe: 'response' });
-  }
-   * @returns 
-   */
-
 
   updateCostCenter(costCenter:CostCenter): Observable<HttpResponse<CostCenter>>{
     return this.http

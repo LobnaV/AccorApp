@@ -33,11 +33,15 @@ VALUES (1, 'ps.accor+H3132-GM@gmail.com', '02507.H3132', 'IBIS BARCELONA FIRA DE
 			 (5, 'ps.accor+H752-GM@gmail.com', '02935.H0752', 'IBIS EVRY', 5, 5),
 			 (6, 'ps.accor+H3347-GM@gmail.com', '02435.H3347', 'MERCURE PORTO GAIA', 6, 6);
 
-
 INSERT INTO `role`(`id`, `name`)
 VALUES (1, 'ROLE_GM'),
 			 (2, 'ROLE_COMPANYADMIN'),
 			 (3, 'ROLE_MASTERADMIN');
+
+INSERT INTO `category`(`id`, `name`)
+VALUES (1, 'Ultra_ECO'),
+			 (2, 'ECO'),
+			 (3, 'MidScale & Luxe');
 
 INSERT INTO `users_roles`(`user_id`, `role_id`)
 VALUES (1, 1),

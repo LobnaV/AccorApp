@@ -50,6 +50,7 @@ const routes: Routes = [
       {path: 'branch/:id/compagny-param/:paramId/edit', component: EditParamComponent},
 
       {path: 'branch/:id/costCenter/:paramId', component: ListCcComponent},
+      {path: 'branch/:id/costCenter/:paramId/add', component:UpdateCcComponent},
       {path: 'branch/:id/costCenter/:paramId/edit/:costCenterId', component: UpdateCcComponent},
 
 
