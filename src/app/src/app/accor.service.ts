@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import {BehaviorSubject, map, Observable} from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Branch } from './model/branch';
-import { CostCenter } from './CostCenter/cost-center';
+import { CostCenter } from './model/costCenter';
 import { Param } from './model/param';
 import { User } from './model/user';
 import {Staff} from "./model/staff";
@@ -110,8 +110,6 @@ export class AccorService {
     return this.http.put<User>(`${this.urlLocal}`, user, { observe: 'response' });
   }
 
-
-
   updateUserName(user:User): Observable<HttpResponse<User>> {
     return this.http.put<User>(`${this.urlLocal}/name`, user, { observe: 'response' });
   }
@@ -165,6 +163,12 @@ export class AccorService {
       .get<Branch[]>(`${this.local}/AllBranchesNE`, { observe: 'response'})
   }
 
+  // Cost Center
+  CostCenterCompany(id: number): Observable<HttpResponse<CostCenter[]>> {
+    return this.http
+      .get<CostCenter[]>(`${this.CCUrl}/costCenter/${id}`, {observe: 'response'})
+  }
+
   costCenterList(){
     return this.http
       .get<CostCenter[]>(this.CCUrl + "/List")
@@ -175,14 +179,31 @@ export class AccorService {
       .post<CostCenter>(this.CCUrl + "/AddCostCenter/", costCenter)
   }
 
-  CostCenterId(megaCode_CostCenter_ID: string){
+  CostCenterId(id: string): Observable<HttpResponse<CostCenter>>{
     return this.http
-      .get<CostCenter>(this.CCUrl + "/" + megaCode_CostCenter_ID)
+      .get<CostCenter>(`${this.CCUrl}/${id}`, { observe: 'response' })
   }
 
-  updateCostCenter(costCenter:CostCenter){
+  updateOwner(idCostCenter: number, email: string, isStaff: boolean): Observable<HttpResponse<CostCenter>> {
+    return this.http.get<CostCenter>(`${this.CCUrl}/${idCostCenter}/owner?email=${email}&isStaff=${isStaff}`, {
+      observe: 'response',
+    });
+  }
+
+  /**
+   * 
+   * @param costCenter
+   *  updateStaff(staff:Staff): Observable<HttpResponse<Staff>> {
     return this.http
-      .put<CostCenter>(this.CCUrl + "/editCostCenter/" + costCenter.megaCode_CostCenter_ID, costCenter);
+      .put<Staff>(this.staffUrl,  staff, { observe: 'response' });
+  }
+   * @returns 
+   */
+
+
+  updateCostCenter(costCenter:CostCenter): Observable<HttpResponse<CostCenter>>{
+    return this.http
+      .put<CostCenter>(this.CCUrl, costCenter, { observe: 'response' });
   }
 
   deleteCC(ccId:CostCenter){

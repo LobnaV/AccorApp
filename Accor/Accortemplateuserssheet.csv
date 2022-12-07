@@ -1,2 +1,3 @@
 BRANCH_ID;HOME;EMAIL;FIRST_NAME;LAST_NAME;STATE;MANAGER;APPROVAL LIMIT;SPEND_LIMIT;COST_CENTER_OWNER;USER_TYPE
-A9017301;TRUE;test@gmail.com;Mtsr;tls;ACTIVE;test@gmail.com;10000;10000;02320.H1032;General Manager;
+A9041701;TRUE;ps.accor+H3086-GM@gmail.com;Laurent;Magdelon;ACTIVE;ps.accor+H3086-GM@gmail.com;10000;10000;03354.H3086;General Manager;
+A9041701;TRUE;ps.accor+H3086-BO@gmail.com;Beatrice;Soubabere;ACTIVE;ps.accor+H3086-GM@gmail.com;0;0;;Head of Department;

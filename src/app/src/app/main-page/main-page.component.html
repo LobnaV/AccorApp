@@ -1,8 +1,7 @@
 <!-- Vue General Manager -->
-<div class="container d-flex justify-content-center">
-  <button (click)="isVueGm = !isVueGm" class="btn btn-primary">{{isVueGm ? 'GM' : 'Master'}}</button>
-</div>
-<div *ngIf="isVueGm" class="container-fluid">
+<!-- mettre en place une distinction entre NE/SE car ne renvoie pas vers la mm page -->
+<!-- comment? -->
+<div *ngIf="role === 'ROLE_GM'" class="container-fluid">
 
   <div class="contenue">
     <h5>{{'TITLE' | translate}}</h5>
@@ -36,8 +35,7 @@
 
 
 <!-- Vue Company Admin -->
-
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="role === 'ROLE_COMPANYADMIN'">
     <div class="contenue">
         <h5>{{'TITLE_CA' | translate}}</h5>
 
@@ -58,45 +56,47 @@
 
 
 <!-- Vue Master Admin -->
+<ng-container *ngIf="role === 'ROLE_MASTERADMIN'">
 
-<div *ngIf="!isVueGm" class="container-fluid">
-  <div class="contenue">
-    <h5 class="title_ma">{{'TITLE_MA' | translate}}</h5>
-  </div>
-  <div class="form-group col-md-8" id="searchBar">
-    <div class="btn_searchbar">
-      <input (keyup)="Search($event)" [(ngModel)]="searchTerm" class="form-control" placeholder="{{'BUTTONS.SEARCH_CODE' | translate}}"
-             type="text">
-      <div class="container">
-        <button [routerLink]="['/create/branch']" class="btn add_Btn">{{'BUTTONS.ADDBRANCH' | translate}}</button>
+  <div class="container-fluid">
+    <div class="contenue">
+      <h5 class="title_ma">{{'TITLE_MA' | translate}}</h5>
+    </div>
+    <div class="form-group col-md-8" id="searchBar">
+      <div class="btn_searchbar">
+        <input (keyup)="Search($event)" [(ngModel)]="searchTerm" class="form-control" placeholder="{{'BUTTONS.SEARCH_CODE' | translate}}"
+               type="text">
+        <div class="container">
+          <button [routerLink]="['/create/branch']" class="btn add_Btn">{{'BUTTONS.ADDBRANCH' | translate}}</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
-<div *ngIf="!isVueGm" style="margin: auto; width: 90%;">
-    <table class="table" >
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">{{'PARAM.PERIMETER' | translate}}</th>
-          <th scope="col">{{'PARAM.BRANCH_ID' | translate}}</th>
-          <th scope="col">{{'PARAM.BRANCH_NAME' | translate}}</th>
-          <th></th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody class="data" >
-        <tr *ngFor="let branche of allBranches | filter: searchKey:'code'">
-          <td>{{branche.perimeter}}</td>
-          <td>{{branche.code}}</td>
-          <td>{{branche.name}}</td>
-          <td><button [routerLink]="['branch', branche?.id, 'edit-manager']" class="btn">{{'BUTTONS.EDITMANAGERS' | translate}}</button></td>
-          <td><button [routerLink]="['branch', branche?.id, 'edit-approval_limit']" class="btn">{{'BUTTONS.EDIT_APPROVAL_LIMIT' | translate}}</button></td>
-          <td><button [routerLink]="['branch', branche?.id, 'access']" class="btn">{{'BUTTONS.EDIT_ACCESS' | translate}}</button></td>
-        </tr>
-      </tbody>
-    </table>
-    </div>
-    
+  
+  <div style="margin: auto; width: 90%;">
+      <table class="table" >
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">{{'PARAM.PERIMETER' | translate}}</th>
+            <th scope="col">{{'PARAM.BRANCH_ID' | translate}}</th>
+            <th scope="col">{{'PARAM.BRANCH_NAME' | translate}}</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody class="data" >
+          <tr *ngFor="let branche of allBranches | filter: searchKey:'code'">
+            <td>{{branche.perimeter}}</td>
+            <td>{{branche.code}}</td>
+            <td>{{branche.name}}</td>
+            <td><button [routerLink]="['branch', branche?.id, 'edit-manager']" class="btn">{{'BUTTONS.EDITMANAGERS' | translate}}</button></td>
+            <td><button [routerLink]="['branch', branche?.id, 'edit-approval_limit']" class="btn">{{'BUTTONS.EDIT_APPROVAL_LIMIT' | translate}}</button></td>
+            <td><button [routerLink]="['branch', branche?.id, 'access']" class="btn">{{'BUTTONS.EDIT_ACCESS' | translate}}</button></td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      
+</ng-container>
 

@@ -8,6 +8,7 @@ import {Param} from "../../model/param";
 import {Staff} from "../../model/staff";
 import {ConfirmationDialogService} from "../confirmation-dialog/confirmation-dialog.service";
 import { TranslateService } from '@ngx-translate/core';
+import { CostCenter } from '../../model/costCenter';
 
 
 @Component({
@@ -23,6 +24,12 @@ export class UserListComponent implements OnInit {
   companie?: Param | null;
   userGM?: User | null;
   staffs?: Staff[] | null = [];
+  costcenters?: CostCenter[] | null = [];
+  perimeter?:string;
+  costcenter?: CostCenter;
+  staff?: Staff;
+
+
 
   userForm = new FormGroup({
     selectCompany: new FormControl,
@@ -49,11 +56,27 @@ export class UserListComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.loadGM(params['id']);
       this.loadStaff(params['id']);
+      this.loadCostCenter(params['id']); 
+      
     });
-
+    
     this.service.search.subscribe((val: any) => {
       this.searchKey = val;
     })
+
+
+    for (let i = 0; i < this.staffs!.length; i++) {
+      console.log(this.staffs)
+      const element = this.staffs![i].mail;
+      const elementId = this.staffs![i].id
+      console.log(elementId)
+      console.log(this.costcenter?.owner)
+
+      if (this.costcenter?.owner === element!) {
+
+      }
+
+    }    
 
   }
 
@@ -79,6 +102,15 @@ export class UserListComponent implements OnInit {
       },
       (res: HttpErrorResponse) => console.log(res.message)
     );
+  }
+
+  loadCostCenter(idCompagnie: number){
+    this.service.CostCenterCompany(idCompagnie).subscribe(
+      (res: HttpResponse<CostCenter[]>) => {
+        this.costcenters = res.body;
+      },
+      (res: HttpErrorResponse) => console.log(res.message)
+    )
   }
 
   deleteStaff(idStaff: number) {
@@ -139,6 +171,22 @@ export class UserListComponent implements OnInit {
       }
     );
   }
+
+  
+  updateOwner(email: string, isStaff: boolean){
+    this.service.updateOwner(this.costcenter?.id!, email, isStaff).subscribe(
+      (response: HttpResponse<CostCenter>) => {
+        this.costcenter = response.body!;
+
+      },
+      (res: HttpErrorResponse) => {
+        console.log(res.message);
+      }
+    );
+  
+
+  }
+
 }
 
 

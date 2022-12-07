@@ -2,15 +2,15 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AccorService } from 'src/app/accor.service';
-import { CostCenter } from 'src/app/model/costCenter';
+import { CostCenter } from '../../model/costCenter';
 
 @Component({
-  selector: 'app-list-cc',
-  templateUrl: './list-cc.component.html',
-  styleUrls: ['./list-cc.component.scss']
+  selector: 'app-list-error-cc',
+  templateUrl: './list-error-cc.component.html',
+  styleUrls: ['./list-error-cc.component.scss']
 })
-export class ListCcComponent implements OnInit {
-  
+export class ListErrorCcComponent implements OnInit {
+
   searchKey: string = "";
   searchTerm: string = "";
   costcenters?: CostCenter[] | null = [];
@@ -26,9 +26,9 @@ export class ListCcComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
   
       this.loadCostCenter(params['id']); 
-      console.log(params['id'])
     });
 
+    console.log(this.costcenters)
    
 
       this.service.search.subscribe((val: any) => {
@@ -40,7 +40,6 @@ export class ListCcComponent implements OnInit {
     this.service.CostCenterCompany(idCompagnie).subscribe(
       (res: HttpResponse<CostCenter[]>) => {
         this.costcenters = res.body;
-        console.log(this.costcenters)
       },
       (res: HttpErrorResponse) => console.log(res.message)
     )
@@ -53,5 +52,5 @@ export class ListCcComponent implements OnInit {
     this.service.search.next(this.searchTerm);
   }
 
-
 }
+

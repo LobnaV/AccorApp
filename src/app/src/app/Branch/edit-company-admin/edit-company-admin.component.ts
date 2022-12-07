@@ -18,7 +18,6 @@ export class EditCompanyAdminComponent implements OnInit {
   branch?: Branch;
   user?: User;
   userCA?:any = [];
-  inputTxt = '';
 
   managerForm = new FormGroup({
     id: new FormControl(''),
@@ -87,19 +86,17 @@ export class EditCompanyAdminComponent implements OnInit {
       </div>
     </div>
    </div>`;
-
   
-    if(this.inputTxt != ''){
-     // this.list.push(this.inputTxt);
-    }
-  
-
+    // if(this.inputTxt != ''){
+    //  this.list.push(this.inputTxt);
+    // }
 
     doc.innerHTML += template
     return;
   }
 
   Update() {
+    
     const updateForm = {
       ...new Branch(),
       id: this.managerForm.get('id')?.value,

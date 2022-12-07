@@ -3,8 +3,8 @@ import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from './Account/login/login.component';
 import {SignupComponent} from './Account/signup/signup.component';
 import {AddBranchComponent} from './Branch/add-branch/add-branch.component';
-import {AddCostCenterComponent} from './CostCenter/add-cost-center/add-cost-center.component';
 import {EditCCComponent} from './CostCenter/edit-cc/edit-cc.component';
+import {ListErrorCcComponent} from './CostCenter/list-error-cc/list-error-cc.component';
 import {ListCcComponent} from './CostCenter/list-cc/list-cc.component';
 import {AccorGuard} from './Guard/accor.guard';
 import {LayoutComponent} from './layout/layout.component';
@@ -19,6 +19,7 @@ import {passwordResetInitRoute} from "./password-reset/init/password-reset-init.
 import { EditManagerComponent } from './Branch/edit-manager/edit-manager.component';
 import { EditApprovalLimitComponent } from './Branch/edit-approval-limit/edit-approval-limit.component';
 import { EditCompanyAdminComponent } from './Branch/edit-company-admin/edit-company-admin.component';
+import { UpdateCcComponent } from './Parameter/update-cc/update-cc.component';
 
 const ACCOUNT_ROUTES = [
   passwordResetFinishRoute,
@@ -40,9 +41,17 @@ const routes: Routes = [
       {path: 'compagny-param/:id/staff/:staffId/edit', component: UpdateStaffComponent},
       {path: 'compagny-param/:id/user-gm/:userId/edit', component: UpdateUserGmComponent},
 
+      {path: 'compagny-param/:id/costCenter/:costCenterId/edit', component: EditCCComponent},
+      {path: 'compagny-param/:id/listErrorCostCenter', component: ListErrorCcComponent},
+
+
       {path: 'branch/:id', component: ParameterComponent},
       {path: 'branch/:id/compagny-param/add', component:EditParamComponent},
       {path: 'branch/:id/compagny-param/:paramId/edit', component: EditParamComponent},
+
+      {path: 'branch/:id/costCenter/:paramId', component: ListCcComponent},
+      {path: 'branch/:id/costCenter/:paramId/edit/:costCenterId', component: UpdateCcComponent},
+
 
       {path: 'Home/branch/:id/edit-manager', component:EditManagerComponent},
       {path: 'Home/branch/:id/edit-approval_limit', component:EditApprovalLimitComponent},
@@ -50,8 +59,6 @@ const routes: Routes = [
 
       {path: 'UserList/:id', component: UserListComponent},
       {path: 'create/branch', component: AddBranchComponent},
-      {path: 'listCostCenter', component: ListCcComponent},
-      {path: 'addCostCenter', component: AddCostCenterComponent},
       {path: 'editCC/:CostCenterId ', component: EditCCComponent}
     ]
   },

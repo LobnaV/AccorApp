@@ -18,17 +18,16 @@ export class MainPageComponent implements OnInit {
   branches: any = [];
   allBranches: any = [];
 
+  role?: string;
 
   searchKey: string = "";
   searchTerm: string = "";
-
-  isVueGm = true;
 
   constructor(
     private service: AccorService,
     public translate: TranslateService,
     ) {
-
+    this.role = window.sessionStorage.getItem('roleCurrentUser')!;
     // Register translation languages
     translate.addLangs(['en', 'fr']);
     // Set default language

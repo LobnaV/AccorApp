@@ -1,9 +1,6 @@
 package com.App.Accor.repository;
 
-import com.App.Accor.model.Branch;
 import com.App.Accor.model.CompanyParameter;
-import com.App.Accor.model.ECategory;
-import com.App.Accor.model.Staff;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
