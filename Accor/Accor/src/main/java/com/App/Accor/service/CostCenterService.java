@@ -4,15 +4,19 @@ import com.App.Accor.model.CompanyParameter;
 import com.App.Accor.model.CostCenter;
 import com.App.Accor.model.Staff;
 import com.App.Accor.model.User;
+import com.App.Accor.playload.CodingListFormat;
 import com.App.Accor.playload.CsvFormatDTO;
 import com.App.Accor.repository.CostCenterRepository;
 import com.App.Accor.repository.StaffRepository;
 import com.App.Accor.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,6 +36,9 @@ public class CostCenterService {
 	@Autowired
 	private SftpUploadService sftpUploadService;
 
+	@Autowired
+	private SftpCodingListSevice sftpCodingListSevice;
+
 	public List<CostCenter> findByCompanyId(Long idCompagnie) {
 		return costCenterR.findByCompanyId(idCompagnie);
 	}
@@ -46,19 +53,56 @@ public class CostCenterService {
 			.orElseThrow();
 	}
 
-	public CostCenter add(CostCenter costCenter) {
+	public CostCenter postSave(CostCenter costCenter) {
 
-		return costCenterR.save(costCenter);
-	}
+		List<CodingListFormat> codingList = new ArrayList<>();
+		List<CostCenter> costCenters = costCenterR.findByCompanyId(costCenter.getCompany().getId());
+		costCenters.forEach(oneCostCenter -> {
+			CodingListFormat csvFormatCodingList = new CodingListFormat();
+			csvFormatCodingList.setMegaCodeCostCenter_ID(oneCostCenter.getCompany().getMegaCode() + " - " + oneCostCenter.getCode());
+			csvFormatCodingList.setMegaCodeCostCenter_Label(oneCostCenter.getCompany().getName() + " - " + oneCostCenter.getLabel());
+			csvFormatCodingList.setApprover(oneCostCenter.getOwner());
+			codingList.add(csvFormatCodingList);
 
-	public CostCenter edit(CostCenter costCenter) {
-		return costCenterR.save(costCenter);
+			System.out.println(csvFormatCodingList.getMegaCodeCostCenter_ID());
+			System.out.println(csvFormatCodingList.getMegaCodeCostCenter_Label());
+			System.out.println(csvFormatCodingList.getApprover());
+		});
+		try {
+			sftpCodingListSevice.uploadFileToSftp(codingList);
+
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		return null;
 	}
 
 
 	public CostCenter save(CostCenter costCenter) throws Exception {
 
-		return costCenterR.save(costCenter);
+		CostCenter costCenterSaved = costCenterR.save(costCenter);
+
+
+		List<CodingListFormat> codingList = new ArrayList<>();
+			List<CostCenter> costCenters = costCenterR.findByCompanyId(costCenter.getCompany().getId());
+			costCenters.forEach(oneCostCenter -> {
+				CodingListFormat csvFormatCodingList = new CodingListFormat();
+				csvFormatCodingList.setMegaCodeCostCenter_ID(oneCostCenter.getCompany().getMegaCode() + " - " + oneCostCenter.getCode());
+				csvFormatCodingList.setMegaCodeCostCenter_Label(oneCostCenter.getCompany().getName() + " - " + oneCostCenter.getLabel());
+				csvFormatCodingList.setApprover(oneCostCenter.getOwner());
+				codingList.add(csvFormatCodingList);
+
+				System.out.println(csvFormatCodingList.getMegaCodeCostCenter_ID());
+				System.out.println(csvFormatCodingList.getMegaCodeCostCenter_Label());
+				System.out.println(csvFormatCodingList.getApprover());
+			});
+			try {
+				sftpCodingListSevice.uploadFileToSftp(codingList);
+
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		return costCenterSaved ;
 
 	}
 
@@ -96,8 +140,6 @@ public class CostCenterService {
 		}
 		return costCenter;
 	}
-
-
 
 	public void delete(final Long id) {
 		Optional<CostCenter> costCenter = costCenterR.findById(id);

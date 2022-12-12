@@ -8,10 +8,12 @@
         <h4 *ngIf="this.costcenter?.id == null"> Create cost center</h4>
         <form [formGroup]="costCenterForm" (ngSubmit)='Update()'>
             <input type="text" formControlName="id" hidden>
+            <br>
             <div class="branch">
                 <h6>{{'PARAM.BRANCH_ID' | translate}}: {{branch?.code}}</h6>
                 <h6>{{'PARAM.BRANCH_NAME' | translate}}: {{branch?.name}}</h6>
             </div>
+            <br>
                 <div formGroupName="company">
                     <div class="form-group row" >
                         <label class="col-sm-2 col-form-label" for="megaCode">Hotel MegaCode:</label>
@@ -27,10 +29,16 @@
                     </div>
                 </div>
 
-            <div class="form-group row" >
+            <div class="form-group row"  *ngIf="costcenter?.id == null" >
                 <label class="col-sm-2 col-form-label" for="code">Code:</label>
                 <div class="col-sm-6">
                     <input type="text" id='code' class="form-control" formControlName="code" >
+                </div>
+            </div>
+            <div class="form-group row"  *ngIf="costcenter?.id">
+                <label class="col-sm-2 col-form-label" for="code">Code:</label>
+                <div class="col-sm-6">
+                    <input type="text" id='code' class="form-control" formControlName="code" readonly>
                 </div>
             </div>
 
@@ -45,22 +53,28 @@
                     <div formGroupName="userGM">
                         <input type="text" class="form-control" formControlName="id" hidden>
 
-                        <div class="form-group row">
+                        <div class="form-group row" *ngIf="costcenter?.id == null" >
                             <label class="col-sm-2 col-form-label" for="firstName" >{{'HEADER.FIRSTNAME' | translate}}:</label>
                             <div class="col-sm-6">
-                                <input classe="input" type="text" id='firstName' class="form-control" formControlName="firstName">
+                                <input classe="input" type="text" id='firstName' class="form-control" formControlName="firstName" readonly>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row" *ngIf="costcenter?.id == null">
                             <label class="col-sm-2 col-form-label" for="lastName">{{'HEADER.LASTNAME' | translate}}:</label>
                             <div class="col-sm-6">
-                                <input classe="input" type="text" id='lastName' class="form-control" formControlName="lastName" >
+                                <input classe="input" type="text" id='lastName' class="form-control" formControlName="lastName" readonly>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row" *ngIf="costcenter?.id == null">
                             <label class="col-sm-2 col-form-label" for="mail">Email:</label>
                             <div class="col-sm-6">
-                                <input type="mail" id='mail' class="form-control" formControlName="username" >
+                                <input type="mail" id='mail' class="form-control" formControlName="username" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row" *ngIf="costcenter?.id">
+                            <label class="col-sm-2 col-form-label" for="mail">Email:</label>
+                            <div class="col-sm-6">
+                                <input type="mail" id='mail' class="form-control" formControlName="username">
                             </div>
                         </div>
                         <div class="save">

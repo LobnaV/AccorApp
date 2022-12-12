@@ -24,10 +24,28 @@ export class UserListComponent implements OnInit {
   companie?: Param | null;
   userGM?: User | null;
   staffs?: Staff[] | null = [];
-  costcenters?: CostCenter[] | null = [];
+  costcenters?: CostCenter[] | any = [];
   perimeter?:string;
   costcenter?: CostCenter;
   staff?: Staff;
+
+  costCenterForm = new FormGroup({
+    id: new FormControl(''),
+    code: new FormControl(''),
+    label: new FormControl(''),
+    owner: new FormControl(''),
+    company: new FormGroup({
+      id: new FormControl(''),
+      megaCode: new FormControl(''),
+      name: new FormControl(''),
+      userGM: new FormGroup({
+        id: new FormControl(''),
+        username: new FormControl(''),
+        firstName: new FormControl(''),
+        lastName: new FormControl(''),
+      }),
+    }),
+  })
 
 
 
@@ -169,6 +187,21 @@ export class UserListComponent implements OnInit {
         console.log(res.message);
         this.isLoading = false;
       }
+    );
+  }
+
+  save(){
+    const updateForm = new CostCenter(
+      this.costCenterForm.get('id')?.value,
+      this.costCenterForm.get('code')?.value,
+      this.costCenterForm.get('label')?.value,
+      this.costCenterForm.get('owner')?.value);
+      
+    this.service.updateCostCenter(updateForm)
+    .subscribe(
+      (res: HttpResponse<CostCenter>) => {
+      },
+      (res: HttpErrorResponse) => console.log(res.message)
     );
   }
 

@@ -77,6 +77,9 @@
           <input type="text" class="form-control" formControlName="generalManagerN2">
         </div>
       </div>
+      <div><i style="color:#8F1D1D">Any modification here will result in having the General Manager becoming the dispatcher automatically. Please don’t hesitate to contact the GM to ask him to rearrange the workflow the way he would like to.
+        Alert: Please pay specific attention to the email address of the GM N+1 - which will impact the entierty of the branch.  
+        </i></div>
       <div class="save">
         <button type="submit" class="btn bnt-Save" [disabled]="paramForm.invalid">{{this.param?.id ? 'edit' :
           'add'}}</button>

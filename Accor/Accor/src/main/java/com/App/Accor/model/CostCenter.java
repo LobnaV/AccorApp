@@ -25,7 +25,7 @@ public class CostCenter implements Serializable {
 
 	private String owner;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private CompanyParameter company;
 
 }

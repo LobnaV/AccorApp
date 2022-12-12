@@ -76,7 +76,11 @@
 <!-- vue NE -->
 <div class="tables" *ngIf="companie?.branch?.perimeter == 'Northern Europe'">
 
-  <p> General manager email</p>
+  <div style="display: flex; justify-content: space-between;">
+    <p> General manager email</p>
+    <button class="btn btn-save" (click)="save" style="background-color:#B9E9A2; margin-bottom: 0.3rem;" >Save</button>
+  </div>
+
   <table class="table">
     <thead class="thead-dark">
       <tr>
@@ -111,7 +115,7 @@
         <th></th>
       </tr>
     </thead>
-    <tbody class="data" *ngFor="let data of costcenters ">
+    <tbody class="data" *ngFor="let data of costcenters | filter: searchKey:'mail' ">
       <tr>
         <th>{{data?.code}}</th>
         <th>{{data?.label}}</th>
@@ -127,6 +131,6 @@
   </table>
 
   <div>
-    <button [routerLink]="'listErrorCostCenter'"> Exceptions</button>
+    <button class="btn" style="background-color:#C5C5C5;" [routerLink]="'listErrorCostCenter'"> Exceptions</button>
   </div>
 </div>

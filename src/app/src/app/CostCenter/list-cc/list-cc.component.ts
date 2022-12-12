@@ -14,7 +14,7 @@ export class ListCcComponent implements OnInit {
   
   searchKey: string = "";
   searchTerm: string = "";
-  costcenters?: CostCenter[] | null = [];
+  costcenters: CostCenter[] | any = [];
   company?: Param
 
   constructor(

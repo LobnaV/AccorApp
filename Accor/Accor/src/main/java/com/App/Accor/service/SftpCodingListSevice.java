@@ -2,14 +2,18 @@ package com.App.Accor.service;
 
 import com.App.Accor.Config.UploadGateway;
 import com.App.Accor.playload.CodingListFormat;
-import com.App.Accor.playload.CsvFormatDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.List;
 
+
+@Service
+@Transactional
 public class SftpCodingListSevice {
 
 	private final String DELIMITER = ";";
@@ -36,10 +40,10 @@ public class SftpCodingListSevice {
 	}
 
 	public void uploadFileToSftp(List<CodingListFormat> csvFormats) throws FileNotFoundException {
-		File csvOutputFile = new File("Accortemplateuserssheet.csv");
+		File csvOutputFile = new File("CostCenterList.csv");
 		try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
 			pw.println(headerCsv());
-			csvFormats.forEach(codingList -> pw.println(convertToCSV(codingList)));
+			csvFormats.forEach(codingListx -> pw.println(convertToCSV(codingListx)));
 		}
 
 		uploadGateway.upload(csvOutputFile);
