@@ -168,6 +168,11 @@ export class AccorService {
       .post<CostCenter>(this.CCUrl, costCenter, {observe: 'response'})
   }
 
+  cl(costCenter:CostCenter): Observable<HttpResponse<CostCenter>>{
+    return this.http
+      .post<CostCenter>(`${this.CCUrl}/cl`, costCenter, {observe: 'response'})
+  }
+
   CostCenterId(id: string): Observable<HttpResponse<CostCenter>>{
     return this.http
       .get<CostCenter>(`${this.CCUrl}/${id}`, { observe: 'response' })

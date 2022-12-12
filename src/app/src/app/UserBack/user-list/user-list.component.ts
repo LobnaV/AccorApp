@@ -196,10 +196,11 @@ export class UserListComponent implements OnInit {
       this.costCenterForm.get('code')?.value,
       this.costCenterForm.get('label')?.value,
       this.costCenterForm.get('owner')?.value);
-      
-    this.service.updateCostCenter(updateForm)
+
+    this.service.cl(updateForm)
     .subscribe(
       (res: HttpResponse<CostCenter>) => {
+        console.log('ok')
       },
       (res: HttpErrorResponse) => console.log(res.message)
     );

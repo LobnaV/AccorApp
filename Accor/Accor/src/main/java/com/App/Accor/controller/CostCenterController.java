@@ -27,11 +27,11 @@ public class CostCenterController {
 		return service.costCenterList();
 	}
 
-/*	@PostMapping
+	@PostMapping("/cl")
 	public ResponseEntity<CostCenter> postSave(@RequestBody CostCenter costCenter) throws Exception {
 		CostCenter postSave = service.postSave(costCenter);
 		return ResponseEntity.ok(postSave);
-	}*/
+	}
 
 	@PreAuthorize("hasRole('ROLE_COMPANYADMIN')")
 	@PostMapping
