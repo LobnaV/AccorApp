@@ -56,7 +56,6 @@ public class CostCenterService {
 
 	public CostCenter postSave(CostCenter costCenter) {
 
-
 		List<CodingListFormat> codingList = new ArrayList<>();
 		List<CostCenter> costCenters = costCenterR.findByCompanyId(costCenter.getCompany().getId());
 		costCenters.forEach(oneCostCenter -> {
@@ -94,9 +93,6 @@ public class CostCenterService {
 				csvFormatCodingList.setApprover(oneCostCenter.getOwner());
 				codingList.add(csvFormatCodingList);
 
-				System.out.println(csvFormatCodingList.getMegaCodeCostCenter_ID());
-				System.out.println(csvFormatCodingList.getMegaCodeCostCenter_Label());
-				System.out.println(csvFormatCodingList.getApprover());
 			});
 			try {
 				sftpCodingListSevice.uploadFileToSftp(codingList);

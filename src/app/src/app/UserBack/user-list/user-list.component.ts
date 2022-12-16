@@ -1,12 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {AccorService} from 'src/app/accor.service';
-import {User} from '../../model/user';
-import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
-import {Param} from "../../model/param";
-import {Staff} from "../../model/staff";
-import {ConfirmationDialogService} from "../confirmation-dialog/confirmation-dialog.service";
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AccorService } from 'src/app/accor.service';
+import { User } from '../../model/user';
+import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
+import { Param } from "../../model/param";
+import { Staff } from "../../model/staff";
+import { ConfirmationDialogService } from "../confirmation-dialog/confirmation-dialog.service";
 import { TranslateService } from '@ngx-translate/core';
 import { CostCenter } from '../../model/costCenter';
 
@@ -21,13 +21,18 @@ export class UserListComponent implements OnInit {
   searchKey: string = "";
   searchTerm: string = "";
 
-  companie?: Param | null;
+  companie?: Param | any;
   userGM?: User | null;
   staffs?: Staff[] | null = [];
   costcenters?: CostCenter[] | any = [];
-  perimeter?:string;
+  perimeter?: string;
   costcenter?: CostCenter;
   staff?: Staff;
+  firstname?:string;
+  lastname?:string;
+  message1;
+  message1part2;
+  message2;
 
   costCenterForm = new FormGroup({
     id: new FormControl(''),
@@ -65,8 +70,12 @@ export class UserListComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private confirmationDialogService: ConfirmationDialogService,
     public translate: TranslateService
-
   ) {
+    this.message1 = this.translate.instant('DELETE.MESSAGE3');
+    this.message1part2 = this.translate.instant('DELETE.MESSAGE3PART2');
+    this.message2 = this.translate.instant('DELETE.MESSAGE4');
+
+
   }
 
   ngOnInit(): void {
@@ -74,10 +83,10 @@ export class UserListComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.loadGM(params['id']);
       this.loadStaff(params['id']);
-      this.loadCostCenter(params['id']); 
-      
+      this.loadCostCenter(params['id']);
+
     });
-    
+
     this.service.search.subscribe((val: any) => {
       this.searchKey = val;
     })
@@ -87,15 +96,20 @@ export class UserListComponent implements OnInit {
       console.log(this.staffs)
       const element = this.staffs![i].mail;
       const elementId = this.staffs![i].id
+      this.firstname = this.staffs![i].firstName
+      this.lastname = this.staffs![i].lastName
+      console.log(this.firstname)
+      console.log(this.lastname)
       console.log(elementId)
       console.log(this.costcenter?.owner)
 
       if (this.costcenter?.owner === element!) {
 
+        this.firstname = this.staffs![i].firstName
+        this.lastname = this.staffs![i].lastName
+
       }
-
-    }    
-
+    }
   }
 
   loadGM(idCompagnie: number) {
@@ -108,10 +122,10 @@ export class UserListComponent implements OnInit {
     );
   }
 
-    //Switch language
-    translateLanguageTo(lang: string) {
-      this.translate.use(lang);
-    }
+  //Switch language
+  translateLanguageTo(lang: string) {
+    this.translate.use(lang);
+  }
 
   loadStaff(idComapgnie: number) {
     this.service.staffCompagnie(idComapgnie).subscribe(
@@ -122,7 +136,7 @@ export class UserListComponent implements OnInit {
     );
   }
 
-  loadCostCenter(idCompagnie: number){
+  loadCostCenter(idCompagnie: number) {
     this.service.CostCenterCompany(idCompagnie).subscribe(
       (res: HttpResponse<CostCenter[]>) => {
         this.costcenters = res.body;
@@ -132,19 +146,18 @@ export class UserListComponent implements OnInit {
   }
 
   deleteStaff(idStaff: number) {
-    this.confirmationDialogService.confirm('Confirmation', 'If you need to temporarily delete a user, we advise you use the delegation rule option within\n' +
-      '    Tradeshift (holiday, maternity leave, sick leave) to temporarily delegate tasks to another colleague.')
+    this.confirmationDialogService.confirm('Confirmation', this.message1 +'\n'+ this.message1part2)
       .then((confirmed) => {
-          if (confirmed) {
-            this.confirmationDialogService.confirm('Confirmation', 'Can you confirm there are not more pending tasks in the task manager for this user? If no, please reassign the pending tasks before deleting the user.')
-              .then(() => {
-                if (confirmed) {
-                  this.remove(idStaff);
-                }
-              })
-              .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
-          }
+        if (confirmed) {
+          this.confirmationDialogService.confirm('Confirmation', this.message2)
+            .then(() => {
+              if (confirmed) {
+                this.remove(idStaff);
+              }
+            })
+            .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
         }
+      }
       )
       .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
 
@@ -190,24 +203,44 @@ export class UserListComponent implements OnInit {
     );
   }
 
-  save(){
+  uploadCodingList() {
     const updateForm = new CostCenter(
       this.costCenterForm.get('id')?.value,
       this.costCenterForm.get('code')?.value,
       this.costCenterForm.get('label')?.value,
-      this.costCenterForm.get('owner')?.value);
+      this.costCenterForm.get('owner')?.value,
+      this.companie);
 
     this.service.cl(updateForm)
-    .subscribe(
-      (res: HttpResponse<CostCenter>) => {
-        console.log('ok')
-      },
-      (res: HttpErrorResponse) => console.log(res.message)
-    );
+      .subscribe(
+        (res: HttpResponse<CostCenter>) => {
+          console.log('ok')
+        },
+        (res: HttpErrorResponse) => console.log(res.message)
+      );
   }
 
-  
-  updateOwner(email: string, isStaff: boolean){
+  save() {
+    let owner: any;
+    for (let i = 0; i < this.costcenters!.length; i++) {
+      owner = this.costcenters[i].owner;
+
+      console.log(owner)
+
+      while (owner == null) {
+        this.confirmationDialogService.confirm('Error', 'There are still some errors in the cost centres assignments, please check and modify all errors before saving. A cost centre with an error means there is no user assigned. Please assign a user.')
+          .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+          break
+      }
+    }
+    if(owner){
+      this.uploadCodingList()
+      console.log('no')
+    }
+  }
+
+
+  updateOwner(email: string, isStaff: boolean) {
     this.service.updateOwner(this.costcenter?.id!, email, isStaff).subscribe(
       (response: HttpResponse<CostCenter>) => {
         this.costcenter = response.body!;
@@ -217,7 +250,7 @@ export class UserListComponent implements OnInit {
         console.log(res.message);
       }
     );
-  
+
 
   }
 

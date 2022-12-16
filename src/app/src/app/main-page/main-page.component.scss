@@ -6,6 +6,33 @@
     }
 }
 
+
+.container-fluid2{
+
+    .listeDeroulante2 { 
+        margin: auto;
+        width: 40%;
+
+        select {
+            width: 75%;
+        }
+
+        .part2{
+            .ngForm{
+                display: flex;
+                justify-content: center;
+            }
+        }
+        .btn{
+            border: none;
+            margin-bottom: 0.5rem;
+
+        }
+    }
+}
+
+
+
 .container-fluid{
     display: flex;
     .contenue {
@@ -25,7 +52,14 @@
                 justify-content: center;
             }
         }
+
+        .btn{
+            border: none;
+            margin-bottom: 0.5rem;
+        }
     }
+
+    
 
     #searchBar{
         margin-left: auto;

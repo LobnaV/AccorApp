@@ -1,11 +1,7 @@
 <div class="container">
   <div>
-    <H6 style="margin-top: 3rem;">After modifications, it is possible to have inconsistencies with cost center and their users. <br>
-      Please find below the list of all users without cost center that will be inactive.
-    </H6>
-    <H6 style="text-decoration: underline; margin-top: 1rem;">
-      Reminder: one cost center must have one assigned user, one user must have at least one cost center.
-    </H6>
+    <H6 style="margin-top: 3rem;">{{'EXCEPTION.DESCRIPTION1' | translate}}</H6>
+    <H6 style="text-decoration: underline; margin-top: 1rem;">{{'EXCEPTION.DESCRIPTION2' | translate}}</H6>
   </div>
 
   <table class="table" style="margin-top: 3rem;">
@@ -19,9 +15,12 @@
       </tr>
     </thead>
     <tbody class="data" *ngFor="let data of costcenters" style="background-color: #C5C5C5;">
-      <tr *ngIf="data?.owner == null">
-        <th>{{data?.code}}</th>
-        <th>{{data?.label}}</th>
+      <tr *ngIf="data?.owner == null || data?.code == null">
+        <td *ngIf="data?.code != null">{{data?.code}}</td>
+        <td *ngIf="data?.code == null" style="color:#8F1D1D;">ERROR</td>
+        <td *ngIf="data?.label != null" >{{data?.label}}</td>
+        <td *ngIf="data?.label == null" style="color:#8F1D1D;">ERROR</td>
+        <td *ngIf="data?.owner != null">{{data?.owner}}</td>
         <td *ngIf="data?.owner == null" style="color:#8F1D1D;">ERROR</td>
         <!-- <th>{{data?.firstName}}</th>
         <th>{{data?.lastName}}</th> -->

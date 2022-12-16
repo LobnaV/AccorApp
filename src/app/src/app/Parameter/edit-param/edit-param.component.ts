@@ -69,7 +69,7 @@ export class EditParamComponent implements OnInit {
               name: this.param?.name,
               category:{
                 id: this.param?.category?.id,
-                name: this.param?.category?.name
+                name: this.param?.category?.name?.toString()
               },
               generalManagerN1: this.param?.generalManagerN1,
               generalManagerN2: this.param?.generalManagerN2,
@@ -88,6 +88,7 @@ export class EditParamComponent implements OnInit {
         this.param = new Param();
       }
     })
+
   }
 
   Update() {

@@ -18,13 +18,13 @@
                     <div class="form-group row" >
                         <label class="col-sm-2 col-form-label" for="megaCode">Hotel MegaCode:</label>
                         <div class="col-sm-6">
-                            <input type="text" id='megaCode' class="form-control" formControlName="megaCode" readonly>
+                            <input style="background-color: #e9ecef;"  type="text" id='megaCode' class="form-control" formControlName="megaCode" readonly>
                         </div>
                     </div>
                     <div class="form-group row" >
                         <label class="col-sm-2 col-form-label" for="name">{{'HOTELNAME' | translate}}:</label>
                         <div class="col-sm-6">
-                            <input type="text" id='name' class="form-control" formControlName="name" readonly>
+                            <input style="background-color: #e9ecef;" type="text" id='name' class="form-control" formControlName="name" readonly>
                         </div>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
             <div class="form-group row"  *ngIf="costcenter?.id">
                 <label class="col-sm-2 col-form-label" for="code">Code:</label>
                 <div class="col-sm-6">
-                    <input type="text" id='code' class="form-control" formControlName="code" readonly>
+                    <input style="background-color: #e9ecef;" type="text" id='code' class="form-control" formControlName="code" readonly>
                 </div>
             </div>
 
@@ -54,27 +54,27 @@
                         <input type="text" class="form-control" formControlName="id" hidden>
 
                         <div class="form-group row" *ngIf="costcenter?.id == null" >
-                            <label class="col-sm-2 col-form-label" for="firstName" >{{'HEADER.FIRSTNAME' | translate}}:</label>
+                            <label class="col-sm-2 col-form-label" for="firstName" >{{'HEADER.FIRSTNAME' | translate}}*:</label>
                             <div class="col-sm-6">
-                                <input classe="input" type="text" id='firstName' class="form-control" formControlName="firstName" readonly>
+                                <input style="background-color: #e9ecef;" classe="input" type="text" id='firstName' class="form-control" formControlName="firstName" readonly>
                             </div>
                         </div>
                         <div class="form-group row" *ngIf="costcenter?.id == null">
-                            <label class="col-sm-2 col-form-label" for="lastName">{{'HEADER.LASTNAME' | translate}}:</label>
+                            <label class="col-sm-2 col-form-label" for="lastName">{{'HEADER.LASTNAME' | translate}}*:</label>
                             <div class="col-sm-6">
-                                <input classe="input" type="text" id='lastName' class="form-control" formControlName="lastName" readonly>
+                                <input style="background-color: #e9ecef;" classe="input" type="text" id='lastName' class="form-control" formControlName="lastName" readonly>
                             </div>
                         </div>
                         <div class="form-group row" *ngIf="costcenter?.id == null">
-                            <label class="col-sm-2 col-form-label" for="mail">Email:</label>
+                            <label class="col-sm-2 col-form-label" for="mail">Email*:</label>
                             <div class="col-sm-6">
-                                <input type="mail" id='mail' class="form-control" formControlName="username" readonly>
+                                <input style="background-color: #e9ecef;" type="mail" id='mail' class="form-control" formControlName="username" readonly>
                             </div>
                         </div>
                         <div class="form-group row" *ngIf="costcenter?.id">
-                            <label class="col-sm-2 col-form-label" for="mail">Email:</label>
+                            <label class="col-sm-2 col-form-label" for="mail">Email*:</label>
                             <div class="col-sm-6">
-                                <input type="mail" id='mail' class="form-control" formControlName="username">
+                                <input  style="background-color: #e9ecef;" type="mail" id='mail' class="form-control" formControlName="username">
                             </div>
                         </div>
                         <div class="save">

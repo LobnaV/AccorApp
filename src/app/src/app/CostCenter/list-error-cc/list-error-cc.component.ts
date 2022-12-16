@@ -1,6 +1,7 @@
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { AccorService } from 'src/app/accor.service';
 import { CostCenter } from '../../model/costCenter';
 
@@ -18,7 +19,7 @@ export class ListErrorCcComponent implements OnInit {
   constructor(
     private service: AccorService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    public translate: TranslateService
   ) { }
 
   ngOnInit(): void {
@@ -44,6 +45,11 @@ export class ListErrorCcComponent implements OnInit {
       (res: HttpErrorResponse) => console.log(res.message)
     )
   }
+
+    //Switch language
+    translateLanguageTo(lang: string) {
+      this.translate.use(lang);
+    }
 
 
   Search(event: any) {

@@ -66,3 +66,9 @@ VALUES ('ps.accor+H3086-BO@gmail.com', 'Beatrice', 'Soubabere', 2),
 			 ('ps.accor+H3347-FB1@gmail.com', 'Sandra', 'Bento', 6),
 			 ('ps.accor+H3347-FB@gmail.com', 'Sandra', 'Lopes', 6),
 			 ('ps.accor+H3347-TE@gmail.com', 'Paulo', 'Nunes', 6);
+
+
+INSERT INTO `cost_center`( `code`, `label`, `owner`, `company_id`)
+VALUES ('3RZ','RESTAURANT 5','ps.accor+H3347-FB@gmail.com',6),
+			 ('3QZ','KITCHEN','ps.accor+H3347-FB1@gmail.com',6),
+			 ('3RZ','RESTAURANT 5','ps.accor+H3086-BO@gmail.com',2)

@@ -1,14 +1,14 @@
-<div class="form-group col-md-8 " id="searchBar">
-  <div>Megacode {{companie?.megaCode}} - {{'HOTELNAME' | translate}} {{companie?.name}}</div>
-  <div class="btn_searchbar">
-    <input class="form-control" type="text" [(ngModel)]="searchTerm" (keyup)="Search($event)"
-      placeholder="{{'BUTTONS.SEARCH_USER' | translate}}">
-    <img type="button" class="cursor-pointer" src="">
-  </div>
-</div>
-
 <!-- vue SE -->
 <div class="tables" *ngIf="companie?.branch?.perimeter == 'Southern Europe'">
+
+  <div class="form-group col-md-8 " id="searchBar">
+    <div>Megacode {{companie?.megaCode}} - {{'HOTELNAME' | translate}} {{companie?.name}}</div>
+    <div class="btn_searchbar">
+      <input class="form-control" type="text" [(ngModel)]="searchTerm" (keyup)="Search($event)"
+        placeholder="{{'BUTTONS.SEARCH_USER' | translate}}">
+      <img type="button" class="cursor-pointer" src="">
+    </div>
+  </div>
 
   <table class="table">
     <thead class="thead-dark">
@@ -76,11 +76,22 @@
 <!-- vue NE -->
 <div class="tables" *ngIf="companie?.branch?.perimeter == 'Northern Europe'">
 
-  <div style="display: flex; justify-content: space-between;">
-    <p> General manager email</p>
-    <button class="btn btn-save" (click)="save()" style="background-color:#B9E9A2; margin-bottom: 0.3rem;" >Save</button>
+  <div class="form-group col-md-8 " id="searchBar">
+    <div>Megacode {{companie?.megaCode}} - {{'HOTELNAME' | translate}} {{companie?.name}}</div>
+    <div class="btn_searchbar">
+      <input class="form-control" type="text" [(ngModel)]="searchTerm" (keyup)="Search($event)"
+        placeholder="{{'BUTTONS.SEARCH_CODECC' | translate}}">
+      <img type="button" class="cursor-pointer" src="">
+    </div>
   </div>
 
+  <div class="btns">
+      <button class="btn  p-2" style="background-color:#E38D9B; margin-bottom: 0.3rem; margin-right: 1rem;" [routerLink]="'listErrorCostCenter'">Exceptions</button>
+      <button class="btn btn-save  p-2" (click)="save()" style="background-color:#B9E9A2; margin-bottom: 0.3rem;">Save</button>
+  </div>
+  <div>
+    <p>General manager</p>
+  </div>
   <table class="table">
     <thead class="thead-dark">
       <tr>
@@ -107,16 +118,16 @@
   <table class="table" *ngIf="staffs">
     <thead class="thead-dark">
       <tr>
-        <th scope="col">Cost center</th>
-        <th scope="col">Cost center name</th>
+        <th scope="col">Cost centre</th>
+        <th scope="col">Cost centre name</th>
         <th scope="col">Email </th>
         <!-- <th scope="col">{{'HEADER.FIRSTNAME' | translate}}</th>
         <th scope="col">{{'HEADER.LASTNAME' | translate}}</th> -->
         <th></th>
       </tr>
     </thead>
-    <tbody class="data" *ngFor="let data of costcenters | filter: searchKey:'mail' ">
-      <tr>
+    <tbody class="data" [formGroup]="costCenterForm" *ngFor="let data of costcenters | filter: searchKey:'code'">
+      <tr *ngIf="data?.code != null || data?.label != null">
         <th>{{data?.code}}</th>
         <th>{{data?.label}}</th>
         <td *ngIf="data?.owner != null">{{data?.owner}}</td>
@@ -130,7 +141,5 @@
     </tbody>
   </table>
 
-  <div>
-    <button class="btn" style="background-color:#C5C5C5;" [routerLink]="'listErrorCostCenter'"> Exceptions</button>
-  </div>
+
 </div>

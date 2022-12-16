@@ -24,7 +24,8 @@ public class CompanyParameter implements Serializable {
 	private String name;
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	private Approval category;
+	private Category category;
+	//private Approval category;
 
 	private String generalManagerN1;
 
