@@ -1,0 +1,27 @@
+h5{
+    padding: 0.5rem;
+}
+
+.details{
+    background-color: black;
+    p{
+        color: white;
+        padding: 0.5rem;
+    }
+}
+.form-group{
+    display: flex;
+    padding-bottom: 0.5rem;
+    .form-control{
+        width: 70%;
+        margin-left: 1rem
+    }
+}
+.save{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 8rem;
+    .btn-Save{
+        background-color: #B9E9A2;
+    }
+}
