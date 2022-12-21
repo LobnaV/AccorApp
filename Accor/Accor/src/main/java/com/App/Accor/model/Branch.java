@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Collection;
 
 
 @Data
@@ -22,13 +23,19 @@ public class Branch implements Serializable {
 
 	private String name;
 
-	private String countryCode;
+	/*@ManyToMany
+		@JoinTable(
+		name = "branches_users",
+		joinColumns = @JoinColumn(
+			name = "branch_id", referencedColumnName = "id"),
+		inverseJoinColumns = @JoinColumn(
+			name = "user_id", referencedColumnName = "id"))
+	private Collection<User> userMGM;*/
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private User userMGM;
 
-	//* à verififer avec Mohamed, commment faire le lien entre le perimetre de la branche
-	// et le user MA qui appartient a un perimetre
+
 	//	@NotNull
 	@Enumerated(EnumType.STRING)
 	private EPerimeter perimeter;

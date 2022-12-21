@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import {BehaviorSubject, Observable} from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Branch } from './model/branch';
-import { CostCenter } from './CostCenter/cost-center';
+import { CostCenter } from './model/costCenter';
 import { Param } from './model/param';
 import { User } from './model/user';
 import { Staff } from './model/staff';
@@ -81,6 +81,11 @@ export class AccorService {
       .put<Staff>(this.staffUrl,  staff, { observe: 'response' });
   }
 
+  updateManager(staff:Staff): Observable<HttpResponse<Staff>> {
+    return this.http
+      .put<Staff>(`${this.staffUrl}/test`,  staff, { observe: 'response' });
+  }
+
 
   deleteStaff(id: number): Observable<HttpResponse<void>> {
     return this.http.delete<void>(`${this.staffUrl}/${id}`, { observe: 'response' });
@@ -94,14 +99,11 @@ export class AccorService {
   // Service User
 
 
-  users(){
-    return this.http
-      .get<User[]>(this.urlLocal + "/List")
-  }
 
-  addUser(user:User){
+
+  addUser(user:User): Observable<HttpResponse<User>> {       
     return this.http
-      .post<User>(this.urlLocal + "/AddUser/", user)
+      .post<User>(`${this.urlLocal}`, user, { observe: 'response' });
   }
 
   updateUser(user:User): Observable<HttpResponse<User>> {
@@ -116,18 +118,18 @@ export class AccorService {
     return this.http.get<User>(`${this.urlLocal}/${id}`, { observe: 'response' })
   }
 
-  deleteUser(userId:User){
+  deleteUser(userId:number){
     return this.http
       .delete<User>(this.urlLocal + "/delete/" + userId)
   }
 
-  dispId(id:number){
-    return this.http
-      .get<User>(this.urlLocal + "/x/"+ id)
-  }
-
   branchId(id:number) : Observable<HttpResponse<Branch>>{
     return this.http.get<Branch>(`${this.local}/${id}`, { observe: 'response' })
+  }
+
+  users(): Observable<HttpResponse<User[]>>{
+    return this.http
+      .get<User[]>(this.urlLocal + "/List", { observe: 'response'})
   }
 
   branches(): Observable<HttpResponse<Branch[]>> {
@@ -139,16 +141,21 @@ export class AccorService {
     return this.http
       .post<Branch>(this.local, branch, { observe: 'response'})
   }
-
-  //*
-  allBranchesSE(): Observable<HttpResponse<Branch[]>>{
+  
+  updateBranch(branch:Branch): Observable<HttpResponse<Branch>>{
     return this.http
-      .get<Branch[]>(`${this.local}/AllBranchesSE`, { observe: 'response'})
+      .put<Branch>(this.local, branch, { observe: 'response'})
   }
 
-  allBranchesNE(): Observable<HttpResponse<Branch[]>>{
+  allBranches(): Observable<HttpResponse<Branch[]>>{
     return this.http
-      .get<Branch[]>(`${this.local}/AllBranchesNE`, { observe: 'response'})
+      .get<Branch[]>(`${this.local}/allBranches`, { observe: 'response'})
+  }
+
+  // Cost Center
+  CostCenterCompany(id: number): Observable<HttpResponse<CostCenter[]>> {
+    return this.http
+      .get<CostCenter[]>(`${this.CCUrl}/costCenter/${id}`, {observe: 'response'})
   }
 
   costCenterList(){
@@ -156,19 +163,30 @@ export class AccorService {
       .get<CostCenter[]>(this.CCUrl + "/List")
   }
 
-  addcostCenter(costCenter:CostCenter){
+  addcostCenter(costCenter:CostCenter): Observable<HttpResponse<CostCenter>>{
     return this.http
-      .post<CostCenter>(this.CCUrl + "/AddCostCenter/", costCenter)
+      .post<CostCenter>(this.CCUrl, costCenter, {observe: 'response'})
   }
 
-  CostCenterId(megaCode_CostCenter_ID: string){
+  cl(costCenter:CostCenter): Observable<HttpResponse<CostCenter>>{
     return this.http
-      .get<CostCenter>(this.CCUrl + "/" + megaCode_CostCenter_ID)
+      .post<CostCenter>(`${this.CCUrl}/cl`, costCenter, {observe: 'response'})
   }
 
-  updateCostCenter(costCenter:CostCenter){
+  CostCenterId(id: string): Observable<HttpResponse<CostCenter>>{
     return this.http
-      .put<CostCenter>(this.CCUrl + "/editCostCenter/" + costCenter.megaCode_CostCenter_ID, costCenter);
+      .get<CostCenter>(`${this.CCUrl}/${id}`, { observe: 'response' })
+  }
+
+  updateOwner(idCostCenter: number, email: string, isStaff: boolean): Observable<HttpResponse<CostCenter>> {
+    return this.http.get<CostCenter>(`${this.CCUrl}/${idCostCenter}/owner?email=${email}&isStaff=${isStaff}`, {
+      observe: 'response',
+    });
+  }
+
+  updateCostCenter(costCenter:CostCenter): Observable<HttpResponse<CostCenter>>{
+    return this.http
+      .put<CostCenter>(this.CCUrl, costCenter, { observe: 'response' });
   }
 
   deleteCC(ccId:CostCenter){

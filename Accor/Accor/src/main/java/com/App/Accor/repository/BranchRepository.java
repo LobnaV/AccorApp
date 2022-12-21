@@ -16,6 +16,6 @@ import java.util.Optional;
 public interface BranchRepository extends JpaRepository<Branch, Long> {
 
 	Optional<Branch> findByUserMGMUsername(String username);
-	List<Branch> findByPerimeter (EPerimeter perimeter);
+	List<Branch> findAll();
 
 }

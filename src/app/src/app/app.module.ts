@@ -12,8 +12,7 @@ import { UserListComponent } from './UserBack/user-list/user-list.component';
 import { ParameterComponent } from './Parameter/parameter/parameter.component';
 import { EditParamComponent } from './Parameter/edit-param/edit-param.component';
 import { AddBranchComponent } from './Branch/add-branch/add-branch.component';
-import { ListCcComponent } from './CostCenter/list-cc/list-cc.component';
-import { AddCostCenterComponent } from './CostCenter/add-cost-center/add-cost-center.component';
+import { ListErrorCcComponent } from './CostCenter/list-error-cc/list-error-cc.component';
 import { EditCCComponent } from './CostCenter/edit-cc/edit-cc.component';
 import { CommonModule } from '@angular/common';
 import {MatRadioModule} from '@angular/material/radio';
@@ -29,6 +28,11 @@ import {UpdateStaffComponent} from "./UserBack/update-staff/update-staff.compone
 import {UpdateUserGmComponent} from "./UserBack/update-user/update-user-gm.component";
 import {PasswordResetInitComponent} from "./password-reset/init/password-reset-init.component";
 import {PasswordResetFinishComponent} from "./password-reset/finish/password-reset-finish.component";
+import { EditManagerComponent } from './Branch/edit-manager/edit-manager.component';
+import { EditApprovalLimitComponent } from './Branch/edit-approval-limit/edit-approval-limit.component';
+import { EditCompanyAdminComponent } from './Branch/edit-company-admin/edit-company-admin.component';
+import { ListCcComponent } from './CostCenter/list-cc/list-cc.component';
+import { UpdateCcComponent } from './Parameter/update-cc/update-cc.component';
 
 // Factory function required during AOT compilation
 export function httpTranslateLoaderFactory(http: HttpClient) {
@@ -46,8 +50,7 @@ export function httpTranslateLoaderFactory(http: HttpClient) {
     ParameterComponent,
     EditParamComponent,
     AddBranchComponent,
-    ListCcComponent,
-    AddCostCenterComponent,
+    ListErrorCcComponent,
     EditCCComponent,
     LoginComponent,
     SignupComponent,
@@ -57,7 +60,12 @@ export function httpTranslateLoaderFactory(http: HttpClient) {
     UpdateStaffComponent,
     UpdateUserGmComponent,
     PasswordResetInitComponent,
-    PasswordResetFinishComponent
+    PasswordResetFinishComponent,
+    EditManagerComponent,
+    EditApprovalLimitComponent,
+    EditCompanyAdminComponent,
+    ListCcComponent,
+    UpdateCcComponent
   ],
   imports: [
     BrowserModule,

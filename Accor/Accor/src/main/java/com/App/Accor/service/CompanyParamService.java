@@ -1,8 +1,6 @@
 package com.App.Accor.service;
 
-import com.App.Accor.model.CompanyParameter;
-import com.App.Accor.model.Staff;
-import com.App.Accor.model.User;
+import com.App.Accor.model.*;
 import com.App.Accor.playload.CsvFormatDTO;
 import com.App.Accor.repository.CompanyParameterRepository;
 import com.App.Accor.repository.StaffRepository;
@@ -91,14 +89,11 @@ public class CompanyParamService {
 			csvFormatStaff.setUserType("Head of Department");
 			staffCsv.add(csvFormatStaff);
 		});
-
-
 		try {
 		//	String branchCode = tradeshiftInterface.getPrimaryBranchUser(companyParameter.getUserGM().getUsername());
 		//	csvFormatDTO.setHome(branchCode.equals(paramSaved.getBranch().getCode()) ? "TRUE" : "FALSE");
 			csvFormatDTO.setOwnedCostCenter(paramSaved.getUserGM().getUsername().equals(companyParameter.getDispacherMail()) ? companyParameter.getMegaCode() : "" );
 			sftpUploadService.uploadFileToSftp(staffCsv);
-
 
 		} catch (Exception e) {
 			throw new RuntimeException(e);

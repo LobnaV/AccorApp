@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddCostCenterComponent } from './add-cost-center.component';
+import { EditApprovalLimitComponent } from './edit-approval-limit.component';
 
-describe('AddCostCenterComponent', () => {
-  let component: AddCostCenterComponent;
-  let fixture: ComponentFixture<AddCostCenterComponent>;
+describe('EditApprovalLimitComponent', () => {
+  let component: EditApprovalLimitComponent;
+  let fixture: ComponentFixture<EditApprovalLimitComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddCostCenterComponent ]
+      declarations: [ EditApprovalLimitComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddCostCenterComponent);
+    fixture = TestBed.createComponent(EditApprovalLimitComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,11 +1,12 @@
 <nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
     <a class="nav-link " [routerLink]="'Home'" routerLinkActive="active-link" aria-current="page">{{'NAVBAR.HOME' | translate}}</a>
+    <!-- <a *ngIf="role === 'ROLE_GM'" class="nav-link" [routerLink]="'listCostCenter'" routerLinkActive="active-link" aria-current="page" >Exception</a> -->
     <!-- <a class="nav-link " [routerLink]="'branchs'" routerLinkActive="active-link" aria-current="page">Branch</a> -->
-    <a class="nav-link " [routerLink]="'UserList'" routerLinkActive="active-link" aria-current="page">{{'NAVBAR.LISTOFUSERS' | translate}}</a>
+    <!-- <a class="nav-link " [routerLink]="'UserList'" routerLinkActive="active-link" aria-current="page">{{'NAVBAR.LISTOFUSERS' | translate}}</a> -->
     <!-- <a class="nav-link " [routerLink]="'companies'" routerLinkActive="active-link" aria-current="page">List of hotels</a> -->
     <!-- <a class="nav-link " [routerLink]="'listCostCenter'" routerLinkActive="active-link" aria-current="page">Cost Center</a> -->
-    <a class="nav-link " [routerLink]="'Parameter'" routerLinkActive="active-link" aria-current="page">{{'NAVBAR.PARAMETERS' | translate}}</a>
+    <!-- <a class="nav-link " [routerLink]="'Parameter'" routerLinkActive="active-link" aria-current="page">{{'NAVBAR.PARAMETERS' | translate}}</a> -->
     <a class="nav-link" (click)="onClickLogout()">{{'NAVBAR.LOGOUT' | translate}}</a>
   </div>
   Change Language : <select #selLang (change)="translateLanguageTo(selLang.value)">

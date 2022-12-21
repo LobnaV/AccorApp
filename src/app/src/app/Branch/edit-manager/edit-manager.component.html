@@ -1,0 +1,73 @@
+<div class="card">
+    <div class="card-body">
+        <form [formGroup]="managerForm" (ngSubmit)='Update()'>
+            <input type="text" formControlName="id" hidden>
+            <input type="text" formControlName="code" hidden>
+            <input type="text" formControlName="name" hidden>
+            <input type="text" formControlName="perimeter" hidden>
+            <div class="branch">
+                <h6>Edit COO of : {{branch?.name}}</h6>
+            </div>
+            <div formGroupName="category">
+
+                <div class="categories d-flex justify-content-center">
+                    <label classe="categorie" style="margin-left: 14rem;"> Catégorie Ultra ECO </label>
+                    <label classe="categorie" style="margin-right: 6rem;"> Catégorie ECO </label>
+                    <label classe="categorie" style="margin-right: 15rem;"> Catégorie MidScale & LUXE </label>
+                </div>
+
+                <div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label" for="userMGM">General Manager</label>
+                        <div class="col-sm-3">
+                            <input type="email" id='userMGM' class="form-control">
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="email" id='userMGM' class="form-control" formControlName="approvalLimitGM">
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="email" id='userMGM' class="form-control">
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label" for="firstNameGM">Manager N+1</label>
+                        <div class="col-sm-3">
+                            <input type="texte" id='firstNameMGM' class="form-control">
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="texte" id='firstNameMGM' class="form-control">
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="texte" id='firstNameMGM' class="form-control">
+                        </div>
+                    </div>
+
+
+                    <div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="lastNameGM">Manager N+2</label>
+                            <div class="col-sm-3">
+                                <input type="texte" id='lastNameMGM' class="form-control">
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="texte" id='lastNameMGM' class="form-control">
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="texte" id='lastNameMGM' class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="save">
+                <button type="submit" class="btn bnt-Save" [disabled]="managerForm.invalid"> Save</button>
+            </div>
+
+        </form>
+
+    </div>
+</div>

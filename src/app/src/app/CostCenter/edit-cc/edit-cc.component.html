@@ -1,1 +1,51 @@
-<p>edit-cc works!</p>
+<div class="container">
+    <div class="btns">
+        <!-- <button class="btnBack" (click)="back()">Back</button> -->
+    </div>
+
+    <div class="card-body" >
+        <div style="margin: 3rem;">Cost Center : {{costcenter?.code}} - {{costcenter?.label}}</div>
+        <form [formGroup]="staffForm" (ngSubmit)='Update(); updateCC(); updateOwner' >
+            <input type="text" class="form-control" formControlName="id" hidden>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="firstName">{{'HEADER.FIRSTNAME' | translate}}*:</label>
+                <div class="col-sm-6">
+                    <input classe="input" type="text" id='firstName' class="form-control" formControlName="firstName">
+                </div>
+            </div>
+            <br>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="lastName">{{'HEADER.LASTNAME' | translate}}*:</label>
+                <div class="col-sm-6">
+                    <input classe="input" type="text" id='lastName' class="form-control" formControlName="lastName">
+                </div>
+            </div>
+            <br>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="mail">Email*:</label>
+                <div class="col-sm-6">
+                    <input type="mail" id='mail' class="form-control" formControlName="mail">
+                </div>
+            </div>
+            <br>
+            <form [formGroup]="costCenterForm">
+                <input type="text" class="form-control" formControlName="id" hidden>
+    
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="mail"> Confimation Email*:</label>
+                    <div class="col-sm-6">
+                        <input type="mail" id='mail' class="form-control" formControlName="owner">
+                    </div>
+                </div>
+            </form>
+            <div class="save">
+                <button type="submit" class="btn-Save" >{{this.costcenter?.id ? 'Edit' : 'Add'}}</button>
+            </div>
+        </form>
+        <br>
+
+
+
+    </div>
+</div>

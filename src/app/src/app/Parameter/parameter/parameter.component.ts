@@ -20,7 +20,11 @@ export class ParameterComponent implements OnInit {
   searchKey: string = "";
   searchTerm: string = "";
   branche?:any;
+  message1?:any;
+  message1part2?:any;
+  message2?:any;
 
+lang:any
   constructor(
     private service:AccorService,
     private router:Router,
@@ -28,7 +32,12 @@ export class ParameterComponent implements OnInit {
     public translate: TranslateService,
     private confirmationDialogService: ConfirmationDialogService,
 
-  ) { }
+  ) { 
+
+    this.message1 = this.translate.instant('DELETE.MESSAGE1');
+    this.message1part2 = this.translate.instant('DELETE.MESSAGE1PART2');
+    this.message2 = this.translate.instant('DELETE.MESSAGE2');
+  }
 
   branch? : Branch|null
   companies?: Param[]|any = [];
@@ -99,19 +108,17 @@ export class ParameterComponent implements OnInit {
     this.service.deleteParam(paramId)
      .subscribe( (data:any) =>{
        this.params = this.params?.filter((param: { id: any; }) => paramId !== param.id);
-         alert("deleted param");
          this.router.navigate(["Parameter"]);
      })
   }
 
   deleteParam(idParam: number, name: string) {
-    this.confirmationDialogService.confirm('Confirmation', 'Deleting a hotel here means you will delete the hotel from the Company admin Dashboard, but does not mean that users will be deleted from Tradeshift production environment. If you need to delete a particular user in Tradeshift, as a company admin: If the user is a hotel member, you can ask the general manager to do it directly from his ' + name + ' session. This will delete the user from Tradeshift You can also delete the user directly from the Tradeshift app, please contact : astore.einvoicing.support@accor.com')
-      .then((confirmed) => {
+    this.confirmationDialogService.confirm('Confirmation', this.message1 + name + this.message1part2 )
+         .then((confirmed) => {
           if (confirmed) {
-            this.confirmationDialogService.confirm('Confirmation', 'Yes I will delete users that need to be deleted, directly on Tradeshift, and I wish to delete this hotel from the dashboard.')
+            this.confirmationDialogService.confirm('Confirmation', this.message2)
               .then(() => {
                 if (confirmed) {
-                 // this.remove(idParam);
                  console.log('remove ok')      
                 }
               })

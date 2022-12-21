@@ -1,41 +1,59 @@
-<div class="card">  
-    <div class="card-body">
-      <h5 *ngIf="this.branch?.id"> {{'BUTTONS.EDIT_BRANCH' | translate}}</h5>
-      <h5 *ngIf="this.branch?.id == null">{{'BUTTONS.ADDBRANCH' | translate}}</h5>
-      <div class="details">
-        <p>Branch details</p>
-      </div>
-      <form [formGroup]="branchForm" (ngSubmit)='Update()'>
-        <input type="text" formControlName="id" hidden>
-        <div class="form-group">
-          <label for="code">{{'PARAM.BRANCH_ID' | translate}}:</label>
+<div class="card">
+  <div class="card-body">
+    <h5 *ngIf="this.branch?.id"> {{'BUTTONS.EDIT_BRANCH' | translate}}</h5>
+    <h5 *ngIf="this.branch?.id == null">{{'BUTTONS.ADDBRANCH' | translate}}</h5>
+    <div class="details">
+      <p>Branch details</p>
+    </div>
+    <form [formGroup]="branchForm" (ngSubmit)='Update()'>
+      <input type="text" formControlName="id" hidden>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="code">{{'PARAM.BRANCH_ID' | translate}}:</label>
+        <div class="col-sm-6">  
           <input type="text" id='code' class="form-control" formControlName="code">
         </div>
-        <div class="form-group">
-            <label for="name">{{'PARAM.BRANCH_NAME' | translate}}: </label>
-            <input type="text" id='name' class="form-control" formControlName="name">
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="name">{{'PARAM.BRANCH_NAME' | translate}}: </label>
+        <div class="col-sm-6">
+          <input type="text" id='name' class="form-control" formControlName="name">
         </div>
-        <div class="form-group">
-            <label for="uuid">UUID </label>
-            <input type="text" id='uuid' class="form-control" formControlName="uuid">
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="perimeter">{{'PARAM.PERIMETER' | translate}}:</label>
+       <div class="col-sm-6">
+        <select class="form-control" formControlName="perimeter" [(ngModel)]="selectedPerimeter" placeholder="Select Perimeter">
+          <option [ngValue]="null" disabled>{{'PARAM.PERIMETER' | translate}}</option>
+          <option *ngFor="let perimeter of perimeters" [ngValue]="perimeter" >
+            {{perimeter}}
+          </option>
+        </select>
+       </div>
+      </div>
+      <div formGroupName="userMGM">
+        <input type="text" formControlName="id" hidden>
+        <!-- <input type="text" formControlName="roles" value="ROLE_COMPANYADMIN" ngDefaultControl hidden> -->
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" for="userMGM">{{'PARAM.EMAIL_GM' | translate}}</label>
+         <div class="col-sm-6">
+           <input type="email" id='userMGM' class="form-control" formControlName="username">
+         </div>
         </div>
-        <div class="form-group">
-          <label for="perimeter">{{'PARAM.PERIMETER' | translate}}:</label>
-          <input type="text" id='perimeter' class="form-control" formControlName="perimeter">
-        </div>
-        <div class="save">
-          <button type="submit" class="btn btn-Save" [disabled]="branchForm.invalid">{{this.branch?.id ? 'edit' : 'Save'}}</button>
-        </div>
-        <!-- <div class="form-group">
-          <select [(ngModel)]="selectedPerimeter">
+      </div>
+      <div class="save">
+        <button type="submit" class="btn btn-Save" [disabled]="branchForm.invalid">{{this.branch?.id ? 'edit' :
+          'Save'}}</button>
+      </div>
+      <!-- <div class="form-group row">
+          <select class="col-sm-2" formControlName="perimeter" [(ngModel)]="selectedPerimeter">
             <option [ngValue]="null" disabled>{{'PARAM.PERIMETER' | translate}}</option>
             <option *ngFor="let perimeter of perimeters" [ngValue]="perimeter" formControlName="perimeter">
               {{perimeter}}
             </option>
           </select>
         </div> -->
-      </form> 
+    </form>
 
 
-    </div>
   </div>
+</div>

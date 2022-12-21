@@ -1,0 +1,30 @@
+<div class="container">
+  <div>
+    <H6 style="margin-top: 3rem;">{{'EXCEPTION.DESCRIPTION1' | translate}}</H6>
+    <H6 style="text-decoration: underline; margin-top: 1rem;">{{'EXCEPTION.DESCRIPTION2' | translate}}</H6>
+  </div>
+
+  <table class="table" style="margin-top: 3rem;">
+    <thead class="thead-dark" style="background-color: black; color: white">
+      <tr>
+        <th scope="col">Cost center</th>
+        <th scope="col">Cost center name</th>
+        <th scope="col">Email </th>
+        <!-- <th scope="col">{{'HEADER.FIRSTNAME' | translate}}</th>
+        <th scope="col">{{'HEADER.LASTNAME' | translate}}</th> -->
+      </tr>
+    </thead>
+    <tbody class="data" *ngFor="let data of costcenters" style="background-color: #C5C5C5;">
+      <tr *ngIf="data?.owner == null || data?.code == null">
+        <td *ngIf="data?.code != null">{{data?.code}}</td>
+        <td *ngIf="data?.code == null" style="color:#8F1D1D;">ERROR</td>
+        <td *ngIf="data?.label != null" >{{data?.label}}</td>
+        <td *ngIf="data?.label == null" style="color:#8F1D1D;">ERROR</td>
+        <td *ngIf="data?.owner != null">{{data?.owner}}</td>
+        <td *ngIf="data?.owner == null" style="color:#8F1D1D;">ERROR</td>
+        <!-- <th>{{data?.firstName}}</th>
+        <th>{{data?.lastName}}</th> -->
+      </tr>
+    </tbody>
+  </table>
+</div>

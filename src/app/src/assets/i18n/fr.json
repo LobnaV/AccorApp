@@ -11,13 +11,14 @@
         "TITLE2": "Conditions/règles à respecter :",
         "RULE1":"Seul le Directeur Général accède à l'application et effectue les modifications au sein des utilisateurs de son hôtel (pas de Chef de Service).",
         "RULE2":"Si certains changements sont temporaires (vacances, congé de maternité, congé de maladie), nous vous encourageons à utiliser les règles de délégation en place dans Tradeshift au lieu d'effectuer des changements permanents.",
-        "RULE3":"Si vous avez besoin de changer le nom d'un de vos utilisateurs (et de conserver la même adresse email), merci d'éditer directement l'utilisateur dans le champ correspondant et de ne pas supprimer l'utilisateur pour en recréer un."
+        "RULE3":"Si vous avez besoin de changer le nom d'un de vos utilisateurs (et de conserver la même adresse email), merci d'éditer directement l'utilisateur dans le champ correspondant et de ne pas supprimer l'utilisateur pour en recréer un.",
+        "RULE4":"Veuillez utiliser la barre ci-dessous pour sélectionner l'hôtel pour lequel vous souhaitez gérer les utilisateurs."
     },
     "TITLE_CA":"L'application utilisateur Accor pour les administrateurs d'entreprise :",
     "DESCRIPTION_CA":"l'application vous permettra de gérer le périmètre de l'hôtel à l'intérieur des agences dans lesquelles vous êtes autorisé à opérer.",
     "CONDITION_CA":"Si vous avez besoin de supprimer ou d'ajouter des utilisateurs comptables, veuillez utiliser directement l'outil Tradeshift. La création de l'utilisateur de l'hôtel doit être effectuée par le directeur général, dans l'application utilisateur.",
     "SELECTHOTEL":"Sélectionner un hôtel",
-    "SELECTBRANCH":"électionner une branche",
+    "SELECTBRANCH":"Sélectionner une branche",
     "HOTELNAME": "Nom de l'hôtel",
     "BRANCHNAME": "Nom de la branche",
     "HEADER":{
@@ -28,9 +29,10 @@
     },
     "TITLE_MA":"Gérer les branches",
     "BUTTONS":{
-        "SEARCH_USER":"Rechercher par nom",
+        "SEARCH_USER":"Rechercher par email",
         "SEARCH":"Rechercher par megaCode",
         "SEARCH_CODE":"Rechercher par branche ID",
+        "SEARCH_CODECC":"Recher par code",
         "ADDUSER":"Ajouter un utilisateur",
         "EDIT":"Modifier",
         "DELETE":"Supprimer",
@@ -47,6 +49,19 @@
         "BRANCH_NAME":"Nom de la branche",
         "EMAIL_GM":"Email Général Manager",
         "PERIMETER":"Périmètre"
+    },
+    "EXCEPTION":{
+        "DESCRIPTION1":"Après modifications, il est possible d'avoir des incohérences avec les centres de coûts et leurs utilisateurs. Veuillez trouver ci-dessous la liste de tous les utilisateurs sans centre de coûts qui seront inactifs.",
+        "DESCRIPTION2":"Rappel : un centre de coût doit avoir un utilisateur assigné, un utilisateur doit avoir au moins un centre de coût."
+    },
+    "DELETE":{
+        "MESSAGE1":"La suppression d'un hôtel ici signifie que vous supprimerez l'hôtel du tableau de bord d'administration de l'entreprise, mais ne signifie pas que les utilisateurs seront supprimés de l'environnement de production Tradeshift. Si vous avez besoin de supprimer un utilisateur particulier dans Tradeshift, en tant qu'administrateur d'entreprise : Si l'utilisateur est membre d'un hôtel, vous pouvez demander au directeur général de le faire directement depuis sa session ",
+        "MESSAGE1PART2":". Cela supprimera l'utilisateur de Tradeshift Vous pouvez également supprimer l'utilisateur directement depuis l'application Tradeshift, merci de contacter : astore.einvoicing.support@accor.com",
+        "MESSAGE2":"Oui, je supprimerai les utilisateurs qui doivent être supprimés, directement sur Tradeshift, et je souhaite supprimer cet hôtel du tableau de bord.",
+        "MESSAGE3":"Si vous devez supprimer temporairement un utilisateur, nous vous conseillons d'utiliser l'option de règle de délégation dans",
+        "MESSAGE3PART2":"    Tradeshift (vacances, maternité, maladie) pour déléguer temporairement des tâches à un autre collègue.",
+        "MESSAGE4":"Pouvez-vous confirmer qu'il n'y a plus de tâches en attente dans le gestionnaire de tâches pour cet utilisateur ? Si non, veuillez réaffecter les tâches en attente avant de supprimer l'utilisateur."
     }
+
     
 }

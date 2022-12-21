@@ -18,11 +18,19 @@ export class EditParamComponent implements OnInit {
   param?: Param;
   branch?: Branch;
   user?:User;
+  selectedCategory?: any;
+  categories?:any = ['Ultra ECO', 'ECO', 'MidScale & Luxe']
 
   paramForm = new FormGroup({
     id: new FormControl(''),
     megaCode: new FormControl(''),
     name: new FormControl(''),
+    category: new FormGroup({
+      id: new FormControl(''),
+      name: new FormControl(''),
+    }),
+    generalManagerN1: new FormControl(''),
+    generalManagerN2: new FormControl(''),
     userGM: new FormGroup({
       id: new FormControl(''),
       username: new FormControl(''),
@@ -30,6 +38,7 @@ export class EditParamComponent implements OnInit {
       lastName: new FormControl(''),
     }),
     userMGM: new FormControl('')
+
   })
 
   constructor(
@@ -58,6 +67,12 @@ export class EditParamComponent implements OnInit {
               id: this.param?.id,
               megaCode: this.param?.megaCode,
               name: this.param?.name,
+              category:{
+                id: this.param?.category?.id,
+                name: this.param?.category?.name?.toString()
+              },
+              generalManagerN1: this.param?.generalManagerN1,
+              generalManagerN2: this.param?.generalManagerN2,
               userGM: { 
                 id: this.param.userGM?.id,
                 username: this.param.userGM?.username,
@@ -73,6 +88,7 @@ export class EditParamComponent implements OnInit {
         this.param = new Param();
       }
     })
+
   }
 
   Update() {
@@ -82,6 +98,9 @@ export class EditParamComponent implements OnInit {
     id: this.paramForm.get('id')?.value,
     megaCode: this.paramForm.get('megaCode')?.value,
     name: this.paramForm.get('name')?.value,
+    category: this.paramForm.get('category')?.value,
+    generalManagerN1: this.paramForm.get('generalManagerN1')?.value, 
+    generalManagerN2: this.paramForm.get('generalManagerN2')?.value,
     userGM: this.paramForm.get('userGM')?.value,
     branch: this.branch,
     dispacherMail: this.paramForm.get('userGM.username')?.value

@@ -1,0 +1,39 @@
+<div class="card">
+    <div class="card-body">
+          <button (click)="Add()"> Add</button>
+        <form [formGroup]="managerForm" (ngSubmit)='Update()'>
+            <input type="text" formControlName="id" hidden>
+            <input type="text" formControlName="code" hidden>
+            <input type="text" formControlName="name" hidden>
+            <input type="text" formControlName="perimeter" hidden>
+            <div class="branch">
+                <h6>Acces of : {{branch?.name}}</h6>
+            </div>
+
+            <div class="categories d-flex" style="margin: 0.5rem;">
+                <p classe="categorie" style="margin-left: 3rem;"> Email</p>
+            </div>
+
+    
+            
+            <div class="form" formGroupName="userMGM">
+
+                <div class="template">
+                    <input type="text" formControlName="id" hidden>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label" for="userMGM">{{'PARAM.EMAIL_GM' | translate}}</label>
+                        <div class="col-sm-3" style="width: 35%;">
+                            <input type="email" id='userMGM' class="form-control" formControlName="username">
+                            <button (click)="remove(userCA?.id)" class="btn-delete">delete</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="save">
+                <button type="submit" class="btn bnt-Save" [disabled]="managerForm.invalid"> Save</button>
+            </div>
+        </form>
+    </div>
+</div>

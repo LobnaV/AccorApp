@@ -43,6 +43,11 @@
         }
     }
 
+    .btns{
+        display: flex;
+        justify-content: flex-end
+    }
+
     .container{
         margin-bottom: 1rem;
         display: flex;
@@ -53,26 +58,3 @@
         }
     }
 }
-
-// .popup{
-//     margin: 1rem;
-// }
-
-// .popup1,.popup2{
-//         background-color: #c9c9c9;
-//         margin: 4rem;
-
-//         .btn-delete{
-//             margin: 1rem;
-//             background-color: #9BE69F;
-
-//         }
-//         .btn-info{
-//             margin: 1rem;
-//             background-color: #E38D9B;
-//             border: none;
-
-//         }
-
- 
-// }

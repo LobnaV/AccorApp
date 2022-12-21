@@ -1,10 +1,10 @@
 INSERT INTO branch (`id`, `code`, `name`, `perimeter`)
-VALUES (1, 'A9017301', 'ACCORINVEST SPAIN SA', 'SE'),
-			 (2, 'A9041701', 'MONTREUILLOISE', 'SE'),
-			 (3, 'A9037801', 'SCHE', 'SE'),
-			 (4, 'A9038901', 'SIM', 'SE'),
-			 (5, 'A9027801', 'HOTEXCO', 'NE'),
-			 (6, 'A9016601', 'PORTIS HOTEIS PORTUGUESES', 'NE');
+VALUES (1, 'A9017301', 'ACCORINVEST SPAIN SA', 'Southern_Europe'),
+			 (2, 'A9041701', 'MONTREUILLOISE', 'Southern_Europe'),
+			 (3, 'A9037801', 'SCHE', 'Southern_Europe'),
+			 (4, 'A9038901', 'SIM', 'Southern_Europe'),
+			 (5, 'A9027801', 'HOTEXCO', 'Northern_Europe'),
+			 (6, 'A9016601', 'PORTIS HOTEIS PORTUGUESES', 'Northern_Europe');
 
 
 INSERT INTO `user`(`id`, `first_name`, `last_name`, `password`, `username`, `primary_branch`)
@@ -19,7 +19,9 @@ VALUES (1, 'Belen', 'TOLOSA', '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.
 			 (5, 'Xavier', 'ALARCON', '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu',
 				'ps.accor+H752-GM@gmail.com', 'A9015701'),
 			 (6, 'Sergio', 'BASTOS', '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu',
-				'ps.accor+H3347-GM@gmail.com', 'A9015701');
+				'ps.accor+H3347-GM@gmail.com', 'A9015701'),
+			 (7, 'Roger', 'Ros', '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu',
+        'ps.accor+roger.ros@gmail.com', 'A9015701');
 
 
 
@@ -31,14 +33,20 @@ VALUES (1, 'ps.accor+H3132-GM@gmail.com', '02507.H3132', 'IBIS BARCELONA FIRA DE
 			 (5, 'ps.accor+H752-GM@gmail.com', '02935.H0752', 'IBIS EVRY', 5, 5),
 			 (6, 'ps.accor+H3347-GM@gmail.com', '02435.H3347', 'MERCURE PORTO GAIA', 6, 6);
 
-
 INSERT INTO `role`(`id`, `name`)
-VALUES (1, 'ROLE_GM');
+VALUES (1, 'ROLE_GM'),
+			 (2, 'ROLE_COMPANYADMIN'),
+			 (3, 'ROLE_MASTERADMIN');
+
+INSERT INTO `category`(`id`, `name`)
+VALUES (1, 'Ultra_ECO'),
+			 (2, 'ECO'),
+			 (3, 'MidScale & Luxe');
 
 INSERT INTO `users_roles`(`user_id`, `role_id`)
 VALUES (1, 1),
-			 (2, 1),
-			 (3, 1),
+			 (2, 2),
+			 (3, 3),
 			 (4, 1),
 			 (5, 1),
 			 (6, 1);
@@ -58,3 +66,9 @@ VALUES ('ps.accor+H3086-BO@gmail.com', 'Beatrice', 'Soubabere', 2),
 			 ('ps.accor+H3347-FB1@gmail.com', 'Sandra', 'Bento', 6),
 			 ('ps.accor+H3347-FB@gmail.com', 'Sandra', 'Lopes', 6),
 			 ('ps.accor+H3347-TE@gmail.com', 'Paulo', 'Nunes', 6);
+
+
+INSERT INTO `cost_center`( `code`, `label`, `owner`, `company_id`)
+VALUES ('3RZ','RESTAURANT 5','ps.accor+H3347-FB@gmail.com',6),
+			 ('3QZ','KITCHEN','ps.accor+H3347-FB1@gmail.com',6),
+			 ('3RZ','RESTAURANT 5','ps.accor+H3086-BO@gmail.com',2)

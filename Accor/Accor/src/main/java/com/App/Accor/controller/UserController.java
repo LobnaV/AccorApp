@@ -4,6 +4,7 @@ import com.App.Accor.model.User;
 import com.App.Accor.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,8 +17,8 @@ public class UserController {
 	UserService service;
 
 	@GetMapping("/List")
-	public List<User> userList() {
-		return service.userList();
+	public ResponseEntity<List<User>> userList() throws Exception{
+		return ResponseEntity.ok(service.userList()) ;
 	}
 
 	@GetMapping("/{id}")

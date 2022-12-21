@@ -16,20 +16,18 @@ export class MainPageComponent implements OnInit {
   selectedBranch?: any;
   companies: Param[] | null = [];
   branches: any = [];
-  allbranchesSE: any = [];
-  allbranchesNE: any = [];
+  allBranches: any = [];
 
+  role?: string;
 
   searchKey: string = "";
   searchTerm: string = "";
-
-  isVueGm = true;
 
   constructor(
     private service: AccorService,
     public translate: TranslateService,
     ) {
-
+    this.role = window.sessionStorage.getItem('roleCurrentUser')!;
     // Register translation languages
     translate.addLangs(['en', 'fr']);
     // Set default language
@@ -58,21 +56,30 @@ export class MainPageComponent implements OnInit {
       });
 
       //Vu Master
-      this.service.allBranchesSE()
-      .subscribe((data: HttpResponse<Branch[]>)  => {
-        this.allbranchesSE = data.body;
-        console.log(this.allbranchesSE[0]);
-        this.allbranchesSE = this.allbranchesSE[0];
-        (res: HttpErrorResponse) => console.log(res.message)
-      });
 
-      this.service.allBranchesNE()
-      .subscribe((data: HttpResponse<Branch[]>)  => {
-        this.allbranchesNE = data.body;
-        console.log(this.allbranchesNE);
-        this.allbranchesNE = this.allbranchesNE[0];
-        (res: HttpErrorResponse) => console.log(res.message)
-      });
+      this.service.allBranches()
+        .subscribe((data:HttpResponse<Branch[]>) => {
+          this.allBranches = data.body;
+          console.log(this.allBranches);
+          (res: HttpErrorResponse) => console.log(res.message)
+        })
+
+
+      // this.service.allBranchesSE()
+      // .subscribe((data: HttpResponse<Branch[]>)  => {
+      //   this.allbranchesSE = data.body;
+      //   console.log(this.allbranchesSE[0]);
+      //   this.allbranchesSE = this.allbranchesSE[0];
+      //   (res: HttpErrorResponse) => console.log(res.message)
+      // });
+
+      // this.service.allBranchesNE()
+      // .subscribe((data: HttpResponse<Branch[]>)  => {
+      //   this.allbranchesNE = data.body;
+      //   console.log(this.allbranchesNE);
+      //   this.allbranchesNE = this.allbranchesNE[0];
+      //   (res: HttpErrorResponse) => console.log(res.message)
+      // });
   }
 
   //Switch language

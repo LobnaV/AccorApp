@@ -1,7 +1,9 @@
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AccorService } from 'src/app/accor.service';
-import { CostCenter } from '../cost-center';
+import { CostCenter } from 'src/app/model/costCenter';
+import { Param } from 'src/app/model/param';
 
 @Component({
   selector: 'app-list-cc',
@@ -9,28 +11,51 @@ import { CostCenter } from '../cost-center';
   styleUrls: ['./list-cc.component.scss']
 })
 export class ListCcComponent implements OnInit {
-
-  costCenters:any;
-  costcenter:any;
+  
   searchKey: string = "";
   searchTerm: string = "";
+  costcenters: CostCenter[] | any = [];
+  company?: Param
 
   constructor(
     private service: AccorService,
+    private activatedRoute: ActivatedRoute,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.service.costCenterList()
-      .subscribe(data =>{
-        this.costCenters = data;
-        console.log(this.costCenters)
-      })
+
+    this.activatedRoute.params.subscribe(params => {
+  
+      this.loadCostCenter(params['id']); 
+      console.log(params['id'])
+
+      const paramId = params['paramId'];
+      this.service.ParamId(paramId).subscribe(
+        (res: HttpResponse<Param>) => {
+          this.company = res.body!;
+          console.log(this.company)
+        },
+        (res: HttpErrorResponse) => console.log(res.message)
+      );
+
+    });   
 
       this.service.search.subscribe((val: any) => {
         this.searchKey = val;
       })
   }
+
+  loadCostCenter(idCompagnie: number){
+    this.service.CostCenterCompany(idCompagnie).subscribe(
+      (res: HttpResponse<CostCenter[]>) => {
+        this.costcenters = res.body;
+        console.log(this.costcenters)
+      },
+      (res: HttpErrorResponse) => console.log(res.message)
+    )
+  }
+
 
   Search(event: any) {
     this.searchTerm = (event.target as HTMLInputElement).value;
@@ -38,18 +63,5 @@ export class ListCcComponent implements OnInit {
     this.service.search.next(this.searchTerm);
   }
 
-  NewCostCenter() {
-    this.router.navigate(["addCostCenter"]);
-  }
-
-  remove(ccId:CostCenter){
-    this.service.deleteCC(ccId)
-     .subscribe( (data:any) =>{
-       this.costCenters = this.costCenters?.filter((costCenter: { id: any; }) => ccId !== costCenter.id);
-         alert("deleted CC");
-         this.router.navigate(["listCostCenter"]);
-     })
-  }
 
 }
-
