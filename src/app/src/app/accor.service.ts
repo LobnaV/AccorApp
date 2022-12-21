@@ -1,15 +1,13 @@
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import {BehaviorSubject, map, Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Branch } from './model/branch';
 import { CostCenter } from './CostCenter/cost-center';
 import { Param } from './model/param';
 import { User } from './model/user';
 import { Staff } from './model/staff';
-
-declare function
 
 @Injectable({
   providedIn: 'root'
