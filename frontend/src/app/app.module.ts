@@ -36,7 +36,7 @@ import { UpdateCcComponent } from './Parameter/update-cc/update-cc.component';
 
 // Factory function required during AOT compilation
 export function httpTranslateLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+  return new TranslateHttpLoader(http, './assets/i18n/');
 }
 
 
