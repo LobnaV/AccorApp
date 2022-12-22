@@ -81,7 +81,7 @@
     <resources>
       <resource>
         <!-- we copy the content of the frontend directory in the final artifact -->
-        <directory>dist/frontend</directory>
+        <directory>dist/app</directory>
       </resource>
     </resources>
   </build>
