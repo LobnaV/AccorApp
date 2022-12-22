@@ -1,4 +1,4 @@
-package com.viggo.accor.Config;
+package com.viggo.accor.config;
 
 
 import com.viggo.accor.security.AuthEntryPointJwt;
@@ -60,7 +60,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()
-			.authorizeRequests().antMatchers("/api/auth/**").permitAll()
+			.authorizeRequests()
+			.antMatchers("/", "/error", "/api/all", "/api/auth/**", "/oauth2/**", "/index.html", "/*.js", "/*.js.map", "/*.css", "/assets/img/*.png", "/favicon.ico")
+			.permitAll()
+			.antMatchers("/api/auth/**").permitAll()
 			.antMatchers("/api/reset-password/init").permitAll()
 			.antMatchers("/api/reset-password/finish").permitAll()
 			.antMatchers("/api/test/**").permitAll()

@@ -1,6 +1,6 @@
 package com.viggo.accor.service;
 
-import com.viggo.accor.Config.UploadGateway;
+import com.viggo.accor.config.UploadGateway;
 import com.viggo.accor.playload.CodingListFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

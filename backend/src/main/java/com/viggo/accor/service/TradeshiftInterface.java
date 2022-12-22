@@ -1,12 +1,10 @@
 package com.viggo.accor.service;
 
-import com.viggo.accor.Config.AuthorizationCodeTokenService;
-import com.viggo.accor.Config.OAuth2Token;
+import com.viggo.accor.config.AuthorizationCodeTokenService;
+import com.viggo.accor.config.OAuth2Token;
 import com.viggo.accor.model.BranchTradeshift;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
-import org.springframework.security.oauth2.client.OAuth2RestOperations;
-import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
