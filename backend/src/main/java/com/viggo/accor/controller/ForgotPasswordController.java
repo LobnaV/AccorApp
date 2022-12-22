@@ -1,9 +1,9 @@
-package com.App.Accor.controller;
+package com.viggo.accor.controller;
 
-import com.App.Accor.model.KeyAndPasswordVM;
-import com.App.Accor.model.User;
-import com.App.Accor.service.MailService;
-import com.App.Accor.service.UserService;
+import com.viggo.accor.model.KeyAndPasswordVM;
+import com.viggo.accor.model.User;
+import com.viggo.accor.service.MailService;
+import com.viggo.accor.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

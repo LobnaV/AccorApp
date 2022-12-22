@@ -1,9 +1,9 @@
-package com.App.Accor.controller;
+package com.viggo.accor.controller;
 
-import com.App.Accor.model.CompanyParameter;
-import com.App.Accor.model.CostCenter;
-import com.App.Accor.model.Staff;
-import com.App.Accor.service.CostCenterService;
+import com.viggo.accor.model.CompanyParameter;
+import com.viggo.accor.model.CostCenter;
+import com.viggo.accor.model.Staff;
+import com.viggo.accor.service.CostCenterService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -1,9 +1,9 @@
-package com.App.Accor.Config;
+package com.viggo.accor.Config;
 
 
-import com.App.Accor.security.AuthEntryPointJwt;
-import com.App.Accor.security.AuthTokenFilter;
-import com.App.Accor.service.UserDetailsServiceCustom;
+import com.viggo.accor.security.AuthEntryPointJwt;
+import com.viggo.accor.security.AuthTokenFilter;
+import com.viggo.accor.service.UserDetailsServiceCustom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

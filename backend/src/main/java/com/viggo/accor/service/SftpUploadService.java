@@ -1,8 +1,8 @@
-package com.App.Accor.service;
+package com.viggo.accor.service;
 
-import com.App.Accor.Config.UploadGateway;
-import com.App.Accor.playload.CsvFormatDTO;
-import com.App.Accor.repository.CompanyParameterRepository;
+import com.viggo.accor.Config.UploadGateway;
+import com.viggo.accor.playload.CsvFormatDTO;
+import com.viggo.accor.repository.CompanyParameterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

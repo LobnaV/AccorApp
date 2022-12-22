@@ -1,9 +1,9 @@
-package com.App.Accor.service;
+package com.viggo.accor.service;
 
-import com.App.Accor.model.CompanyParameter;
-import com.App.Accor.model.Staff;
-import com.App.Accor.playload.CsvFormatDTO;
-import com.App.Accor.repository.StaffRepository;
+import com.viggo.accor.model.CompanyParameter;
+import com.viggo.accor.model.Staff;
+import com.viggo.accor.playload.CsvFormatDTO;
+import com.viggo.accor.repository.StaffRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;

@@ -1,14 +1,14 @@
-package com.App.Accor.controller;
+package com.viggo.accor.controller;
 
-import com.App.Accor.model.User;
-import com.App.Accor.model.UserDetails;
-import com.App.Accor.playload.request.LoginRequest;
-import com.App.Accor.playload.request.SignupRequest;
-import com.App.Accor.playload.response.JwtResponse;
-import com.App.Accor.playload.response.MessageResponse;
-import com.App.Accor.repository.RoleRepository;
-import com.App.Accor.repository.UserRepository;
-import com.App.Accor.security.JwtUtils;
+import com.viggo.accor.model.User;
+import com.viggo.accor.model.UserDetails;
+import com.viggo.accor.playload.request.LoginRequest;
+import com.viggo.accor.playload.request.SignupRequest;
+import com.viggo.accor.playload.response.JwtResponse;
+import com.viggo.accor.playload.response.MessageResponse;
+import com.viggo.accor.repository.RoleRepository;
+import com.viggo.accor.repository.UserRepository;
+import com.viggo.accor.security.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

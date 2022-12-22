@@ -1,8 +1,8 @@
-package com.App.Accor.service;
+package com.viggo.accor.service;
 
-import com.App.Accor.model.User;
-import com.App.Accor.model.UserDetails;
-import com.App.Accor.repository.UserRepository;
+import com.viggo.accor.model.User;
+import com.viggo.accor.model.UserDetails;
+import com.viggo.accor.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

@@ -1,6 +1,6 @@
-package com.App.Accor.security;
+package com.viggo.accor.security;
 
-import com.App.Accor.service.UserDetailsServiceCustom;
+import com.viggo.accor.service.UserDetailsServiceCustom;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

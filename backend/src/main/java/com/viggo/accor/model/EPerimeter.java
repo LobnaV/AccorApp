@@ -1,4 +1,4 @@
-package com.App.Accor.model;
+package com.viggo.accor.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

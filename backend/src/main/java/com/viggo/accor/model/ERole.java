@@ -1,4 +1,4 @@
-package com.App.Accor.model;
+package com.viggo.accor.model;
 
 import java.util.HashSet;
 import java.util.Set;

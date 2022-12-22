@@ -1,15 +1,15 @@
-package com.App.Accor.service;
+package com.viggo.accor.service;
 
-import com.App.Accor.model.CompanyParameter;
-import com.App.Accor.model.CostCenter;
-import com.App.Accor.model.Staff;
-import com.App.Accor.model.User;
-import com.App.Accor.playload.CodingListFormat;
-import com.App.Accor.playload.CsvFormatDTO;
-import com.App.Accor.repository.CompanyParameterRepository;
-import com.App.Accor.repository.CostCenterRepository;
-import com.App.Accor.repository.StaffRepository;
-import com.App.Accor.repository.UserRepository;
+import com.viggo.accor.model.CompanyParameter;
+import com.viggo.accor.model.CostCenter;
+import com.viggo.accor.model.Staff;
+import com.viggo.accor.model.User;
+import com.viggo.accor.playload.CodingListFormat;
+import com.viggo.accor.playload.CsvFormatDTO;
+import com.viggo.accor.repository.CompanyParameterRepository;
+import com.viggo.accor.repository.CostCenterRepository;
+import com.viggo.accor.repository.StaffRepository;
+import com.viggo.accor.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;

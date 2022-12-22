@@ -1,4 +1,4 @@
-package com.App.Accor.playload.request;
+package com.viggo.accor.playload.request;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.App.Accor.playload.response;
+package com.viggo.accor.playload.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

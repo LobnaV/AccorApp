@@ -1,6 +1,6 @@
-package com.App.Accor.repository;
+package com.viggo.accor.repository;
 
-import com.App.Accor.model.Staff;
+import com.viggo.accor.model.Staff;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

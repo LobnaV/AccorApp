@@ -1,7 +1,7 @@
-package com.App.Accor.controller;
+package com.viggo.accor.controller;
 
-import com.App.Accor.model.Staff;
-import com.App.Accor.service.StaffService;
+import com.viggo.accor.model.Staff;
+import com.viggo.accor.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

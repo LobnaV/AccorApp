@@ -1,4 +1,4 @@
-package com.App.Accor.playload;
+package com.viggo.accor.playload;
 
 import javax.servlet.http.HttpServletRequest;
 

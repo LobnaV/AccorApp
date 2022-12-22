@@ -1,9 +1,9 @@
-package com.App.Accor.service;
+package com.viggo.accor.service;
 
-import com.App.Accor.model.*;
-import com.App.Accor.playload.CsvFormatDTO;
-import com.App.Accor.repository.BranchRepository;
-import com.App.Accor.repository.UserRepository;
+import com.viggo.accor.model.*;
+import com.viggo.accor.playload.CsvFormatDTO;
+import com.viggo.accor.repository.BranchRepository;
+import com.viggo.accor.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;

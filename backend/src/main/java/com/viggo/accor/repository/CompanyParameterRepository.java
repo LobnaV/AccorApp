@@ -1,6 +1,6 @@
-package com.App.Accor.repository;
+package com.viggo.accor.repository;
 
-import com.App.Accor.model.CompanyParameter;
+import com.viggo.accor.model.CompanyParameter;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

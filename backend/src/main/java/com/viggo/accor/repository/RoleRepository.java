@@ -1,6 +1,6 @@
-package com.App.Accor.repository;
+package com.viggo.accor.repository;
 
-import com.App.Accor.model.Role;
+import com.viggo.accor.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package com.App.Accor.Config;
+package com.viggo.accor.Config;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

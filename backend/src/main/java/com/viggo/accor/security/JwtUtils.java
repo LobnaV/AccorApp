@@ -1,6 +1,6 @@
-package com.App.Accor.security;
+package com.viggo.accor.security;
 
-import com.App.Accor.model.UserDetails;
+import com.viggo.accor.model.UserDetails;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

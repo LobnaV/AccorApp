@@ -1,8 +1,8 @@
-package com.App.Accor.service;
+package com.viggo.accor.service;
 
-import com.App.Accor.Config.AuthorizationCodeTokenService;
-import com.App.Accor.Config.OAuth2Token;
-import com.App.Accor.model.BranchTradeshift;
+import com.viggo.accor.Config.AuthorizationCodeTokenService;
+import com.viggo.accor.Config.OAuth2Token;
+import com.viggo.accor.model.BranchTradeshift;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.security.oauth2.client.OAuth2RestOperations;

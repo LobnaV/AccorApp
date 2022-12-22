@@ -1,4 +1,4 @@
-package com.App.Accor.Config;
+package com.viggo.accor.Config;
 
 
 import org.springframework.integration.annotation.Gateway;
