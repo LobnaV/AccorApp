@@ -34,7 +34,7 @@ if (!TUNNEL_TOKEN) {
 		};
 
 		// start up node server to handle requests
-		execa(`${process.cwd()}/node_modules/nodemon/bin/nodemon.js`, ['src/server.js'], { env }).stdout.pipe(process.stdout);
+		// execa(`${process.cwd()}/node_modules/nodemon/bin/nodemon.js`, ['src/server.js'], { env }).stdout.pipe(process.stdout);
 	} catch (err) {
 		console.log(chalk.red('An error occurred while starting the application'), err);
 		process.exit(1);

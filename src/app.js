@@ -6,6 +6,7 @@ const session = require('koa-session');
 const views = require('koa-views');
 const ts = require('./ts-api');
 const auth = require('./auth');
+const chalk = require('chalk');
 
 const app = new Koa();
 const router = new Router();
@@ -39,9 +40,9 @@ router.get('/', async (ctx) => {
 	// use this to see calls to the Tradeshift API working
 	const { CompanyName } = await ts.getAccount(ctx);
 	ctx.state.message = `Hello developer from ${CompanyName}!`;
-	console.log(ctx.state.user.accessToken);
+
 	// render the message in the view
-	await ctx.render('../src/app/src/');
+	await ctx.render('view');
 });
 
 // add routes to the app
