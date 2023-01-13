@@ -31,7 +31,5 @@ const getClient = (ctx) => {
 };
 
 api.getAccount = async (ctx) => getClient(ctx).get('/account/info');
-api.getAccount = async (ctx) => getClient(ctx).get('/account/info/user');
-module.exports = api;
 
-console.log('test page ts api')
+module.exports = api;

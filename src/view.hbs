@@ -1,38 +1,21 @@
 <!DOCTYPE html>
 <html lang="en-US">
-
 <head>
 	<base href="/">
 	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<title>Bucko</title>
 	<script src="//d5wfroyti11sa.cloudfront.net/prod/client/ts-9.2.4.min.js"></script>
-<script type="text/javascript" defer>
-
-const test = async (ctx) => getClient(ctx).get('/account/info');
-
-console.log(test)
-
-</script>
-
-
 	<style>
 		h1 {
 			margin-top: 44px;
 			text-align: center;
 		}
 	</style>
-
-
 </head>
-
 <body>
 	<header data-ts="TopBar"></header>
 	<main data-ts="Main">
 		<h1>{{message}}</h1>
-		<h1>{{username}}</h1>
-		<div class="test"></div>
-		<button id="redirect" onclick="location.href ='http://localhost:4200/Home'">AppUser</button>
 	</main>
 </body>
-
 </html>

@@ -43,7 +43,7 @@ async function updateManifest(manifest, tunnelHost) {
 	const auth = utils.getAuth();
 
 	const version = cloneObject(manifest);
-	version.app.main = tunnelHost ;
+	version.app.main = tunnelHost;
 	version.app.redirect_uri = utils.buildRedirectUrl(tunnelHost);
 	version.version = `0.0.0-${hash(version)}`;
 
