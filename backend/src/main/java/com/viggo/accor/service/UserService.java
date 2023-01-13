@@ -25,8 +25,8 @@ public class UserService {
 	@Autowired
 	private CompanyParameterRepository companyParameterRepository;
 
-	@Autowired
-	private TradeshiftInterface tradeshiftInterface;
+//	@Autowired
+//	private TradeshiftInterface tradeshiftInterface;
 
 	@Autowired
 	private SftpUploadService sftpUploadService;
@@ -58,8 +58,8 @@ public class UserService {
 		csvFormatDTO.setSpendLimit("10000");
 		csvFormatDTO.setUserType("General Manager");// a modifier apres l'ajout des roles
 		try {
-			String branchCode = tradeshiftInterface.getPrimaryBranchUser(userSaved.getUsername());
-			csvFormatDTO.setHome(branchCode.equals(userSaved.getPrimaryBranch()) ? "TRUE" : "FALSE");
+//			String branchCode = tradeshiftInterface.getPrimaryBranchUser(userSaved.getUsername());
+//			csvFormatDTO.setHome(branchCode.equals(userSaved.getPrimaryBranch()) ? "TRUE" : "FALSE");
 			csvFormatDTO.setOwnedCostCenter(userSaved.getUsername().equals(companyParameter.get().getDispacherMail())? "" : "");
 			//csvFormatDTO.setUserType();
 			sftpUploadService.uploadFileToSftp(csvFormatDTO);
@@ -86,8 +86,8 @@ public class UserService {
 		//csvFormatDTO.setOwnedCostCenter(companyParameter.get());
 		csvFormatDTO.setUserType("General Manager");// a modifier apres l'ajout des roles
 		try {
-			String branchCode = tradeshiftInterface.getPrimaryBranchUser(userSaved.getUsername());
-			csvFormatDTO.setHome(branchCode.equals(userSaved.getPrimaryBranch()) ? "TRUE" : "FALSE");
+//			String branchCode = tradeshiftInterface.getPrimaryBranchUser(userSaved.getUsername());
+//			csvFormatDTO.setHome(branchCode.equals(userSaved.getPrimaryBranch()) ? "TRUE" : "FALSE");
 			//csvFormatDTO.setOwnedCostCenter(userSaved.getUsername().equals(companyParameter.get().getDispacherMail())? "" : "");
 			//csvFormatDTO.setUserType();// aide!
 			sftpUploadService.uploadFileToSftp(csvFormatDTO);

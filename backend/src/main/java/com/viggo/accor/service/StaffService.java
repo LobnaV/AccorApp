@@ -18,8 +18,8 @@ public class StaffService {
 	@Autowired
 	private StaffRepository staffRepository;
 
-	@Autowired
-	private TradeshiftInterface tradeshiftInterface;
+//	@Autowired
+//	private TradeshiftInterface tradeshiftInterface;
 
 	@Autowired
 	private SftpUploadService sftpUploadService;
@@ -85,8 +85,8 @@ public class StaffService {
 		csvFormatDTO.setOwnedCostCenter(companyParameter.getMegaCode());
 		csvFormatDTO.setUserType("Head of Department");
 		try {
-			String branchCode = tradeshiftInterface.getPrimaryBranchUser(companyParameter.getUserGM().getUsername());
-			csvFormatDTO.setHome(branchCode.equals(companyParameter.getBranch().getCode()) ? "TRUE" : "FALSE");
+//			String branchCode = tradeshiftInterface.getPrimaryBranchUser(companyParameter.getUserGM().getUsername());
+//			csvFormatDTO.setHome(branchCode.equals(companyParameter.getBranch().getCode()) ? "TRUE" : "FALSE");
 			csvFormatDTO.setOwnedCostCenter(staff.getMail().equals(companyParameter.getDispacherMail())? companyParameter.getMegaCode() : "");
 			csvFormatDTO.setState(csvFormatDTO.getHome().equals("TRUE")? "LOCKED" : "REMOVE");
 			sftpUploadService.uploadFileToSftp(csvFormatDTO);
