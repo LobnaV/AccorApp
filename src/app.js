@@ -1,10 +1,3 @@
-// const express = require('express');
-//
-// const app = express();
-//
-// app.use('/', express.static('./app'));
-//
-// module.exports = app;
 // Use Express
 const express = require("express");
 // Use body-parser
