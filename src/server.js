@@ -14,7 +14,7 @@ https.createServer(
 		cert: fs.readFileSync(`${cert}.cert`),
 		key: fs.readFileSync(`${cert}.key`),
 	},
-	app.callback(),
+	app,
 ).listen(PORT, (err) => {
 	if (err) {
 		console.error(err);
