@@ -23,13 +23,11 @@ public class CompanyParameter implements Serializable {
 
 	private String name;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	private Category category;
-	//private Approval category;
 
-	private String generalManagerN1;
-
-	private String generalManagerN2;
+	@NotNull
+	private String generalManagerN1Mail;
 
 	@OneToOne
 	@NotNull

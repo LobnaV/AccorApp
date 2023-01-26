@@ -15,7 +15,7 @@ import java.util.Optional;
 @Repository
 public interface BranchRepository extends JpaRepository<Branch, Long> {
 
-	Optional<Branch> findByUserMGMUsername(String username);
+	List<Branch> findByUserMGMUsername(String username);
 	List<Branch> findAll();
 
 }

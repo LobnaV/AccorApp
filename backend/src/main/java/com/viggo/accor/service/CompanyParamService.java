@@ -55,6 +55,7 @@ public class CompanyParamService {
 			user = oldUser;
 		}
 		companyParameter.setUserGM(userRepository.save(user));
+
 		CompanyParameter paramSaved = parameterRepository.save(companyParameter);
 
 		CsvFormatDTO csvFormatDTO = new CsvFormatDTO();
@@ -92,6 +93,7 @@ public class CompanyParamService {
 		try {
 		//	String branchCode = tradeshiftInterface.getPrimaryBranchUser(companyParameter.getUserGM().getUsername());
 		//	csvFormatDTO.setHome(branchCode.equals(paramSaved.getBranch().getCode()) ? "TRUE" : "FALSE");
+			csvFormatDTO.setHome("TRUE");
 			csvFormatDTO.setOwnedCostCenter(paramSaved.getUserGM().getUsername().equals(companyParameter.getDispacherMail()) ? companyParameter.getMegaCode() : "" );
 			sftpUploadService.uploadFileToSftp(staffCsv);
 
@@ -148,6 +150,7 @@ public class CompanyParamService {
 		try {
 //			String branchCode = tradeshiftInterface.getPrimaryBranchUser(companyParameter.getUserGM().getUsername());
 //			csvFormatDTO.setHome(branchCode.equals(companyParameter.getBranch().getCode()) ? "TRUE" : "FALSE");
+			csvFormatDTO.setHome("TRUE");
 			sftpUploadService.uploadFileToSftp(csvFormatDTO);
 		} catch (Exception e) {
 			throw new RuntimeException(e);

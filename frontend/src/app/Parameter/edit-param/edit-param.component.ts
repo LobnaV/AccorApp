@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { AccorService } from 'src/app/accor.service';
 import { Param } from '../../model/param';
 import { Location } from '@angular/common';
 import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
 import { Branch } from 'src/app/model/branch';
 import { User } from 'src/app/model/user';
+import { Category } from "../../model/category";
 
 @Component({
   selector: 'app-edit-param',
@@ -18,27 +19,20 @@ export class EditParamComponent implements OnInit {
   param?: Param;
   branch?: Branch;
   user?:User;
-  selectedCategory?: any;
-  categories?:any = ['Ultra ECO', 'ECO', 'MidScale & Luxe']
+  categories?: Category[];
 
   paramForm = new FormGroup({
     id: new FormControl(''),
-    megaCode: new FormControl(''),
-    name: new FormControl(''),
-    category: new FormGroup({
-      id: new FormControl(''),
-      name: new FormControl(''),
-    }),
-    generalManagerN1: new FormControl(''),
-    generalManagerN2: new FormControl(''),
+    megaCode: new FormControl('', Validators.required),
+    name: new FormControl('', Validators.required),
+    category: new FormControl(''),
+    generalManagerN1Mail: new FormControl('', Validators.required),
     userGM: new FormGroup({
       id: new FormControl(''),
-      username: new FormControl(''),
-      firstName: new FormControl(''),
-      lastName: new FormControl(''),
-    }),
-    userMGM: new FormControl('')
-
+      username: new FormControl('', Validators.required),
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
+    })
   })
 
   constructor(
@@ -57,6 +51,12 @@ export class EditParamComponent implements OnInit {
         },
         (res: HttpErrorResponse) => console.log(res.message)
       );
+      this.service.getCategories().subscribe(
+        (res: HttpResponse<Category[]>) => {
+          this.categories = res.body!;
+        },
+        (res: HttpErrorResponse) => console.log(res.message)
+      );
 
       const paramId = params['paramId'];
       if(paramId){
@@ -67,19 +67,14 @@ export class EditParamComponent implements OnInit {
               id: this.param?.id,
               megaCode: this.param?.megaCode,
               name: this.param?.name,
-              category:{
-                id: this.param?.category?.id,
-                name: this.param?.category?.name?.toString()
-              },
-              generalManagerN1: this.param?.generalManagerN1,
-              generalManagerN2: this.param?.generalManagerN2,
-              userGM: { 
+              category: this.param?.category,
+              generalManagerN1Mail: this.param?.generalManagerN1Mail,
+              userGM: {
                 id: this.param.userGM?.id,
                 username: this.param.userGM?.username,
                 firstName: this.param.userGM?.firstName,
-                lastName: this.param.userGM?.lastName, 
+                lastName: this.param.userGM?.lastName,
               },
-              userMGM: this.branch?.userMGM?.username,
             });
           },
           (res: HttpErrorResponse) => console.log(res.message)
@@ -91,16 +86,22 @@ export class EditParamComponent implements OnInit {
 
   }
 
+  trackById(index: number, item: any) {
+    return item.id;
+  }
+
+  compareObjects(a: any, b: any) {
+    return a != null && b != null ? a.id === b.id : false;
+  }
+
   Update() {
-    //const updateForm = this.paramForm.value;
    const updateForm = {
     ...new Param(),
     id: this.paramForm.get('id')?.value,
     megaCode: this.paramForm.get('megaCode')?.value,
     name: this.paramForm.get('name')?.value,
     category: this.paramForm.get('category')?.value,
-    generalManagerN1: this.paramForm.get('generalManagerN1')?.value, 
-    generalManagerN2: this.paramForm.get('generalManagerN2')?.value,
+    generalManagerN1Mail: this.paramForm.get('generalManagerN1Mail')?.value,
     userGM: this.paramForm.get('userGM')?.value,
     branch: this.branch,
     dispacherMail: this.paramForm.get('userGM.username')?.value
@@ -128,7 +129,7 @@ export class EditParamComponent implements OnInit {
     }
   }
 
- 
+
 
 
 }

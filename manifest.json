@@ -8,12 +8,12 @@
   },
   "manifest_version": "3.0",
   "tradeshift_version": "5.0",
-  "version": "0.0.0-a29dc28bd56df3590dee4dca9a63c23818370769",
+  "version": "0.0.0-d7aeaaf4c1026576846398afae3ef1c383cbae50",
   "app_id": "AccorAppUser",
   "vendor_id": "ACCORHOSPITALITYNLNV",
   "app": {
-    "main": "https://dd9e-2001-861-e380-ac10-a141-b2cc-7e04-59fa.ngrok.io/",
-    "redirect_uri": "https://dd9e-2001-861-e380-ac10-a141-b2cc-7e04-59fa.ngrok.io/auth/callback"
+    "main": "https://c526-2001-861-e380-ac10-1d64-2df-7aab-e47.ngrok.io/",
+    "redirect_uri": "https://c526-2001-861-e380-ac10-1d64-2df-7aab-e47.ngrok.io/auth/callback"
   },
   "capabilities": {
     "access": [

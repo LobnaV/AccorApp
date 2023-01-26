@@ -46,10 +46,10 @@ public class BranchService {
 	}
 
 
-	public Branch findByUserMGM() throws Exception {
+	public List<Branch> findByUserMGM() throws Exception {
 		UserDetails userDetails =
 			(UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		return branchR.findByUserMGMUsername(userDetails.getUsername()).orElseThrow(() -> new Exception("Impossible de trouver la branche associée"));
+		return branchR.findByUserMGMUsername(userDetails.getUsername());
 	}
 
 	public Branch save(Branch branch) throws Exception {
@@ -81,6 +81,7 @@ public class BranchService {
 		try {
 			//	String branchCode = tradeshiftInterface.getPrimaryBranchUser(companyParameter.getUserGM().getUsername());
 			//	csvFormatDTO.setHome(branchCode.equals(paramSaved.getBranch().getCode()) ? "TRUE" : "FALSE");
+				csvFormatDTO.setHome("TRUE");
 			//csvFormatDTO.setOwnedCostCenter(branchSaved.getUserMGM().getUsername().equals(branch.getDispacherMail()) ? companyParameter.getMegaCode() : "" );
 			sftpUploadService.uploadFileToSftp(csvFormatDTO);
 		} catch (Exception e) {

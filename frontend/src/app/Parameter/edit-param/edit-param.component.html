@@ -28,18 +28,19 @@
         </div>
       </div>
 
-      <div formGroupName="category">
-        <input type="text" formControlName="id" hidden>
-        
+      <div>
         <div class="form-group row" >
-          <label class="col-sm-2 col-form-label" for="category">Category*:</label>
+          <label class="col-sm-2 col-form-label" for="category">Category:</label>
          <div class="col-sm-8">
-          <select class="form-control" formControlName="name" [(ngModel)]="selectedCategory">
-            <option [ngValue]="undefined" [disabled]="true">Select category</option>
-            <option *ngFor="let category of categories" [ngValue]="category" >
-              {{category}}
-            </option>
-          </select>
+
+           <select [compareWith]="compareObjects" class="form-control"
+                   formControlName="category"
+                   id="category" name="category">
+             <option [ngValue]="null">Select category</option>
+             <option
+               *ngFor="let category of categories; trackBy: trackById"
+               [ngValue]="category">{{category.name}}</option>
+           </select>
          </div>
         </div>
       </div>
@@ -65,26 +66,16 @@
           </div>
         </div>
       </div>
+
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label" for="generalManagerN1">{{'PARAM.EMAIL_GM' | translate}} N+1 *:</label>
+        <label class="col-sm-2 col-form-label" for="generalManagerN1Mail">{{'HEADER.FIRSTNAME' | translate}} N+1 mail *:</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" formControlName="generalManagerN1">
+          <input type="email" id="generalManagerN1Mail" class="form-control" formControlName="generalManagerN1Mail">
         </div>
       </div>
-      <div class="form-group row">
-        <label class="col-sm-2 col-form-label" for="generalManagerN2">{{'PARAM.EMAIL_GM' | translate}} N+2 *:</label>
-        <div class="col-sm-8">
-          <input type="text" class="form-control" formControlName="generalManagerN2">
-        </div>
-      </div>
-      <div>
-        <br>
-        <i style="color:#8F1D1D">Any modification here will result in having the General Manager becoming the dispatcher automatically. Please don’t hesitate to contact the GM to ask him to rearrange the workflow the way he would like to.
-        Alert: Please pay specific attention to the email address of the GM N+1 - which will impact the entierty of the branch.  
-        </i></div>
+
       <div class="save">
-        <button type="submit" class="btn bnt-Save" [disabled]="paramForm.invalid">{{this.param?.id ? 'edit' :
-          'add'}}</button>
+        <button type="submit" class="btn bnt-Save" [disabled]="paramForm.invalid">{{this.param?.id ? 'edit' : 'add'}}</button>
       </div>
     </form>
   </div>

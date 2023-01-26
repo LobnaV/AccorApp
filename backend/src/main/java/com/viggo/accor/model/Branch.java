@@ -32,7 +32,7 @@ public class Branch implements Serializable {
 			name = "user_id", referencedColumnName = "id"))
 	private Collection<User> userMGM;*/
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private User userMGM;
 
 

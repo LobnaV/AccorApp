@@ -1,6 +1,5 @@
 package com.viggo.accor.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -13,7 +12,8 @@ public class Category {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Enumerated(EnumType.STRING)
-	private ECategory name;
+	private String code;
+
+	private String name;
 
 }

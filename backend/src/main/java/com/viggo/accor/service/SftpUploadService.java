@@ -78,9 +78,9 @@ public class SftpUploadService {
 
 		uploadGateway.upload(csvOutputFile);
 
-		if (csvOutputFile.exists()) {
-			csvOutputFile.delete();
-		}
+//		if (csvOutputFile.exists()) {
+//			csvOutputFile.delete();
+//		}
 	}
 
 	public void uploadFileToSftp(List<CsvFormatDTO> csvFormats) throws FileNotFoundException {

@@ -32,7 +32,7 @@ lang:any
     public translate: TranslateService,
     private confirmationDialogService: ConfirmationDialogService,
 
-  ) { 
+  ) {
 
     this.message1 = this.translate.instant('DELETE.MESSAGE1');
     this.message1part2 = this.translate.instant('DELETE.MESSAGE1PART2');
@@ -40,7 +40,7 @@ lang:any
   }
 
   branch? : Branch|null
-  companies?: Param[]|any = [];
+  companies?: Param[] | any = [];
   userMGM?: User | null;
 
   ngOnInit(): void {
@@ -91,7 +91,7 @@ lang:any
       },
       (res: HttpErrorResponse) => console.log(res.message)
     );
-  } 
+  }
 
   Search(event: any) {
     this.searchTerm = (event.target as HTMLInputElement).value;
@@ -119,7 +119,7 @@ lang:any
             this.confirmationDialogService.confirm('Confirmation', this.message2)
               .then(() => {
                 if (confirmed) {
-                 console.log('remove ok')      
+                 console.log('remove ok')
                 }
               })
               .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));

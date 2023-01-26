@@ -8,18 +8,20 @@ import { CostCenter } from './model/costCenter';
 import { Param } from './model/param';
 import { User } from './model/user';
 import { Staff } from './model/staff';
+import { Category } from "./model/category";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccorService {
   public search = new BehaviorSubject<string>('');
-  private url = `${environment.UrlLocal}`
-  private urlLocal = `${this.url}/User`
+  private url = `${environment.UrlLocal}`;
+  private urlLocal = `${this.url}/User`;
   private local = `${this.url}/Branch`;
-  private paramUrl = `${this.url}/parameter`
-  private staffUrl = `${this.url}/staff`
-  private CCUrl = `${this.url}/CostCenter`
+  private paramUrl = `${this.url}/parameter`;
+  private staffUrl = `${this.url}/staff`;
+  private CCUrl = `${this.url}/CostCenter`;
+  private categorieUrl = `${this.url}/categories`;
 
   constructor(
     private http: HttpClient,
@@ -31,6 +33,11 @@ export class AccorService {
   getParams(): Observable<HttpResponse<Param[]>> {
     return this.http
       .get<Param[]>(this.paramUrl + '/List', {observe: 'response'})
+  }
+
+  getCategories(): Observable<HttpResponse<Category[]>> {
+    return this.http
+      .get<Category[]>(this.categorieUrl, {observe: 'response'})
   }
 
   ParamId(id: number): Observable<HttpResponse<Param>> {

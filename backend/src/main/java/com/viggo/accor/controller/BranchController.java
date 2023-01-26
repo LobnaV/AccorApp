@@ -23,7 +23,7 @@ public class BranchController {
 	@PreAuthorize("hasRole('ROLE_COMPANYADMIN')")
 	@GetMapping("/List")
 	public ResponseEntity<List<Branch>> branchList() throws Exception {
-		return ResponseEntity.ok(Collections.singletonList(service.findByUserMGM()));
+		return ResponseEntity.ok(service.findByUserMGM());
 	}
 
 	@PreAuthorize("hasRole('ROLE_MASTERADMIN')")

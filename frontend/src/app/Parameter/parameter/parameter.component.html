@@ -28,8 +28,7 @@
       <tr>
         <td>{{param.megaCode}}</td>
         <td>{{param.userGM?.username}}</td>
-        <td>{{param.generalManagerN1}}</td>
-        <td>{{param.generalManagerN2}}</td>
+        <td>{{param.generalManagerN1Mail}}</td>
         <td><button [routerLink]="['compagny-param', param?.id, 'edit']" class="btn btn-edit"
             style="margin-left: 10px;">{{'BUTTONS.EDIT' | translate}}</button></td>
         <td><button (click)="deleteParam(param.id, param.name)" class="btn btn-delete"
@@ -44,7 +43,6 @@
         <th scope="col">HotelMegaCode </th>
         <th scope="col">General manager</th>
         <th scope="col">General manager N+1</th>
-        <th scope="col">General manager N+2</th>
         <th></th>
         <th></th>
         <th></th>
@@ -54,8 +52,7 @@
       <tr>
         <td>{{param.megaCode}}</td>
         <td>{{param.userGM?.username}}</td>
-        <td>{{param.generalManagerN1}}</td>
-        <td>{{param.generalManagerN2}}</td>
+        <td>{{param.generalManagerN1Mail}}</td>
         <td><button [routerLink]="['costCenter', param?.id]" class="btn btn-edit"
           style="margin-left: 10px; background-color: #3AE3B0;">Cost centre</button></td>
         <td><button [routerLink]="['compagny-param', param?.id, 'edit']" class="btn btn-edit"

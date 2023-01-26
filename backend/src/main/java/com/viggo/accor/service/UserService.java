@@ -60,6 +60,7 @@ public class UserService {
 		try {
 //			String branchCode = tradeshiftInterface.getPrimaryBranchUser(userSaved.getUsername());
 //			csvFormatDTO.setHome(branchCode.equals(userSaved.getPrimaryBranch()) ? "TRUE" : "FALSE");
+			csvFormatDTO.setHome("TRUE");
 			csvFormatDTO.setOwnedCostCenter(userSaved.getUsername().equals(companyParameter.get().getDispacherMail())? "" : "");
 			//csvFormatDTO.setUserType();
 			sftpUploadService.uploadFileToSftp(csvFormatDTO);
@@ -88,6 +89,7 @@ public class UserService {
 		try {
 //			String branchCode = tradeshiftInterface.getPrimaryBranchUser(userSaved.getUsername());
 //			csvFormatDTO.setHome(branchCode.equals(userSaved.getPrimaryBranch()) ? "TRUE" : "FALSE");
+			csvFormatDTO.setHome("TRUE");
 			//csvFormatDTO.setOwnedCostCenter(userSaved.getUsername().equals(companyParameter.get().getDispacherMail())? "" : "");
 			//csvFormatDTO.setUserType();// aide!
 			sftpUploadService.uploadFileToSftp(csvFormatDTO);
