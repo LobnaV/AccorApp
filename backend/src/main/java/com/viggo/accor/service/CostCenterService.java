@@ -81,6 +81,7 @@ public class CostCenterService {
 
 	public CostCenter save(CostCenter costCenter) throws Exception {
 
+		costCenter.setOwner(costCenter.getCompany().getUserGM().getUsername());
 		CostCenter costCenterSaved = costCenterR.save(costCenter);
 
 
