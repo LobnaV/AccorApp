@@ -3,6 +3,7 @@ package com.viggo.accor.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -51,6 +52,7 @@ public class User implements Serializable {
 			name = "user_id", referencedColumnName = "id"),
 		inverseJoinColumns = @JoinColumn(
 			name = "role_id", referencedColumnName = "id"))
+	@BatchSize(size = 20)
 	private Collection<Role> roles;
 
 	public User(String username, String encode, String firstName, String lastName) {

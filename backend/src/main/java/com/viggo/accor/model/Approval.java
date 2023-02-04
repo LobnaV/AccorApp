@@ -13,18 +13,18 @@ public class Approval {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	private Category categoryID;
+	@ManyToOne
+	private Category category;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	private CompanyParameter companyID;
+	@ManyToOne
+	private CompanyParameter company;
 
 	//a verifier!
-	private String approvalLimitGM;//attribuer a ts les GM de la branches
-
-	private String approvalLimitN1;// attribuer a ts les GM N+1 de la branches
-
-	private String approvalLimitN2;// attribuer a ts les GM N+2 de la branches
+//	private String approvalLimitGM;//attribuer a ts les GM de la branches
+//
+//	private String approvalLimitN1;// attribuer a ts les GM N+1 de la branches
+//
+//	private String approvalLimitN2;// attribuer a ts les GM N+2 de la branches
 
 
 }
