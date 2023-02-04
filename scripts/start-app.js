@@ -14,7 +14,7 @@ if (!fs.existsSync(path.resolve(__dirname, '../manifest.json'))) {
 
 const manifest = require('../manifest.json'); // eslint-disable-line import/no-unresolved
 
-const PORT = process.env.PORT || 8443;
+const PORT = process.env.PORT || 8080;
 const TUNNEL_TOKEN = process.env.NGROK_TOKEN;
 
 if (!TUNNEL_TOKEN) {

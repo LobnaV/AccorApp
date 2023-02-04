@@ -28,8 +28,8 @@ const ACCOUNT_ROUTES = [
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
-  {path: '', children: ACCOUNT_ROUTES},
   {path: 'auth/callback', component: LoginComponent},
+  {path: '', children: ACCOUNT_ROUTES},
   {path: 'login', component: LoginComponent},
   {
     path: '', canActivate: [AccorGuard], component: LayoutComponent, children: [

@@ -1,41 +1,50 @@
-<div class="container login my-4">
-  <div class="row">
-    <div class="col-md-10 col-sm-12 offset-md-1 offset-sm-0">
-      <div class="card">
-        <h1 class="text-center">Connexion</h1>
-        <div class="card-body">
-          <form (ngSubmit)="onLogin()" [formGroup]="loginForm">
+<!--<div class="container login my-4">-->
+<!--  <div class="row">-->
+<!--    <div class="col-md-10 col-sm-12 offset-md-1 offset-sm-0">-->
+<!--      <div class="card">-->
+<!--        <h1 class="text-center">Connexion</h1>-->
+<!--        <div class="card-body">-->
+<!--          <form (ngSubmit)="onLogin()" [formGroup]="loginForm">-->
 
-            <div class="inputs">
-              <div class="form-group col-md-8">
-                <div class="form-outline">
-                  <label class="form-label" for="username">Username</label>
-                  <input [ngClass]="{'is-invalid': (loginForm.get('username')?.dirty || loginForm.get('username')?.touched) && loginForm.get('username')?.invalid }"
-                         class="form-control"
-                         formControlName="username"
-                         id="username"
-                         type="text"/>
-                </div>
-              </div>
-              <div class="form-group col-md-8">
-                <div class="form-outline">
-                  <label class="form-label" for="password">Mot de passe</label>
-                  <input [ngClass]="{'is-invalid': (loginForm.get('password')?.dirty || loginForm.get('password')?.touched) && loginForm.get('password')?.invalid}"
-                         class="form-control"
-                         formControlName="password"
-                         id="password"
-                         type="password"/>
-                </div>
-              </div>
-              <a [routerLink]="['/reset/request']">Forgot your password?</a>
-            </div>
-            <div class="button">
-              <button [disabled]="loginForm.invalid" class="btn btn-danger col-md-2" type="submit">Login</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+<!--            <div class="inputs">-->
+<!--              <div class="form-group col-md-8">-->
+<!--                <div class="form-outline">-->
+<!--                  <label class="form-label" for="username">Username</label>-->
+<!--                  <input [ngClass]="{'is-invalid': (loginForm.get('username')?.dirty || loginForm.get('username')?.touched) && loginForm.get('username')?.invalid }"-->
+<!--                         class="form-control"-->
+<!--                         formControlName="username"-->
+<!--                         id="username"-->
+<!--                         type="text"/>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="form-group col-md-8">-->
+<!--                <div class="form-outline">-->
+<!--                  <label class="form-label" for="password">Mot de passe</label>-->
+<!--                  <input [ngClass]="{'is-invalid': (loginForm.get('password')?.dirty || loginForm.get('password')?.touched) && loginForm.get('password')?.invalid}"-->
+<!--                         class="form-control"-->
+<!--                         formControlName="password"-->
+<!--                         id="password"-->
+<!--                         type="password"/>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <a [routerLink]="['/reset/request']">Forgot your password?</a>-->
+<!--            </div>-->
+<!--            <div class="button">-->
+<!--              <button [disabled]="loginForm.invalid" class="btn btn-danger col-md-2" type="submit">Login</button>-->
+<!--            </div>-->
+<!--          </form>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<div class="container" >
+  <button *ngIf="!isLoggedIn" class="btn btn-primary" (click)="login()" type="submit">
+    Login</button>
+  <div *ngIf="isLoggedIn" class="content">
+    <span>Welcome !!</span>
+    <a class="btn btn-default pull-right"(click)="logout()" href="#">Logout</a>
+    <br/>
   </div>
 </div>
-
