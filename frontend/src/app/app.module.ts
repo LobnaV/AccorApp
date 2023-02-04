@@ -15,19 +15,19 @@ import { AddBranchComponent } from './Branch/add-branch/add-branch.component';
 import { ListErrorCcComponent } from './CostCenter/list-error-cc/list-error-cc.component';
 import { EditCCComponent } from './CostCenter/edit-cc/edit-cc.component';
 import { CommonModule } from '@angular/common';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatRadioModule } from '@angular/material/radio';
 import { LoginComponent } from './Account/login/login.component';
 import { SignupComponent } from './Account/signup/signup.component';
 import { LayoutComponent } from './layout/layout.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { ForgotPasswordFormComponent } from './forgot-password-form/forgot-password-form.component';
-import {AuthInterceptor} from "./Account/login/auth.interceptor";
-import {ConfirmationDialogComponent} from "./UserBack/confirmation-dialog/confirmation-dialog.component";
+import { AuthInterceptor } from './Account/login/auth.interceptor';
+import { ConfirmationDialogComponent } from "./UserBack/confirmation-dialog/confirmation-dialog.component";
 import { BrowserModule } from '@angular/platform-browser';
-import {UpdateStaffComponent} from "./UserBack/update-staff/update-staff.component";
-import {UpdateUserGmComponent} from "./UserBack/update-user/update-user-gm.component";
-import {PasswordResetInitComponent} from "./password-reset/init/password-reset-init.component";
-import {PasswordResetFinishComponent} from "./password-reset/finish/password-reset-finish.component";
+import { UpdateStaffComponent} from './UserBack/update-staff/update-staff.component';
+import { UpdateUserGmComponent} from './UserBack/update-user/update-user-gm.component';
+import { PasswordResetInitComponent} from './password-reset/init/password-reset-init.component';
+import { PasswordResetFinishComponent} from './password-reset/finish/password-reset-finish.component';
 import { EditManagerComponent } from './Branch/edit-manager/edit-manager.component';
 import { EditApprovalLimitComponent } from './Branch/edit-approval-limit/edit-approval-limit.component';
 import { EditCompanyAdminComponent } from './Branch/edit-company-admin/edit-company-admin.component';
@@ -79,8 +79,7 @@ export function httpTranslateLoaderFactory(http: HttpClient) {
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    {provide: TranslateLoader, useFactory: httpTranslateLoaderFactory, deps: [HttpClient]
-    }
+    { provide: TranslateLoader, useFactory: httpTranslateLoaderFactory, deps: [HttpClient] }
   ],
   bootstrap: [AppComponent]
 })

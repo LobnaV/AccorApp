@@ -3,11 +3,19 @@ require('dotenv').config();
 const https = require('https');
 const path = require('path');
 const fs = require('fs');
-const app = require('./app');
+
+const express = require('express');
+const app = express();
 
 const PORT = process.env.PORT || 8443;
 
 const cert = path.resolve(__dirname, '../certs/localhost');
+
+
+app.use(express.static(path.join(__dirname, '../frontend/dist/app')));
+app.get('*', (req, res) => {
+	res.sendFile(path.join(__dirname, '../frontend/dist/app/index.html'));
+});
 
 https.createServer(
 	{
