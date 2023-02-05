@@ -4,6 +4,7 @@ import { AccorService } from 'src/app/accor.service';
 import { Param } from 'src/app/model/param';
 import { TokenStorageService } from '../../Account/login/token-storage.service';
 import { Router } from '@angular/router';
+import {Oauth2Service} from "../../Account/tradeshift/oauth2.service";
 
 @Component({
   selector: 'app-navbar',
@@ -20,6 +21,7 @@ export class NavbarComponent implements OnInit {
     private router: Router,
     private service: AccorService,
     public translate: TranslateService,
+    public tsOAuthService: Oauth2Service,
     private tokenStorage: TokenStorageService
   ) {
     this.role = window.sessionStorage.getItem('roleCurrentUser')!;
@@ -31,6 +33,7 @@ export class NavbarComponent implements OnInit {
 
   onClickLogout() {
     this.tokenStorage.signOut();
+    this.tsOAuthService.logout();
     this.router.navigate(['/']);
   }
 

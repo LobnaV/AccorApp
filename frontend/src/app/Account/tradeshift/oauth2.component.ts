@@ -3,7 +3,7 @@ import { Oauth2Service } from './oauth2.service';
 import { Router } from '@angular/router';
 
 @Component({
-  template: `<button (click)="logout()">retry</button>`,
+  template: '',
   selector: 'app-oauth2-tradeshift'
 })
 export class Oauth2Component implements OnInit {

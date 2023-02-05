@@ -33,21 +33,21 @@ public class CompagnyParamController {
 
 	@PreAuthorize("hasRole('ROLE_COMPANYADMIN')")
 	@PostMapping
-	public ResponseEntity<CompanyParameter> createCompanyParameter(@Valid @RequestBody CompanyParameter CompanyParameter) throws Exception {
+	public ResponseEntity<CompanyParameter> createCompanyParameter(@Valid @RequestBody CompanyParameter CompanyParameter, @RequestHeader("Ts_Access_Token") String accessToken) throws Exception {
 		if (CompanyParameter.getId() != null) {
 			throw new Exception("A new compagny parameter cannot already have an ID");
 		}
-		CompanyParameter result = service.save(CompanyParameter);
+		CompanyParameter result = service.save(CompanyParameter, accessToken);
 		return ResponseEntity.created(new URI("/api/parameter/" + result.getId())).body(result);
 	}
 
 	@PreAuthorize("hasRole('ROLE_COMPANYADMIN')")
 	@PutMapping
-	public ResponseEntity<CompanyParameter> updateCompanyParameter(@Valid @RequestBody CompanyParameter CompanyParameter) throws Exception {
+	public ResponseEntity<CompanyParameter> updateCompanyParameter(@Valid @RequestBody CompanyParameter CompanyParameter, @RequestHeader("Ts_Access_Token") String accessToken) throws Exception {
 		if (CompanyParameter.getId() == null) {
 			throw new Exception("Invalid id");
 		}
-		CompanyParameter result = service.save(CompanyParameter);
+		CompanyParameter result = service.save(CompanyParameter, accessToken);
 		return ResponseEntity.ok(result);
 	}
 
@@ -65,9 +65,9 @@ public class CompagnyParamController {
 	}
 	@PreAuthorize("hasRole('ROLE_GM')")
 	@GetMapping("/{id}/dispacher")
-	public ResponseEntity<CompanyParameter> updateDispatcher(@RequestParam String email, @PathVariable Long id, @RequestParam boolean isStaff) throws Exception {
+	public ResponseEntity<CompanyParameter> updateDispatcher(@RequestParam String email, @PathVariable Long id, @RequestParam boolean isStaff, @RequestHeader("Ts_Access_Token") String accessToken) throws Exception {
 
-		return ResponseEntity.ok(service.updateDispacher(id, email, isStaff));
+		return ResponseEntity.ok(service.updateDispacher(id, email, isStaff, accessToken));
 	}
 
 }

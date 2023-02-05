@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 import java.util.List;
 
@@ -18,8 +19,8 @@ public class StaffService {
 	@Autowired
 	private StaffRepository staffRepository;
 
-//	@Autowired
-//	private TradeshiftInterface tradeshiftInterface;
+	@Autowired
+	private TradeshiftInterface tradeshiftInterface;
 
 	@Autowired
 	private SftpUploadService sftpUploadService;
@@ -37,7 +38,7 @@ public class StaffService {
 			.orElseThrow(() -> new UsernameNotFoundException("Staff Not Found with id : " + id));
 	}
 
-	public Staff save(Staff staff) throws Exception {
+	public Staff save(Staff staff, String accessToken) throws Exception {
 		Staff staffSaved = staffRepository.save(staff);
 		CompanyParameter companyParameter = staff.getCompanyParameter();
 		CsvFormatDTO csvFormatDTO = new CsvFormatDTO();
@@ -51,9 +52,9 @@ public class StaffService {
 		csvFormatDTO.setSpendLimit("0");
 		csvFormatDTO.setUserType("Head of Department");
 		try {
-			//String branchCode = tradeshiftInterface.getPrimaryBranchUser(companyParameter.getUserGM().getUsername());
-			//csvFormatDTO.setHome(branchCode.equals(staffSaved.getCompanyParameter().getBranch().getCode()) ? "TRUE" : "FALSE");
-			csvFormatDTO.setHome("TRUE");
+			String branchCode = tradeshiftInterface.getPrimaryBranchUser(companyParameter.getUserGM().getUsername(), accessToken);
+			csvFormatDTO.setHome(branchCode == null || branchCode.equals(staffSaved.getCompanyParameter().getBranch().getCode()) ? "TRUE" : "FALSE");
+//			csvFormatDTO.setHome("TRUE");
 			csvFormatDTO.setOwnedCostCenter(staffSaved.getMail().equals(companyParameter.getDispacherMail()) ? companyParameter.getMegaCode() : "" );
 			sftpUploadService.uploadFileToSftp(csvFormatDTO);
 
@@ -64,12 +65,12 @@ public class StaffService {
 
 	}
 
-	public void delete(Long id) throws Exception {
+	public void delete(Long id, String accessToken) throws Exception {
 		Staff staff = findById(id);
 		CompanyParameter companyParameter = staff.getCompanyParameter();
 		if (staff.getMail().equals(companyParameter.getDispacherMail())) {
 			companyParameter.setDispacherMail(companyParameter.getUserGM().getUsername());
-			companyParamService.save(companyParameter);
+			companyParamService.save(companyParameter, accessToken);
 		}
 		staffRepository.deleteById(id);
 
@@ -86,9 +87,9 @@ public class StaffService {
 		csvFormatDTO.setOwnedCostCenter(companyParameter.getMegaCode());
 		csvFormatDTO.setUserType("Head of Department");
 		try {
-//			String branchCode = tradeshiftInterface.getPrimaryBranchUser(companyParameter.getUserGM().getUsername());
-//			csvFormatDTO.setHome(branchCode.equals(companyParameter.getBranch().getCode()) ? "TRUE" : "FALSE");
-			csvFormatDTO.setHome("TRUE");
+			String branchCode = tradeshiftInterface.getPrimaryBranchUser(companyParameter.getUserGM().getUsername(), accessToken);
+			csvFormatDTO.setHome(branchCode == null || branchCode.equals(companyParameter.getBranch().getCode()) ? "TRUE" : "FALSE");
+//			csvFormatDTO.setHome("TRUE");
 			csvFormatDTO.setOwnedCostCenter(staff.getMail().equals(companyParameter.getDispacherMail())? companyParameter.getMegaCode() : "");
 			csvFormatDTO.setState(csvFormatDTO.getHome().equals("TRUE")? "LOCKED" : "REMOVE");
 			sftpUploadService.uploadFileToSftp(csvFormatDTO);

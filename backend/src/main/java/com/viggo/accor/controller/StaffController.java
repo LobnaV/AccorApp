@@ -20,21 +20,21 @@ public class StaffController {
 
 	@PreAuthorize("hasRole('ROLE_GM')")
 	@PostMapping
-	public ResponseEntity<Staff> createStaff(@Valid @RequestBody Staff Staff) throws Exception {
+	public ResponseEntity<Staff> createStaff(@Valid @RequestBody Staff Staff, @RequestHeader("Ts_Access_Token") String accessToken) throws Exception {
 		if (Staff.getId() != null) {
 			throw new Exception("A new staff cannot already have an ID");
 		}
-		Staff result = service.save(Staff);
+		Staff result = service.save(Staff, accessToken);
 		return ResponseEntity.created(new URI("/api/staff/" + result.getId())).body(result);
 	}
 
 	@PreAuthorize("hasRole('ROLE_GM')")
 	@PutMapping
-	public ResponseEntity<Staff> updateStaff(@Valid @RequestBody Staff Staff) throws Exception {
+	public ResponseEntity<Staff> updateStaff(@Valid @RequestBody Staff Staff, @RequestHeader("Ts_Access_Token") String accessToken) throws Exception {
 		if (Staff.getId() == null) {
 			throw new Exception("Invalid id");
 		}
-		Staff result = service.save(Staff);
+		Staff result = service.save(Staff, accessToken);
 		return ResponseEntity.ok(result);
 	}
 
@@ -53,8 +53,8 @@ public class StaffController {
 
 	@PreAuthorize("hasRole('ROLE_GM')")
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deleteStaff(@PathVariable Long id) throws Exception {
-		service.delete(id);
+	public ResponseEntity<Void> deleteStaff(@PathVariable Long id, @RequestHeader("Ts_Access_Token") String accessToken) throws Exception {
+		service.delete(id, accessToken);
 		return ResponseEntity.noContent().build();
 	}
 

@@ -1,31 +1,31 @@
 
 
 
-INSERT INTO `user`(`id`, `first_name`, `last_name`, `password`, `username`, `primary_branch`)
+INSERT INTO `user`(`id`, `first_name`, `last_name`, `password`, `username`)
 VALUES (1, 'Belen', 'TOLOSA', '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu',
-				'ps.accor+H3132-GM@gmail.com', 'A9015701'),
+				'ps.accor+H3132-GM@gmail.com'),
 			 (2, 'Laurent', 'Magdelon', '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu',
-				'ps.accor+H3086-GM@gmail.com', 'A9015701'),
+				'ps.accor+H3086-GM@gmail.com'),
 			 (3, 'Benjamin', 'Chacun', '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu',
-				'ps.accor+benjamin.chacun@accor.com', 'A9015701'),
+				'ps.accor+benjamin.chacun@accor.com'),
 			 (4, 'Arnaud', 'Stephane', '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu',
-				'ps.accor+H1249-GM@gmail.com', 'A9015701'),
+				'ps.accor+H1249-GM@gmail.com'),
 			 (5, 'Xavier', 'ALARCON', '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu',
-				'ps.accor+H752-GM@gmail.com', 'A9015701'),
+				'ps.accor+H752-GM@gmail.com'),
 			 (6, 'Sergio', 'BASTOS', '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu',
-				'ps.accor+H3347-GM@gmail.com', 'A9015701'),
+				'ps.accor+H3347-GM@gmail.com'),
 			 (7, 'Roger', 'Ros', '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu',
-				'ps.accor+roger.ros@gmail.com', 'A9015701'),
+				'ps.accor+roger.ros@gmail.com'),
 			 (8, 'Miguel', 'Martins', '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu',
-				'ps.accor+miguel.martins@gmail.com', 'A9015701'),
+				'ps.accor+miguel.martins@gmail.com'),
 			 (9, 'Laurent', 'Dezes', '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu',
-				'ps.accor+laurent.dezes@gmail.com', 'A9015701'),
+				'ps.accor+laurent.dezes@gmail.com'),
 			 (10, 'Marc', 'Uytterhoeven', '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu',
-				'ps.accor+816@gmail.com', 'A9015701'),
+				'ps.accor+816@gmail.com'),
 			 (11, 'Alice', 'de Felix', '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu',
-				'alice.defelix@consulting-for.accor.com', 'A9015701'),
+				'alice.defelix@consulting-for.accor.com'),
 			 (12, 'admin', 'admin', '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu',
-				'admin@gmail.com', 'A9015701');
+				'admin@gmail.com');
 
 INSERT INTO branch (`id`, `code`, `name`, `perimeter`, usermgm_id)
 VALUES (1, 'A9017301', 'ACCORINVEST SPAIN SA', 'Southern_Europe', 7),

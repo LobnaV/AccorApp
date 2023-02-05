@@ -34,16 +34,10 @@ public class User implements Serializable {
 
 	private String password;
 
-	private String primaryBranch;
-
 	@JsonIgnore
 	private String resetKey;
 
 	private Instant resetDate = null;
-
-	private String approvalLimit ;
-
-	private String spendLimit ;
 
 	@ManyToMany
 	@JoinTable(

@@ -3,6 +3,7 @@ package com.viggo.accor.service;
 import com.viggo.accor.config.UploadGateway;
 import com.viggo.accor.playload.CsvFormatDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,9 @@ import java.util.List;
 public class SftpUploadService {
 
 	private final String DELIMITER = ";";
+
+	@Value("${application.temp.sftp}")
+	private String pathTemp;
 
 	@Autowired
 	private UploadGateway uploadGateway;
@@ -70,7 +74,7 @@ public class SftpUploadService {
 	}
 
 	public void uploadFileToSftp(CsvFormatDTO csvFormat) throws FileNotFoundException {
-		File csvOutputFile = new File("Accortemplateuserssheet.csv");
+		File csvOutputFile = new File(pathTemp + "/Accortemplateuserssheet.csv");
 		try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
 			pw.println(headerCsv());
 			pw.println(convertToCSV(csvFormat));
@@ -84,7 +88,7 @@ public class SftpUploadService {
 	}
 
 	public void uploadFileToSftp(List<CsvFormatDTO> csvFormats) throws FileNotFoundException {
-		File csvOutputFile = new File("Accortemplateuserssheet.csv");
+		File csvOutputFile = new File(pathTemp + "/Accortemplateuserssheet.csv");
 		try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
 			pw.println(headerCsv());
 			csvFormats.forEach(csvFormatDto -> pw.println(convertToCSV(csvFormatDto)));

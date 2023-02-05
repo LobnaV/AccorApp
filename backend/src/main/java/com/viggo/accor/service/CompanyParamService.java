@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +29,8 @@ public class CompanyParamService {
 	@Autowired
 	private StaffRepository staffRepository;
 
-//	@Autowired
-//	private TradeshiftInterface tradeshiftInterface;
+	@Autowired
+	private TradeshiftInterface tradeshiftInterface;
 
 	@Autowired
 	private SftpUploadService sftpUploadService;
@@ -44,7 +45,7 @@ public class CompanyParamService {
 		return parameterRepository.findByUserGMUsername(userDetails.getUsername()).orElseThrow(() -> new Exception("Impossible de trouver l'hotel associé"));
 	}
 
-	public CompanyParameter save(CompanyParameter companyParameter) throws Exception {
+	public CompanyParameter save(CompanyParameter companyParameter, String accessToken) throws Exception {
 		User user = companyParameter.getUserGM();
 		if (user.getId() != null) {
 			User oldUser = userRepository.findById(user.getId())
@@ -60,7 +61,6 @@ public class CompanyParamService {
 
 		CsvFormatDTO csvFormatDTO = new CsvFormatDTO();
 		csvFormatDTO.setBranchId(paramSaved.getBranch().getCode());
-		csvFormatDTO.setHome("TRUE");
 		csvFormatDTO.setEmail(paramSaved.getUserGM().getUsername());
 		csvFormatDTO.setFirstName(paramSaved.getUserGM().getFirstName());
 		csvFormatDTO.setLastName(paramSaved.getUserGM().getLastName());
@@ -91,9 +91,9 @@ public class CompanyParamService {
 			staffCsv.add(csvFormatStaff);
 		});
 		try {
-		//	String branchCode = tradeshiftInterface.getPrimaryBranchUser(companyParameter.getUserGM().getUsername());
-		//	csvFormatDTO.setHome(branchCode.equals(paramSaved.getBranch().getCode()) ? "TRUE" : "FALSE");
-			csvFormatDTO.setHome("TRUE");
+			String branchCode = tradeshiftInterface.getPrimaryBranchUser(companyParameter.getUserGM().getUsername(), accessToken);
+			csvFormatDTO.setHome(branchCode == null || branchCode.equals(paramSaved.getBranch().getCode()) ? "TRUE" : "FALSE");
+//			csvFormatDTO.setHome("TRUE");
 			csvFormatDTO.setOwnedCostCenter(paramSaved.getUserGM().getUsername().equals(companyParameter.getDispacherMail()) ? companyParameter.getMegaCode() : "" );
 			sftpUploadService.uploadFileToSftp(staffCsv);
 
@@ -114,7 +114,7 @@ public class CompanyParamService {
 		parameterRepository.deleteById(id);
 	}
 
-	public CompanyParameter updateDispacher(Long id, String email, boolean isStaff) {
+	public CompanyParameter updateDispacher(Long id, String email, boolean isStaff, String accessToken) {
 		parameterRepository.updateDispacher(id, email);
 		CompanyParameter companyParameter = findById(id);
 
@@ -148,9 +148,9 @@ public class CompanyParamService {
 		csvFormatDTO.setOwnedCostCenter(companyParameter.getMegaCode());
 		csvFormatDTO.setUserType(userType);
 		try {
-//			String branchCode = tradeshiftInterface.getPrimaryBranchUser(companyParameter.getUserGM().getUsername());
-//			csvFormatDTO.setHome(branchCode.equals(companyParameter.getBranch().getCode()) ? "TRUE" : "FALSE");
-			csvFormatDTO.setHome("TRUE");
+			String branchCode = tradeshiftInterface.getPrimaryBranchUser(companyParameter.getUserGM().getUsername(), accessToken);
+			csvFormatDTO.setHome(branchCode == null || branchCode.equals(companyParameter.getBranch().getCode()) ? "TRUE" : "FALSE");
+//			csvFormatDTO.setHome("TRUE");
 			sftpUploadService.uploadFileToSftp(csvFormatDTO);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
