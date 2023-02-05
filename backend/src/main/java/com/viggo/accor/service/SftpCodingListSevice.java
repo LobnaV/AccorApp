@@ -48,6 +48,10 @@ public class SftpCodingListSevice {
 
 		uploadGateway.upload(csvOutputFile);
 
+		if (csvOutputFile.exists()) {
+			csvOutputFile.delete();
+		}
+
 	}
 }
 

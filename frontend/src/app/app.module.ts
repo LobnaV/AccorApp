@@ -33,6 +33,7 @@ import { EditApprovalLimitComponent } from './Branch/edit-approval-limit/edit-ap
 import { EditCompanyAdminComponent } from './Branch/edit-company-admin/edit-company-admin.component';
 import { ListCcComponent } from './CostCenter/list-cc/list-cc.component';
 import { UpdateCcComponent } from './Parameter/update-cc/update-cc.component';
+import { Oauth2Component } from './Account/tradeshift/oauth2.component';
 
 // Factory function required during AOT compilation
 export function httpTranslateLoaderFactory(http: HttpClient) {
@@ -65,7 +66,8 @@ export function httpTranslateLoaderFactory(http: HttpClient) {
     EditApprovalLimitComponent,
     EditCompanyAdminComponent,
     ListCcComponent,
-    UpdateCcComponent
+    UpdateCcComponent,
+    Oauth2Component
   ],
   imports: [
     BrowserModule,

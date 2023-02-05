@@ -20,6 +20,7 @@ import { EditManagerComponent } from './Branch/edit-manager/edit-manager.compone
 import { EditApprovalLimitComponent } from './Branch/edit-approval-limit/edit-approval-limit.component';
 import { EditCompanyAdminComponent } from './Branch/edit-company-admin/edit-company-admin.component';
 import { UpdateCcComponent } from './Parameter/update-cc/update-cc.component';
+import {Oauth2Component} from "./Account/tradeshift/oauth2.component";
 
 const ACCOUNT_ROUTES = [
   passwordResetFinishRoute,
@@ -27,7 +28,8 @@ const ACCOUNT_ROUTES = [
 ];
 
 const routes: Routes = [
-  {path: '', redirectTo: '/login', pathMatch: 'full'},
+  {path: '', component: Oauth2Component},
+  {path: 'auth/callback', component: Oauth2Component},
   {path: '', children: ACCOUNT_ROUTES},
   {path: 'login', component: LoginComponent},
   {

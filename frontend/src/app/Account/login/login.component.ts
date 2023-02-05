@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from "./auth.service";
-import {TokenStorageService} from "./token-storage.service";
-import {Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from './auth.service';
+import { TokenStorageService } from './token-storage.service';
+import { Router } from '@angular/router';
+import {Oauth2Service} from "../tradeshift/oauth2.service";
 
 @Component({
   selector: 'app-login',
@@ -21,12 +22,18 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private tokenStorage: TokenStorageService,
+    private oAuthTSService: Oauth2Service,
     private authService: AuthService,
     private router: Router) {
   }
 
   ngOnInit(): void {
-    if (this.tokenStorage.getToken()) {
+    const isConnectedTs = this.oAuthTSService.checkCredentials();
+    console.log('isConnectedTs');
+    console.log(isConnectedTs);
+    if (!isConnectedTs) {
+      this.router.navigate(['']);
+    } else if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getUser().roles;
     }

@@ -129,7 +129,8 @@ export class EditCCComponent implements OnInit {
     if (this.staff?.id) {
       this.service.updateStaff(updateForm)
         .subscribe(
-          (res: HttpResponse<Staff>) => {
+          () => {
+            this.location.back();
           },
           (res: HttpErrorResponse) => console.log(res.message)
         );
@@ -170,7 +171,7 @@ export class EditCCComponent implements OnInit {
         console.log(res.message);
       }
     );
-  
+
 
   }
 

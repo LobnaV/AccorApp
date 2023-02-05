@@ -83,8 +83,10 @@ export class UpdateStaffComponent implements OnInit {
     if (this.staff?.id) {
       this.service.updateStaff(updateForm)
         .subscribe(
-          (res: HttpResponse<Staff>) => {
-            this.location.back();
+          (res: any) => {
+            // this.location.back();
+            console.log('res');
+            console.log(res);
           },
           (res: HttpErrorResponse) => console.log(res.message)
         );

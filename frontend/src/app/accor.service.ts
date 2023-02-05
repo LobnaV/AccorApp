@@ -1,4 +1,4 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -9,6 +9,7 @@ import { Param } from './model/param';
 import { User } from './model/user';
 import { Staff } from './model/staff';
 import { Category } from "./model/category";
+import {Oauth2Service} from "./Account/tradeshift/oauth2.service";
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,8 @@ export class AccorService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private oAuthTsService: Oauth2Service
   ) {
   }
 
@@ -84,8 +86,15 @@ export class AccorService {
   }
 
   updateStaff(staff: Staff): Observable<HttpResponse<Staff>> {
+
+    const accessTokenTs = this.oAuthTsService.getToken();
+    const headers = new HttpHeaders({
+      'Ts_Access_Token': accessTokenTs
+    });
+    console.log('headersheaders');
+    console.log(headers.get('Ts_Access_Token'));
     return this.http
-      .put<Staff>(this.staffUrl, staff, {observe: 'response'});
+      .put<Staff>(this.staffUrl, staff, { observe: 'response', headers });
   }
 
   updateManager(staff: Staff): Observable<HttpResponse<Staff>> {
