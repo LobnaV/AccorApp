@@ -53,13 +53,21 @@ export class AccorService {
   }
 
   addParam(param: Param): Observable<HttpResponse<Param>> {
+    const accessTokenTs = this.oAuthTsService.getToken();
+    const headers = new HttpHeaders({
+      'Ts_Access_Token': accessTokenTs
+    });
     return this.http
-      .post<Param>(this.paramUrl, param, {observe: 'response'})
+      .post<Param>(this.paramUrl, param, {observe: 'response', headers})
   }
 
   updateParam(param: Param): Observable<HttpResponse<Param>> {
+    const accessTokenTs = this.oAuthTsService.getToken();
+    const headers = new HttpHeaders({
+      'Ts_Access_Token': accessTokenTs
+    });
     return this.http
-      .put<Param>(this.paramUrl, param, {observe: 'response'});
+      .put<Param>(this.paramUrl, param, {observe: 'response', headers});
   }
 
   deleteParam(paramId: Param) {
@@ -68,8 +76,13 @@ export class AccorService {
   }
 
   updateDispatcher(idCompagnie: number, email: string, isStaff: boolean): Observable<HttpResponse<Param>> {
+    const accessTokenTs = this.oAuthTsService.getToken();
+    const headers = new HttpHeaders({
+      'Ts_Access_Token': accessTokenTs
+    });
     return this.http.get<Param>(`${this.paramUrl}/${idCompagnie}/dispacher?email=${encodeURIComponent(email)}&isStaff=${isStaff}`, {
       observe: 'response',
+      headers
     });
   }
 
@@ -86,12 +99,10 @@ export class AccorService {
   }
 
   updateStaff(staff: Staff): Observable<HttpResponse<Staff>> {
-
     const accessTokenTs = this.oAuthTsService.getToken();
     const headers = new HttpHeaders({
       'Ts_Access_Token': accessTokenTs
     });
-    console.log('headersheaders');
     console.log(headers.get('Ts_Access_Token'));
     return this.http
       .put<Staff>(this.staffUrl, staff, { observe: 'response', headers });
@@ -104,12 +115,20 @@ export class AccorService {
 
 
   deleteStaff(id: number): Observable<HttpResponse<void>> {
-    return this.http.delete<void>(`${this.staffUrl}/${id}`, {observe: 'response'});
+    const accessTokenTs = this.oAuthTsService.getToken();
+    const headers = new HttpHeaders({
+      'Ts_Access_Token': accessTokenTs
+    });
+    return this.http.delete<void>(`${this.staffUrl}/${id}`, {observe: 'response', headers});
   }
 
   createStaff(staff: Staff): Observable<HttpResponse<Staff>> {
+    const accessTokenTs = this.oAuthTsService.getToken();
+    const headers = new HttpHeaders({
+      'Ts_Access_Token': accessTokenTs
+    });
     return this.http
-      .post<Staff>(this.staffUrl, staff, {observe: 'response'})
+      .post<Staff>(this.staffUrl, staff, {observe: 'response', headers})
   }
 
   // Service User
