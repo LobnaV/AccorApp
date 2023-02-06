@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class Oauth2Service {
   static clientId = 'ACCORHOSPITALITYNLNV.AccorAppUser';
   static clientSecret = 'c6f21019-9d78-44a2-b666-080f922c861d';
-  static redirectUri = 'https://9784-2001-861-e380-ac10-69f0-9b2-27a2-782c.ngrok.io/auth/callback';
+  static redirectUri = 'https://a0d0-51-178-51-178.ngrok.io/auth/callback';
   static tokenUrl = 'https://api-sandbox.tradeshift.com/tradeshift/auth/token';
 
   constructor(private _http: HttpClient) { }
@@ -59,7 +59,7 @@ export class Oauth2Service {
   };
 
   getToken(): string {
-    return localStorage.getItem('access_token')!;
+    return localStorage.getItem('access_token') || "";
   };
 
   saveToken(token: any) {

@@ -3,6 +3,7 @@ package com.viggo.accor.service;
 import com.viggo.accor.config.UploadGateway;
 import com.viggo.accor.playload.CodingListFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +21,9 @@ public class SftpCodingListSevice {
 
 	@Autowired
 	private UploadGateway uploadGateway;
+
+	@Value("${application.temp.sftp}")
+	private String pathTemp;
 
 	private String convertToCSV(CodingListFormat codingList) {
 		return codingList.getMegaCodeCostCenter_ID() +
@@ -40,7 +44,7 @@ public class SftpCodingListSevice {
 	}
 
 	public void uploadFileToSftp(List<CodingListFormat> csvFormats) throws FileNotFoundException {
-		File csvOutputFile = new File("CostCenterList.csv");
+		File csvOutputFile = new File(pathTemp + "/CostCenterList.csv");
 		try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
 			pw.println(headerCsv());
 			csvFormats.forEach(codingListx -> pw.println(convertToCSV(codingListx)));

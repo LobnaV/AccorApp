@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AccorService } from 'src/app/accor.service';
-import {Param} from "../../model/param";
-import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
+import { Param} from '../../model/param';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 import { Branch } from 'src/app/model/branch';
 import { User } from 'src/app/model/user';
@@ -19,7 +18,7 @@ export class ParameterComponent implements OnInit {
   parameters: any;
   searchKey: string = "";
   searchTerm: string = "";
-  branche?:any;
+  branche?: Branch;
   message1?:any;
   message1part2?:any;
   message2?:any;
@@ -30,7 +29,7 @@ lang:any
     private router:Router,
     private activatedRoute: ActivatedRoute,
     public translate: TranslateService,
-    private confirmationDialogService: ConfirmationDialogService,
+    private confirmationDialogService: ConfirmationDialogService
 
   ) {
 
@@ -52,8 +51,8 @@ lang:any
 
     this.activatedRoute.params.subscribe(params => {
       console.log(params['id']);
-      this.service.branchId(params['id']).subscribe(data => {
-        this.branche = data;
+      this.service.branchId(params['id']).subscribe((data: HttpResponse<Branch>) => {
+        this.branche = data.body!;
         console.log(data);
       });
     });
@@ -106,9 +105,8 @@ lang:any
 
   remove(paramId:any){
     this.service.deleteParam(paramId)
-     .subscribe( (data:any) =>{
-       this.params = this.params?.filter((param: { id: any; }) => paramId !== param.id);
-         this.router.navigate(["Parameter"]);
+     .subscribe( () =>{
+       this.loadCompanies(this.branche?.id!);
      })
   }
 
@@ -119,7 +117,7 @@ lang:any
             this.confirmationDialogService.confirm('Confirmation', this.message2)
               .then(() => {
                 if (confirmed) {
-                 console.log('remove ok')
+                  this.remove(idParam);
                 }
               })
               .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));

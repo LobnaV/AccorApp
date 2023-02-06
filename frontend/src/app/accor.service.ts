@@ -71,8 +71,7 @@ export class AccorService {
   }
 
   deleteParam(paramId: Param) {
-    return this.http
-      .delete<Param>(this.paramUrl + '/deleteParameter/' + paramId)
+    return this.http.delete<Param>(this.paramUrl + '/' + paramId, {observe: 'response'});
   }
 
   updateDispatcher(idCompagnie: number, email: string, isStaff: boolean): Observable<HttpResponse<Param>> {
