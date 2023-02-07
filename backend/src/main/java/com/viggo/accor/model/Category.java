@@ -16,4 +16,8 @@ public class Category {
 
 	private String name;
 
+	@Column(length = 20)
+	@Enumerated(EnumType.STRING)
+	private EPerimeter perimeter;
+
 }

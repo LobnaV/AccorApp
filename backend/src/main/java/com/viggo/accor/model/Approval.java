@@ -8,7 +8,6 @@ import javax.persistence.*;
 @Entity
 @Table
 public class Approval {
-//Seulement pour la partie SE
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -16,15 +15,5 @@ public class Approval {
 	@ManyToOne
 	private Category category;
 
-	@ManyToOne
-	private CompanyParameter company;
-
-	//a verifier!
-//	private String approvalLimitGM;//attribuer a ts les GM de la branches
-//
-//	private String approvalLimitN1;// attribuer a ts les GM N+1 de la branches
-//
-//	private String approvalLimitN2;// attribuer a ts les GM N+2 de la branches
-
-
+	private Long value;
 }

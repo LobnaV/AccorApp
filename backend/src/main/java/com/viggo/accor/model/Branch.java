@@ -23,20 +23,9 @@ public class Branch implements Serializable {
 
 	private String name;
 
-	/*@ManyToMany
-		@JoinTable(
-		name = "branches_users",
-		joinColumns = @JoinColumn(
-			name = "branch_id", referencedColumnName = "id"),
-		inverseJoinColumns = @JoinColumn(
-			name = "user_id", referencedColumnName = "id"))
-	private Collection<User> userMGM;*/
-
 	@ManyToOne
 	private User userMGM;
 
-
-	//	@NotNull
 	@Enumerated(EnumType.STRING)
 	private EPerimeter perimeter;
 }
