@@ -21,6 +21,8 @@ import { EditApprovalLimitComponent } from './Branch/edit-approval-limit/edit-ap
 import { EditCompanyAdminComponent } from './Branch/edit-company-admin/edit-company-admin.component';
 import { UpdateCcComponent } from './Parameter/update-cc/update-cc.component';
 import {Oauth2Component} from "./Account/tradeshift/oauth2.component";
+import { CostCenterEditComponent } from './cost-center/cost-center-edit/cost-center-edit.component';
+import { CostCenterComponent } from './cost-center/cost-center.component';
 
 const ACCOUNT_ROUTES = [
   passwordResetFinishRoute,
@@ -28,7 +30,8 @@ const ACCOUNT_ROUTES = [
 ];
 
 const routes: Routes = [
-  {path: '', component: Oauth2Component},
+  // {path: '', component: Oauth2Component},
+  {path: '', component: LoginComponent},
   {path: 'auth/callback', component: Oauth2Component},
   {path: '', children: ACCOUNT_ROUTES},
   {path: 'login', component: LoginComponent},
@@ -54,6 +57,10 @@ const routes: Routes = [
       {path: 'branch/:id/costCenter/:paramId', component: ListCcComponent},
       {path: 'branch/:id/costCenter/:paramId/add', component:UpdateCcComponent},
       {path: 'branch/:id/costCenter/:paramId/edit/:costCenterId', component: UpdateCcComponent},
+
+      {path: 'branch/:branchId/NE/compagny-param/:paramId', component: CostCenterComponent},
+      {path: 'branch/:branchId/NE/compagny-param/:paramId/cost-center/add', component:CostCenterEditComponent},
+      {path: 'branch/:branchId/NE/compagny-param/:paramId/cost-center/:costCenterId/edit', component: CostCenterEditComponent},
 
 
       {path: 'Home/branch/:id/edit-manager', component:EditManagerComponent},

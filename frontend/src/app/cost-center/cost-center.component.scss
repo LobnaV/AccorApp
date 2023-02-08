@@ -1,0 +1,42 @@
+.container{
+    #searchBar{
+        margin-left: auto;
+
+        .btn_searchbar{
+            display: flex;
+            justify-content: flex-end;
+            margin: 2rem;
+            margin-left: auto;
+                .container2{
+                    display: flex;
+                    justify-content: flex-end;
+
+                    .add_Btn{
+                        background-color: #9BE69F;
+                    }
+                }
+        }
+    }
+    .table{
+        .data{
+            .btn-edit{
+                background-color:#F0AB29 ;
+            }
+        }
+    }
+}
+
+
+.save{
+
+  display: flex;
+  justify-content: flex-end;
+
+  .btn-Save{
+    border: none;
+    border-radius: 5%;
+    width: 6rem;
+    background-color: #B9E9A2;
+    margin: 2rem;
+  }
+}

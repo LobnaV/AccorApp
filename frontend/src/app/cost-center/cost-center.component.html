@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="btns">
+    <button (click)="location.back()" class="btnBack">Back</button>
+  </div>
+
+  <br>
+
+  MegaCode {{company?.megaCode}} - Hotel Name {{company?.name}}
+
+  <div class="form-group col-md-8" id="searchBar">
+    <div class="btn_searchbar">
+      <input (keyup)="Search($event)" [(ngModel)]="searchTerm" class="form-control" placeholder="{{'BUTTONS.SEARCH_CODECC' | translate}}" style="margin-right: 15rem;" type="text">
+      <div class="container2">
+        <button [routerLink]="'add'" class="btn add_Btn" style="background-color: #9BE69F">Create/Add</button>
+      </div>
+    </div>
+  </div>
+
+  <table class="table" style="margin-top: 3rem;">
+    <thead class="thead-dark" style="background-color: black; color: white">
+    <tr>
+      <th scope="col">Cost center</th>
+      <th scope="col">Cost center name</th>
+      <th scope="col">Email</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody *ngFor="let data of costcenters | filter: searchKey: 'code' " class="data" style="background-color: #C5C5C5;">
+    <tr>
+      <th>{{data.code}}</th>
+      <th>{{data.label}}</th>
+      <th *ngIf="data?.owner != null">{{data?.owner}}</th>
+      <th *ngIf="data?.owner == null">{{data?.company?.userGM?.username}}</th>
+      <td>
+        <button [routerLink]="['cost-center', data?.id, 'edit']" class="btn btn-edit" style="margin-left: 10px;">{{'BUTTONS.EDIT' |translate}}</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

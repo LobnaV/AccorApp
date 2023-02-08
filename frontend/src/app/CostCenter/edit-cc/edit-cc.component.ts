@@ -11,7 +11,7 @@ import { CostCenter } from 'src/app/model/costCenter';
 
 
 @Component({
-  selector: 'app-edit-cc',
+  selector: 'app-cost-center-edit',
   templateUrl: './edit-cc.component.html',
   styleUrls: ['./edit-cc.component.scss']
 })

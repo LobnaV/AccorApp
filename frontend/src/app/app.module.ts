@@ -34,6 +34,8 @@ import { EditCompanyAdminComponent } from './Branch/edit-company-admin/edit-comp
 import { ListCcComponent } from './CostCenter/list-cc/list-cc.component';
 import { UpdateCcComponent } from './Parameter/update-cc/update-cc.component';
 import { Oauth2Component } from './Account/tradeshift/oauth2.component';
+import { CostCenterComponent } from './cost-center/cost-center.component';
+import { CostCenterEditComponent } from './cost-center/cost-center-edit/cost-center-edit.component';
 
 // Factory function required during AOT compilation
 export function httpTranslateLoaderFactory(http: HttpClient) {
@@ -67,7 +69,9 @@ export function httpTranslateLoaderFactory(http: HttpClient) {
     EditCompanyAdminComponent,
     ListCcComponent,
     UpdateCcComponent,
-    Oauth2Component
+    Oauth2Component,
+    CostCenterComponent,
+    CostCenterEditComponent
   ],
   imports: [
     BrowserModule,

@@ -50,7 +50,7 @@ public class SftpCodingListSevice {
 			csvFormats.forEach(codingListx -> pw.println(convertToCSV(codingListx)));
 		}
 
-		uploadGateway.upload(csvOutputFile);
+//		uploadGateway.upload(csvOutputFile);
 
 		if (csvOutputFile.exists()) {
 			csvOutputFile.delete();

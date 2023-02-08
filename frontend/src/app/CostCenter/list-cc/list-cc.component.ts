@@ -11,7 +11,7 @@ import { Param } from 'src/app/model/param';
   styleUrls: ['./list-cc.component.scss']
 })
 export class ListCcComponent implements OnInit {
-  
+
   searchKey: string = "";
   searchTerm: string = "";
   costcenters: CostCenter[] | any = [];
@@ -26,9 +26,9 @@ export class ListCcComponent implements OnInit {
   ngOnInit(): void {
 
     this.activatedRoute.params.subscribe(params => {
-  
-      this.loadCostCenter(params['id']); 
-      console.log(params['id'])
+
+      this.loadCostCenter(params['paramId']);
+      console.log(params['paramId'])
 
       const paramId = params['paramId'];
       this.service.ParamId(paramId).subscribe(
@@ -39,7 +39,7 @@ export class ListCcComponent implements OnInit {
         (res: HttpErrorResponse) => console.log(res.message)
       );
 
-    });   
+    });
 
       this.service.search.subscribe((val: any) => {
         this.searchKey = val;
