@@ -22,16 +22,16 @@ export class EditParamComponent implements OnInit {
   categories?: Category[];
 
   paramForm = new FormGroup({
-    id: new FormControl(''),
-    megaCode: new FormControl('', Validators.required),
-    name: new FormControl('', Validators.required),
-    category: new FormControl(''),
-    generalManagerN1Mail: new FormControl('', Validators.required),
+    id: new FormControl(null),
+    megaCode: new FormControl(null, Validators.required),
+    name: new FormControl(null, Validators.required),
+    category: new FormControl(null, Validators.required),
+    generalManagerN1Mail: new FormControl(null, Validators.required),
     userGM: new FormGroup({
-      id: new FormControl(''),
-      username: new FormControl('', Validators.required),
-      firstName: new FormControl('', Validators.required),
-      lastName: new FormControl('', Validators.required),
+      id: new FormControl(null),
+      username: new FormControl(null, Validators.required),
+      firstName: new FormControl(null, Validators.required),
+      lastName: new FormControl(null, Validators.required),
     })
   })
 
@@ -80,10 +80,14 @@ export class EditParamComponent implements OnInit {
           (res: HttpErrorResponse) => console.log(res.message)
         );
       } else {
-        this.param = new Param();
+        // this.param = new Param();
       }
     })
 
+  }
+
+  back(){
+    this.location.back()
   }
 
   trackById(index: number, item: any) {

@@ -13,5 +13,7 @@ public interface StaffRepository extends JpaRepository<Staff, Long> {
 
 	List<Staff> findByCompanyParameterId(Long idCompagnie);
 
+	void deleteAllByCompanyParameterId(long paramId);
+
 	Optional<Staff> findByMail(String mail);
 }

@@ -1,3 +1,7 @@
+
+<div class="back">
+  <button (click)="back()" class="btn btnBack">Back</button>
+</div>
 <div class="form-group col-md-8" id="searchBar">
   <div class="btn_searchbar">
     <input class="form-control" type="text" [(ngModel)]="searchTerm" (keyup)="Search($event)"
@@ -9,7 +13,7 @@
 </div>
 
 <div class="brancheName">
-  Branche {{branche?.code}} - {{'BRANCHNAME' | translate}} {{branche?.name}}
+  Branche {{branch?.code}} - {{'BRANCHNAME' | translate}} {{branch?.name}}
 </div>
 
 <div style="margin: auto; width: 90%;">
@@ -28,10 +32,8 @@
         <td>{{param.megaCode}}</td>
         <td>{{param.userGM?.username}}</td>
         <td>{{param.generalManagerN1Mail}}</td>
-        <td><button [routerLink]="['compagny-param', param?.id, 'edit']" class="btn btn-edit"
-            style="margin-left: 10px;">{{'BUTTONS.EDIT' | translate}}</button></td>
-        <td><button (click)="deleteParam(param.id, param.name)" class="btn btn-delete"
-            style="margin-left: 10px;">{{'BUTTONS.DELETE' | translate}}</button></td>
+        <td><button [routerLink]="['compagny-param', param?.id, 'edit']" class="btn btn-edit" style="margin-left: 10px;">{{'BUTTONS.EDIT' | translate}}</button></td>
+        <td><button (click)="deleteParam(param.id, param.name)" class="btn btn-delete" style="margin-left: 10px;">{{'BUTTONS.DELETE' | translate}}</button></td>
       </tr>
     </tbody>
   </table>

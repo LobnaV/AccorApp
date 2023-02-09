@@ -1,16 +1,16 @@
 #searchBar{
     margin-left: auto;
     .btn_searchbar{
-        display: flex;   
+        display: flex;
         justify-content: flex-end;
-        margin: 2rem; 
+        margin: 2rem;
         margin-left: auto;
             .container{
                 display: flex;
                 justify-content: flex-end;
                 .add_Btn{
                     background-color: #9BE69F;
-                   
+
                 }
             }
     }
@@ -45,4 +45,13 @@
             background-color: #E38D9B;
         }
     }
+}
+
+
+.btnBack {
+  border: none;
+  border-radius: 2rem;
+  width: 6rem;
+  background-color: #E9C4A2;
+  margin: 0.5rem 0.5rem 0.5rem 2rem;
 }

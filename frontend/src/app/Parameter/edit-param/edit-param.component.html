@@ -1,4 +1,7 @@
 <div class="card">
+  <div class="back">
+    <button (click)="back()" class="btn btnBack">Back</button>
+  </div>
   <div class="card-body">
     <h4 *ngIf="this.param?.id"> {{'PARAM.UPDATE_PARAMETER' | translate}}</h4>
     <h4 *ngIf="this.param?.id == null"> Create new parameter</h4>
@@ -9,20 +12,14 @@
         <h6>{{'PARAM.BRANCH_ID' | translate}}: {{branch?.code}} - {{'PARAM.BRANCH_NAME' | translate}}: {{branch?.name}}</h6>
       </div>
       <br>
-      <div class="form-group row" *ngIf="this.param?.id readonly">
-        <label class="col-sm-2 col-form-label" for="megaCode">Hotel MegaCode:</label>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="megaCode">Hotel MegaCode *</label>
         <div class="col-sm-8">
-          <input style="background-color: #e9ecef;" type="text" id='megaCode' class="form-control" formControlName="megaCode" readonly>
-        </div>
-      </div>
-      <div class="form-group row" *ngIf="this.param?.id == null">
-        <label class="col-sm-2 col-form-label" for="megaCode">Hotel MegaCode*:</label>
-        <div class="col-sm-8">
-          <input type="text" id='megaCode' class="form-control" formControlName="megaCode">
+          <input type="text" id='megaCode' class="form-control" formControlName="megaCode" [disabled]="this.param?.id != null">
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label" for="name">{{'HOTELNAME' | translate}}*:</label>
+        <label class="col-sm-2 col-form-label" for="name">{{'HOTELNAME' | translate}} *</label>
         <div class="col-sm-8">
           <input type="text" id='name' class="form-control" formControlName="name">
         </div>
@@ -30,15 +27,13 @@
 
       <div>
         <div class="form-group row" >
-          <label class="col-sm-2 col-form-label" for="category">Category:</label>
+          <label class="col-sm-2 col-form-label" for="category">Category *</label>
          <div class="col-sm-8">
 
-           <select [compareWith]="compareObjects" class="form-control"
-                   formControlName="category"
+           <select [compareWith]="compareObjects" class="form-control" formControlName="category"
                    id="category" name="category">
-             <option [ngValue]="null">Select category</option>
-             <option
-               *ngFor="let category of categories; trackBy: trackById"
+             <option [value]="null">Select category</option>
+             <option *ngFor="let category of categories; trackBy: trackById"
                [ngValue]="category">{{category.name}}</option>
            </select>
          </div>
@@ -48,19 +43,19 @@
       <div formGroupName="userGM">
         <input type="text" formControlName="id" hidden>
         <div class="form-group row">
-          <label class="col-sm-2 col-form-label" for="userGM">{{'PARAM.EMAIL_GM' | translate}}*:</label>
+          <label class="col-sm-2 col-form-label" for="userGM">{{'PARAM.EMAIL_GM' | translate}} *</label>
           <div class="col-sm-8">
             <input type="email" id='userGM' class="form-control" formControlName="username">
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-sm-2 col-form-label" for="firstNameGM">{{'HEADER.FIRSTNAME' | translate}}*:</label>
+          <label class="col-sm-2 col-form-label" for="firstNameGM">{{'HEADER.FIRSTNAME' | translate}} *</label>
           <div class="col-sm-8">
             <input type="email" id='firstNameGM' class="form-control" formControlName="firstName">
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-sm-2 col-form-label" for="lastNameGM">{{'HEADER.LASTNAME' | translate}}*:</label>
+          <label class="col-sm-2 col-form-label" for="lastNameGM">{{'HEADER.LASTNAME' | translate}} *</label>
           <div class="col-sm-8">
             <input type="email" id='lastNameGM' class="form-control" formControlName="lastName">
           </div>
@@ -68,7 +63,7 @@
       </div>
 
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label" for="generalManagerN1Mail">Email N+1 *:</label>
+        <label class="col-sm-2 col-form-label" for="generalManagerN1Mail">Email N+1 *</label>
         <div class="col-sm-8">
           <input type="email" id="generalManagerN1Mail" class="form-control" formControlName="generalManagerN1Mail">
         </div>

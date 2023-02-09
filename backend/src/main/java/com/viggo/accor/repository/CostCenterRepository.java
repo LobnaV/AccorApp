@@ -14,6 +14,7 @@ import java.util.List;
 public interface CostCenterRepository extends JpaRepository<CostCenter, Long> {
 	List<CostCenter> findByCompanyId(Long idCompagnie);
 
+	void deleteAllByCompanyId(long paramId);
 
 	@Modifying
 	@Query("update CostCenter u set u.owner = :mail where u.id = :id")

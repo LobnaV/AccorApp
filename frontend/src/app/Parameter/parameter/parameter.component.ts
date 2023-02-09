@@ -5,8 +5,8 @@ import { Param} from '../../model/param';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 import { Branch } from 'src/app/model/branch';
-import { User } from 'src/app/model/user';
 import { ConfirmationDialogService } from 'src/app/UserBack/confirmation-dialog/confirmation-dialog.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-parameter',
@@ -14,11 +14,9 @@ import { ConfirmationDialogService } from 'src/app/UserBack/confirmation-dialog/
   styleUrls: ['./parameter.component.scss']
 })
 export class ParameterComponent implements OnInit {
-  params:any;
-  parameters: any;
+
   searchKey: string = "";
   searchTerm: string = "";
-  branche?: Branch;
   message1?:any;
   message1part2?:any;
   message2?:any;
@@ -26,10 +24,10 @@ export class ParameterComponent implements OnInit {
 lang:any
   constructor(
     private service:AccorService,
-    private router:Router,
     private activatedRoute: ActivatedRoute,
     public translate: TranslateService,
-    private confirmationDialogService: ConfirmationDialogService
+    private confirmationDialogService: ConfirmationDialogService,
+    private location: Location
 
   ) {
 
@@ -38,32 +36,16 @@ lang:any
     this.message2 = this.translate.instant('DELETE.MESSAGE2');
   }
 
-  branch? : Branch|null
-  companies?: Param[] | any = [];
-  userMGM?: User | null;
+  branch?: Branch;
+  companies: Param[] = [];
 
   ngOnInit(): void {
 
     this.activatedRoute.params.subscribe(params => {
-      this.loadMGM(params['id']);
-      this.loadCompanies(params['id']);
+      const branchId = params['id'];
+      this.loadBranch(branchId);
+      this.loadCompanies(branchId);
     });
-
-    this.activatedRoute.params.subscribe(params => {
-      console.log(params['id']);
-      this.service.branchId(params['id']).subscribe((data: HttpResponse<Branch>) => {
-        this.branche = data.body!;
-        console.log(data);
-      });
-    });
-
-    this.service.getParams().subscribe(
-      (res: HttpResponse<Param[]>) => {
-        this.parameters = res.body;
-        console.log(this.parameters)
-      },
-      (res: HttpErrorResponse) => console.log(res.message)
-    );
 
     this.service.search.subscribe((val: any) => {
       this.searchKey = val;
@@ -71,22 +53,21 @@ lang:any
 
   }
 
-  loadMGM(idBranch: number) {
+  loadBranch(idBranch: number) {
     this.service.branchId(idBranch).subscribe(
-      (res: HttpResponse<Branch>) => {
-        this.branch = res.body;
-        this.userMGM = this.branch?.userMGM;
-      },
+      (res: HttpResponse<Branch>) => this.branch = res.body!,
       (res: HttpErrorResponse) => console.log(res.message)
     );
   }
 
+  back(){
+    this.location.back()
+  }
 
   loadCompanies(idBranch: number) {
     this.service.companieBranch(idBranch).subscribe(
       (res: HttpResponse<Param[]>) => {
-        this.companies = res.body;
-        console.log(this.companies)
+        this.companies = res.body!;
       },
       (res: HttpErrorResponse) => console.log(res.message)
     );
@@ -98,16 +79,8 @@ lang:any
     this.service.search.next(this.searchTerm);
   }
 
-   //Switch language
-   translateLanguageTo(lang: string) {
-    this.translate.use(lang);
-  }
-
   remove(paramId:any){
-    this.service.deleteParam(paramId)
-     .subscribe( () =>{
-       this.loadCompanies(this.branche?.id!);
-     })
+    this.service.deleteParam(paramId).subscribe( () => this.loadCompanies(this.branch?.id!));
   }
 
   deleteParam(idParam: number, name: string) {

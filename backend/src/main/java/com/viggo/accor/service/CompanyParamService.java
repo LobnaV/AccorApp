@@ -3,6 +3,7 @@ package com.viggo.accor.service;
 import com.viggo.accor.model.*;
 import com.viggo.accor.playload.CsvFormatDTO;
 import com.viggo.accor.repository.CompanyParameterRepository;
+import com.viggo.accor.repository.CostCenterRepository;
 import com.viggo.accor.repository.StaffRepository;
 import com.viggo.accor.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,9 @@ public class CompanyParamService {
 
 	@Autowired
 	private StaffRepository staffRepository;
+
+	@Autowired
+	private CostCenterRepository costCenterRepository;
 
 	@Autowired
 	private TradeshiftInterface tradeshiftInterface;
@@ -111,6 +115,8 @@ public class CompanyParamService {
 	}
 
 	public void delete(Long id) {
+		staffRepository.deleteAllByCompanyParameterId(id);
+		costCenterRepository.deleteAllByCompanyId(id);
 		parameterRepository.deleteById(id);
 	}
 

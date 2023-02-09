@@ -25,7 +25,6 @@ export class NavbarComponent implements OnInit {
     private tokenStorage: TokenStorageService
   ) {
     this.role = window.sessionStorage.getItem('roleCurrentUser')!;
-
   }
 
   ngOnInit(): void {
