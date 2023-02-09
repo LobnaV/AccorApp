@@ -94,7 +94,7 @@ public class SftpUploadService {
 			csvFormats.forEach(csvFormatDto -> pw.println(convertToCSV(csvFormatDto)));
 		}
 
-//		uploadGateway.upload(csvOutputFile);
+		uploadGateway.upload(csvOutputFile);
 
 	}
 
