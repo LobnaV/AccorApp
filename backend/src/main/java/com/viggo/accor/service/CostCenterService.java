@@ -80,10 +80,7 @@ public class CostCenterService {
 
 
 	public CostCenter save(CostCenter costCenter) throws Exception {
-
-		costCenter.setOwner(costCenter.getCompany().getUserGM().getUsername());
 		CostCenter costCenterSaved = costCenterR.save(costCenter);
-
 
 		List<CodingListFormat> codingList = new ArrayList<>();
 			List<CostCenter> costCenters = costCenterR.findByCompanyId(costCenter.getCompany().getId());
@@ -97,7 +94,6 @@ public class CostCenterService {
 			});
 			try {
 				sftpCodingListSevice.uploadFileToSftp(codingList);
-
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}

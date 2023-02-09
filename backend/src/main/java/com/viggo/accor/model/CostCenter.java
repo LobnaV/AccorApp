@@ -25,6 +25,10 @@ public class CostCenter implements Serializable {
 
 	private String owner;
 
+	private String firstName;
+
+	private String LastName;
+
 	@ManyToOne
 	private CompanyParameter company;
 

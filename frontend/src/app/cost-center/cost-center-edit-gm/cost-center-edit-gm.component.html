@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="btns">
+    <button (click)="location.back()" class="btn btnBack">Back</button>
+  </div>
+
+  <div class="card-body">
+    <div style="margin: 3rem;">Cost Center : {{costcenter?.code}} - {{costcenter?.label}}</div>
+    <form (ngSubmit)="updateCC()" [formGroup]="costCenterForm">
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="firstName">{{'HEADER.FIRSTNAME' | translate}} *</label>
+        <div class="col-sm-6">
+          <input class="form-control" classe="input" formControlName="firstName" id='firstName' type="text">
+        </div>
+      </div>
+      <br>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="lastName">{{'HEADER.LASTNAME' | translate}} *</label>
+        <div class="col-sm-6">
+          <input class="form-control" classe="input" formControlName="lastName" id='lastName' type="text">
+        </div>
+      </div>
+      <br>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="mail">Email *</label>
+        <div class="col-sm-6">
+          <input class="form-control" formControlName="owner" id='mail' type="mail">
+        </div>
+      </div>
+      <br>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="mail2">Confimation Email *</label>
+        <div class="col-sm-6">
+          <input class="form-control" formControlName="owner_conf" id='mail2' type="mail">
+          <p *ngIf="notTheSame" class="validation-error">L'email et sa confirmation ne sont pas égaux !</p>
+        </div>
+      </div>
+      <div class="save">
+        <button [disabled]="costCenterForm.invalid" class="btn-Save" type="submit">Edit</button>
+      </div>
+    </form>
+  </div>
+</div>

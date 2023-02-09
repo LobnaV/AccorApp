@@ -1,6 +1,6 @@
 <div class="container">
   <div class="btns">
-    <button (click)="location.back()" class="btnBack">Back</button>
+    <button (click)="location.back()" class="btn btnBack">Back</button>
   </div>
 
   <br>
@@ -11,7 +11,7 @@
     <div class="btn_searchbar">
       <input (keyup)="Search($event)" [(ngModel)]="searchTerm" class="form-control" placeholder="{{'BUTTONS.SEARCH_CODECC' | translate}}" style="margin-right: 15rem;" type="text">
       <div class="container2">
-        <button [routerLink]="'add'" class="btn add_Btn" style="background-color: #9BE69F">Create/Add</button>
+        <button [routerLink]="'cost-center/add'" class="btn add_Btn" style="background-color: #9BE69F">Create/Add</button>
       </div>
     </div>
   </div>

@@ -3,9 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from './Account/login/login.component';
 import {SignupComponent} from './Account/signup/signup.component';
 import {AddBranchComponent} from './Branch/add-branch/add-branch.component';
-import {EditCCComponent} from './CostCenter/edit-cc/edit-cc.component';
-import {ListErrorCcComponent} from './CostCenter/list-error-cc/list-error-cc.component';
-import {ListCcComponent} from './CostCenter/list-cc/list-cc.component';
+import {ListErrorCcComponent} from './cost-center/list-error-cc/list-error-cc.component';
 import {AccorGuard} from './Guard/accor.guard';
 import {LayoutComponent} from './layout/layout.component';
 import {MainPageComponent} from './main-page/main-page.component';
@@ -19,10 +17,10 @@ import {passwordResetInitRoute} from "./password-reset/init/password-reset-init.
 import { EditManagerComponent } from './Branch/edit-manager/edit-manager.component';
 import { EditApprovalLimitComponent } from './Branch/edit-approval-limit/edit-approval-limit.component';
 import { EditCompanyAdminComponent } from './Branch/edit-company-admin/edit-company-admin.component';
-import { UpdateCcComponent } from './Parameter/update-cc/update-cc.component';
 import {Oauth2Component} from "./Account/tradeshift/oauth2.component";
 import { CostCenterEditComponent } from './cost-center/cost-center-edit/cost-center-edit.component';
 import { CostCenterComponent } from './cost-center/cost-center.component';
+import { CostCenterEditGmComponent } from './cost-center/cost-center-edit-gm/cost-center-edit-gm.component';
 
 const ACCOUNT_ROUTES = [
   passwordResetFinishRoute,
@@ -46,17 +44,13 @@ const routes: Routes = [
       {path: 'compagny-param/:id/staff/:staffId/edit', component: UpdateStaffComponent},
       {path: 'compagny-param/:id/user-gm/:userId/edit', component: UpdateUserGmComponent},
 
-      {path: 'compagny-param/:id/costCenter/:costCenterId/edit', component: EditCCComponent},
+      {path: 'compagny-param/:id/costCenter/:costCenterId/edit', component: CostCenterEditGmComponent},
       {path: 'compagny-param/:id/listErrorCostCenter', component: ListErrorCcComponent},
 
 
       {path: 'branch/:id', component: ParameterComponent},
       {path: 'branch/:id/compagny-param/add', component:EditParamComponent},
       {path: 'branch/:id/compagny-param/:paramId/edit', component: EditParamComponent},
-
-      {path: 'branch/:id/costCenter/:paramId', component: ListCcComponent},
-      {path: 'branch/:id/costCenter/:paramId/add', component:UpdateCcComponent},
-      {path: 'branch/:id/costCenter/:paramId/edit/:costCenterId', component: UpdateCcComponent},
 
       {path: 'branch/:branchId/NE/compagny-param/:paramId', component: CostCenterComponent},
       {path: 'branch/:branchId/NE/compagny-param/:paramId/cost-center/add', component:CostCenterEditComponent},
@@ -68,8 +62,7 @@ const routes: Routes = [
       {path: 'Home/branch/:id/access', component:EditCompanyAdminComponent},
 
       {path: 'UserList/:id', component: UserListComponent},
-      {path: 'create/branch', component: AddBranchComponent},
-      {path: 'editCC/:CostCenterId ', component: EditCCComponent}
+      {path: 'create/branch', component: AddBranchComponent}
     ]
   },
 ];

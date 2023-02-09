@@ -121,21 +121,15 @@
         <th scope="col">Cost centre</th>
         <th scope="col">Cost centre name</th>
         <th scope="col">Email </th>
-        <!-- <th scope="col">{{'HEADER.FIRSTNAME' | translate}}</th>
-        <th scope="col">{{'HEADER.LASTNAME' | translate}}</th> -->
         <th></th>
       </tr>
     </thead>
     <tbody class="data" [formGroup]="costCenterForm" *ngFor="let data of costcenters | filter: searchKey:'code'">
       <tr *ngIf="data?.code != null || data?.label != null">
-        <th>{{data?.code}}</th>
-        <th>{{data?.label}}</th>
+        <td>{{data?.code}}</td>
+        <td>{{data?.label}}</td>
         <td *ngIf="data?.owner != null">{{data?.owner}}</td>
-        <td *ngIf="data?.owner == null" style="color:#8F1D1D;">ERROR</td>
-        <!-- <th>{{data?.firstName}}</th>
-        <th>{{data?.lastName}}</th> -->
-        <td> <button [routerLink]="['costCenter', data?.id, 'edit']" class="btn btn-edit"
-            style="margin-left: 10px;">{{'BUTTONS.EDIT' | translate}}</button>
+        <td> <button [routerLink]="['costCenter', data?.id, 'edit']" class="btn btn-edit" style="margin-left: 10px;">{{'BUTTONS.EDIT' | translate}}</button>
         </td>
       </tr>
     </tbody>

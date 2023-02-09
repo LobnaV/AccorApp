@@ -6,6 +6,8 @@ export class CostCenter {
       public code?: string,
       public label?: string,
       public owner?: string,
+      public firstName?: string,
+      public lastName?: string,
       public company?:Param
     ) {}
   }
