@@ -88,8 +88,8 @@ lang:any
          .then((confirmed) => {
           if (confirmed) {
             this.confirmationDialogService.confirm('Confirmation', this.message2)
-              .then(() => {
-                if (confirmed) {
+              .then((deleteConfirm) => {
+                if (deleteConfirm) {
                   this.remove(idParam);
                 }
               })
