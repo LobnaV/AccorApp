@@ -1,67 +1,118 @@
 {
-    "NAVBAR":{
-        "HOME":"Home",
-        "LISTOFUSERS":"Liste utilisateurs",
-        "PARAMETERS":"Parametres",
-        "LOGOUT":"Se déconnecter" 
+  "NAVBAR": {
+    "HOME": "Home",
+    "LISTOFUSERS": "Liste utilisateurs",
+    "PARAMETERS": "Parametres",
+    "LOGOUT": "Se déconnecter"
+  },
+  "TITLE": "L'application utilisateur Accor",
+  "DESCRIPTION": "L'application vous permettra, en tant que GM, de gérer les différents utilisateurs Tradeshift de votre hôtel et l'attribution des centres de coûts entre eux et vous. Nous vous rappelons que la composition du workflow est la suivante :",
+  "CONDITIONS": {
+    "TITLE2": "Conditions/règles à respecter :",
+    "RULE1": "Seul le Directeur Général accède à l'application et effectue les modifications au sein des utilisateurs de son hôtel (pas de Chef de Service).",
+    "RULE2": "Si certains changements sont temporaires (vacances, congé de maternité, congé de maladie), nous vous encourageons à utiliser les règles de délégation en place dans Tradeshift au lieu d'effectuer des changements permanents.",
+    "RULE3": "Si vous avez besoin de changer le nom d'un de vos utilisateurs (et de conserver la même adresse email), merci d'éditer directement l'utilisateur dans le champ correspondant et de ne pas supprimer l'utilisateur pour en recréer un.",
+    "RULE4": "Veuillez utiliser la barre ci-dessous pour sélectionner l'hôtel pour lequel vous souhaitez gérer les utilisateurs."
+  },
+  "TITLE_CA": "L'application utilisateur Accor pour les administrateurs d'entreprise :",
+  "DESCRIPTION_CA": "l'application vous permettra de gérer le périmètre de l'hôtel à l'intérieur des agences dans lesquelles vous êtes autorisé à opérer.",
+  "CONDITION_CA": "Si vous avez besoin de supprimer ou d'ajouter des utilisateurs comptables, veuillez utiliser directement l'outil Tradeshift. La création de l'utilisateur de l'hôtel doit être effectuée par le directeur général, dans l'application utilisateur.",
+  "SELECTHOTEL": "Sélectionner un hôtel",
+  "SELECTBRANCH": "Sélectionner une branche",
+  "HOTELNAME": "Nom de l'hôtel",
+  "BRANCHNAME": "Nom de la branche",
+  "HEADER": {
+    "DISPATCHER": "Dispatcher",
+    "FIRSTNAME": "Prénom",
+    "LASTNAME": "Nom",
+    "EMAIL": "Email"
+  },
+  "TITLE_MA": "Gérer les branches",
+  "BUTTONS": {
+    "ADD": "Ajouter",
+    "BACK": "Retour",
+    "SEARCH_USER": "Rechercher par email",
+    "SEARCH": "Rechercher par mega code",
+    "SEARCH_CODE": "Rechercher par branche ID",
+    "SEARCH_CODECC": "Recher par code",
+    "ADDUSER": "Ajouter un utilisateur",
+    "EDIT": "Modifier",
+    "DELETE": "Supprimer",
+    "ADDPARAMETER": "Créer un parametre",
+    "ADDBRANCH": "Création d'une nouvelle branche",
+    "EDIT_BRANCH": "Modifier la branche",
+    "EDITMANAGERS": "Modifier le Managers",
+    "EDIT_APPROVAL_LIMIT": "Modifier les limites d'approbation",
+    "EDIT_ACCESS": "Modifier les accès"
+  },
+  "PARAM": {
+    "UPDATE_PARAMETER": "Modifier les parametres",
+    "BRANCH_ID": "Branche ID",
+    "BRANCH_NAME": "Nom de la branche",
+    "EMAIL_GM": "Email Général Manager",
+    "PERIMETER": "Périmètre"
+  },
+  "EXCEPTION": {
+    "DESCRIPTION1": "Après modifications, il est possible d'avoir des incohérences avec les centres de coûts et leurs utilisateurs. Veuillez trouver ci-dessous la liste de tous les utilisateurs sans centre de coûts qui seront inactifs.",
+    "DESCRIPTION2": "Rappel : un centre de coût doit avoir un utilisateur assigné, un utilisateur doit avoir au moins un centre de coût."
+  },
+  "DELETE": {
+    "MESSAGE1": "La suppression d'un hôtel ici signifie que vous supprimerez l'hôtel du tableau de bord d'administration de l'entreprise, mais ne signifie pas que les utilisateurs seront supprimés de l'environnement de production Tradeshift. Si vous avez besoin de supprimer un utilisateur particulier dans Tradeshift, en tant qu'administrateur d'entreprise : Si l'utilisateur est membre d'un hôtel, vous pouvez demander au directeur général de le faire directement depuis sa session ",
+    "MESSAGE1PART2": ". Cela supprimera l'utilisateur de Tradeshift Vous pouvez également supprimer l'utilisateur directement depuis l'application Tradeshift, merci de contacter : astore.einvoicing.support@accor.com",
+    "MESSAGE2": "Oui, je supprimerai les utilisateurs qui doivent être supprimés, directement sur Tradeshift, et je souhaite supprimer cet hôtel du tableau de bord.",
+    "MESSAGE3": "Si vous devez supprimer temporairement un utilisateur, nous vous conseillons d'utiliser l'option de règle de délégation dans",
+    "MESSAGE3PART2": "    Tradeshift (vacances, maternité, maladie) pour déléguer temporairement des tâches à un autre collègue.",
+    "MESSAGE4": "Pouvez-vous confirmer qu'il n'y a plus de tâches en attente dans le gestionnaire de tâches pour cet utilisateur ? Si non, veuillez réaffecter les tâches en attente avant de supprimer l'utilisateur."
+  },
+  "layouts": {
+    "connexion": {
+      "title": "Connexion",
+      "login": "Email",
+      "password": "Mot de passe",
+      "connexion": "Se connecter",
+      "forgotpwd": "Avez-vous oublié votre mot de passe ?",
+      "error": {
+        "wrongAuthentification":  "Erreur d'authentification ! Veuillez vérifier vos identifiants de connexion."
+      }
     },
-    "TITLE":"L'application utilisateur Accor",
-    "DESCRIPTION":"L'application vous permettra, en tant que GM, de gérer les différents utilisateurs Tradeshift de votre hôtel et l'attribution des centres de coûts entre eux et vous. Nous vous rappelons que la composition du workflow est la suivante :",
-    "CONDITIONS":{
-        "TITLE2": "Conditions/règles à respecter :",
-        "RULE1":"Seul le Directeur Général accède à l'application et effectue les modifications au sein des utilisateurs de son hôtel (pas de Chef de Service).",
-        "RULE2":"Si certains changements sont temporaires (vacances, congé de maternité, congé de maladie), nous vous encourageons à utiliser les règles de délégation en place dans Tradeshift au lieu d'effectuer des changements permanents.",
-        "RULE3":"Si vous avez besoin de changer le nom d'un de vos utilisateurs (et de conserver la même adresse email), merci d'éditer directement l'utilisateur dans le champ correspondant et de ne pas supprimer l'utilisateur pour en recréer un.",
-        "RULE4":"Veuillez utiliser la barre ci-dessous pour sélectionner l'hôtel pour lequel vous souhaitez gérer les utilisateurs."
+    "reset-init": {
+      "title": "Réinitialiser son mot de passe",
+      "login": "Email",
+      "reset": "Réinitialiser",
+      "error": {
+        "error1": "Entrez l'adresse e-mail que vous avez utilisée pour vous inscrire.",
+        "error2": "Consultez vos e-mails pour savoir comment réinitialiser votre mot de passe."
+      }
     },
-    "TITLE_CA":"L'application utilisateur Accor pour les administrateurs d'entreprise :",
-    "DESCRIPTION_CA":"l'application vous permettra de gérer le périmètre de l'hôtel à l'intérieur des agences dans lesquelles vous êtes autorisé à opérer.",
-    "CONDITION_CA":"Si vous avez besoin de supprimer ou d'ajouter des utilisateurs comptables, veuillez utiliser directement l'outil Tradeshift. La création de l'utilisateur de l'hôtel doit être effectuée par le directeur général, dans l'application utilisateur.",
-    "SELECTHOTEL":"Sélectionner un hôtel",
-    "SELECTBRANCH":"Sélectionner une branche",
-    "HOTELNAME": "Nom de l'hôtel",
-    "BRANCHNAME": "Nom de la branche",
-    "HEADER":{
-        "DISPATCHER":"Dispatcher", 
-        "FIRSTNAME":"Prénom", 
-        "LASTNAME":"Nom",
-        "EMAIL":"Email"
-    },
-    "TITLE_MA":"Gérer les branches",
-    "BUTTONS":{
-        "SEARCH_USER":"Rechercher par email",
-        "SEARCH":"Rechercher par megaCode",
-        "SEARCH_CODE":"Rechercher par branche ID",
-        "SEARCH_CODECC":"Recher par code",
-        "ADDUSER":"Ajouter un utilisateur",
-        "EDIT":"Modifier",
-        "DELETE":"Supprimer",
-        "ADDPARAMETER":"Créer un parametre",
-        "ADDBRANCH":"Création d'une nouvelle branche",
-        "EDIT_BRANCH":"Modifier la branche",
-        "EDITMANAGERS":"Modifier le Managers",
-        "EDIT_APPROVAL_LIMIT":"Modifier les limites d'approbation",
-        "EDIT_ACCESS":"Modifier les accès"
-    },
-    "PARAM":{
-        "UPDATE_PARAMETER":"Modifier les parametres",
-        "BRANCH_ID":"Branche ID",
-        "BRANCH_NAME":"Nom de la branche",
-        "EMAIL_GM":"Email Général Manager",
-        "PERIMETER":"Périmètre"
-    },
-    "EXCEPTION":{
-        "DESCRIPTION1":"Après modifications, il est possible d'avoir des incohérences avec les centres de coûts et leurs utilisateurs. Veuillez trouver ci-dessous la liste de tous les utilisateurs sans centre de coûts qui seront inactifs.",
-        "DESCRIPTION2":"Rappel : un centre de coût doit avoir un utilisateur assigné, un utilisateur doit avoir au moins un centre de coût."
-    },
-    "DELETE":{
-        "MESSAGE1":"La suppression d'un hôtel ici signifie que vous supprimerez l'hôtel du tableau de bord d'administration de l'entreprise, mais ne signifie pas que les utilisateurs seront supprimés de l'environnement de production Tradeshift. Si vous avez besoin de supprimer un utilisateur particulier dans Tradeshift, en tant qu'administrateur d'entreprise : Si l'utilisateur est membre d'un hôtel, vous pouvez demander au directeur général de le faire directement depuis sa session ",
-        "MESSAGE1PART2":". Cela supprimera l'utilisateur de Tradeshift Vous pouvez également supprimer l'utilisateur directement depuis l'application Tradeshift, merci de contacter : astore.einvoicing.support@accor.com",
-        "MESSAGE2":"Oui, je supprimerai les utilisateurs qui doivent être supprimés, directement sur Tradeshift, et je souhaite supprimer cet hôtel du tableau de bord.",
-        "MESSAGE3":"Si vous devez supprimer temporairement un utilisateur, nous vous conseillons d'utiliser l'option de règle de délégation dans",
-        "MESSAGE3PART2":"    Tradeshift (vacances, maternité, maladie) pour déléguer temporairement des tâches à un autre collègue.",
-        "MESSAGE4":"Pouvez-vous confirmer qu'il n'y a plus de tâches en attente dans le gestionnaire de tâches pour cet utilisateur ? Si non, veuillez réaffecter les tâches en attente avant de supprimer l'utilisateur."
+    "reset-finish": {
+      "title": "Réinitialiser du mot de passe",
+      "password": "Nouveau mot de passe",
+      "pwdConfirmation": "Confirmation mot de passe",
+      "reset": "Réinitialiser",
+      "connexion": "Connectez-vous",
+      "error": {
+        "error1": "La clé de réinitialisation du mot de passe est manquante.",
+        "error2": "Choisissez un nouveau mot de passe.",
+        "error3": "Votre mot de passe a déjà été réinitialisé. Veuillez-vous connecter.",
+        "error4": "Votre mot de passe a été réinitialisé. ",
+        "error5": "Le mot de passe et sa confirmation ne correspondent pas !"
+      }
     }
-
-    
+  },
+  "exception": {
+    "validations": {
+      "required": "Ce champ est obligatoire.",
+      "invalid": "Ce champ est invalide.",
+      "minMail": "Votre e-mail doit comporter au moins 5 caractères.",
+      "maxMail": "Votre e-mail ne peut pas dépasser 100 caractères.",
+      "minPassword": "Votre confirmation de mot de passe doit comporter au moins 4 caractères.",
+      "maxPassword": "Votre confirmation de mot de passe ne peut pas dépasser 50 caractères."
+    },
+    "error": {
+      "noUserFoundWithLogin":  "Impossible de trouver l'utilisateur associé.",
+      "uniqueCodeCostCenter":  "Veuillez vous assurer que le code est unique.",
+      "uniqueMailGM":  "Veuillez vous assurer que le mail du GM est unique.",
+      "uniqueMegaCode":  "Veuillez vous assurer que le megacode de l'hotel est unique."
+    }
+  }
 }

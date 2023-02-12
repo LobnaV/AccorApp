@@ -11,12 +11,14 @@ import com.viggo.accor.repository.CostCenterRepository;
 import com.viggo.accor.repository.StaffRepository;
 import com.viggo.accor.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.ConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -78,11 +80,12 @@ public class CostCenterService {
 		return null;
 	}
 
-
+	@Transactional(rollbackFor = Exception.class)
 	public CostCenter save(CostCenter costCenter) throws Exception {
-		CostCenter costCenterSaved = costCenterR.save(costCenter);
-
-		List<CodingListFormat> codingList = new ArrayList<>();
+		CostCenter costCenterSaved;
+		try {
+			costCenterSaved = costCenterR.save(costCenter);
+			List<CodingListFormat> codingList = new ArrayList<>();
 			List<CostCenter> costCenters = costCenterR.findByCompanyId(costCenter.getCompany().getId());
 			costCenters.forEach(oneCostCenter -> {
 				CodingListFormat csvFormatCodingList = new CodingListFormat();
@@ -97,8 +100,10 @@ public class CostCenterService {
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}
+		} catch (DataIntegrityViolationException | ConstraintViolationException e) {
+			throw new Exception("uniqueCodeCostCenter");
+		}
 		return costCenterSaved ;
-
 	}
 
 

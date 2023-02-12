@@ -8,8 +8,7 @@ import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-cost-center',
-  templateUrl: './cost-center.component.html',
-  styleUrls: ['./cost-center.component.scss']
+  templateUrl: './cost-center.component.html'
 })
 export class CostCenterComponent implements OnInit {
 
@@ -57,4 +56,7 @@ export class CostCenterComponent implements OnInit {
   }
 
 
+  back() {
+    this.location.back()
+  }
 }

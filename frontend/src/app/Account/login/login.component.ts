@@ -4,6 +4,7 @@ import { AuthService } from './auth.service';
 import { TokenStorageService } from './token-storage.service';
 import { Router } from '@angular/router';
 import {Oauth2Service} from "../tradeshift/oauth2.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-login',
@@ -14,16 +15,17 @@ export class LoginComponent implements OnInit {
   loginForm = new FormGroup({
     username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required, Validators.minLength(4)])
-  })
+  });
   isLoggedIn = false;
   isLoginFailed = false;
-  errorMessage = '';
+  errorMessage?: string;
   roles: string[] = [];
 
   constructor(
     private tokenStorage: TokenStorageService,
     private oAuthTSService: Oauth2Service,
     private authService: AuthService,
+    public translate: TranslateService,
     private router: Router) {
   }
 
@@ -58,9 +60,14 @@ export class LoginComponent implements OnInit {
         //console.log(this.roles)
       },
       err => {
-        this.errorMessage = err.error.message;
+        this.errorMessage = err.error;
         this.isLoginFailed = true;
       }
     );
+  }
+
+  //Switch language
+  translateLanguageTo(lang: string) {
+    this.translate.use(lang);
   }
 }

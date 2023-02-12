@@ -1,67 +1,117 @@
 {
-    "NAVBAR":{
-        "HOME":"Home",
-        "LISTOFUSERS":"List of users",
-        "PARAMETERS":"Parameters",
-        "LOGOUT":"Logout" 
-        },
-    "TITLE":" The Accor User app",
-    "DESCRIPTION":"The app will allow you, as a GM, to manage the different Tradeshift users of your hotel and the cost centre attribution between them and you. We remind you that the composition of the workflow is the following:",
-    "CONDITIONS":{
-        "TITLE2": "Conditions / rules to be respected:",
-        "RULE1":"Only the General Manager shall access the application and perform changes within users of his hotel (no Head of Department).",
-        "RULE2":"If some changes are temporary (holiday, maternity leave, sick leave), we encourage you use the delegation rules in place in Tradeshift instead of performing permanent changes.",
-        "RULE3":"If you need to change the name of one of your user (and keep the same email address), please edit directly the user in the corresponding field and do not delete the user to recreate one.",
-        "RULE4":"Please use the bar below to select the hotel you want to manage users for."
+  "NAVBAR": {
+    "HOME": "Home",
+    "LISTOFUSERS": "List of users",
+    "PARAMETERS": "Parameters",
+    "LOGOUT": "Logout"
+  },
+  "TITLE": " The Accor User app",
+  "DESCRIPTION": "The app will allow you, as a GM, to manage the different Tradeshift users of your hotel and the cost centre attribution between them and you. We remind you that the composition of the workflow is the following:",
+  "CONDITIONS": {
+    "TITLE2": "Conditions / rules to be respected:",
+    "RULE1": "Only the General Manager shall access the application and perform changes within users of his hotel (no Head of Department).",
+    "RULE2": "If some changes are temporary (holiday, maternity leave, sick leave), we encourage you use the delegation rules in place in Tradeshift instead of performing permanent changes.",
+    "RULE3": "If you need to change the name of one of your user (and keep the same email address), please edit directly the user in the corresponding field and do not delete the user to recreate one.",
+    "RULE4": "Please use the bar below to select the hotel you want to manage users for."
+  },
+  "TITLE_CA": "The Accor User app for Company admins:",
+  "DESCRIPTION_CA": "The app will allow you to manage the hotel perimeter inside the branches you are permitted to operate in.",
+  "CONDITION_CA": "If you need to delete or add some accounting users, please use the Tradeshift tool directly. The hotel user creation must be performed by the general manager, in the User app.",
+  "SELECTHOTEL": "Select hotel",
+  "SELECTBRANCH": "Select branch",
+  "HOTELNAME": "Hotel name",
+  "BRANCHNAME": "Branch name",
+  "HEADER": {
+    "DISPATCHER": "Dispatcher",
+    "FIRSTNAME": "First name",
+    "LASTNAME": "Last name"
+  },
+  "TITLE_MA": "Manage branches",
+  "BUTTONS": {
+    "ADD": "Create",
+    "BACK": "Back",
+    "SEARCH_USER": "Search by email",
+    "SEARCH": "Search by megaCode ",
+    "SEARCH_CODE": "Search by branch ID",
+    "SEARCH_CODECC": "Search by code",
+    "ADDUSER": "Add user",
+    "EDIT": "Edit",
+    "DELETE": "Delete",
+    "ADDPARAMETER": "Create new parameter",
+    "ADDBRANCH": "New branch creation",
+    "EDIT_BRANCH": "Update branch",
+    "EDITMANAGERS": "Edit Managers",
+    "EDIT_APPROVAL_LIMIT": "Edit Approval limits",
+    "EDIT_ACCESS": "Edit Access"
+  },
+  "PARAM": {
+    "UPDATE_PARAMETER": "Update parameter",
+    "BRANCH_ID": "Branche ID",
+    "BRANCH_NAME": "Branch name",
+    "EMAIL_GM": "Email General Manager",
+    "PERIMETER": "Perimeter"
+  },
+  "EXCEPTION": {
+    "DESCRIPTION1": "After modifications, it is possible to have inconsistencies with cost center and their users. Please find below the list of all users without cost center that will be inactive.",
+    "DESCRIPTION2": "Reminder: one cost center must have one assigned user, one user must have at least one cost center."
+  },
+  "DELETE": {
+    "MESSAGE1": "Deleting a hotel here means you will delete the hotel from the Company admin Dashboard, but does not mean that users will be deleted from Tradeshift production environment. If you need to delete a particular user in Tradeshift, as a company admin: If the user is a hotel member, you can ask the general manager to do it directly from his ",
+    "MESSAGE1PART2": " session. This will delete the user from Tradeshift You can also delete the user directly from the Tradeshift app, please contact : astore.einvoicing.support@accor.com",
+    "MESSAGE2": "Yes I will delete users that need to be deleted, directly on Tradeshift, and I wish to delete this hotel from the dashboard.",
+    "MESSAGE3": "If you need to temporarily delete a user, we advise you use the delegation rule option within",
+    "MESSAGE3PART2": "    Tradeshift (holiday, maternity leave, sick leave) to temporarily delegate tasks to another colleague.",
+    "MESSAGE4": "Can you confirm there are not more pending tasks in the task manager for this user? If no, please reassign the pending tasks before deleting the user."
+  },
+  "layouts": {
+    "connexion": {
+      "title": "Connection",
+      "login": "Mail",
+      "password": "Password",
+      "connexion": "Sign in",
+      "forgotpwd": "Forgot your password ?",
+      "error": {
+        "wrongAuthentification": "Authentification error ! Please verify your login credentials."
+      }
     },
-    "TITLE_CA":"The Accor User app for Company admins:",
-    "DESCRIPTION_CA":"The app will allow you to manage the hotel perimeter inside the branches you are permitted to operate in.",
-    "CONDITION_CA":"If you need to delete or add some accounting users, please use the Tradeshift tool directly. The hotel user creation must be performed by the general manager, in the User app.",
-    "SELECTHOTEL":"Select hotel",
-    "SELECTBRANCH":"Select branch",
-    "HOTELNAME": "Hotel name",
-    "BRANCHNAME": "Branch name",
-    "HEADER":{
-        "DISPATCHER":"Dispatcher", 
-        "FIRSTNAME":"First name", 
-        "LASTNAME":"Last name"
+    "reset-init": {
+      "title": "Reset your password",
+      "login": "Mail",
+      "reset": "Reset",
+      "error": {
+        "error1": "Enter the email address you used to register.",
+        "error2": "Check your emails for details on how to reset your password."
+      }
     },
-    "TITLE_MA":"Manage branches",
-    "BUTTONS":{
-        "SEARCH_USER":"Search by email",
-        "SEARCH":"Search by megaCode ",
-        "SEARCH_CODE":"Search by branch ID",
-        "SEARCH_CODECC":"Search by code",
-        "ADDUSER":"Add user",
-        "EDIT":"Edit",
-        "DELETE":"Delete",
-        "ADDPARAMETER":"Create new parameter",
-        "ADDBRANCH":"New branch creation",
-        "EDIT_BRANCH":"Update branch",
-        "EDITMANAGERS":"Edit Managers",
-        "EDIT_APPROVAL_LIMIT":"Edit Approval limits",
-        "EDIT_ACCESS":"Edit Access"
-    },
-    "PARAM":{
-        "UPDATE_PARAMETER":"Update parameter",
-        "BRANCH_ID":"Branche ID",
-        "BRANCH_NAME":"Branch name",
-        "EMAIL_GM":"Email General Manager",
-        "PERIMETER":"Perimeter" 
-    },
-    "EXCEPTION":{
-        "DESCRIPTION1":"After modifications, it is possible to have inconsistencies with cost center and their users. Please find below the list of all users without cost center that will be inactive.",
-        "DESCRIPTION2":"Reminder: one cost center must have one assigned user, one user must have at least one cost center."
-    },
-    "DELETE":{
-        "MESSAGE1":"Deleting a hotel here means you will delete the hotel from the Company admin Dashboard, but does not mean that users will be deleted from Tradeshift production environment. If you need to delete a particular user in Tradeshift, as a company admin: If the user is a hotel member, you can ask the general manager to do it directly from his ",
-        "MESSAGE1PART2":" session. This will delete the user from Tradeshift You can also delete the user directly from the Tradeshift app, please contact : astore.einvoicing.support@accor.com",
-        "MESSAGE2":"Yes I will delete users that need to be deleted, directly on Tradeshift, and I wish to delete this hotel from the dashboard.",
-        "MESSAGE3":"If you need to temporarily delete a user, we advise you use the delegation rule option within",
-        "MESSAGE3PART2":"    Tradeshift (holiday, maternity leave, sick leave) to temporarily delegate tasks to another colleague.",
-        "MESSAGE4":"Can you confirm there are not more pending tasks in the task manager for this user? If no, please reassign the pending tasks before deleting the user."
+    "reset-finish": {
+      "title": "Reset password",
+      "password": "New password",
+      "pwdConfirmation": "Password confirmation",
+      "reset": "Reset",
+      "connexion": "Sign in",
+      "error": {
+        "error1": "The password reset key is missing.",
+        "error2": "Choose a new password.",
+        "error3": "Your password has already been reset. Please login.",
+        "error4": "Your password has been reset. Please ",
+        "error5": "The password and its confirmation do not match!"
+      }
     }
-
-    
-
+  },
+  "exception": {
+    "validations": {
+      "required": "this field is required.",
+      "invalid": "this field is invalid.",
+      "minMail": "Your email is required to be at least 5 characters.",
+      "maxMail": "Your email cannot be longer than 100 characters.",
+      "minPassword": "Your password confirmation is required to be at least 4 characters.",
+      "maxPassword": "Your password confirmation cannot be longer than 50 characters."
+    },
+    "error": {
+      "noUserFoundWithLogin":  "Unable to find the associated user.",
+      "uniqueCodeCostCenter":  "Please ensure that the code is unique.",
+      "uniqueMailGM":  "Please ensure that the GM email is unique.",
+      "uniqueMegaCode":  "Please ensure that the hotel megacode is unique."
+    }
+  }
 }

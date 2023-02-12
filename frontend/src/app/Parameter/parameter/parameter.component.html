@@ -1,63 +1,63 @@
+<div class="container mt-4">
 
-<div class="back">
-  <button (click)="back()" class="btn btnBack">Back</button>
-</div>
-<div class="form-group col-md-8" id="searchBar">
-  <div class="btn_searchbar">
-    <input class="form-control" type="text" [(ngModel)]="searchTerm" (keyup)="Search($event)"
-      placeholder="{{'BUTTONS.SEARCH' | translate}}">
-    <div class="container">
-      <button [routerLink]="['compagny-param/add']" class="btn add_Btn">{{'BUTTONS.ADDPARAMETER' | translate}}</button>
+  <div class="d-flex justify-content-between">
+    <button (click)="back()" class="button button-back">{{'BUTTONS.BACK' | translate}}</button>
+    <div class="btn_searchbar">
+      <input class="form-control" type="text" [(ngModel)]="searchTerm" (keyup)="Search($event)"
+             placeholder="{{'BUTTONS.SEARCH' | translate}}">
     </div>
+    <button [routerLink]="['compagny-param/add']" class="button button-add">{{'BUTTONS.ADDPARAMETER' | translate}}</button>
   </div>
-</div>
 
-<div class="brancheName">
-  Branche {{branch?.code}} - {{'BRANCHNAME' | translate}} {{branch?.name}}
-</div>
+  <hr>
 
-<div style="margin: auto; width: 90%;">
+  <div>
+    Branche <span class="text-bold">{{branch?.code}}</span> - {{'BRANCHNAME' | translate}} <span class="text-bold">{{branch?.name}}</span>
+  </div>
+
+  <hr>
+
   <table class="table" *ngIf="branch?.perimeter == 'Southern Europe'">
     <thead class="thead-dark">
-      <tr>
-        <th scope="col">HotelMegaCode </th>
-        <th scope="col">General manager</th>
-        <th scope="col">General manager N+1</th>
-        <th></th>
-        <th></th>
-      </tr>
+    <tr>
+      <th scope="col">HotelMegaCode </th>
+      <th scope="col">General manager</th>
+      <th scope="col">General manager N+1</th>
+      <th></th>
+      <th></th>
+    </tr>
     </thead>
     <tbody class="data" *ngFor="let param of companies | filter: searchKey:'megaCode'">
-      <tr>
-        <td>{{param.megaCode}}</td>
-        <td>{{param.userGM?.username}}</td>
-        <td>{{param.generalManagerN1Mail}}</td>
-        <td><button [routerLink]="['compagny-param', param?.id, 'edit']" class="btn btn-edit" style="margin-left: 10px;">{{'BUTTONS.EDIT' | translate}}</button></td>
-        <td><button (click)="deleteParam(param.id, param.name)" class="btn btn-delete" style="margin-left: 10px;">{{'BUTTONS.DELETE' | translate}}</button></td>
-      </tr>
+    <tr>
+      <td>{{param.megaCode}}</td>
+      <td>{{param.userGM?.username}}</td>
+      <td>{{param.generalManagerN1Mail}}</td>
+      <td class="text-right"><button [routerLink]="['compagny-param', param?.id, 'edit']" class="btn btn-edit" style="margin-left: 10px;">{{'BUTTONS.EDIT' | translate}}</button></td>
+      <td class="text-right"><button (click)="deleteParam(param.id, param.name)" class="btn btn-delete" style="margin-left: 10px;">{{'BUTTONS.DELETE' | translate}}</button></td>
+    </tr>
     </tbody>
   </table>
 
   <table class="table" *ngIf="branch?.perimeter == 'Northern Europe'">
     <thead class="thead-dark">
-      <tr>
-        <th scope="col">HotelMegaCode </th>
-        <th scope="col">General manager</th>
-        <th scope="col">General manager N+1</th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
+    <tr>
+      <th scope="col">HotelMegaCode </th>
+      <th scope="col">General manager</th>
+      <th scope="col">General manager N+1</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
     </thead>
     <tbody class="data" *ngFor="let param of companies | filter: searchKey:'megaCode'">
-      <tr>
-        <td>{{param.megaCode}}</td>
-        <td>{{param.userGM?.username}}</td>
-        <td>{{param.generalManagerN1Mail}}</td>
-        <td><button [routerLink]="['NE/compagny-param/', param?.id]" class="btn btn-edit" style="margin-left: 10px; background-color: #3AE3B0;">Cost centre</button></td>
-        <td><button [routerLink]="['compagny-param', param?.id, 'edit']" class="btn btn-edit" style="margin-left: 10px;">{{'BUTTONS.EDIT' | translate}}</button></td>
-        <td><button (click)="deleteParam(param.id, param.name)" class="btn btn-delete" style="margin-left: 10px;">{{'BUTTONS.DELETE' | translate}}</button></td>
-      </tr>
+    <tr>
+      <td>{{param.megaCode}}</td>
+      <td>{{param.userGM?.username}}</td>
+      <td>{{param.generalManagerN1Mail}}</td>
+      <td class="text-right"><button [routerLink]="['NE/compagny-param/', param?.id]" class="btn btn-edit" style="margin-left: 10px; background-color: #3AE3B0;">Cost centre</button></td>
+      <td class="text-right"><button [routerLink]="['compagny-param', param?.id, 'edit']" class="btn btn-edit" style="margin-left: 10px;">{{'BUTTONS.EDIT' | translate}}</button></td>
+      <td class="text-right"><button (click)="deleteParam(param.id, param.name)" class="btn btn-delete" style="margin-left: 10px;">{{'BUTTONS.DELETE' | translate}}</button></td>
+    </tr>
     </tbody>
   </table>
 </div>

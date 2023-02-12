@@ -33,7 +33,7 @@ public class ForgotPasswordController {
 	public void requestPasswordReset(@RequestBody String mail) throws Exception {
 		mailService.sendPasswordResetMail(
 			userService.requestPasswordReset(mail)
-				.orElseThrow(Exception::new)
+				.orElseThrow(() -> new Exception("noUserFoundWithLogin"))
 		);
 	}
 
@@ -45,8 +45,8 @@ public class ForgotPasswordController {
 		Optional<User> user =
 			userService.completePasswordReset(keyAndPassword.getNewPassword(), keyAndPassword.getKey());
 
-		if (!user.isPresent()) {
-			throw new Exception("No user was found for this reset key");
+		if (user.isEmpty()) {
+			throw new Exception("noUserFoundWithLogin");
 		}
 	}
 }

@@ -11,8 +11,7 @@ import { Category } from "../../model/category";
 
 @Component({
   selector: 'app-edit-param',
-  templateUrl: './edit-param.component.html',
-  styleUrls: ['./edit-param.component.scss']
+  templateUrl: './edit-param.component.html'
 })
 export class EditParamComponent implements OnInit {
 
@@ -20,6 +19,7 @@ export class EditParamComponent implements OnInit {
   branch?: Branch;
   user?:User;
   categories?: Category[];
+  error?: string;
 
   paramForm = new FormGroup({
     id: new FormControl(null),
@@ -116,19 +116,14 @@ export class EditParamComponent implements OnInit {
   if(this.param?.id){
     this.service.updateParam(updateForm)
       .subscribe(
-        (res: HttpResponse<Param>) => {
-          console.log('update ok')
-          this.location.back();
-        },
-        (res: HttpErrorResponse) => console.log(res.message)
+        () => this.location.back(),
+        (res: HttpErrorResponse) => this.error = res.error
       );
     }else{
       this.service.addParam(updateForm)
         .subscribe(
-          (res:HttpResponse<Param>) => {
-            this.location.back();
-          },
-          (res: HttpErrorResponse) => console.log(res.message)
+          () => this.location.back(),
+          (res: HttpErrorResponse) => this.error = res.error
         );
     }
   }

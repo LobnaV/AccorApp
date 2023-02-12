@@ -2,14 +2,21 @@
   <div class="row">
     <div class="col-md-10 col-sm-12 offset-md-1 offset-sm-0">
       <div class="card">
-        <h1 class="text-center">Connexion</h1>
+        <div class="d-flex justify-content-center">
+          <h1 class="text-center">{{'layouts.connexion.title' | translate}}</h1>
+          <div class="align-self-center m-2">
+            <select #selLang (change)="translateLanguageTo(selLang.value)">
+              <option *ngFor="let language of translate.getLangs()" [value]="language">{{ language }}</option>
+            </select>
+          </div>
+        </div>
         <div class="card-body">
           <form (ngSubmit)="onLogin()" [formGroup]="loginForm">
 
             <div class="inputs">
               <div class="form-group col-md-8">
                 <div class="form-outline">
-                  <label class="form-label" for="username">Username</label>
+                  <label class="form-label" for="username">{{'layouts.connexion.login' | translate}}</label>
                   <input [ngClass]="{'is-invalid': (loginForm.get('username')?.dirty || loginForm.get('username')?.touched) && loginForm.get('username')?.invalid }"
                          class="form-control"
                          formControlName="username"
@@ -19,7 +26,7 @@
               </div>
               <div class="form-group col-md-8">
                 <div class="form-outline">
-                  <label class="form-label" for="password">Mot de passe</label>
+                  <label class="form-label" for="password">{{'layouts.connexion.password' | translate}}</label>
                   <input [ngClass]="{'is-invalid': (loginForm.get('password')?.dirty || loginForm.get('password')?.touched) && loginForm.get('password')?.invalid}"
                          class="form-control"
                          formControlName="password"
@@ -27,13 +34,16 @@
                          type="password"/>
                 </div>
               </div>
-              <a [routerLink]="['/reset/request']">Forgot your password?</a>
+              <a [routerLink]="['/reset/request']">{{'layouts.connexion.forgotpwd' | translate}}</a>
             </div>
-            <div class="button">
-              <button [disabled]="loginForm.invalid" class="btn btn-danger col-md-2" type="submit">Login</button>
+            <div class="d-flex justify-content-center mt-4">
+              <button [disabled]="loginForm.invalid" class="btn btn-danger col-md-2" type="submit">{{'layouts.connexion.connexion' | translate}}</button>
             </div>
           </form>
         </div>
+      </div>
+      <div class="alert alert-danger" *ngIf="errorMessage">
+        {{"layouts.connexion.error." + errorMessage | translate}}
       </div>
     </div>
   </div>

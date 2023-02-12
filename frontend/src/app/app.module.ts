@@ -19,7 +19,6 @@ import { LoginComponent } from './Account/login/login.component';
 import { SignupComponent } from './Account/signup/signup.component';
 import { LayoutComponent } from './layout/layout.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
-import { ForgotPasswordFormComponent } from './forgot-password-form/forgot-password-form.component';
 import { AuthInterceptor } from './Account/login/auth.interceptor';
 import { ConfirmationDialogComponent } from "./UserBack/confirmation-dialog/confirmation-dialog.component";
 import { BrowserModule } from '@angular/platform-browser';
@@ -55,7 +54,6 @@ export function httpTranslateLoaderFactory(http: HttpClient) {
     LoginComponent,
     SignupComponent,
     LayoutComponent,
-    ForgotPasswordFormComponent,
     ConfirmationDialogComponent,
     UpdateStaffComponent,
     UpdateUserGmComponent,

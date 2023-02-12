@@ -9,6 +9,7 @@ import { Staff } from "../../model/staff";
 import { ConfirmationDialogService } from "../confirmation-dialog/confirmation-dialog.service";
 import { TranslateService } from '@ngx-translate/core';
 import { CostCenter } from '../../model/costCenter';
+import {Location} from "@angular/common";
 
 
 @Component({
@@ -69,6 +70,7 @@ export class UserListComponent implements OnInit {
     private service: AccorService,
     private activatedRoute: ActivatedRoute,
     private confirmationDialogService: ConfirmationDialogService,
+    public location: Location,
     public translate: TranslateService
   ) {
     this.message1 = this.translate.instant('DELETE.MESSAGE3');
@@ -250,8 +252,10 @@ export class UserListComponent implements OnInit {
         console.log(res.message);
       }
     );
+  }
 
-
+  back() {
+    this.location.back()
   }
 
 }

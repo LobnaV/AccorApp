@@ -1,72 +1,81 @@
-<!-- vue SE -->
-<div class="tables" *ngIf="companie?.branch?.perimeter == 'Southern Europe'">
 
-  <div class="form-group col-md-8 " id="searchBar">
-    <div>Megacode {{companie?.megaCode}} - {{'HOTELNAME' | translate}} {{companie?.name}}</div>
+<!-- vue SE -->
+<div class="container mt-4" *ngIf="companie?.branch?.perimeter == 'Southern Europe'">
+
+  <div class="d-flex justify-content-between">
+    <button (click)="back()" class="button button-back">{{'BUTTONS.BACK' | translate}}</button>
     <div class="btn_searchbar">
       <input class="form-control" type="text" [(ngModel)]="searchTerm" (keyup)="Search($event)"
-        placeholder="{{'BUTTONS.SEARCH_USER' | translate}}">
-      <img type="button" class="cursor-pointer" src="">
+             placeholder="{{'BUTTONS.SEARCH_USER' | translate}}">
     </div>
+    <img type="button" class="cursor-pointer" src="">
   </div>
+
+  <hr>
+
+  <div>
+    MegaCode <span class="text-bold">{{companie?.megaCode}}</span> - {{'HOTELNAME' | translate}} <span class="text-bold">{{companie?.name}}</span>
+  </div>
+
+  <hr>
 
   <table class="table">
     <thead class="thead-dark">
-      <tr>
-        <th scope="col">{{'HEADER.DISPATCHER' | translate}}</th>
-        <th scope="col">{{'HEADER.FIRSTNAME' | translate}}</th>
-        <th scope="col">{{'HEADER.LASTNAME' | translate}}</th>
-        <th scope="col">Email </th>
-        <th></th>
-      </tr>
+    <tr>
+      <th scope="col">{{'HEADER.DISPATCHER' | translate}}</th>
+      <th scope="col">{{'HEADER.FIRSTNAME' | translate}}</th>
+      <th scope="col">{{'HEADER.LASTNAME' | translate}}</th>
+      <th scope="col">Email </th>
+      <th></th>
+    </tr>
     </thead>
     <tbody class="data" [formGroup]="userForm">
-      <tr>
-        <th scope="row"><input type="radio" id="radioCheck" name="dispatcher"
-            [value]="userGM?.username === companie?.dispacherMail"
-            [checked]="userGM?.username === companie?.dispacherMail" [disabled]="isLoading"
-            (click)="updateDispacher(userGM?.username!, false)">
-        </th>
-        <th scope="row">{{userGM?.firstName}}</th>
-        <th>{{userGM?.lastName}}</th>
-        <td>{{userGM?.username}}</td>
-        <td> <button [routerLink]="['user-gm', userGM?.id, 'edit']" class="btn btn-edit"
-            style="margin-left: 10px;">{{'BUTTONS.EDIT' | translate}}</button>
-      </tr>
+    <tr>
+      <td scope="row"><input type="radio" id="radioCheck" name="dispatcher"
+                             [value]="userGM?.username === companie?.dispacherMail"
+                             [checked]="userGM?.username === companie?.dispacherMail" [disabled]="isLoading"
+                             (click)="updateDispacher(userGM?.username!, false)">
+      </td>
+      <td scope="row">{{userGM?.firstName}}</td>
+      <td>{{userGM?.lastName}}</td>
+      <td>{{userGM?.username}}</td>
+      <td> <button [routerLink]="['user-gm', userGM?.id, 'edit']" class="btn btn-edit"
+                   style="margin-left: 10px;">{{'BUTTONS.EDIT' | translate}}</button>
+    </tr>
     </tbody>
   </table>
 
-  <div class="container">
-    <button [routerLink]="['staff/add']" class="btn add_Btn">{{'BUTTONS.ADDUSER' | translate}}</button>
+  <div class="d-flex justify-content-end mb-3">
+    <button [routerLink]="['staff/add']" class="button button-save">{{'BUTTONS.ADDUSER' | translate}}</button>
   </div>
 
   <table class="table" *ngIf="staffs">
     <thead class="thead-dark">
-      <tr>
-        <th scope="col">{{'HEADER.DISPATCHER' | translate}}</th>
-        <th scope="col">{{'HEADER.FIRSTNAME' | translate}}</th>
-        <th scope="col">{{'HEADER.LASTNAME' | translate}}</th>
-        <th scope="col">Email </th>
-        <th></th>
-        <th></th>
-      </tr>
+    <tr>
+      <th scope="col">{{'HEADER.DISPATCHER' | translate}}</th>
+      <th scope="col">{{'HEADER.FIRSTNAME' | translate}}</th>
+      <th scope="col">{{'HEADER.LASTNAME' | translate}}</th>
+      <th scope="col">Email </th>
+      <th></th>
+      <th></th>
+    </tr>
     </thead>
     <tbody class="data" [formGroup]="userForm" *ngFor="let data of staffs | filter: searchKey:'mail'">
-      <tr>
-        <th scope="row">
-          <input type="radio" id="radioCheck" name="dispatcher" [value]="data?.mail === companie?.dispacherMail"
-            [checked]="data?.mail === companie?.dispacherMail" [disabled]="isLoading"
-            (click)="updateDispacher(data?.mail!, true)">
-        </th>
-        <th scope="row">{{data?.firstName}}</th>
-        <th>{{data?.lastName}}</th>
-        <td>{{data?.mail}}</td>
-        <td> <button [routerLink]="['staff', data?.id, 'edit']" class="btn btn-edit"
-            style="margin-left: 10px;">{{'BUTTONS.EDIT' | translate}}</button>
-        </td>
-        <td><button [disabled]="data?.mail === companie?.dispacherMail" (click)="deleteStaff(data?.id)"
-            class="btn btn-delete" style="margin-left: 10px;">{{'BUTTONS.DELETE' | translate}}</button></td>
-      </tr>
+    <tr>
+      <th scope="row">
+        <input type="radio" id="radioCheck" name="dispatcher" [value]="data?.mail === companie?.dispacherMail"
+               [checked]="data?.mail === companie?.dispacherMail" [disabled]="isLoading"
+               (click)="updateDispacher(data?.mail!, true)">
+      </th>
+      <td scope="row">{{data?.firstName}}</td>
+      <td>{{data?.lastName}}</td>
+      <td>{{data?.mail}}</td>
+      <td> <button [routerLink]="['staff', data?.id, 'edit']" class="btn btn-edit"
+                   style="margin-left: 10px;">{{'BUTTONS.EDIT' | translate}}</button>
+      </td>
+      <td><button [disabled]="data?.mail === companie?.dispacherMail" (click)="deleteStaff(data?.id)"
+                  class="btn btn-delete" style="margin-left: 10px;">{{'BUTTONS.DELETE' | translate}}</button></td>
+    </tr>
     </tbody>
   </table>
 </div>
@@ -74,41 +83,48 @@
 
 
 <!-- vue NE -->
-<div class="tables" *ngIf="companie?.branch?.perimeter == 'Northern Europe'">
+<div class="container mt-4" *ngIf="companie?.branch?.perimeter == 'Northern Europe'">
 
-  <div class="form-group col-md-8 " id="searchBar">
-    <div>Megacode {{companie?.megaCode}} - {{'HOTELNAME' | translate}} {{companie?.name}}</div>
+  <div class="d-flex justify-content-between">
+    <button (click)="back()" class="button button-back">{{'BUTTONS.BACK' | translate}}</button>
     <div class="btn_searchbar">
       <input class="form-control" type="text" [(ngModel)]="searchTerm" (keyup)="Search($event)"
-        placeholder="{{'BUTTONS.SEARCH_CODECC' | translate}}">
-      <img type="button" class="cursor-pointer" src="">
+             placeholder="{{'BUTTONS.SEARCH_CODECC' | translate}}">
+    </div>
+
+    <div class="btns">
+      <button class="btn  p-2" style="background-color:#E38D9B; margin-bottom: 0.3rem; margin-right: 1rem;" [routerLink]="'listErrorCostCenter'">Exceptions</button>
+      <button class="btn btn-save  p-2" (click)="save()" style="background-color:#B9E9A2; margin-bottom: 0.3rem;">Save</button>
     </div>
   </div>
 
-  <div class="btns">
-      <button class="btn  p-2" style="background-color:#E38D9B; margin-bottom: 0.3rem; margin-right: 1rem;" [routerLink]="'listErrorCostCenter'">Exceptions</button>
-      <button class="btn btn-save  p-2" (click)="save()" style="background-color:#B9E9A2; margin-bottom: 0.3rem;">Save</button>
+  <hr>
+
+  <div>
+    MegaCode <span class="text-bold">{{companie?.megaCode}}</span> - {{'HOTELNAME' | translate}} <span class="text-bold">{{companie?.name}}</span>
   </div>
+
+  <hr>
   <div>
     <p>General manager</p>
   </div>
   <table class="table">
     <thead class="thead-dark">
-      <tr>
-        <th scope="col">{{'HEADER.FIRSTNAME' | translate}}</th>
-        <th scope="col">{{'HEADER.LASTNAME' | translate}}</th>
-        <th scope="col">Email </th>
-        <th></th>
-      </tr>
+    <tr>
+      <th scope="col">{{'HEADER.FIRSTNAME' | translate}}</th>
+      <th scope="col">{{'HEADER.LASTNAME' | translate}}</th>
+      <th scope="col">Email </th>
+      <th></th>
+    </tr>
     </thead>
     <tbody class="data" [formGroup]="userForm">
-      <tr>
-        <th scope="row">{{userGM?.firstName}}</th>
-        <th>{{userGM?.lastName}}</th>
-        <td>{{userGM?.username}}</td>
-        <td> <button [routerLink]="['user-gm', userGM?.id, 'edit']" class="btn btn-edit"
-            style="margin-left: 10px;">{{'BUTTONS.EDIT' | translate}}</button>
-      </tr>
+    <tr>
+      <td scope="row">{{userGM?.firstName}}</td>
+      <td>{{userGM?.lastName}}</td>
+      <td>{{userGM?.username}}</td>
+      <td> <button [routerLink]="['user-gm', userGM?.id, 'edit']" class="btn btn-edit"
+                   style="margin-left: 10px;">{{'BUTTONS.EDIT' | translate}}</button>
+    </tr>
     </tbody>
   </table>
 
@@ -117,23 +133,21 @@
   </div>
   <table class="table" *ngIf="staffs">
     <thead class="thead-dark">
-      <tr>
-        <th scope="col">Cost centre</th>
-        <th scope="col">Cost centre name</th>
-        <th scope="col">Email </th>
-        <th></th>
-      </tr>
+    <tr>
+      <th scope="col">Cost centre</th>
+      <th scope="col">Cost centre name</th>
+      <th scope="col">Email </th>
+      <th></th>
+    </tr>
     </thead>
     <tbody class="data" [formGroup]="costCenterForm" *ngFor="let data of costcenters | filter: searchKey:'code'">
-      <tr *ngIf="data?.code != null || data?.label != null">
-        <td>{{data?.code}}</td>
-        <td>{{data?.label}}</td>
-        <td *ngIf="data?.owner != null">{{data?.owner}}</td>
-        <td> <button [routerLink]="['costCenter', data?.id, 'edit']" class="btn btn-edit" style="margin-left: 10px;">{{'BUTTONS.EDIT' | translate}}</button>
-        </td>
-      </tr>
+    <tr *ngIf="data?.code != null || data?.label != null">
+      <td>{{data?.code}}</td>
+      <td>{{data?.label}}</td>
+      <td *ngIf="data?.owner != null">{{data?.owner}}</td>
+      <td> <button [routerLink]="['costCenter', data?.id, 'edit']" class="btn btn-edit" style="margin-left: 10px;">{{'BUTTONS.EDIT' | translate}}</button>
+      </td>
+    </tr>
     </tbody>
   </table>
-
-
 </div>

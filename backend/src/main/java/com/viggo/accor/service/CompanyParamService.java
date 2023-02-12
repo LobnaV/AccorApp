@@ -7,6 +7,7 @@ import com.viggo.accor.repository.CostCenterRepository;
 import com.viggo.accor.repository.StaffRepository;
 import com.viggo.accor.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -49,6 +50,7 @@ public class CompanyParamService {
 		return parameterRepository.findByUserGMUsername(userDetails.getUsername()).orElseThrow(() -> new Exception("Impossible de trouver l'hotel associé"));
 	}
 
+	@Transactional(rollbackFor = Exception.class)
 	public CompanyParameter save(CompanyParameter companyParameter, String accessToken) throws Exception {
 		User user = companyParameter.getUserGM();
 		if (user.getId() != null) {
@@ -59,9 +61,19 @@ public class CompanyParamService {
 			oldUser.setUsername(user.getUsername());
 			user = oldUser;
 		}
-		companyParameter.setUserGM(userRepository.save(user));
 
-		CompanyParameter paramSaved = parameterRepository.save(companyParameter);
+		try {
+			companyParameter.setUserGM(userRepository.save(user));
+		} catch (DataIntegrityViolationException e) {
+			throw new Exception("uniqueMailGM");
+		}
+
+		CompanyParameter paramSaved;
+		try {
+			paramSaved = parameterRepository.save(companyParameter);
+		} catch (DataIntegrityViolationException e) {
+			throw new Exception("uniqueMegaCode");
+		}
 
 		CsvFormatDTO csvFormatDTO = new CsvFormatDTO();
 		csvFormatDTO.setBranchId(paramSaved.getBranch().getCode());

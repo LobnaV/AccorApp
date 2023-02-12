@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import {BehaviorSubject, catchError, Observable, throwError} from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Branch } from './model/branch';
 import { CostCenter } from './model/costCenter';
@@ -59,6 +59,7 @@ export class AccorService {
     });
     return this.http
       .post<Param>(this.paramUrl, param, {observe: 'response', headers})
+      .pipe(catchError(error => throwError(error)));
   }
 
   updateParam(param: Param): Observable<HttpResponse<Param>> {
@@ -67,7 +68,8 @@ export class AccorService {
       'Ts_Access_Token': accessTokenTs
     });
     return this.http
-      .put<Param>(this.paramUrl, param, {observe: 'response', headers});
+      .put<Param>(this.paramUrl, param, {observe: 'response', headers})
+      .pipe(catchError(error => throwError(error)));
   }
 
   deleteParam(paramId: Param) {
@@ -198,6 +200,7 @@ export class AccorService {
   addcostCenter(costCenter: CostCenter): Observable<HttpResponse<CostCenter>> {
     return this.http
       .post<CostCenter>(this.CCUrl, costCenter, {observe: 'response'})
+      .pipe(catchError(error => throwError(error)));
   }
 
   cl(costCenter: CostCenter): Observable<HttpResponse<CostCenter>> {
@@ -218,7 +221,8 @@ export class AccorService {
 
   updateCostCenter(costCenter: CostCenter): Observable<HttpResponse<CostCenter>> {
     return this.http
-      .put<CostCenter>(this.CCUrl, costCenter, {observe: 'response'});
+      .put<CostCenter>(this.CCUrl, costCenter, {observe: 'response'})
+      .pipe(catchError(error => throwError(error)));
   }
 
   deleteCC(ccId: CostCenter) {

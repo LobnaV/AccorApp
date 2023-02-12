@@ -9,13 +9,12 @@ import { CostCenter } from 'src/app/model/costCenter';
 
 @Component({
   selector: 'app-cost-center-edit-gm',
-  templateUrl: './cost-center-edit-gm.component.html',
-  styleUrls: ['../cost-center.component.scss']
+  templateUrl: './cost-center-edit-gm.component.html'
 })
 export class CostCenterEditGmComponent implements OnInit {
 
   costcenter?: CostCenter;
-  notTheSame = false;
+  error?: string;
 
   costCenterForm = new FormGroup({
     firstName: new FormControl('', Validators.required),
@@ -61,10 +60,10 @@ export class CostCenterEditGmComponent implements OnInit {
       updateCostCenter.owner = this.costCenterForm.get('owner')?.value
       this.service.updateCostCenter(updateCostCenter).subscribe(
         () => this.location.back(),
-        (res: HttpErrorResponse) => console.log(res.message)
+        (res: HttpErrorResponse) => this.error = res.error
       )
     } else {
-      this.notTheSame = true;
+      this.error = 'L\'email et sa confirmation ne sont pas égaux !';
     }
   }
 }

@@ -9,12 +9,12 @@ import { Param } from 'src/app/model/param';
 
 @Component({
   selector: 'app-cost-center-edit',
-  templateUrl: './cost-center-edit.component.html',
-  styleUrls: ['../cost-center.component.scss']
+  templateUrl: './cost-center-edit.component.html'
 })
 export class CostCenterEditComponent implements OnInit {
 
   param?: Param;
+  error?: string;
 
   costCenterForm = new FormGroup({
     id: new FormControl(''),
@@ -87,13 +87,13 @@ export class CostCenterEditComponent implements OnInit {
       this.service.updateCostCenter(updateForm)
         .subscribe(
           () => this.location.back(),
-          (res: HttpErrorResponse) => console.log(res.message)
+          (res: HttpErrorResponse) => this.error = res.error
         );
     } else {
       this.service.addcostCenter(updateForm)
         .subscribe(
           () => this.location.back(),
-          (res: HttpErrorResponse) => console.log(res.message)
+          (res: HttpErrorResponse) => this.error = res.error
         );
     }
   }

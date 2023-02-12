@@ -28,7 +28,7 @@
       </option>
     </select>
 
-    <button class="btn" [disabled]="!selectedCompanie" [routerLink]="['/compagny-param', selectedCompanie?.id]">GO</button>
+    <button class="button button-ok" [disabled]="!selectedCompanie" [routerLink]="['/compagny-param', selectedCompanie?.id]">GO</button>
   </div>
 </div>
 
@@ -51,7 +51,7 @@
                 {{branche.code}} - {{branche.name}}
             </option>
         </select>
-        <button class="btn" [disabled]="!selectedBranch" [routerLink]="['/branch', selectedBranch?.id]">GO</button>
+        <button class="button button-ok" [disabled]="!selectedBranch" [routerLink]="['/branch', selectedBranch?.id]">GO</button>
     </div>
 </div>
 

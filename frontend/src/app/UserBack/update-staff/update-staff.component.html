@@ -1,33 +1,39 @@
-<div class="container">
-    <div class="btns">
-        <button class="btnBack" (click)="back()">Back</button>
-    </div>
+<div class="container mt-4">
 
-    <div class="card-body">
-        <form [formGroup]="staffForm" (ngSubmit)='Update()'>
-          <input type="text" class="form-control" formControlName="id" hidden>
-
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="firstName">{{'HEADER.FIRSTNAME' | translate}}*:</label>
-               <div class="col-sm-6">
-                   <input classe="input" type="text" id='firstName' class="form-control" formControlName="firstName">
-               </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="lastName">{{'HEADER.LASTNAME' | translate}}*:</label>
-               <div class="col-sm-6">
-                   <input classe="input" type="text" id='lastName' class="form-control" formControlName="lastName">
-               </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="mail">Email*:</label>
-               <div class="col-sm-6">
-                   <input  type="mail" id='mail' class="form-control" formControlName="mail">
-               </div>
-            </div>
-            <div class="save">
-                <button type="submit" class="btn-Save" [disabled]="staffForm.invalid">{{this.staff?.id ? 'Edit' : 'Add'}}</button>
-            </div>
-        </form>
+  <div class="row">
+    <div class="col-2">
+      <button (click)="back()" class="button button-back">{{'BUTTONS.BACK' | translate}}</button>
     </div>
+    <div class="col-8 text-right">
+      <h4>Update staff</h4>
+    </div>
+  </div>
+  <hr>
+  <form [formGroup]="staffForm" (ngSubmit)='Update()'>
+    <input type="text" class="form-control" formControlName="id" hidden>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="firstName">{{'HEADER.FIRSTNAME' | translate}}*:</label>
+      <div class="col-sm-6">
+        <input classe="input" type="text" id='firstName' class="form-control" formControlName="firstName">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="lastName">{{'HEADER.LASTNAME' | translate}}*:</label>
+      <div class="col-sm-6">
+        <input classe="input" type="text" id='lastName' class="form-control" formControlName="lastName">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="mail">Email*:</label>
+      <div class="col-sm-6">
+        <input  type="mail" id='mail' class="form-control" formControlName="mail">
+      </div>
+    </div>
+    <div class="d-flex justify-content-center m-4">
+      <button class="button button-save w-25" type="submit" [disabled]="staffForm.invalid">{{this.staff?.id ? 'Edit' :
+        'Add'}}</button>
+    </div>
+  </form>
 </div>
+

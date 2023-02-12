@@ -13,6 +13,8 @@ export class PasswordResetInitComponent {
   errorEmailNotExists?: string | null;
   success?: string | null;
 
+  loading = false;
+
   resetRequestForm? = this.fb.group({
     email: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(254), Validators.email]]
   });
@@ -25,15 +27,18 @@ export class PasswordResetInitComponent {
 
   requestReset() {
     this.error = null;
+    this.loading = true;
     this.errorEmailNotExists = null;
 
     this.passwordResetInitService.save(this.resetRequestForm?.get(['email'])?.value).subscribe(
       () => {
         this.success = 'OK';
+        this.loading = false;
       },
-      () => {
+      err => {
         this.success = null;
-        this.error = 'ERROR';
+        this.error = err.error;
+        this.loading = false;
       }
     );
   }

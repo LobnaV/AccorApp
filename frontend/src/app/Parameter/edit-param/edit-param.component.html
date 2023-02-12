@@ -1,77 +1,82 @@
-<div class="card">
-  <div class="back">
-    <button (click)="back()" class="btn btnBack">Back</button>
+<div class="container mt-4">
+
+  <div class="row">
+    <div class="col-2">
+      <button (click)="back()" class="button button-back">{{'BUTTONS.BACK' | translate}}</button>
+    </div>
+    <div class="col-8 text-right">
+      <h4 *ngIf="this.param?.id"> {{'PARAM.UPDATE_PARAMETER' | translate}}</h4>
+      <h4 *ngIf="this.param?.id == null"> Create new parameter</h4>
+    </div>
   </div>
-  <div class="card-body">
-    <h4 *ngIf="this.param?.id"> {{'PARAM.UPDATE_PARAMETER' | translate}}</h4>
-    <h4 *ngIf="this.param?.id == null"> Create new parameter</h4>
-    <form [formGroup]="paramForm" (ngSubmit)='Update()'>
-      <br>
+
+  <hr>
+  <h6>{{'PARAM.BRANCH_ID' | translate}}: <span class="text-bold">{{branch?.code}}</span> - {{'PARAM.BRANCH_NAME' | translate}}: <span class="text-bold">{{branch?.name}}</span></h6>
+  <hr>
+  <form [formGroup]="paramForm" (ngSubmit)='Update()'>
+    <input type="text" formControlName="id" hidden>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="megaCode">Hotel MegaCode *</label>
+      <div class="col-sm-8">
+        <input type="text" id='megaCode' class="form-control" formControlName="megaCode" [disabled]="this.param?.id != null">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="name">{{'HOTELNAME' | translate}} *</label>
+      <div class="col-sm-8">
+        <input type="text" id='name' class="form-control" formControlName="name">
+      </div>
+    </div>
+
+    <div>
+      <div class="form-group row" >
+        <label class="col-sm-2 col-form-label" for="category">Category *</label>
+        <div class="col-sm-8">
+
+          <select [compareWith]="compareObjects" class="form-control" formControlName="category"
+                  id="category" name="category">
+            <option [value]="null">Select category</option>
+            <option *ngFor="let category of categories; trackBy: trackById"
+                    [ngValue]="category">{{category.name}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div formGroupName="userGM">
       <input type="text" formControlName="id" hidden>
-      <div class="branch">
-        <h6>{{'PARAM.BRANCH_ID' | translate}}: {{branch?.code}} - {{'PARAM.BRANCH_NAME' | translate}}: {{branch?.name}}</h6>
-      </div>
-      <br>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label" for="megaCode">Hotel MegaCode *</label>
+        <label class="col-sm-2 col-form-label" for="userGM">{{'PARAM.EMAIL_GM' | translate}} *</label>
         <div class="col-sm-8">
-          <input type="text" id='megaCode' class="form-control" formControlName="megaCode" [disabled]="this.param?.id != null">
+          <input type="email" id='userGM' class="form-control" formControlName="username">
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label" for="name">{{'HOTELNAME' | translate}} *</label>
+        <label class="col-sm-2 col-form-label" for="firstNameGM">{{'HEADER.FIRSTNAME' | translate}} *</label>
         <div class="col-sm-8">
-          <input type="text" id='name' class="form-control" formControlName="name">
+          <input type="email" id='firstNameGM' class="form-control" formControlName="firstName">
         </div>
       </div>
-
-      <div>
-        <div class="form-group row" >
-          <label class="col-sm-2 col-form-label" for="category">Category *</label>
-         <div class="col-sm-8">
-
-           <select [compareWith]="compareObjects" class="form-control" formControlName="category"
-                   id="category" name="category">
-             <option [value]="null">Select category</option>
-             <option *ngFor="let category of categories; trackBy: trackById"
-               [ngValue]="category">{{category.name}}</option>
-           </select>
-         </div>
-        </div>
-      </div>
-
-      <div formGroupName="userGM">
-        <input type="text" formControlName="id" hidden>
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-label" for="userGM">{{'PARAM.EMAIL_GM' | translate}} *</label>
-          <div class="col-sm-8">
-            <input type="email" id='userGM' class="form-control" formControlName="username">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-label" for="firstNameGM">{{'HEADER.FIRSTNAME' | translate}} *</label>
-          <div class="col-sm-8">
-            <input type="email" id='firstNameGM' class="form-control" formControlName="firstName">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-label" for="lastNameGM">{{'HEADER.LASTNAME' | translate}} *</label>
-          <div class="col-sm-8">
-            <input type="email" id='lastNameGM' class="form-control" formControlName="lastName">
-          </div>
-        </div>
-      </div>
-
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label" for="generalManagerN1Mail">Email N+1 *</label>
+        <label class="col-sm-2 col-form-label" for="lastNameGM">{{'HEADER.LASTNAME' | translate}} *</label>
         <div class="col-sm-8">
-          <input type="email" id="generalManagerN1Mail" class="form-control" formControlName="generalManagerN1Mail">
+          <input type="email" id='lastNameGM' class="form-control" formControlName="lastName">
         </div>
       </div>
+    </div>
 
-      <div class="save">
-        <button type="submit" class="btn bnt-Save" [disabled]="paramForm.invalid">{{this.param?.id ? 'edit' : 'add'}}</button>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="generalManagerN1Mail">Email N+1 *</label>
+      <div class="col-sm-8">
+        <input type="email" id="generalManagerN1Mail" class="form-control" formControlName="generalManagerN1Mail">
       </div>
-    </form>
-  </div>
+    </div>
+
+    <div class="d-flex justify-content-center m-4">
+      <button class="button button-save w-25" type="submit" [disabled]="paramForm.invalid">{{this.param?.id ? 'edit' : 'add'}}</button>
+    </div>
+    <div class="alert alert-danger" *ngIf="error">
+      {{"exception.error." + error | translate}}
+    </div>
+  </form>
 </div>

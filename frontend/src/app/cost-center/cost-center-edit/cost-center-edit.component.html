@@ -1,75 +1,81 @@
-<div class="container">
-  <div class="back">
-    <button (click)="back()" class="btn btnBack">Back</button>
+<div class="container mt-4">
+
+  <div class="row">
+    <div class="col-2">
+      <button (click)="back()" class="button button-back">{{'BUTTONS.BACK' | translate}}</button>
+    </div>
+    <div class="col-8 text-right">
+      <h4>Create cost center</h4>
+    </div>
   </div>
 
-  <div class="card-body">
-    <h4>Create cost center</h4>
-    <form (ngSubmit)='Update()' [formGroup]="costCenterForm">
-      <input hidden type="text" formControlName="id">
-      <br>
-      <div class="branch">
-        <h6>{{'PARAM.BRANCH_ID' | translate}}: {{param?.branch?.code}}</h6>
-        <h6>{{'PARAM.BRANCH_NAME' | translate}}: {{param?.branch?.name}}</h6>
-      </div>
-      <br>
-      <div>
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-label" for="megaCode">Hotel MegaCode </label>
-          <div class="col-sm-6">
-            <input class="form-control" id='megaCode' readonly style="background-color: #e9ecef;" type="text" [value]="param?.megaCode">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-label" for="name">{{'HOTELNAME' | translate}} </label>
-          <div class="col-sm-6">
-            <input class="form-control" id='name' readonly style="background-color: #e9ecef;" type="text" [value]="param?.name">
-          </div>
-        </div>
-      </div>
+  <hr>
 
+  <h6>{{'PARAM.BRANCH_ID' | translate}}: <span class="text-bold">{{param?.branch?.code}}</span></h6>
+  <h6>{{'PARAM.BRANCH_NAME' | translate}}: <span class="text-bold">{{param?.branch?.name}}</span></h6>
+
+  <hr>
+  <form (ngSubmit)='Update()' [formGroup]="costCenterForm">
+    <input hidden type="text" formControlName="id">
+    <div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label" for="code">Code *</label>
+        <label class="col-sm-2 col-form-label" for="megaCode">Hotel MegaCode </label>
         <div class="col-sm-6">
-          <input class="form-control" formControlName="code" id='code' type="text">
+          <input class="form-control" id='megaCode' readonly style="background-color: #e9ecef;" type="text" [value]="param?.megaCode">
         </div>
       </div>
-
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label" for="label">Label *</label>
+        <label class="col-sm-2 col-form-label" for="name">{{'HOTELNAME' | translate}} </label>
         <div class="col-sm-6">
-          <input class="form-control" formControlName="label" id='label' type="text">
+          <input class="form-control" id='name' readonly style="background-color: #e9ecef;" type="text" [value]="param?.name">
         </div>
       </div>
+    </div>
 
-      <div class="card-body">
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-label" for="firstName">{{'HEADER.FIRSTNAME' | translate}}</label>
-          <div class="col-sm-6">
-            <input class="form-control" classe="input" id='firstName' readonly style="background-color: #e9ecef;" type="text" formControlName="firstName">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-label" for="lastName">{{'HEADER.LASTNAME' | translate}}</label>
-          <div class="col-sm-6">
-            <input class="form-control" classe="input" id='lastName' readonly style="background-color: #e9ecef;" type="text" formControlName="lastName">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-label" for="mail">Email</label>
-          <div class="col-sm-6">
-            <input class="form-control" id='mail' readonly style="background-color: #e9ecef;" type="mail" formControlName="owner">
-          </div>
-        </div>
-        <div class="save">
-          <button class="btn btn-Save" type="submit" [disabled]="costCenterForm.invalid">Save</button>
-        </div>
-        <br>
-        <i style="color:#8F1D1D ;">Any modfication here will result in having the General manger becoming the
-          dispatcher automatically. Please don't hesitate to contact the GM to ask him to rearrange the workflow th
-          way he would like to.</i>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="code">Code *</label>
+      <div class="col-sm-6">
+        <input class="form-control" formControlName="code" id='code' type="text">
       </div>
+    </div>
 
-    </form>
-  </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="label">Label *</label>
+      <div class="col-sm-6">
+        <input class="form-control" formControlName="label" id='label' type="text">
+      </div>
+    </div>
+
+    <div class="card-body">
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="firstName">{{'HEADER.FIRSTNAME' | translate}}</label>
+        <div class="col-sm-6">
+          <input class="form-control" classe="input" id='firstName' readonly style="background-color: #e9ecef;" type="text" formControlName="firstName">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="lastName">{{'HEADER.LASTNAME' | translate}}</label>
+        <div class="col-sm-6">
+          <input class="form-control" classe="input" id='lastName' readonly style="background-color: #e9ecef;" type="text" formControlName="lastName">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="mail">Email</label>
+        <div class="col-sm-6">
+          <input class="form-control" id='mail' readonly style="background-color: #e9ecef;" type="mail" formControlName="owner">
+        </div>
+      </div>
+      <div class="d-flex justify-content-center m-4">
+        <button class="button button-save w-25" type="submit" [disabled]="costCenterForm.invalid">Save</button>
+      </div>
+      <br>
+      <div class="alert alert-danger" *ngIf="error">
+        {{"exception.error." + error | translate}}
+      </div>
+      <i style="color:#8F1D1D ;">Any modfication here will result in having the General manger becoming the
+        dispatcher automatically. Please don't hesitate to contact the GM to ask him to rearrange the workflow th
+        way he would like to.</i>
+    </div>
+
+  </form>
 </div>

@@ -70,35 +70,6 @@ public class UserService {
 		return userSaved;
 	}
 
-	//edit user Partie NE
-	public User editNE(User user) {
-		User userSaved = userRepository.save(user);
-		Optional<CompanyParameter> companyParameter = companyParameterRepository.findByUserGMUsername(userSaved.getUsername()) ;
-
-		CsvFormatDTO csvFormatDTO = new CsvFormatDTO();
-		csvFormatDTO.setBranchId(companyParameter.get().getBranch().getCode());
-		csvFormatDTO.setEmail(userSaved.getUsername());
-		csvFormatDTO.setFirstName(userSaved.getFirstName());
-		csvFormatDTO.setLastName(user.getLastName());
-		csvFormatDTO.setState("ACTIVE");
-		csvFormatDTO.setManager(companyParameter.get().getUserGM().getUsername());
-		csvFormatDTO.setApprovalLimit("10000");
-		csvFormatDTO.setSpendLimit("10000");
-		//csvFormatDTO.setOwnedCostCenter(companyParameter.get());
-		csvFormatDTO.setUserType("General Manager");// a modifier apres l'ajout des roles
-		try {
-//			String branchCode = tradeshiftInterface.getPrimaryBranchUser(userSaved.getUsername());
-//			csvFormatDTO.setHome(branchCode.equals(userSaved.getPrimaryBranch()) ? "TRUE" : "FALSE");
-			csvFormatDTO.setHome("TRUE");
-			//csvFormatDTO.setOwnedCostCenter(userSaved.getUsername().equals(companyParameter.get().getDispacherMail())? "" : "");
-			//csvFormatDTO.setUserType();// aide!
-			sftpUploadService.uploadFileToSftp(csvFormatDTO);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-		return userSaved;
-	}
-
 
 
 	public void delete(final Long id) {

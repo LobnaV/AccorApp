@@ -1,1 +1,91 @@
 /* You can add global styles to this file, and also import other style files */
+
+.validation-error {
+  color: #d9534f;
+  margin-bottom: 5px;
+}
+
+
+.table{
+  display: table;
+
+  thead{
+    background-color: black;
+    color: white;
+  }
+
+  .data{
+    border-style: none;
+    border-bottom-color:white ;
+    th,td{
+      padding: 0.5rem;
+    }
+    tr{
+      background-color: #C5C5C5;
+    }
+    .btn-edit{
+      background-color:#F0AB29 ;
+    }
+
+    .btn-delete{
+      background-color: #E38D9B;
+    }
+  }
+}
+
+.text-right {
+  text-align: center;
+}
+
+.button {
+  //text-transform: uppercase;
+  height: 44px;
+  letter-spacing: 0.05em;
+  box-shadow: none !important;
+  -webkit-border-radius: 70px;
+  -moz-border-radius: 70px;
+  border-radius: 70px;
+  padding-right: 25px;
+  padding-left: 25px;
+  border: none;
+}
+
+.button:disabled {
+  color: #fff;
+  cursor: not-allowed;
+  background-color: gray;
+}
+
+.btn_searchbar {
+  width: 50%;
+}
+
+.button-ok {
+  width: 40px;
+  height: 40px;
+  padding-right: 0;
+  padding-left: 0;
+  background-color: #3f88c5;
+  color: white;
+  margin-left: 20px;
+}
+
+.button-back {
+  background-color: #E9C4A2;
+}
+
+.button-save {
+  background-color: #B9E9A2;
+  border-radius: 10px;
+}
+.button-add{
+  background-color: #9BE69F;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+form .row {
+  margin-bottom: 10px;
+}

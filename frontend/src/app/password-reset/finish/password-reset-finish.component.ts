@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { PasswordResetFinishService } from './password-reset-finish.service';
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-password-reset-finish',
@@ -16,6 +17,8 @@ export class PasswordResetFinishComponent implements OnInit {
   success?: string | null;
   key?: string | null;
 
+  loading = false;
+
   passwordForm? = this.fb.group({
     newPassword: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
     confirmPassword: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]]
@@ -23,6 +26,7 @@ export class PasswordResetFinishComponent implements OnInit {
 
   constructor(
     private router: Router,
+    public translate: TranslateService,
     private passwordResetFinishService: PasswordResetFinishService,
     private route: ActivatedRoute,
     private elementRef: ElementRef,
@@ -44,17 +48,25 @@ export class PasswordResetFinishComponent implements OnInit {
     if (password !== confirmPassword) {
       this.doNotMatch = 'ERROR';
     } else {
+      this.loading = true;
       this.passwordResetFinishService.save({ key: this.key, newPassword: password }).subscribe(
         () => {
+          this.loading = false;
           this.success = 'OK';
           this.login();
         },
-        () => {
+        err => {
+          this.loading = false;
           this.success = null;
-          this.error = 'ERROR';
+          this.error = err.error;
         }
       );
     }
+  }
+
+  //Switch language
+  translateLanguageTo(lang: string) {
+    this.translate.use(lang);
   }
 
   login() {
