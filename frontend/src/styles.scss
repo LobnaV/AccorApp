@@ -2,7 +2,8 @@
 
 .validation-error {
   color: #d9534f;
-  margin-bottom: 5px;
+  margin-bottom: 0;
+  font-size: small;
 }
 
 
@@ -34,7 +35,7 @@
 }
 
 .text-right {
-  text-align: center;
+  text-align: right;
 }
 
 .button {
@@ -77,6 +78,10 @@
 .button-save {
   background-color: #B9E9A2;
   border-radius: 10px;
+}
+
+.button-red {
+  background-color: #E38D9B;
 }
 .button-add{
   background-color: #9BE69F;

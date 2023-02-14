@@ -2,27 +2,35 @@
 
   <div class="d-flex justify-content-between">
     <button (click)="back()" class="button button-back">{{'BUTTONS.BACK' | translate}}</button>
-    <div class="btn_searchbar">
-      <input class="form-control" type="text" [(ngModel)]="searchTerm" (keyup)="Search($event)"
-             placeholder="{{'BUTTONS.SEARCH' | translate}}">
+    <h1>{{"layouts.compagny-list.title" | translate}}</h1>
+    <button [routerLink]="['compagny-param/add']" class="button button-add">{{"layouts.compagny-list.buttons.add-compagny" | translate}}</button>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col">
+      <h4>{{"layouts.commons.branch" | translate}}</h4>
+      <div>
+        {{"layouts.commons.branch-code" | translate}} <span class="text-bold">{{branch?.code}}</span> - {{"layouts.commons.branch-name" | translate}} <span class="text-bold">{{branch?.name}}</span>
+      </div>
     </div>
-    <button [routerLink]="['compagny-param/add']" class="button button-add">{{'BUTTONS.ADDPARAMETER' | translate}}</button>
+    <div class="col m-auto">
+      <div class="btn_searchbar w-100">
+        <input class="form-control" type="text" [(ngModel)]="searchTerm" (keyup)="Search($event)"
+               placeholder="{{'layouts.compagny-list.placeholder' | translate}}">
+      </div>
+    </div>
   </div>
 
   <hr>
 
-  <div>
-    Branche <span class="text-bold">{{branch?.code}}</span> - {{'BRANCHNAME' | translate}} <span class="text-bold">{{branch?.name}}</span>
-  </div>
-
-  <hr>
-
-  <table class="table" *ngIf="branch?.perimeter == 'Southern Europe'">
+  <table class="table table-responsive" *ngIf="branch?.perimeter == 'Southern Europe'">
     <thead class="thead-dark">
     <tr>
-      <th scope="col">HotelMegaCode </th>
-      <th scope="col">General manager</th>
-      <th scope="col">General manager N+1</th>
+      <th>{{"layouts.compagny-list.table.columns.megacode" | translate}}</th>
+      <th>{{"layouts.compagny-list.table.columns.general-manager" | translate}}</th>
+      <th>{{"layouts.compagny-list.table.columns.general-manager-n1" | translate}}</th>
       <th></th>
       <th></th>
     </tr>
@@ -32,18 +40,18 @@
       <td>{{param.megaCode}}</td>
       <td>{{param.userGM?.username}}</td>
       <td>{{param.generalManagerN1Mail}}</td>
-      <td class="text-right"><button [routerLink]="['compagny-param', param?.id, 'edit']" class="btn btn-edit" style="margin-left: 10px;">{{'BUTTONS.EDIT' | translate}}</button></td>
-      <td class="text-right"><button (click)="deleteParam(param.id, param.name)" class="btn btn-delete" style="margin-left: 10px;">{{'BUTTONS.DELETE' | translate}}</button></td>
+      <td class="text-right"><button [routerLink]="['compagny-param', param?.id, 'edit']" class="btn btn-edit">{{"layouts.commons.buttons.edit" | translate}}</button></td>
+      <td class="text-right"><button (click)="deleteParam(param.id, param.name)" class="btn btn-delete">{{"layouts.commons.buttons.delete" | translate}}</button></td>
     </tr>
     </tbody>
   </table>
 
-  <table class="table" *ngIf="branch?.perimeter == 'Northern Europe'">
+  <table class="table table-responsive" *ngIf="branch?.perimeter == 'Northern Europe'">
     <thead class="thead-dark">
     <tr>
-      <th scope="col">HotelMegaCode </th>
-      <th scope="col">General manager</th>
-      <th scope="col">General manager N+1</th>
+      <th>{{"layouts.compagny-list.table.columns.megacode" | translate}}</th>
+      <th>{{"layouts.compagny-list.table.columns.general-manager" | translate}}</th>
+      <th>{{"layouts.compagny-list.table.columns.general-manager-n1" | translate}}</th>
       <th></th>
       <th></th>
       <th></th>
@@ -54,9 +62,9 @@
       <td>{{param.megaCode}}</td>
       <td>{{param.userGM?.username}}</td>
       <td>{{param.generalManagerN1Mail}}</td>
-      <td class="text-right"><button [routerLink]="['NE/compagny-param/', param?.id]" class="btn btn-edit" style="margin-left: 10px; background-color: #3AE3B0;">Cost centre</button></td>
-      <td class="text-right"><button [routerLink]="['compagny-param', param?.id, 'edit']" class="btn btn-edit" style="margin-left: 10px;">{{'BUTTONS.EDIT' | translate}}</button></td>
-      <td class="text-right"><button (click)="deleteParam(param.id, param.name)" class="btn btn-delete" style="margin-left: 10px;">{{'BUTTONS.DELETE' | translate}}</button></td>
+      <td class="text-right"><button [routerLink]="['NE/compagny-param/', param?.id]" class="btn btn-edit" style="background-color: #3AE3B0;">{{"layouts.commons.buttons.cost-center" | translate}}</button></td>
+      <td class="text-right"><button [routerLink]="['compagny-param', param?.id, 'edit']" class="btn btn-edit">{{"layouts.commons.buttons.edit" | translate}}</button></td>
+      <td class="text-right"><button (click)="deleteParam(param.id, param.name)" class="btn btn-delete">{{"layouts.commons.buttons.delete" | translate}}</button></td>
     </tr>
     </tbody>
   </table>

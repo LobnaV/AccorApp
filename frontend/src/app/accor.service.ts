@@ -106,7 +106,8 @@ export class AccorService {
     });
     console.log(headers.get('Ts_Access_Token'));
     return this.http
-      .put<Staff>(this.staffUrl, staff, { observe: 'response', headers });
+      .put<Staff>(this.staffUrl, staff, { observe: 'response', headers })
+      .pipe(catchError(error => throwError(error)));
   }
 
   updateManager(staff: Staff): Observable<HttpResponse<Staff>> {
@@ -130,6 +131,7 @@ export class AccorService {
     });
     return this.http
       .post<Staff>(this.staffUrl, staff, {observe: 'response', headers})
+      .pipe(catchError(error => throwError(error)));
   }
 
   // Service User

@@ -5,11 +5,13 @@ import com.viggo.accor.model.Staff;
 import com.viggo.accor.playload.CsvFormatDTO;
 import com.viggo.accor.repository.StaffRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestHeader;
 
+import javax.validation.ConstraintViolationException;
 import java.util.List;
 
 @Service
@@ -38,8 +40,14 @@ public class StaffService {
 			.orElseThrow(() -> new UsernameNotFoundException("Staff Not Found with id : " + id));
 	}
 
+	@Transactional(rollbackFor = Exception.class)
 	public Staff save(Staff staff, String accessToken) throws Exception {
-		Staff staffSaved = staffRepository.save(staff);
+		Staff staffSaved;
+		try {
+			staffSaved = staffRepository.save(staff);
+		} catch (DataIntegrityViolationException | ConstraintViolationException e) {
+			throw new Exception("uniqueStaffMail");
+		}
 		CompanyParameter companyParameter = staff.getCompanyParameter();
 		CsvFormatDTO csvFormatDTO = new CsvFormatDTO();
 		csvFormatDTO.setBranchId(companyParameter.getBranch().getCode());
@@ -54,7 +62,6 @@ public class StaffService {
 		try {
 			String branchCode = tradeshiftInterface.getPrimaryBranchUser(companyParameter.getUserGM().getUsername(), accessToken);
 			csvFormatDTO.setHome(branchCode == null || branchCode.equals(staffSaved.getCompanyParameter().getBranch().getCode()) ? "TRUE" : "FALSE");
-//			csvFormatDTO.setHome("TRUE");
 			csvFormatDTO.setOwnedCostCenter(staffSaved.getMail().equals(companyParameter.getDispacherMail()) ? companyParameter.getMegaCode() : "" );
 			sftpUploadService.uploadFileToSftp(csvFormatDTO);
 

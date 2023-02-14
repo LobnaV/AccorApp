@@ -8,8 +8,7 @@ import { Branch } from '../../model/branch';
 
 @Component({
   selector: 'app-add-branch',
-  templateUrl: './add-branch.component.html',
-  styleUrls: ['./add-branch.component.scss']
+  templateUrl: './add-branch.component.html'
 })
 export class AddBranchComponent implements OnInit {
 
@@ -98,5 +97,5 @@ export class AddBranchComponent implements OnInit {
     }
   }
 
-  
+
 }

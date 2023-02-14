@@ -2,26 +2,35 @@
 
   <div class="d-flex justify-content-between">
     <button (click)="back()" class="button button-back">{{'BUTTONS.BACK' | translate}}</button>
-    <div class="btn_searchbar">
-      <input (keyup)="Search($event)" [(ngModel)]="searchTerm" class="form-control" placeholder="{{'BUTTONS.SEARCH_CODECC' | translate}}" type="text">
+    <h1>{{"layouts.cost-center.title" | translate}}</h1>
+    <button [routerLink]="['cost-center/add']" class="button button-add">{{"layouts.cost-center.buttons.add-cost-center" | translate}}</button>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col">
+      <h4>{{"layouts.commons.compagny" | translate}}</h4>
+      <div>
+        {{"layouts.commons.compagny-mega-code" | translate}} <span class="text-bold">{{company?.megaCode}}</span> - {{"layouts.commons.compagny-name" | translate}} <span class="text-bold">{{company?.name}}</span>
+      </div>
     </div>
-    <button [routerLink]="['cost-center/add']" class="button button-add">{{'BUTTONS.ADD' | translate}}</button>
+    <div class="col m-auto">
+      <div class="btn_searchbar w-100">
+        <input class="form-control" type="text" [(ngModel)]="searchTerm" (keyup)="Search($event)"
+               placeholder="{{'layouts.cost-center.placeholder' | translate}}">
+      </div>
+    </div>
   </div>
 
   <hr>
 
-  <div>
-    MegaCode <span class="text-bold">{{company?.megaCode}}</span> - {{'HOTELNAME' | translate}} <span class="text-bold">{{company?.name}}</span>
-  </div>
-
-  <hr>
-
-  <table class="table">
+  <table class="table table-responsive">
     <thead class="thead-dark">
     <tr>
-      <th scope="col">code</th>
-      <th scope="col">name</th>
-      <th scope="col">Email</th>
+      <th>{{"layouts.commons.formulaire.code" | translate}}</th>
+      <th>{{"layouts.commons.formulaire.lastname" | translate}}</th>
+      <th>{{"layouts.commons.formulaire.mail" | translate}}</th>
       <th></th>
     </tr>
     </thead>
@@ -31,7 +40,7 @@
       <td>{{data.label}}</td>
       <td>{{data.owner}}</td>
       <td class="text-right">
-        <button [routerLink]="['cost-center', data?.id, 'edit']" class="btn btn-edit">{{'BUTTONS.EDIT' |translate}}</button>
+        <button [routerLink]="['cost-center', data?.id, 'edit']" class="btn btn-edit">{{"layouts.commons.buttons.edit" |translate}}</button>
       </td>
     </tr>
     </tbody>

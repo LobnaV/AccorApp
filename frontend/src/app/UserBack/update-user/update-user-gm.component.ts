@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {AccorService} from 'src/app/accor.service';
 import {Location} from '@angular/common';
@@ -10,8 +10,7 @@ import {User} from "../../model/user";
 
 @Component({
   selector: 'app-update-user-gm',
-  templateUrl: './update-user-gm.component.html',
-  styleUrls: ['../user.component.scss']
+  templateUrl: './update-user-gm.component.html'
 })
 export class UpdateUserGmComponent implements OnInit {
 
@@ -20,10 +19,10 @@ export class UpdateUserGmComponent implements OnInit {
 
   userForm = new FormGroup({
     id: new FormControl(''),
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
+    firstName: new FormControl('', Validators.required),
+    lastName: new FormControl('', Validators.required),
     username: new FormControl({value: '', disabled: true}),
-    
+
   })
 
   constructor(
@@ -66,7 +65,7 @@ export class UpdateUserGmComponent implements OnInit {
   }
 
   back() {
-    this.confirmationDialogService.confirm('Confirmation', 'Are you sure you want to leave this page without saving your changes ?')
+    this.confirmationDialogService.confirm('Confirmation', 'layouts.commons.messages.leave')
       .then(confirmed => {
         if(confirmed) this.location.back();
       })

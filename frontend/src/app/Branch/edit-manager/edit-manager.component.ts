@@ -7,12 +7,10 @@ import { AccorService } from 'src/app/accor.service';
 import { Branch } from 'src/app/model/branch';
 import { User } from 'src/app/model/user';
 import { Param } from 'src/app/model/param';
-import { Category } from 'src/app/model/category';
 
 @Component({
   selector: 'app-edit-manager',
-  templateUrl: './edit-manager.component.html',
-  styleUrls: ['./edit-manager.component.scss']
+  templateUrl: './edit-manager.component.html'
 })
 export class EditManagerComponent implements OnInit {
 
@@ -47,7 +45,7 @@ export class EditManagerComponent implements OnInit {
     private location: Location,
   ) { }
   ngOnInit(): void {
-    
+
     this.route.params.subscribe(params => {
       this.loadCompanies(params['id']);
     });
@@ -76,7 +74,7 @@ export class EditManagerComponent implements OnInit {
         this.service.branchId(idBranch).subscribe(
           (res: HttpResponse<Branch>) => {
             this.branch = res.body!;
-            this.managerForm.patchValue({   
+            this.managerForm.patchValue({
               id: this.branch?.id,
               code: this.branch?.code,
               name: this.branch?.name,
@@ -94,13 +92,13 @@ export class EditManagerComponent implements OnInit {
 
             for (let i = 0; i < this.companies?.length; i++) {
               element = this.companies[i];
-              
+
               console.log(element.category.name)
 
               el = element.category.name
               el++
             }
-            console.log(element++)            
+            console.log(element++)
           },
           (res: HttpErrorResponse) => console.log(res.message)
         );
@@ -112,7 +110,7 @@ export class EditManagerComponent implements OnInit {
   }
 
 
-  
+
   loadCompanies(idBranch: number) {
     this.service.companieBranch(idBranch).subscribe(
       (res: HttpResponse<Param[]>) => {
@@ -121,7 +119,7 @@ export class EditManagerComponent implements OnInit {
       },
       (res: HttpErrorResponse) => console.log(res.message)
     );
-  } 
+  }
 
   Update() {
     const updateForm = {

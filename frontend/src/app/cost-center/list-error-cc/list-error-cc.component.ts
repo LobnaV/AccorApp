@@ -7,8 +7,7 @@ import { CostCenter } from '../../model/costCenter';
 
 @Component({
   selector: 'app-list-error-cc',
-  templateUrl: './list-error-cc.component.html',
-  styleUrls: ['./list-error-cc.component.scss']
+  templateUrl: './list-error-cc.component.html'
 })
 export class ListErrorCcComponent implements OnInit {
 
@@ -25,12 +24,12 @@ export class ListErrorCcComponent implements OnInit {
   ngOnInit(): void {
 
     this.activatedRoute.params.subscribe(params => {
-  
-      this.loadCostCenter(params['id']); 
+
+      this.loadCostCenter(params['id']);
     });
 
     console.log(this.costcenters)
-   
+
 
       this.service.search.subscribe((val: any) => {
         this.searchKey = val;

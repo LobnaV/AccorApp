@@ -5,76 +5,91 @@
       <button (click)="back()" class="button button-back">{{'BUTTONS.BACK' | translate}}</button>
     </div>
     <div class="col-8 text-right">
-      <h4>Create cost center</h4>
+      <h1>{{"layouts.cost-center-update.title-" + (costCenterForm.get('id')?.value ? "edit" : "add") | translate}}</h1>
     </div>
   </div>
 
   <hr>
 
-  <h6>{{'PARAM.BRANCH_ID' | translate}}: <span class="text-bold">{{param?.branch?.code}}</span></h6>
-  <h6>{{'PARAM.BRANCH_NAME' | translate}}: <span class="text-bold">{{param?.branch?.name}}</span></h6>
+  <h4>{{"layouts.commons.branch" | translate}}</h4>
+  <div>
+    {{"layouts.commons.branch-code" | translate}} <span class="text-bold">{{param?.branch?.code}}</span> - {{"layouts.commons.branch-name" | translate}} <span class="text-bold">{{param?.branch?.name}}</span>
+  </div>
 
   <hr>
   <form (ngSubmit)='Update()' [formGroup]="costCenterForm">
     <input hidden type="text" formControlName="id">
     <div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label" for="megaCode">Hotel MegaCode </label>
-        <div class="col-sm-6">
-          <input class="form-control" id='megaCode' readonly style="background-color: #e9ecef;" type="text" [value]="param?.megaCode">
+        <label class="col-sm-4 col-form-label" for="megaCode">{{"layouts.commons.formulaire.megacode" | translate}}</label>
+        <div class="col-sm-4">
+          <input class="form-control" id='megaCode' readonly type="text" [value]="param?.megaCode" disabled>
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label" for="name">{{'HOTELNAME' | translate}} </label>
-        <div class="col-sm-6">
-          <input class="form-control" id='name' readonly style="background-color: #e9ecef;" type="text" [value]="param?.name">
+        <label class="col-sm-4 col-form-label" for="name">{{"layouts.commons.formulaire.name" | translate}} </label>
+        <div class="col-sm-4">
+          <input class="form-control" id='name' readonly type="text" [value]="param?.name" disabled>
         </div>
       </div>
     </div>
 
     <div class="form-group row">
-      <label class="col-sm-2 col-form-label" for="code">Code *</label>
-      <div class="col-sm-6">
+      <label class="col-sm-4 col-form-label" for="code">{{"layouts.commons.formulaire.code" | translate}} *</label>
+      <div class="col-sm-4">
         <input class="form-control" formControlName="code" id='code' type="text">
+        <div *ngIf="costCenterForm.get('code')?.invalid && (costCenterForm.get('code')?.dirty || costCenterForm.get('code')?.touched)">
+          <p class="validation-error" *ngIf="costCenterForm.get('code')?.errors!['required']">
+            {{"exception.validations.required" | translate}}
+          </p>
+        </div>
+        <div *ngIf="errorUniqueCode">
+          <p class="validation-error">
+            {{"exception.error." + errorUniqueCode | translate}}
+          </p>
+        </div>
       </div>
     </div>
 
     <div class="form-group row">
-      <label class="col-sm-2 col-form-label" for="label">Label *</label>
-      <div class="col-sm-6">
+      <label class="col-sm-4 col-form-label" for="label">{{"layouts.commons.formulaire.label" | translate}} *</label>
+      <div class="col-sm-4">
         <input class="form-control" formControlName="label" id='label' type="text">
+        <div *ngIf="costCenterForm.get('label')?.invalid && (costCenterForm.get('label')?.dirty || costCenterForm.get('label')?.touched)">
+          <p class="validation-error" *ngIf="costCenterForm.get('label')?.errors!['required']">
+            {{"exception.validations.required" | translate}}
+          </p>
+        </div>
       </div>
     </div>
 
     <div class="card-body">
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label" for="firstName">{{'HEADER.FIRSTNAME' | translate}}</label>
-        <div class="col-sm-6">
-          <input class="form-control" classe="input" id='firstName' readonly style="background-color: #e9ecef;" type="text" formControlName="firstName">
+        <label class="col-sm-4 col-form-label" for="firstName">{{"layouts.commons.formulaire.firstname" | translate}}</label>
+        <div class="col-sm-4">
+          <input class="form-control" classe="input" id='firstName' readonly type="text" formControlName="firstName">
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label" for="lastName">{{'HEADER.LASTNAME' | translate}}</label>
-        <div class="col-sm-6">
-          <input class="form-control" classe="input" id='lastName' readonly style="background-color: #e9ecef;" type="text" formControlName="lastName">
+        <label class="col-sm-4 col-form-label" for="lastName">{{"layouts.commons.formulaire.lastname" | translate}}</label>
+        <div class="col-sm-4">
+          <input class="form-control" id='lastName' readonly type="text" formControlName="lastName">
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label" for="mail">Email</label>
-        <div class="col-sm-6">
-          <input class="form-control" id='mail' readonly style="background-color: #e9ecef;" type="mail" formControlName="owner">
+        <label class="col-sm-4 col-form-label" for="mail">{{"layouts.commons.formulaire.mail" | translate}}</label>
+        <div class="col-sm-4">
+          <input class="form-control" id='mail' readonly type="email" formControlName="owner">
         </div>
       </div>
       <div class="d-flex justify-content-center m-4">
-        <button class="button button-save w-25" type="submit" [disabled]="costCenterForm.invalid">Save</button>
+        <button class="button button-save w-25" type="submit" [disabled]="costCenterForm.invalid">{{"layouts.commons.buttons." + (costCenterForm.get('id')?.value ? "edit" : "save") | translate}}</button>
+      </div>
+      <div class="alert alert-danger" *ngIf="error">
+        {{error}}
       </div>
       <br>
-      <div class="alert alert-danger" *ngIf="error">
-        {{"exception.error." + error | translate}}
-      </div>
-      <i style="color:#8F1D1D ;">Any modfication here will result in having the General manger becoming the
-        dispatcher automatically. Please don't hesitate to contact the GM to ask him to rearrange the workflow th
-        way he would like to.</i>
+      <i style="color:#8F1D1D ;">{{"layouts.cost-center-update.message" | translate}}</i>
     </div>
 
   </form>

@@ -1,46 +1,75 @@
 <div class="container mt-4">
 
-  <div class="row">
-    <div class="col-2">
-      <button (click)="location.back()" class="button button-back">{{'BUTTONS.BACK' | translate}}</button>
-    </div>
+
+  <div class="d-flex justify-content-between">
+    <button (click)="location.back()" class="button button-back">{{'BUTTONS.BACK' | translate}}</button>
+    <h4>{{"layouts.cost-center-edit-gm.title" | translate}}</h4>
+    <img type="button" class="cursor-pointer" src="">
   </div>
 
   <hr>
 
-  <h6>Cost Center : {{costcenter?.code}} - {{costcenter?.label}}</h6>
+  <div>{{"layouts.commons.formulaire.code" | translate}} <span class="text-bold">{{costcenter?.code}}</span> - {{"layouts.commons.formulaire.name1" | translate}} <span class="text-bold">{{costcenter?.label}}</span></div>
 
   <hr>
   <form (ngSubmit)="updateCC()" [formGroup]="costCenterForm">
     <div class="form-group row">
-      <label class="col-sm-2 col-form-label" for="firstName">{{'HEADER.FIRSTNAME' | translate}} *</label>
-      <div class="col-sm-6">
-        <input class="form-control" classe="input" formControlName="firstName" id='firstName' type="text">
+      <label class="col-sm-4 col-form-label" for="firstName">{{"layouts.commons.formulaire.firstname" | translate}} *</label>
+      <div class="col-sm-4">
+        <input class="form-control" formControlName="firstName" id='firstName' type="text">
+        <div *ngIf="costCenterForm.get('firstName')?.invalid && (costCenterForm.get('firstName')?.dirty || costCenterForm.get('firstName')?.touched)">
+          <p class="validation-error" *ngIf="costCenterForm.get('firstName')?.errors!['required']">
+            {{"exception.validations.required" | translate}}
+          </p>
+        </div>
       </div>
     </div>
-    <br>
     <div class="form-group row">
-      <label class="col-sm-2 col-form-label" for="lastName">{{'HEADER.LASTNAME' | translate}} *</label>
-      <div class="col-sm-6">
-        <input class="form-control" classe="input" formControlName="lastName" id='lastName' type="text">
+      <label class="col-sm-4 col-form-label" for="lastName">{{"layouts.commons.formulaire.lastname" | translate}} *</label>
+      <div class="col-sm-4">
+        <input class="form-control" formControlName="lastName" id='lastName' type="text">
+        <div *ngIf="costCenterForm.get('lastName')?.invalid && (costCenterForm.get('lastName')?.dirty || costCenterForm.get('lastName')?.touched)">
+          <p class="validation-error" *ngIf="costCenterForm.get('lastName')?.errors!['required']">
+            {{"exception.validations.required" | translate}}
+          </p>
+        </div>
       </div>
     </div>
-    <br>
     <div class="form-group row">
-      <label class="col-sm-2 col-form-label" for="mail">Email *</label>
-      <div class="col-sm-6">
-        <input class="form-control" formControlName="owner" id='mail' type="mail">
+      <label class="col-sm-4 col-form-label" for="mail">{{"layouts.commons.formulaire.mail" | translate}} *</label>
+      <div class="col-sm-4">
+        <input class="form-control" formControlName="owner" id='mail' type="email">
+        <div *ngIf="costCenterForm.get('owner')?.invalid && (costCenterForm.get('owner')?.dirty || costCenterForm.get('owner')?.touched)">
+          <p class="validation-error" *ngIf="costCenterForm.get('owner')?.errors!['required']">
+            {{"exception.validations.required" | translate}}
+          </p>
+          <p class="validation-error" *ngIf="costCenterForm.get('owner')?.errors!['email']">
+            {{"exception.validations.invalid" | translate}}
+          </p>
+        </div>
       </div>
     </div>
-    <br>
     <div class="form-group row">
-      <label class="col-sm-2 col-form-label" for="mail2">Confimation Email *</label>
-      <div class="col-sm-6">
-        <input class="form-control" formControlName="owner_conf" id='mail2' type="mail">
+      <label class="col-sm-4 col-form-label" for="mail2">{{"layouts.commons.formulaire.mailConfirmation" | translate}} *</label>
+      <div class="col-sm-4">
+        <input class="form-control" formControlName="owner_conf" id='mail2' type="email">
+        <div *ngIf="costCenterForm.get('owner_conf')?.invalid && (costCenterForm.get('owner_conf')?.dirty || costCenterForm.get('owner_conf')?.touched)">
+          <p class="validation-error" *ngIf="costCenterForm.get('owner_conf')?.errors!['required']">
+            {{"exception.validations.required" | translate}}
+          </p>
+          <p class="validation-error" *ngIf="costCenterForm.get('owner_conf')?.errors!['email']">
+            {{"exception.validations.invalid" | translate}}
+          </p>
+        </div>
+        <div *ngIf="errorMail">
+          <p class="validation-error">
+            {{"exception.error." + errorMail | translate}}
+          </p>
+        </div>
       </div>
     </div>
     <div class="d-flex justify-content-center m-4">
-      <button class="button button-save w-25" type="submit" [disabled]="costCenterForm.invalid">Edit</button>
+      <button class="button button-save w-25" type="submit" [disabled]="costCenterForm.invalid">{{"layouts.commons.buttons.edit" |translate}}</button>
     </div>
     <br>
     <div class="alert alert-danger" *ngIf="error">

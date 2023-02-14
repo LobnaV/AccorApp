@@ -61,7 +61,8 @@
     "MESSAGE2": "Yes I will delete users that need to be deleted, directly on Tradeshift, and I wish to delete this hotel from the dashboard.",
     "MESSAGE3": "If you need to temporarily delete a user, we advise you use the delegation rule option within",
     "MESSAGE3PART2": "    Tradeshift (holiday, maternity leave, sick leave) to temporarily delegate tasks to another colleague.",
-    "MESSAGE4": "Can you confirm there are not more pending tasks in the task manager for this user? If no, please reassign the pending tasks before deleting the user."
+    "MESSAGE4": "Can you confirm there are not more pending tasks in the task manager for this user? If no, please reassign the pending tasks before deleting the user.",
+    "cancel": "Annuler"
   },
   "layouts": {
     "connexion": {

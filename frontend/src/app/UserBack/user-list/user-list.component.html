@@ -4,43 +4,53 @@
 
   <div class="d-flex justify-content-between">
     <button (click)="back()" class="button button-back">{{'BUTTONS.BACK' | translate}}</button>
-    <div class="btn_searchbar">
-      <input class="form-control" type="text" [(ngModel)]="searchTerm" (keyup)="Search($event)"
-             placeholder="{{'BUTTONS.SEARCH_USER' | translate}}">
-    </div>
+    <h1>{{"layouts.overview-list.title" | translate}}</h1>
     <img type="button" class="cursor-pointer" src="">
   </div>
 
   <hr>
 
-  <div>
-    MegaCode <span class="text-bold">{{companie?.megaCode}}</span> - {{'HOTELNAME' | translate}} <span class="text-bold">{{companie?.name}}</span>
+  <div class="row">
+    <div class="col">
+      <h4>{{"layouts.commons.compagny" | translate}}</h4>
+      <div>
+        {{"layouts.commons.compagny-mega-code" | translate}} <span class="text-bold">{{companie?.megaCode}}</span> - {{"layouts.commons.compagny-name" | translate}} <span class="text-bold">{{companie?.name}}</span>
+      </div>
+    </div>
+    <div class="col m-auto">
+      <div class="btn_searchbar w-100">
+        <input class="form-control" type="text" [(ngModel)]="searchTerm" (keyup)="Search($event)"
+               placeholder="{{'layouts.overview-list.placeholderSe' | translate}}">
+      </div>
+    </div>
   </div>
 
   <hr>
 
-  <table class="table">
+  <table class="table table-responsive">
     <thead class="thead-dark">
     <tr>
-      <th scope="col">{{'HEADER.DISPATCHER' | translate}}</th>
-      <th scope="col">{{'HEADER.FIRSTNAME' | translate}}</th>
-      <th scope="col">{{'HEADER.LASTNAME' | translate}}</th>
-      <th scope="col">Email </th>
+      <th>{{"layouts.commons.formulaire.dispatcher" | translate}}</th>
+      <th>{{"layouts.commons.formulaire.firstname" | translate}}</th>
+      <th>{{"layouts.commons.formulaire.lastname" | translate}}</th>
+      <th>{{"layouts.commons.formulaire.mail" | translate}}</th>
       <th></th>
     </tr>
     </thead>
     <tbody class="data" [formGroup]="userForm">
     <tr>
-      <td scope="row"><input type="radio" id="radioCheck" name="dispatcher"
+      <td>
+        <input type="radio" id="radioCheck1" name="dispatcher"
                              [value]="userGM?.username === companie?.dispacherMail"
                              [checked]="userGM?.username === companie?.dispacherMail" [disabled]="isLoading"
                              (click)="updateDispacher(userGM?.username!, false)">
       </td>
-      <td scope="row">{{userGM?.firstName}}</td>
+      <td>{{userGM?.firstName}}</td>
       <td>{{userGM?.lastName}}</td>
       <td>{{userGM?.username}}</td>
-      <td> <button [routerLink]="['user-gm', userGM?.id, 'edit']" class="btn btn-edit"
-                   style="margin-left: 10px;">{{'BUTTONS.EDIT' | translate}}</button>
+      <td class="text-right">
+        <button [routerLink]="['user-gm', userGM?.id, 'edit']" class="btn btn-edit" >{{"layouts.commons.buttons.edit" |translate}}</button>
+      </td>
     </tr>
     </tbody>
   </table>
@@ -49,32 +59,33 @@
     <button [routerLink]="['staff/add']" class="button button-save">{{'BUTTONS.ADDUSER' | translate}}</button>
   </div>
 
-  <table class="table" *ngIf="staffs">
+  <table class="table table-responsive" *ngIf="staffs">
     <thead class="thead-dark">
     <tr>
-      <th scope="col">{{'HEADER.DISPATCHER' | translate}}</th>
-      <th scope="col">{{'HEADER.FIRSTNAME' | translate}}</th>
-      <th scope="col">{{'HEADER.LASTNAME' | translate}}</th>
-      <th scope="col">Email </th>
+      <th>{{"layouts.commons.formulaire.dispatcher" | translate}}</th>
+      <th>{{"layouts.commons.formulaire.firstname" | translate}}</th>
+      <th>{{"layouts.commons.formulaire.lastname" | translate}}</th>
+      <th>{{"layouts.commons.formulaire.mail" | translate}}</th>
       <th></th>
       <th></th>
     </tr>
     </thead>
     <tbody class="data" [formGroup]="userForm" *ngFor="let data of staffs | filter: searchKey:'mail'">
     <tr>
-      <th scope="row">
+      <td>
         <input type="radio" id="radioCheck" name="dispatcher" [value]="data?.mail === companie?.dispacherMail"
                [checked]="data?.mail === companie?.dispacherMail" [disabled]="isLoading"
                (click)="updateDispacher(data?.mail!, true)">
-      </th>
-      <td scope="row">{{data?.firstName}}</td>
+      </td>
+      <td>{{data?.firstName}}</td>
       <td>{{data?.lastName}}</td>
       <td>{{data?.mail}}</td>
-      <td> <button [routerLink]="['staff', data?.id, 'edit']" class="btn btn-edit"
-                   style="margin-left: 10px;">{{'BUTTONS.EDIT' | translate}}</button>
+      <td class="text-right">
+        <button [routerLink]="['staff', data?.id, 'edit']" class="btn btn-edit">{{"layouts.commons.buttons.edit" |translate}}</button>
       </td>
-      <td><button [disabled]="data?.mail === companie?.dispacherMail" (click)="deleteStaff(data?.id)"
-                  class="btn btn-delete" style="margin-left: 10px;">{{'BUTTONS.DELETE' | translate}}</button></td>
+      <td class="text-right">
+        <button [disabled]="data?.mail === companie?.dispacherMail" (click)="deleteStaff(data?.id)"
+                class="btn btn-delete">{{"layouts.commons.buttons.delete" |translate}}</button></td>
     </tr>
     </tbody>
   </table>
@@ -87,56 +98,61 @@
 
   <div class="d-flex justify-content-between">
     <button (click)="back()" class="button button-back">{{'BUTTONS.BACK' | translate}}</button>
-    <div class="btn_searchbar">
-      <input class="form-control" type="text" [(ngModel)]="searchTerm" (keyup)="Search($event)"
-             placeholder="{{'BUTTONS.SEARCH_CODECC' | translate}}">
-    </div>
-
-    <div class="btns">
-      <button class="btn  p-2" style="background-color:#E38D9B; margin-bottom: 0.3rem; margin-right: 1rem;" [routerLink]="'listErrorCostCenter'">Exceptions</button>
-      <button class="btn btn-save  p-2" (click)="save()" style="background-color:#B9E9A2; margin-bottom: 0.3rem;">Save</button>
+    <h1>{{"layouts.overview-list.title" | translate}}</h1>
+    <div class="">
+      <button class="button button-red" [routerLink]="'listErrorCostCenter'">Exceptions</button>
+      <button class="button button-add" (click)="save()">{{"layouts.commons.buttons.save" | translate}}</button>
     </div>
   </div>
 
   <hr>
 
-  <div>
-    MegaCode <span class="text-bold">{{companie?.megaCode}}</span> - {{'HOTELNAME' | translate}} <span class="text-bold">{{companie?.name}}</span>
+  <div class="row">
+    <div class="col">
+      <h4>{{"layouts.commons.compagny" | translate}}</h4>
+      <div>
+        {{"layouts.commons.compagny-mega-code" | translate}} <span class="text-bold">{{companie?.megaCode}}</span> - {{"layouts.commons.compagny-name" | translate}} <span class="text-bold">{{companie?.name}}</span>
+      </div>
+    </div>
+    <div class="col m-auto">
+      <div class="btn_searchbar w-100">
+        <input class="form-control" type="text" [(ngModel)]="searchTerm" (keyup)="Search($event)"
+               placeholder="{{'layouts.overview-list.placeholderNe' | translate}}">
+      </div>
+    </div>
   </div>
 
   <hr>
-  <div>
-    <p>General manager</p>
-  </div>
-  <table class="table">
+
+  <h6>{{'layouts.overview-list.general-manager-label' | translate}}</h6>
+  <table class="table table-responsive">
     <thead class="thead-dark">
     <tr>
-      <th scope="col">{{'HEADER.FIRSTNAME' | translate}}</th>
-      <th scope="col">{{'HEADER.LASTNAME' | translate}}</th>
-      <th scope="col">Email </th>
+      <th>{{"layouts.commons.formulaire.firstname" | translate}}</th>
+      <th>{{"layouts.commons.formulaire.lastname" | translate}}</th>
+      <th>{{"layouts.commons.formulaire.mail" | translate}}</th>
       <th></th>
     </tr>
     </thead>
     <tbody class="data" [formGroup]="userForm">
     <tr>
-      <td scope="row">{{userGM?.firstName}}</td>
+      <td>{{userGM?.firstName}}</td>
       <td>{{userGM?.lastName}}</td>
       <td>{{userGM?.username}}</td>
-      <td> <button [routerLink]="['user-gm', userGM?.id, 'edit']" class="btn btn-edit"
-                   style="margin-left: 10px;">{{'BUTTONS.EDIT' | translate}}</button>
+      <td class="text-right">
+        <button [routerLink]="['user-gm', userGM?.id, 'edit']" class="btn btn-edit">{{"layouts.commons.buttons.edit" |translate}}</button>
+      </td>
     </tr>
     </tbody>
   </table>
 
-  <div>
-    <p> Cost center staff distribution</p>
-  </div>
-  <table class="table" *ngIf="staffs">
+  <h6>{{'layouts.overview-list.cost-center-label' | translate}}</h6>
+  <table class="table table-responsive" *ngIf="staffs">
     <thead class="thead-dark">
     <tr>
-      <th scope="col">Cost centre</th>
-      <th scope="col">Cost centre name</th>
-      <th scope="col">Email </th>
+      <th>{{"layouts.commons.formulaire.code" | translate}}</th>
+      <th>{{"layouts.commons.formulaire.name1" | translate}}</th>
+      <th>{{"layouts.commons.formulaire.mail" | translate}}</th>
       <th></th>
     </tr>
     </thead>
@@ -144,8 +160,9 @@
     <tr *ngIf="data?.code != null || data?.label != null">
       <td>{{data?.code}}</td>
       <td>{{data?.label}}</td>
-      <td *ngIf="data?.owner != null">{{data?.owner}}</td>
-      <td> <button [routerLink]="['costCenter', data?.id, 'edit']" class="btn btn-edit" style="margin-left: 10px;">{{'BUTTONS.EDIT' | translate}}</button>
+      <td>{{data?.owner}}</td>
+      <td class="text-right">
+        <button [routerLink]="['costCenter', data?.id, 'edit']" class="btn btn-edit">{{"layouts.commons.buttons.edit" |translate}}</button>
       </td>
     </tr>
     </tbody>

@@ -7,7 +7,7 @@ import { Location } from '@angular/common';
 import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
 import { Branch } from 'src/app/model/branch';
 import { User } from 'src/app/model/user';
-import { Category } from "../../model/category";
+import { Category } from '../../model/category';
 
 @Component({
   selector: 'app-edit-param',
@@ -20,16 +20,18 @@ export class EditParamComponent implements OnInit {
   user?:User;
   categories?: Category[];
   error?: string;
+  errorUniqueMail?: string;
+  errorUniqueMegacode?: string;
 
   paramForm = new FormGroup({
     id: new FormControl(null),
     megaCode: new FormControl(null, Validators.required),
     name: new FormControl(null, Validators.required),
     category: new FormControl(null, Validators.required),
-    generalManagerN1Mail: new FormControl(null, Validators.required),
+    generalManagerN1Mail: new FormControl(null, [Validators.required, Validators.email]),
     userGM: new FormGroup({
       id: new FormControl(null),
-      username: new FormControl(null, Validators.required),
+      username: new FormControl(null, [Validators.required, Validators.email]),
       firstName: new FormControl(null, Validators.required),
       lastName: new FormControl(null, Validators.required),
     })
@@ -49,13 +51,13 @@ export class EditParamComponent implements OnInit {
         (res: HttpResponse<Branch>) => {
           this.branch = res.body!;
         },
-        (res: HttpErrorResponse) => console.log(res.message)
+        (res: HttpErrorResponse) => this.error = res.error
       );
       this.service.getCategories().subscribe(
         (res: HttpResponse<Category[]>) => {
           this.categories = res.body!;
         },
-        (res: HttpErrorResponse) => console.log(res.message)
+        (res: HttpErrorResponse) => this.error = res.error
       );
 
       const paramId = params['paramId'];
@@ -76,11 +78,12 @@ export class EditParamComponent implements OnInit {
                 lastName: this.param.userGM?.lastName,
               },
             });
+            this.paramForm.get('megaCode')?.disable();
           },
-          (res: HttpErrorResponse) => console.log(res.message)
+          (res: HttpErrorResponse) => this.error = res.error
         );
       } else {
-        // this.param = new Param();
+        this.param = new Param();
       }
     })
 
@@ -117,19 +120,30 @@ export class EditParamComponent implements OnInit {
     this.service.updateParam(updateForm)
       .subscribe(
         () => this.location.back(),
-        (res: HttpErrorResponse) => this.error = res.error
-      );
+        (res: HttpErrorResponse) => this.hadleErrorMessage(res.error));
     }else{
       this.service.addParam(updateForm)
         .subscribe(
           () => this.location.back(),
-          (res: HttpErrorResponse) => this.error = res.error
-        );
+          (res: HttpErrorResponse) => this.hadleErrorMessage(res.error));
     }
   }
 
-
-
+  private hadleErrorMessage(message: string) {
+    if (message === 'uniqueMailGM') {
+      this.errorUniqueMail = message;
+      this.errorUniqueMegacode = undefined;
+      this.error = undefined;
+    } else if (message === 'uniqueMegaCode') {
+      this.errorUniqueMegacode = message;
+      this.errorUniqueMail = undefined;
+      this.error = undefined;
+    } else {
+      this.error = message;
+      this.errorUniqueMail = undefined;
+      this.errorUniqueMegacode = undefined;
+    }
+  }
 
 }
 

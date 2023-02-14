@@ -9,8 +9,7 @@ import { User } from 'src/app/model/user';
 
 @Component({
   selector: 'app-edit-company-admin',
-  templateUrl: './edit-company-admin.component.html',
-  styleUrls: ['./edit-company-admin.component.scss']
+  templateUrl: './edit-company-admin.component.html'
 })
 export class EditCompanyAdminComponent implements OnInit {
 
@@ -86,7 +85,7 @@ export class EditCompanyAdminComponent implements OnInit {
       </div>
     </div>
    </div>`;
-  
+
     // if(this.inputTxt != ''){
     //  this.list.push(this.inputTxt);
     // }
@@ -96,7 +95,7 @@ export class EditCompanyAdminComponent implements OnInit {
   }
 
   Update() {
-    
+
     const updateForm = {
       ...new Branch(),
       id: this.managerForm.get('id')?.value,

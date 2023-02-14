@@ -15,12 +15,13 @@ export class CostCenterEditGmComponent implements OnInit {
 
   costcenter?: CostCenter;
   error?: string;
+  errorMail?: string;
 
   costCenterForm = new FormGroup({
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
-    owner: new FormControl('', Validators.required),
-    owner_conf: new FormControl('', Validators.required),
+    owner: new FormControl('', [Validators.required, Validators.email]),
+    owner_conf: new FormControl('', [Validators.required, Validators.email]),
   })
 
   constructor(
@@ -54,6 +55,7 @@ export class CostCenterEditGmComponent implements OnInit {
 
   updateCC() {
     if (this.costCenterForm.get('owner')?.value === this.costCenterForm.get('owner_conf')?.value) {
+      this.errorMail = undefined;
       const updateCostCenter = this.costcenter!;
       updateCostCenter.firstName = this.costCenterForm.get('firstName')?.value
       updateCostCenter.lastName = this.costCenterForm.get('lastName')?.value
@@ -63,7 +65,7 @@ export class CostCenterEditGmComponent implements OnInit {
         (res: HttpErrorResponse) => this.error = res.error
       )
     } else {
-      this.error = 'L\'email et sa confirmation ne sont pas égaux !';
+      this.errorMail = 'mailConfirmation';
     }
   }
 }

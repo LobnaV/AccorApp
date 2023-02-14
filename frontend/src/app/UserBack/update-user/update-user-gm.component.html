@@ -1,44 +1,58 @@
 <div class="container mt-4">
 
-  <div class="row">
-    <div class="col-2">
-      <button (click)="back()" class="button button-back">{{'BUTTONS.BACK' | translate}}</button>
-    </div>
-    <div class="col-8 text-right">
-      <h4>Update user</h4>
-    </div>
+
+  <div class="d-flex justify-content-between">
+    <button (click)="back()" class="button button-back">{{'BUTTONS.BACK' | translate}}</button>
+    <h4>{{"layouts.general-manager-update.title" | translate}}</h4>
+    <img type="button" class="cursor-pointer" src="">
   </div>
+
   <hr>
   <form [formGroup]="userForm" (ngSubmit)='Update()'>
     <input type="text" class="form-control" formControlName="id" hidden>
 
     <div class="form-group row">
-      <label class="col-sm-2 col-form-label" for="firstName">firstName*:</label>
-      <div class="col-sm-8">
+      <label class="col-sm-4 col-form-label" for="firstName">{{"layouts.commons.formulaire.firstname" | translate}} *</label>
+      <div class="col-sm-4">
         <input type="text" id='firstName' class="form-control" formControlName="firstName">
+        <div *ngIf="userForm.get('firstName')?.invalid && (userForm.get('firstName')?.dirty || userForm.get('firstName')?.touched)">
+          <p class="validation-error" *ngIf="userForm.get('firstName')?.errors!['required']">
+            {{"exception.validations.required" | translate}}
+          </p>
+        </div>
       </div>
     </div>
     <div class="form-group row">
-      <label class="col-sm-2 col-form-label" for="lastName">lastName*:</label>
-      <div class="col-sm-8">
+      <label class="col-sm-4 col-form-label" for="lastName">{{"layouts.commons.formulaire.lastname" | translate}} *</label>
+      <div class="col-sm-4">
         <input type="text" id='lastName' class="form-control" formControlName="lastName">
+        <div *ngIf="userForm.get('lastName')?.invalid && (userForm.get('lastName')?.dirty || userForm.get('lastName')?.touched)">
+          <p class="validation-error" *ngIf="userForm.get('lastName')?.errors!['required']">
+            {{"exception.validations.required" | translate}}
+          </p>
+        </div>
       </div>
     </div>
     <div class="form-group row">
-      <label class="col-sm-2 col-form-label" for="username">Email:</label>
-      <div class="col-sm-8">
-        <input type="mail" id='username' class="form-control" formControlName="username" readonly />
+      <label class="col-sm-4 col-form-label" for="username">{{"layouts.commons.formulaire.mail" | translate}} *</label>
+      <div class="col-sm-4">
+        <input type="email" id='username' class="form-control" formControlName="username" readonly />
+        <div *ngIf="userForm.get('username')?.invalid && (userForm.get('username')?.dirty || userForm.get('username')?.touched)">
+          <p class="validation-error" *ngIf="userForm.get('lastName')?.errors!['required']">
+            {{"exception.validations.required" | translate}}
+          </p>
+          <p class="validation-error" *ngIf="userForm.get('username')?.errors!['email']">
+            {{"exception.validations.invalid" | translate}}
+          </p>
+        </div>
       </div>
     </div>
     <div class="d-flex justify-content-center m-4">
-      <button class="button button-save w-25" type="submit" [disabled]="userForm.invalid">{{this.user?.id ? 'Edit' :
-        'Add'}}</button>
+      <button class="button button-save w-25" type="submit" [disabled]="userForm.invalid">{{"layouts.commons.buttons.edit" | translate}}</button>
     </div>
   </form>
   <div>
-    <i style="color:#8F1D1D ;"> If you need, as a GM, to change your email address, you will need to request it to your local champion or
-      send a request to :</i> <br>
-    astore.einvoicing.support@accor.com
+    <i style="color:#8F1D1D ;"> {{"layouts.general-manager-update.message" | translate}}</i> <br>{{"layouts.general-manager-update.mailHelp" | translate}}
 
   </div>
 </div>

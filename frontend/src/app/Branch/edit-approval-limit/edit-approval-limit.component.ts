@@ -9,8 +9,7 @@ import { User } from 'src/app/model/user';
 
 @Component({
   selector: 'app-edit-approval-limit',
-  templateUrl: './edit-approval-limit.component.html',
-  styleUrls: ['./edit-approval-limit.component.scss']
+  templateUrl: './edit-approval-limit.component.html'
 })
 export class EditApprovalLimitComponent implements OnInit {
   branch?: Branch;
@@ -20,7 +19,7 @@ export class EditApprovalLimitComponent implements OnInit {
 
 
 
-  
+
   managerForm = new FormGroup({
     id: new FormControl(''),
     code: new FormControl(''),
@@ -36,7 +35,7 @@ export class EditApprovalLimitComponent implements OnInit {
 
   })
 
-  
+
   constructor(
     private service: AccorService,
     private route: ActivatedRoute,
@@ -89,7 +88,7 @@ export class EditApprovalLimitComponent implements OnInit {
 
   }
 
-  
+
   Update() {
     const updateForm = {
       ...new Branch(),

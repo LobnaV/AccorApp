@@ -14,6 +14,7 @@ import { Param } from 'src/app/model/param';
 export class CostCenterEditComponent implements OnInit {
 
   param?: Param;
+  errorUniqueCode?: string;
   error?: string;
 
   costCenterForm = new FormGroup({
@@ -66,6 +67,9 @@ export class CostCenterEditComponent implements OnInit {
           (res: HttpErrorResponse) => console.log(res.message)
         );
       }
+      this.costCenterForm.get('owner')?.disable();
+      this.costCenterForm.get('firstName')?.disable();
+      this.costCenterForm.get('lastName')?.disable();
     });
   }
 
@@ -74,6 +78,8 @@ export class CostCenterEditComponent implements OnInit {
   }
 
   Update() {
+    this.errorUniqueCode = undefined;
+    this.error = undefined;
     const updateForm = new CostCenter(
       this.costCenterForm.get('id')?.value,
       this.costCenterForm.get('code')?.value,
@@ -87,7 +93,15 @@ export class CostCenterEditComponent implements OnInit {
       this.service.updateCostCenter(updateForm)
         .subscribe(
           () => this.location.back(),
-          (res: HttpErrorResponse) => this.error = res.error
+          (res: HttpErrorResponse) => {
+            if (res.error === 'uniqueCodeCostCenter') {
+              this.errorUniqueCode = res.error;
+              this.error = undefined;
+            } else {
+              this.error = res.error;
+              this.errorUniqueCode = undefined;
+            }
+          }
         );
     } else {
       this.service.addcostCenter(updateForm)

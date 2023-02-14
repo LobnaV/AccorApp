@@ -19,6 +19,7 @@ export class ParameterComponent implements OnInit {
   message1?:any;
   message1part2?:any;
   message2?:any;
+  cancelButton?:any;
 
 lang:any
   constructor(
@@ -29,10 +30,6 @@ lang:any
     private location: Location
 
   ) {
-
-    this.message1 = this.translate.instant('DELETE.MESSAGE1');
-    this.message1part2 = this.translate.instant('DELETE.MESSAGE1PART2');
-    this.message2 = this.translate.instant('DELETE.MESSAGE2');
   }
 
   branch?: Branch;
@@ -49,6 +46,11 @@ lang:any
     this.service.search.subscribe((val: any) => {
       this.searchKey = val;
     })
+
+    this.message1 = this.translate.instant('DELETE.MESSAGE1');
+    this.message1part2 = this.translate.instant('DELETE.MESSAGE1PART2');
+    this.message2 = this.translate.instant('DELETE.MESSAGE2');
+    this.cancelButton = this.translate.instant('DELETE.cancel');
 
   }
 
@@ -83,7 +85,7 @@ lang:any
   }
 
   deleteParam(idParam: number, name: string) {
-    this.confirmationDialogService.confirm('Confirmation', this.message1 + name + this.message1part2 )
+    this.confirmationDialogService.confirm('Confirmation', this.message1 + name + this.message1part2)
          .then((confirmed) => {
           if (confirmed) {
             this.confirmationDialogService.confirm('Confirmation', this.message2)
