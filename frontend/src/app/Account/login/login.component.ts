@@ -31,12 +31,12 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     const isConnectedTs = this.oAuthTSService.checkCredentials();
-    // if (!isConnectedTs) {
-    //   this.router.navigate(['']);
-    // } else if (this.tokenStorage.getToken()) {
+    if (!isConnectedTs) {
+      this.router.navigate(['']);
+    } else if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getUser().roles;
-    // }
+    }
   }
 
   onLogin() {

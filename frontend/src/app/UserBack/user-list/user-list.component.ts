@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { AccorService } from 'src/app/accor.service';
 import { User } from '../../model/user';
 import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
 import { Param } from "../../model/param";
 import { Staff } from "../../model/staff";
 import { ConfirmationDialogService } from "../confirmation-dialog/confirmation-dialog.service";
-import { TranslateService } from '@ngx-translate/core';
 import { CostCenter } from '../../model/costCenter';
 import {Location} from "@angular/common";
 
@@ -24,15 +23,12 @@ export class UserListComponent implements OnInit {
   companie?: Param | any;
   userGM?: User | null;
   staffs?: Staff[] | null = [];
-  costcenters?: CostCenter[] | any = [];
+  costcenters?: CostCenter[] = [];
   perimeter?: string;
   costcenter?: CostCenter;
   staff?: Staff;
   firstname?:string;
   lastname?:string;
-  message1;
-  message1part2;
-  message2;
 
   costCenterForm = new FormGroup({
     id: new FormControl(''),
@@ -69,14 +65,8 @@ export class UserListComponent implements OnInit {
     private service: AccorService,
     private activatedRoute: ActivatedRoute,
     private confirmationDialogService: ConfirmationDialogService,
-    public location: Location,
-    public translate: TranslateService
+    public location: Location
   ) {
-    this.message1 = this.translate.instant('DELETE.MESSAGE3');
-    this.message1part2 = this.translate.instant('DELETE.MESSAGE3PART2');
-    this.message2 = this.translate.instant('DELETE.MESSAGE4');
-
-
   }
 
   ngOnInit(): void {
@@ -91,26 +81,6 @@ export class UserListComponent implements OnInit {
     this.service.search.subscribe((val: any) => {
       this.searchKey = val;
     })
-
-
-    for (let i = 0; i < this.staffs!.length; i++) {
-      console.log(this.staffs)
-      const element = this.staffs![i].mail;
-      const elementId = this.staffs![i].id
-      this.firstname = this.staffs![i].firstName
-      this.lastname = this.staffs![i].lastName
-      console.log(this.firstname)
-      console.log(this.lastname)
-      console.log(elementId)
-      console.log(this.costcenter?.owner)
-
-      if (this.costcenter?.owner === element!) {
-
-        this.firstname = this.staffs![i].firstName
-        this.lastname = this.staffs![i].lastName
-
-      }
-    }
   }
 
   loadGM(idCompagnie: number) {
@@ -121,11 +91,6 @@ export class UserListComponent implements OnInit {
       },
       (res: HttpErrorResponse) => console.log(res.message)
     );
-  }
-
-  //Switch language
-  translateLanguageTo(lang: string) {
-    this.translate.use(lang);
   }
 
   loadStaff(idComapgnie: number) {
@@ -140,17 +105,17 @@ export class UserListComponent implements OnInit {
   loadCostCenter(idCompagnie: number) {
     this.service.CostCenterCompany(idCompagnie).subscribe(
       (res: HttpResponse<CostCenter[]>) => {
-        this.costcenters = res.body;
+        this.costcenters = res.body!;
       },
       (res: HttpErrorResponse) => console.log(res.message)
     )
   }
 
   deleteStaff(idStaff: number) {
-    this.confirmationDialogService.confirm('Confirmation', this.message1 +'\n'+ this.message1part2)
+    this.confirmationDialogService.confirm('Confirmation', 'layouts.commons.messages.delete-user')
       .then((confirmed) => {
         if (confirmed) {
-          this.confirmationDialogService.confirm('Confirmation', this.message2)
+          this.confirmationDialogService.confirm('Confirmation', 'layouts.commons.messages.delete-user-confirmation')
             .then(() => {
               if (confirmed) {
                 this.remove(idStaff);
@@ -205,39 +170,41 @@ export class UserListComponent implements OnInit {
   }
 
   uploadCodingList() {
-    const updateForm = new CostCenter(
-      this.costCenterForm.get('id')?.value,
-      this.costCenterForm.get('code')?.value,
-      this.costCenterForm.get('label')?.value,
-      this.costCenterForm.get('owner')?.value,
-      this.companie);
-
-    this.service.cl(updateForm)
-      .subscribe(
-        (res: HttpResponse<CostCenter>) => {
-          console.log('ok')
-        },
-        (res: HttpErrorResponse) => console.log(res.message)
-      );
+    if (this.costcenters?.length) {
+      this.service.cl(this.costcenters[0])
+        .subscribe(
+          res => {
+            const url = window.URL.createObjectURL(res.body!);
+            const a = document.createElement('a');
+            document.body.appendChild(a);
+            a.setAttribute('style', 'display: none');
+            a.href = url;
+            a.download = `Cost_center.csv`;
+            a.click();
+            window.URL.revokeObjectURL(url);
+            a.remove();
+          },
+          (res: HttpErrorResponse) => console.log(res.message)
+        );
+    }
   }
 
   save() {
-    let owner: any;
-    for (let i = 0; i < this.costcenters!.length; i++) {
-      owner = this.costcenters[i].owner;
-
-      console.log(owner)
-
-      while (owner == null) {
-        this.confirmationDialogService.confirm('Error', 'There are still some errors in the cost centres assignments, please check and modify all errors before saving. A cost centre with an error means there is no user assigned. Please assign a user.')
-          .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
-          break
-      }
-    }
-    if(owner){
-      this.uploadCodingList()
-      console.log('no')
-    }
+    // let owner: any;
+    // for (let i = 0; i < this.costcenters!.length; i++) {
+    //   owner = this.costcenters[i]?.owner!;
+    //
+    //   while (owner == null) {
+    //     this.confirmationDialogService.confirm('Error', 'There are still some errors in the cost centres assignments, please check and modify all errors before saving. A cost centre with an error means there is no user assigned. Please assign a user.')
+    //       .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+    //       break
+    //   }
+    // }
+    // if(owner){
+    //   this.uploadCodingList()
+    //   console.log('no')
+    // }
+    this.uploadCodingList()
   }
 
 

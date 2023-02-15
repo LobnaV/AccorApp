@@ -56,7 +56,7 @@ public class CostCenterService {
 			.orElseThrow();
 	}
 
-	public CostCenter postSave(CostCenter costCenter) {
+	public byte[] postSave(CostCenter costCenter) {
 
 		List<CodingListFormat> codingList = new ArrayList<>();
 		List<CostCenter> costCenters = costCenterR.findByCompanyId(costCenter.getCompany().getId());
@@ -66,18 +66,15 @@ public class CostCenterService {
 			csvFormatCodingList.setMegaCodeCostCenter_Label(oneCostCenter.getCompany().getName() + " - " + oneCostCenter.getLabel());
 			csvFormatCodingList.setApprover(oneCostCenter.getOwner());
 			codingList.add(csvFormatCodingList);
-
-			System.out.println(csvFormatCodingList.getMegaCodeCostCenter_ID());
-			System.out.println(csvFormatCodingList.getMegaCodeCostCenter_Label());
-			System.out.println(csvFormatCodingList.getApprover());
 		});
+		byte[] output;
 		try {
-			sftpCodingListSevice.uploadFileToSftp(codingList);
+			output = sftpCodingListSevice.uploadFileToSftp(codingList);
 
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-		return null;
+		return output;
 	}
 
 	@Transactional(rollbackFor = Exception.class)

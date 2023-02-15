@@ -28,7 +28,7 @@ const ACCOUNT_ROUTES = [
 ];
 
 const routes: Routes = [
-  {path: '', component: LoginComponent},
+  {path: '', component: Oauth2Component},
   {path: 'auth/callback', component: Oauth2Component},
   {path: '', children: ACCOUNT_ROUTES},
   {path: 'login', component: LoginComponent},

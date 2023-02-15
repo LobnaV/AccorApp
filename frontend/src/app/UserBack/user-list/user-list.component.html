@@ -156,7 +156,7 @@
       <th></th>
     </tr>
     </thead>
-    <tbody class="data" [formGroup]="costCenterForm" *ngFor="let data of costcenters | filter: searchKey:'code'">
+    <tbody class="data" *ngFor="let data of costcenters! | filter: searchKey:'code'">
     <tr *ngIf="data?.code != null || data?.label != null">
       <td>{{data?.code}}</td>
       <td>{{data?.label}}</td>

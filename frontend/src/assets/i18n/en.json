@@ -55,16 +55,92 @@
     "DESCRIPTION1": "After modifications, it is possible to have inconsistencies with cost center and their users. Please find below the list of all users without cost center that will be inactive.",
     "DESCRIPTION2": "Reminder: one cost center must have one assigned user, one user must have at least one cost center."
   },
-  "DELETE": {
-    "MESSAGE1": "Deleting a hotel here means you will delete the hotel from the Company admin Dashboard, but does not mean that users will be deleted from Tradeshift production environment. If you need to delete a particular user in Tradeshift, as a company admin: If the user is a hotel member, you can ask the general manager to do it directly from his ",
-    "MESSAGE1PART2": " session. This will delete the user from Tradeshift You can also delete the user directly from the Tradeshift app, please contact : astore.einvoicing.support@accor.com",
-    "MESSAGE2": "Yes I will delete users that need to be deleted, directly on Tradeshift, and I wish to delete this hotel from the dashboard.",
-    "MESSAGE3": "If you need to temporarily delete a user, we advise you use the delegation rule option within",
-    "MESSAGE3PART2": "    Tradeshift (holiday, maternity leave, sick leave) to temporarily delegate tasks to another colleague.",
-    "MESSAGE4": "Can you confirm there are not more pending tasks in the task manager for this user? If no, please reassign the pending tasks before deleting the user.",
-    "cancel": "Annuler"
-  },
   "layouts": {
+    "commons": {
+      "branch": "Branch",
+      "branch-code": "Code",
+      "branch-name": "Name",
+      "compagny": "Hotel",
+      "compagny-mega-code": "Mega code",
+      "compagny-name": "Name",
+      "buttons": {
+        "cost-center": "Cost center",
+        "save": "Save",
+        "edit": "Edit",
+        "cancel": "Cancel",
+        "delete": "Delete"
+      },
+      "messages": {
+        "leave": "Are you sure you want to leave this page without saving your changes?",
+        "delete-user": "If you need to temporarily delete a user, we advise you use the delegation rule option within\nTradeshift (holiday, maternity leave, sick leave) to temporarily delegate tasks to another colleague.",
+        "delete-user-confirmation": "Can you confirm there are not more pending tasks in the task manager for this user? If no, please reassign the pending tasks before deleting the user.",
+        "delete-compagny": "Deleting a hotel here means you will delete the hotel from the Company admin Dashboard, but does not mean that users will be deleted from Tradeshift production environment. If you need to delete a particular user in Tradeshift, as a company admin: If the user is a hotel member, you can ask the general manager to do it directly from his {{name}} session. This will delete the user from Tradeshift You can also delete the user directly from the Tradeshift app, please contact : astore.einvoicing.support@accor.com",
+        "delete-compagny-confirmation": "Yes I will delete users that need to be deleted, directly on Tradeshift, and I wish to delete this hotel from the dashboard."
+      },
+      "formulaire": {
+        "megacode": "Hotel mega code",
+        "name": "Hotel name",
+        "name1": "Name",
+        "category": "Category",
+        "generalManager": "General manager",
+        "code": "Code",
+        "label": "Label",
+        "firstname": "Firstname",
+        "lastname": "Lastname",
+        "mail": "Email",
+        "mailConfirmation": "Email confirmation",
+        "dispatcher": "Dispatcher"
+      }
+    },
+    "compagny-list": {
+      "title": "Hotels",
+      "placeholder": "Search by mega code",
+      "table": {
+        "columns": {
+          "megacode": "Mega code",
+          "general-manager": "General manager",
+          "general-manager-n1": "General manager N+1"
+        }
+      },
+      "buttons": {
+        "add-compagny":  "Add hotel"
+      }
+    },
+    "overview-list": {
+      "title": "Overview",
+      "placeholderSe": "Search by mail",
+      "placeholderNe": "Search by code",
+      "cost-center-label": "Distribution of cost center staff",
+      "general-manager-label": "General manager"
+    },
+    "compagny-update": {
+      "title-add": "Add hotel",
+      "title-edit": "Edit hoter"
+    },
+    "cost-center": {
+      "title": "Costs centers",
+      "placeholder": "Search by code",
+      "buttons": {
+        "add-cost-center":  "Add cost center"
+      }
+    },
+    "cost-center-update": {
+      "title-add": "Add cost center",
+      "title-edit": "Edit cost center",
+      "message": "Any modfication here will result in having the General manger becoming the dispatcher automatically. Please don't hesitate to contact the GM to ask him to rearrange the workflow th way he would like to."
+    },
+    "cost-center-edit-gm": {
+      "title": "Edit cost center"
+    },
+    "staff-update": {
+      "title-add": "Add staff",
+      "title-edit": "Edit staff"
+    },
+    "general-manager-update": {
+      "title": "Edit general manager",
+      "message": "If you need, as a GM, to change your email address, you will need to request it to your local champion or\n send a request to :",
+      "mailHelp": "astore.einvoicing.support@accor.com"
+    },
     "connexion": {
       "title": "Connection",
       "login": "Mail",
@@ -112,7 +188,9 @@
       "noUserFoundWithLogin":  "Unable to find the associated user.",
       "uniqueCodeCostCenter":  "Please ensure that the code is unique.",
       "uniqueMailGM":  "Please ensure that the GM email is unique.",
-      "uniqueMegaCode":  "Please ensure that the hotel megacode is unique."
+      "uniqueMegaCode":  "Please ensure that the hotel megacode is unique.",
+      "mailConfirmation":  "The email and its confirmation are not equal!",
+      "uniqueStaffMail":  "Please ensure that the staff email is unique."
     }
   }
 }

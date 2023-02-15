@@ -56,15 +56,6 @@
     "DESCRIPTION1": "Après modifications, il est possible d'avoir des incohérences avec les centres de coûts et leurs utilisateurs. Veuillez trouver ci-dessous la liste de tous les utilisateurs sans centre de coûts qui seront inactifs.",
     "DESCRIPTION2": "Rappel : un centre de coût doit avoir un utilisateur assigné, un utilisateur doit avoir au moins un centre de coût."
   },
-  "DELETE": {
-    "MESSAGE1": "La suppression d'un hôtel ici signifie que vous supprimerez l'hôtel du tableau de bord d'administration de l'entreprise, mais ne signifie pas que les utilisateurs seront supprimés de l'environnement de production Tradeshift. Si vous avez besoin de supprimer un utilisateur particulier dans Tradeshift, en tant qu'administrateur d'entreprise : Si l'utilisateur est membre d'un hôtel, vous pouvez demander au directeur général de le faire directement depuis sa session ",
-    "MESSAGE1PART2": ". Cela supprimera l'utilisateur de Tradeshift Vous pouvez également supprimer l'utilisateur directement depuis l'application Tradeshift, merci de contacter : astore.einvoicing.support@accor.com",
-    "MESSAGE2": "Oui, je supprimerai les utilisateurs qui doivent être supprimés, directement sur Tradeshift, et je souhaite supprimer cet hôtel du tableau de bord.",
-    "MESSAGE3": "Si vous devez supprimer temporairement un utilisateur, nous vous conseillons d'utiliser l'option de règle de délégation dans",
-    "MESSAGE3PART2": "    Tradeshift (vacances, maternité, maladie) pour déléguer temporairement des tâches à un autre collègue.",
-    "MESSAGE4": "Pouvez-vous confirmer qu'il n'y a plus de tâches en attente dans le gestionnaire de tâches pour cet utilisateur ? Si non, veuillez réaffecter les tâches en attente avant de supprimer l'utilisateur.",
-    "cancel": "Annuler"
-  },
   "layouts": {
     "commons": {
       "branch": "Branche",
@@ -81,7 +72,11 @@
         "delete": "Supprimer"
       },
       "messages": {
-        "leave": "Voulez-vous vraiment quitter cette page sans enregistrer vos modifications ?"
+        "leave": "Voulez-vous vraiment quitter cette page sans enregistrer vos modifications ?",
+        "delete-user": "Si vous devez supprimer temporairement un utilisateur, nous vous conseillons d'utiliser l'option de règle de délégation dans \nTradeshift (vacances, maternité, maladie) pour déléguer temporairement des tâches à un autre collègue.",
+        "delete-user-confirmation": "Pouvez-vous confirmer qu'il n'y a plus de tâches en attente dans le gestionnaire de tâches pour cet utilisateur? Si non, veuillez réaffecter les tâches en attente avant de supprimer l'utilisateur.",
+        "delete-compagny": "La suppression d'un hôtel ici signifie que vous supprimerez l'hôtel du tableau de bord d'administration de l'entreprise, mais ne signifie pas que les utilisateurs seront supprimés de l'environnement de production Tradeshift. Si vous avez besoin de supprimer un utilisateur particulier dans Tradeshift, en tant qu'administrateur d'entreprise : Si l'utilisateur est membre d'un hôtel, vous pouvez demander au directeur général de le faire directement depuis sa session {{name}}. Cela supprimera l'utilisateur de Tradeshift Vous pouvez également supprimer l'utilisateur directement depuis l'application Tradeshift, merci de contacter : astore.einvoicing.support@accor.com",
+        "delete-compagny-confirmation": "Oui, je supprimerai les utilisateurs qui doivent être supprimés, directement sur Tradeshift, et je souhaite supprimer cet hôtel du tableau de bord."
       },
       "formulaire": {
         "megacode": "Mega code hôtel",
@@ -133,7 +128,7 @@
     "cost-center-update": {
       "title-add": "Ajouter un Centre de coûts",
       "title-edit": "Modifier un Centre de coûts",
-      "message": "Any modfication here will result in having the General manger becoming the dispatcher automatically. Please don't hesitate to contact the GM to ask him to rearrange the workflow th way he would like to."
+      "message": "Toute modification ici aura pour conséquence que le directeur général deviendra automatiquement le répartiteur. N'hésitez pas à contacter le GM pour lui demander de réorganiser le flux de travail comme il le souhaite."
     },
     "cost-center-edit-gm": {
       "title": "Modifier un centre de coûts"
@@ -144,7 +139,7 @@
     },
     "general-manager-update": {
       "title": "Modifier un dirécteur général",
-      "message": "If you need, as a GM, to change your email address, you will need to request it to your local champion or\n      send a request to :",
+      "message": "Si vous avez besoin, en tant que GM, de changer votre adresse e-mail, vous devrez en faire la demande auprès de votre champion local ou\n envoyer une demande à :",
       "mailHelp": "astore.einvoicing.support@accor.com"
     },
     "connexion": {

@@ -2,14 +2,13 @@ package com.viggo.accor.service;
 
 import com.viggo.accor.config.UploadGateway;
 import com.viggo.accor.playload.CodingListFormat;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.List;
 
 
@@ -43,7 +42,7 @@ public class SftpCodingListSevice {
 			DELIMITER;
 	}
 
-	public void uploadFileToSftp(List<CodingListFormat> csvFormats) throws FileNotFoundException {
+	public byte[] uploadFileToSftp(List<CodingListFormat> csvFormats) throws IOException {
 		File csvOutputFile = new File(pathTemp + "/CostCenterList.csv");
 		try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
 			pw.println(headerCsv());
@@ -52,9 +51,13 @@ public class SftpCodingListSevice {
 
 		uploadGateway.upload(csvOutputFile);
 
+		byte[] output = FileUtils.readFileToByteArray(csvOutputFile);
+
 		if (csvOutputFile.exists()) {
 			csvOutputFile.delete();
 		}
+
+		return output;
 
 	}
 }

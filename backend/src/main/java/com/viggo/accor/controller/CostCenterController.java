@@ -6,6 +6,8 @@ import com.viggo.accor.model.Staff;
 import com.viggo.accor.service.CostCenterService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -28,9 +30,13 @@ public class CostCenterController {
 	}
 
 	@PostMapping("/cl")
-	public ResponseEntity<CostCenter> postSave(@RequestBody CostCenter costCenter) throws Exception {
-		CostCenter postSave = service.postSave(costCenter);
-		return ResponseEntity.ok(postSave);
+	public ResponseEntity<byte[]> postSave(@RequestBody CostCenter costCenter) throws Exception {
+		byte[] postSave = service.postSave(costCenter);
+//		return ResponseEntity.ok(postSave);
+
+		return ResponseEntity.status(HttpStatus.OK).header("Content-Disposition", "attachment;")
+			.contentType(new MediaType("text", "csv"))
+			.body(postSave);
 	}
 
 	@PreAuthorize("hasRole('ROLE_COMPANYADMIN')")

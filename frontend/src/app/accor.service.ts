@@ -205,9 +205,9 @@ export class AccorService {
       .pipe(catchError(error => throwError(error)));
   }
 
-  cl(costCenter: CostCenter): Observable<HttpResponse<CostCenter>> {
+  cl(costCenter: CostCenter): Observable<HttpResponse<Blob>> {
     return this.http
-      .post<CostCenter>(`${this.CCUrl}/cl`, costCenter, {observe: 'response'})
+      .post(`${this.CCUrl}/cl`, costCenter, {observe: 'response', responseType: 'blob'})
   }
 
   CostCenterId(id: number): Observable<HttpResponse<CostCenter>> {
