@@ -1,19 +1,15 @@
 package com.viggo.accor.service;
 
-import com.viggo.accor.model.CompanyParameter;
 import com.viggo.accor.model.CostCenter;
 import com.viggo.accor.model.Staff;
 import com.viggo.accor.model.User;
 import com.viggo.accor.playload.CodingListFormat;
 import com.viggo.accor.playload.CsvFormatDTO;
-import com.viggo.accor.repository.CompanyParameterRepository;
 import com.viggo.accor.repository.CostCenterRepository;
 import com.viggo.accor.repository.StaffRepository;
 import com.viggo.accor.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -59,11 +55,11 @@ public class CostCenterService {
 	public byte[] postSave(CostCenter costCenter) {
 
 		List<CodingListFormat> codingList = new ArrayList<>();
-		List<CostCenter> costCenters = costCenterR.findByCompanyId(costCenter.getCompany().getId());
+		List<CostCenter> costCenters = costCenterR.findByCompanyBranchId(costCenter.getCompany().getBranch().getId());
 		costCenters.forEach(oneCostCenter -> {
 			CodingListFormat csvFormatCodingList = new CodingListFormat();
 			csvFormatCodingList.setMegaCodeCostCenter_ID(oneCostCenter.getCompany().getMegaCode() + " - " + oneCostCenter.getCode());
-			csvFormatCodingList.setMegaCodeCostCenter_Label(oneCostCenter.getCompany().getName() + " - " + oneCostCenter.getLabel());
+			csvFormatCodingList.setMegaCodeCostCenter_Label(oneCostCenter.getCompany().getName() + " -- " + oneCostCenter.getLabel());
 			csvFormatCodingList.setApprover(oneCostCenter.getOwner());
 			codingList.add(csvFormatCodingList);
 		});
@@ -83,11 +79,11 @@ public class CostCenterService {
 		try {
 			costCenterSaved = costCenterR.save(costCenter);
 			List<CodingListFormat> codingList = new ArrayList<>();
-			List<CostCenter> costCenters = costCenterR.findByCompanyId(costCenter.getCompany().getId());
+			List<CostCenter> costCenters = costCenterR.findByCompanyBranchId(costCenter.getCompany().getBranch().getId());
 			costCenters.forEach(oneCostCenter -> {
 				CodingListFormat csvFormatCodingList = new CodingListFormat();
 				csvFormatCodingList.setMegaCodeCostCenter_ID(oneCostCenter.getCompany().getMegaCode() + " - " + oneCostCenter.getCode());
-				csvFormatCodingList.setMegaCodeCostCenter_Label(oneCostCenter.getCompany().getName() + " - " + oneCostCenter.getLabel());
+				csvFormatCodingList.setMegaCodeCostCenter_Label(oneCostCenter.getCompany().getName() + " -- " + oneCostCenter.getLabel());
 				csvFormatCodingList.setApprover(oneCostCenter.getOwner());
 				codingList.add(csvFormatCodingList);
 

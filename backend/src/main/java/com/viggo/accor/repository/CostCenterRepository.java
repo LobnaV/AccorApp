@@ -1,7 +1,6 @@
 package com.viggo.accor.repository;
 
 import com.viggo.accor.model.CostCenter;
-import com.viggo.accor.model.Staff;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -13,6 +12,8 @@ import java.util.List;
 @Repository
 public interface CostCenterRepository extends JpaRepository<CostCenter, Long> {
 	List<CostCenter> findByCompanyId(Long idCompagnie);
+
+	List<CostCenter> findByCompanyBranchId(Long idCompagnie);
 
 	void deleteAllByCompanyId(long paramId);
 
