@@ -50,7 +50,7 @@ public class ChannelSftp {
 	public MessageHandler handler() {
 		SftpMessageHandler messageHandler = new SftpMessageHandler(sftpSessionFactory());
 		messageHandler.setRemoteDirectoryExpression(new LiteralExpression(sftpRemoteDirectory));
-		messageHandler.setFileNameGenerator(message -> "Accortemplateuserssheet.csv");
+//		messageHandler.setFileNameGenerator(message -> "Accortemplateuserssheet.csv");
 		messageHandler.setUseTemporaryFileName(false);
 		return messageHandler;
 	}

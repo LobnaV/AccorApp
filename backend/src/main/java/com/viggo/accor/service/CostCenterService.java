@@ -65,7 +65,7 @@ public class CostCenterService {
 		});
 		byte[] output;
 		try {
-			output = sftpCodingListSevice.uploadFileToSftp(codingList);
+			output = sftpCodingListSevice.uploadFileToSftp(codingList, costCenter.getCompany().getBranch().getCode());
 
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -78,24 +78,24 @@ public class CostCenterService {
 		CostCenter costCenterSaved;
 		try {
 			costCenterSaved = costCenterR.save(costCenter);
-			List<CodingListFormat> codingList = new ArrayList<>();
-			List<CostCenter> costCenters = costCenterR.findByCompanyBranchId(costCenter.getCompany().getBranch().getId());
-			costCenters.forEach(oneCostCenter -> {
-				CodingListFormat csvFormatCodingList = new CodingListFormat();
-				csvFormatCodingList.setMegaCodeCostCenter_ID(oneCostCenter.getCompany().getMegaCode() + " - " + oneCostCenter.getCode());
-				csvFormatCodingList.setMegaCodeCostCenter_Label(oneCostCenter.getCompany().getName() + " -- " + oneCostCenter.getLabel());
-				csvFormatCodingList.setApprover(oneCostCenter.getOwner());
-				codingList.add(csvFormatCodingList);
-
-			});
-			try {
-				sftpCodingListSevice.uploadFileToSftp(codingList);
-			} catch (Exception e) {
-				throw new RuntimeException(e);
-			}
 		} catch (DataIntegrityViolationException | ConstraintViolationException e) {
 			throw new Exception("uniqueCodeCostCenter");
 		}
+		List<CodingListFormat> codingList = new ArrayList<>();
+		List<CostCenter> costCenters = costCenterR.findByCompanyBranchId(costCenter.getCompany().getBranch().getId());
+		costCenters.forEach(oneCostCenter -> {
+			CodingListFormat csvFormatCodingList = new CodingListFormat();
+			csvFormatCodingList.setMegaCodeCostCenter_ID(oneCostCenter.getCompany().getMegaCode() + " - " + oneCostCenter.getCode());
+			csvFormatCodingList.setMegaCodeCostCenter_Label(oneCostCenter.getCompany().getName() + " -- " + oneCostCenter.getLabel());
+			csvFormatCodingList.setApprover(oneCostCenter.getOwner());
+			codingList.add(csvFormatCodingList);
+
+			});
+			try {
+				sftpCodingListSevice.uploadFileToSftp(codingList, costCenter.getCompany().getBranch().getCode());
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
 		return costCenterSaved ;
 	}
 

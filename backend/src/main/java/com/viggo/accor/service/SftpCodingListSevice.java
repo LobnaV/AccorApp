@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 
@@ -42,8 +44,9 @@ public class SftpCodingListSevice {
 			DELIMITER;
 	}
 
-	public byte[] uploadFileToSftp(List<CodingListFormat> csvFormats) throws IOException {
-		File csvOutputFile = new File(pathTemp + "/CostCenterList.csv");
+	public byte[] uploadFileToSftp(List<CodingListFormat> csvFormats, String branchCode) throws IOException {
+		String fineName = String.format("/IP-19_MegaCodeCostCenter_%s_%s", branchCode, LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd")));
+		File csvOutputFile = new File(pathTemp + fineName);
 		try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
 			pw.println(headerCsv());
 			csvFormats.forEach(codingListx -> pw.println(convertToCSV(codingListx)));
