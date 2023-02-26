@@ -25,20 +25,12 @@ public class UserController {
 		return ResponseEntity.ok(service.findById(id));
 	}
 
-	@PutMapping
-	public ResponseEntity<User> edit(@RequestBody User user) throws Exception {
-		if (user.getId() == null) {
-			throw new Exception("Invalid id");
-		}
-		return ResponseEntity.ok(service.edit(user));
-	}
-
 	@PutMapping("/name")
-	public ResponseEntity<User> editName(@RequestBody User user) throws Exception {
+	public ResponseEntity<User> editName(@RequestBody User user, @RequestHeader("Ts_Access_Token") String accessToken) throws Exception {
 		if (user.getId() == null) {
 			throw new Exception("Invalid id");
 		}
-		return ResponseEntity.ok(service.updateName(user));
+		return ResponseEntity.ok(service.updateName(user, accessToken));
 	}
 
 	@DeleteMapping("/delete/{id}")

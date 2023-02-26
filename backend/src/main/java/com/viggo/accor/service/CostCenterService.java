@@ -100,41 +100,6 @@ public class CostCenterService {
 	}
 
 
-
-	public CostCenter  updateOwner(Long id, String email, boolean isStaff) {
-		costCenterR.updateOwner(id, email);
-		CostCenter costCenter= findById(id);
-
-		String nom;
-		String prenom;
-		String userType;
-
-		if (isStaff) {
-			Staff staff = staffRepository.findByMail(email)
-				.orElseThrow(() -> new UsernameNotFoundException("Staff Not Found with mail : " + email));
-			nom = staff.getLastName();
-			prenom = staff.getFirstName();
-			userType = "Head of Department";
-		} else {
-			User user = userRepository.findByUsername(email)
-				.orElseThrow(() -> new UsernameNotFoundException("User Not Found with mail : " + email));
-			nom = user.getLastName();
-			prenom = user.getFirstName();
-			userType = "General Manager";
-		}
-
-		CsvFormatDTO csvFormatDTO = new CsvFormatDTO();
-		try {
-			//String branchCode = tradeshiftInterface.getPrimaryBranchUser(companyParameter.getUserGM().getUsername());
-		//	csvFormatDTO.setHome(branchCode.equals(companyParameter.getBranch().getCode()) ? "TRUE" : "FALSE");
-			csvFormatDTO.setHome("TRUE");
-			sftpUploadService.uploadFileToSftp(csvFormatDTO);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-		return costCenter;
-	}
-
 	public void delete(final Long id) {
 		Optional<CostCenter> costCenter = costCenterR.findById(id);
 		costCenter.ifPresent(center -> costCenterR.delete(center));

@@ -1,51 +1,64 @@
 <!-- Vue General Manager -->
-<div *ngIf="role === 'ROLE_GM'" class="container-fluid">
+<div *ngIf="role === 'ROLE_GM'" class="m-5">
 
-  <div class="contenue">
-    <h5>{{'TITLE' | translate}}</h5>
+  <div class="row">
+    <div class="col-7">
+      <div>
+        <h5>{{'TITLE' | translate}}</h5>
 
-    <div>{{'DESCRIPTION' | translate}}</div>
-    <div>
-      <img src="./assets/CompositonWorkflow.png" style="width:450px;height:225px;">
+        <div class="mt-4">
+          {{'DESCRIPTION1' | translate}}
+          <span class="text-bold">{{'DESCRIPTION2' | translate}}</span>
+          {{'DESCRIPTION3' | translate}}
+          <span class="text-bold">{{'DESCRIPTION4' | translate}}</span>
+          {{'DESCRIPTION5' | translate}}
+          <span class="text-bold">{{'DESCRIPTION6' | translate}}</span>
+          {{'DESCRIPTION7' | translate}}
+        </div>
+      </div>
+      <div class="mt-4 container">
+        <img src="../../assets/CompositonWorkflow.png">
+      </div>
+      <div class="mt-4">
+        <h5>{{'CONDITIONS.TITLE2' | translate}}</h5>
+        <ul class="mt-4">
+          <li><span class="text-bold">{{'CONDITIONS.RULE11' | translate}}</span>{{'CONDITIONS.RULE12' | translate}}</li>
+          <li>{{'CONDITIONS.RULE21' | translate}}<span class="text-bold">{{'CONDITIONS.RULE22' | translate}}</span>{{'CONDITIONS.RULE23' | translate}}</li>
+          <li>{{'CONDITIONS.RULE31' | translate}}<span class="text-bold">{{'CONDITIONS.RULE32' | translate}}</span></li>
+        </ul>
+
+      </div>
     </div>
-
-    <h6>{{'CONDITIONS.TITLE2' | translate}}</h6>
-    <div>
-      <ul>
-        <li>{{'CONDITIONS.RULE1' | translate}}</li>
-        <li>{{'CONDITIONS.RULE2' | translate}}</li>
-        <li>{{'CONDITIONS.RULE3' | translate}}</li>
-      </ul>
-
+    <div class="col-5 align-self-center">
+      <p class="text-bold">{{'CONDITIONS.RULE4' | translate}}</p>
+      <div class="w-100">
+        <select [(ngModel)]="selectedCompanie" class="w-75">
+          <option [ngValue]="undefined" [disabled]="true">{{'SELECTHOTEL' | translate}}</option>
+          <option *ngFor="let compagnie of companies" [ngValue]="compagnie">
+            {{compagnie.megaCode}} - {{compagnie.name}}
+          </option>
+        </select>
+        <button class="button button-ok" [disabled]="!selectedCompanie" [routerLink]="['/compagny-param', selectedCompanie?.id]">GO</button>
+      </div>
     </div>
-  </div>
-  <div class="listeDeroulante" >
-    <p style="width: 85%;">Please use the bar below to select the hotel you want to manage users for</p>
-    <select [(ngModel)]="selectedCompanie">
-      <option [ngValue]="undefined" [disabled]="true">{{'SELECTHOTEL' | translate}}</option>
-      <option *ngFor="let compagnie of companies" [ngValue]="compagnie">
-        {{compagnie.megaCode}} - {{compagnie.name}}
-      </option>
-    </select>
-
-    <button class="button button-ok" [disabled]="!selectedCompanie" [routerLink]="['/compagny-param', selectedCompanie?.id]">GO</button>
   </div>
 </div>
 
 
 <!-- Vue Company Admin -->
-<div class="container-fluid2" style="margin: auto;width: 85%;" *ngIf="role === 'ROLE_COMPANYADMIN'">
-    <div class="contenue">
-        <h5>{{'TITLE_CA' | translate}}</h5>
-<br>
-        <div>{{'DESCRIPTION_CA' | translate}}</div>
-        <br>
-        <div>{{'CONDITION_CA' | translate}}</div>
-    </div>
-    <br>
-    <p>{{'CONDITIONS.RULE4' | translate}}</p>
-    <div  class="listeDeroulante2">
-        <select [(ngModel)]="selectedBranch">
+<div class="container" *ngIf="role === 'ROLE_COMPANYADMIN'">
+  <div class="mt-4">
+    <h5>{{'TITLE_CA' | translate}}</h5>
+    <ul class="mt-4">
+      <li class="mt-4">{{'DESCRIPTION_CA1' | translate}}<span class="text-bold">{{'DESCRIPTION_CA2' | translate}}</span>{{'DESCRIPTION_CA3' | translate}}</li>
+      <li class="mt-4">{{'CONDITION_CA11' | translate}}<span class="text-bold">{{'CONDITION_CA12' | translate}}</span>{{'CONDITION_CA13' | translate}}<span class="text-bold">{{'CONDITION_CA14' | translate}}</span>{{'CONDITION_CA15' | translate}}</li>
+      <li class="mt-4">{{'CONDITION_CA21' | translate}} <a href="">{{'CONDITION_CA22' | translate}} </a></li>
+      <li class="mt-4">{{'CONDITION_CA31' | translate}}<span class="text-bold">{{'CONDITION_CA32' | translate}}</span>{{'CONDITION_CA33' | translate}}</li>
+    </ul>
+
+  </div>
+    <div  class="mt-4 d-flex justify-content-center">
+        <select [(ngModel)]="selectedBranch" class="w-50">
           <option [ngValue]="undefined" [disabled]="true">{{'SELECTBRANCH' | translate}}</option>
           <option *ngFor="let branche of branches" [ngValue]="branche">
                 {{branche.code}} - {{branche.name}}

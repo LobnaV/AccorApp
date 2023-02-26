@@ -8,6 +8,7 @@ import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
 import { Branch } from 'src/app/model/branch';
 import { User } from 'src/app/model/user';
 import { Category } from '../../model/category';
+import { SouthernEurope } from '../../app.constants';
 
 @Component({
   selector: 'app-edit-param',
@@ -23,11 +24,12 @@ export class EditParamComponent implements OnInit {
   errorUniqueMail?: string;
   errorUniqueMegacode?: string;
 
+  SouthernEurope = SouthernEurope;
+
   paramForm = new FormGroup({
     id: new FormControl(null),
     megaCode: new FormControl(null, Validators.required),
     name: new FormControl(null, Validators.required),
-    category: new FormControl(null, Validators.required),
     generalManagerN1Mail: new FormControl(null, [Validators.required, Validators.email]),
     userGM: new FormGroup({
       id: new FormControl(null),
@@ -50,6 +52,10 @@ export class EditParamComponent implements OnInit {
       this.service.branchId(idBranch).subscribe(
         (res: HttpResponse<Branch>) => {
           this.branch = res.body!;
+          if (this.branch.perimeter === SouthernEurope) {
+            this.paramForm.addControl('category', new FormControl(null, Validators.required));
+
+          }
         },
         (res: HttpErrorResponse) => this.error = res.error
       );

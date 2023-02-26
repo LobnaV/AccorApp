@@ -19,11 +19,10 @@ public class TradeshiftInterface {
 	@Autowired
 	private RestTemplate restTemplate;
 
-	public String getPrimaryBranchUser(String email, String accessToken) throws Exception {
+	public String getPrimaryBranchUser(String email, String accessToken) {
 		try {
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_JSON);
-//		String code = authorizationCodeTokenService.getAuthorizationEndpoint();
 			headers.setBearerAuth(accessToken);
 			headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 
@@ -35,10 +34,6 @@ public class TradeshiftInterface {
 
 			String compagnyAccountId = branchTradeshift.getOverridingCompagnyAccountId() != null ? branchTradeshift.getOverridingCompagnyAccountId() : branchTradeshift.getCompanyAccountId();
 
-//		if (compagnyAccountId == null) {
-//			throw new Exception("Impossible de récupérer les informations de tradeshift de l'utilisateur : " + email);
-//		}
-
 			HttpHeaders headers2 = new HttpHeaders();
 			headers2.setBearerAuth(accessToken);
 			headers2.setContentType(MediaType.TEXT_PLAIN);
@@ -48,11 +43,6 @@ public class TradeshiftInterface {
 			ResponseEntity<String> response = restTemplate.exchange(String.format("%s/companies/%s/properties/CustomerAssignedId", url, compagnyAccountId), HttpMethod.GET, entity2, String.class);
 
 			String branchId = Objects.requireNonNull(response.getBody());
-
-//		if (branchId == null) {
-//			throw new Exception("Impossible de récupérer les informations de tradeshift de l'utilisateur : " + email);
-//		}
-
 			return branchId;
 		} catch (Exception e) {
 			log.error("Error geting primary branch. The value TRUE will be put by default");

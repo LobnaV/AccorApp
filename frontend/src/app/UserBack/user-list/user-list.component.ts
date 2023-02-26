@@ -190,35 +190,9 @@ export class UserListComponent implements OnInit {
   }
 
   save() {
-    // let owner: any;
-    // for (let i = 0; i < this.costcenters!.length; i++) {
-    //   owner = this.costcenters[i]?.owner!;
-    //
-    //   while (owner == null) {
-    //     this.confirmationDialogService.confirm('Error', 'There are still some errors in the cost centres assignments, please check and modify all errors before saving. A cost centre with an error means there is no user assigned. Please assign a user.')
-    //       .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
-    //       break
-    //   }
-    // }
-    // if(owner){
-    //   this.uploadCodingList()
-    //   console.log('no')
-    // }
     this.uploadCodingList()
   }
 
-
-  updateOwner(email: string, isStaff: boolean) {
-    this.service.updateOwner(this.costcenter?.id!, email, isStaff).subscribe(
-      (response: HttpResponse<CostCenter>) => {
-        this.costcenter = response.body!;
-
-      },
-      (res: HttpErrorResponse) => {
-        console.log(res.message);
-      }
-    );
-  }
 
   back() {
     this.location.back()

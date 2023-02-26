@@ -6,17 +6,38 @@
     "LOGOUT": "Logout"
   },
   "TITLE": " The Accor User app",
-  "DESCRIPTION": "The app will allow you, as a GM, to manage the different Tradeshift users of your hotel and the cost centre attribution between them and you. We remind you that the composition of the workflow is the following:",
+  "DESCRIPTION1": "The app will allow you, as a ",
+  "DESCRIPTION2": "General Manager",
+  "DESCRIPTION3": ", to ",
+  "DESCRIPTION4": "manage the different Tradeshift users of your hotel",
+  "DESCRIPTION5": " and ",
+  "DESCRIPTION6": "the cost centre attribution",
+  "DESCRIPTION7": " between them and you. We remind you that the composition of the workflow is the following :",
   "CONDITIONS": {
-    "TITLE2": "Conditions / rules to be respected:",
-    "RULE1": "Only the General Manager shall access the application and perform changes within users of his hotel (no Head of Department).",
-    "RULE2": "If some changes are temporary (holiday, maternity leave, sick leave), we encourage you use the delegation rules in place in Tradeshift instead of performing permanent changes.",
-    "RULE3": "If you need to change the name of one of your user (and keep the same email address), please edit directly the user in the corresponding field and do not delete the user to recreate one.",
-    "RULE4": "Please use the bar below to select the hotel you want to manage users for."
+    "TITLE2": "Conditions / rules to be respected :",
+    "RULE11": "Only the General Manager shall access the application",
+    "RULE12": " and perform changes within users of his hotel (no Head of Department).",
+    "RULE21": "If some changes are temporary (holiday, maternity leave, sick leave), ",
+    "RULE22": "we encourage you use the delegation rules in place in Tradeshift",
+    "RULE23": " instead of performing permanent changes.",
+    "RULE31": "If you need to change the name of one of your user (and keep the same email address), ",
+    "RULE32": "please edit directly the user in the corresponding field and do not delete the user to recreate one.",
+    "RULE4": "Please use the bar below to select the hotel you want to manage users for :"
   },
   "TITLE_CA": "The Accor User app for Company admins:",
-  "DESCRIPTION_CA": "The app will allow you to manage the hotel perimeter inside the branches you are permitted to operate in.",
-  "CONDITION_CA": "If you need to delete or add some accounting users, please use the Tradeshift tool directly. The hotel user creation must be performed by the general manager, in the User app.",
+  "DESCRIPTION_CA1": "The app will allow you to ",
+  "DESCRIPTION_CA2": "manage the hotel perimeter inside the branches you are permitted to operate in",
+  "DESCRIPTION_CA3": ". Such permissions are defined at the Master role level of this application.",
+  "CONDITION_CA11": "If you ",
+  "CONDITION_CA12": "need to add or delete some accounting users, please use the Tradeshift tool directly",
+  "CONDITION_CA13": ". The ",
+  "CONDITION_CA14": "hotel user creation must be performed by the general manager",
+  "CONDITION_CA15": " in the Accor User app, with his own credentials.",
+  "CONDITION_CA21": "If you have any question on the app, on a process to manage users, access to one branch or anything else, please contact : ",
+  "CONDITION_CA22": "astore.einvoicing.support@accor.com",
+  "CONDITION_CA31": "Please ",
+  "CONDITION_CA32": "use the bar below to select the branch",
+  "CONDITION_CA33": " you want to hotel perimeter for :",
   "SELECTHOTEL": "Select hotel",
   "SELECTBRANCH": "Select branch",
   "HOTELNAME": "Hotel name",
@@ -107,15 +128,15 @@
       }
     },
     "overview-list": {
-      "title": "Overview",
+      "title": "Hotel overview",
       "placeholderSe": "Search by mail",
-      "placeholderNe": "Search by code",
-      "cost-center-label": "Distribution of cost center staff",
+      "placeholderNe": "Search by cost center",
+      "cost-center-label": "Distribution of hotel staff by cost center",
       "general-manager-label": "General manager"
     },
     "compagny-update": {
       "title-add": "Add hotel",
-      "title-edit": "Edit hoter"
+      "title-edit": "Edit hotel"
     },
     "cost-center": {
       "title": "Costs centers",

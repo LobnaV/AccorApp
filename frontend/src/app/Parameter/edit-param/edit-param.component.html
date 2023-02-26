@@ -42,8 +42,7 @@
         </div>
       </div>
     </div>
-
-    <div class="form-group row" >
+    <div class="form-group row" *ngIf="branch?.perimeter === SouthernEurope">
       <label class="col-sm-4 col-form-label" for="category">{{"layouts.commons.formulaire.category" | translate}} *</label>
       <div class="col-sm-4">
         <select [compareWith]="compareObjects" class="form-control" formControlName="category"

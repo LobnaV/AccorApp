@@ -1,6 +1,7 @@
 package com.viggo.accor.service;
 
 import com.viggo.accor.model.CompanyParameter;
+import com.viggo.accor.model.EPerimeter;
 import com.viggo.accor.model.Staff;
 import com.viggo.accor.playload.CsvFormatDTO;
 import com.viggo.accor.repository.StaffRepository;
@@ -87,16 +88,13 @@ public class StaffService {
 		csvFormatDTO.setEmail(staff.getMail());
 		csvFormatDTO.setFirstName(staff.getFirstName());
 		csvFormatDTO.setLastName(staff.getLastName());
-		//csvFormatDTO.setState("LOCKED");
 		csvFormatDTO.setManager(companyParameter.getUserGM().getUsername());
 		csvFormatDTO.setApprovalLimit("0");
 		csvFormatDTO.setSpendLimit("0");
-		csvFormatDTO.setOwnedCostCenter(companyParameter.getMegaCode());
 		csvFormatDTO.setUserType("Head of Department");
 		try {
 			String branchCode = tradeshiftInterface.getPrimaryBranchUser(companyParameter.getUserGM().getUsername(), accessToken);
 			csvFormatDTO.setHome(branchCode == null || branchCode.equals(companyParameter.getBranch().getCode()) ? "TRUE" : "FALSE");
-//			csvFormatDTO.setHome("TRUE");
 			csvFormatDTO.setOwnedCostCenter(staff.getMail().equals(companyParameter.getDispacherMail())? companyParameter.getMegaCode() : "");
 			csvFormatDTO.setState(csvFormatDTO.getHome().equals("TRUE")? "LOCKED" : "REMOVE");
 			sftpUploadService.uploadFileToSftp(csvFormatDTO);

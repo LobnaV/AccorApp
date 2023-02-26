@@ -6,17 +6,38 @@
     "LOGOUT": "Se déconnecter"
   },
   "TITLE": "L'application utilisateur Accor",
-  "DESCRIPTION": "L'application vous permettra, en tant que GM, de gérer les différents utilisateurs Tradeshift de votre hôtel et l'attribution des centres de coûts entre eux et vous. Nous vous rappelons que la composition du workflow est la suivante :",
+  "DESCRIPTION1": "L'application vous permettra, en tant que ",
+  "DESCRIPTION2": "Directeur général",
+  "DESCRIPTION3": ", de ",
+  "DESCRIPTION4": "gérer les différents utilisateurs Tradeshift de votre hôtel",
+  "DESCRIPTION5": " et ",
+  "DESCRIPTION6": "la distribution des centres de coûts",
+  "DESCRIPTION7": " entre eux et vous. Nous vous rappelons que la composition du workflow est la suivante :",
   "CONDITIONS": {
-    "TITLE2": "Conditions/règles à respecter :",
-    "RULE1": "Seul le Directeur Général accède à l'application et effectue les modifications au sein des utilisateurs de son hôtel (pas de Chef de Service).",
-    "RULE2": "Si certains changements sont temporaires (vacances, congé de maternité, congé de maladie), nous vous encourageons à utiliser les règles de délégation en place dans Tradeshift au lieu d'effectuer des changements permanents.",
-    "RULE3": "Si vous avez besoin de changer le nom d'un de vos utilisateurs (et de conserver la même adresse email), merci d'éditer directement l'utilisateur dans le champ correspondant et de ne pas supprimer l'utilisateur pour en recréer un.",
-    "RULE4": "Veuillez utiliser la barre ci-dessous pour sélectionner l'hôtel pour lequel vous souhaitez gérer les utilisateurs."
+    "TITLE2": "Conditions / règles à respecter :",
+    "RULE11": "Seul le Directeur Général accède à l'application",
+    "RULE12": " et effectue les modifications au sein des utilisateurs de son hôtel (pas de Chef de Service).",
+    "RULE21": "Si certains changements sont temporaires (vacances, congé de maternité, congé de maladie), ",
+    "RULE22": "nous vous encourageons à utiliser les règles de délégation en place dans Tradeshift",
+    "RULE23": " au lieu d'effectuer des changements permanents.",
+    "RULE31": "Si vous devez changer le nom d'un de vos utilisateurs (tout en gardant la même adresse email), ",
+    "RULE32": "veuillez modifier directement l'utilisateur dans le champ correspondant et ne pas supprimer l'utilisateur pour en recréer un.",
+    "RULE4": "Veuillez sélectionner votre hôtel grâce à la barre ci-dessous :"
   },
-  "TITLE_CA": "L'application utilisateur Accor pour les administrateurs d'entreprise :",
-  "DESCRIPTION_CA": "l'application vous permettra de gérer le périmètre de l'hôtel à l'intérieur des agences dans lesquelles vous êtes autorisé à opérer.",
-  "CONDITION_CA": "Si vous avez besoin de supprimer ou d'ajouter des utilisateurs comptables, veuillez utiliser directement l'outil Tradeshift. La création de l'utilisateur de l'hôtel doit être effectuée par le directeur général, dans l'application utilisateur.",
+  "TITLE_CA": "L’app Accor User pour les Company Admins :",
+  "DESCRIPTION_CA1": "Cette application vous permettra de ",
+  "DESCRIPTION_CA2": "gérer le périmètre de l'hôtel des branches dans lesquelles vous êtes autorisé à opérer",
+  "DESCRIPTION_CA3": ". Ces autorisations sont définies au niveau du rôle Master de cette application.",
+  "CONDITION_CA11": "Si vous devez ",
+  "CONDITION_CA12": "ajouter ou supprimer des utilisateurs comptables, veuillez utiliser directement l'outil Tradeshift",
+  "CONDITION_CA13": ". La ",
+  "CONDITION_CA14": "gestion des utilisateurs de type hôtel doit être effectuée par le General Manager dans l'application Accor User app",
+  "CONDITION_CA15": ", avec son propre login.",
+  "CONDITION_CA21": "Si vous avez des questions sur l'application, sur un processus de gestion des utilisateurs, sur l'accès à une branche ou sur tout autre sujet, veuillez contacter : ",
+  "CONDITION_CA22": "astore.einvoicing.support@accor.com",
+  "CONDITION_CA31": "Veuillez utiliser ",
+  "CONDITION_CA32": "la barre ci-dessous pour sélectionner la branche",
+  "CONDITION_CA33": " pour laquelle vous souhaitez créer un périmètre hôtel :",
   "SELECTHOTEL": "Sélectionner un hôtel",
   "SELECTBRANCH": "Sélectionner une branche",
   "HOTELNAME": "Nom de l'hôtel",
@@ -108,10 +129,10 @@
       }
     },
     "overview-list": {
-      "title": "Tableau de bord",
+      "title": "Hotel overview",
       "placeholderSe": "Rechercher par email",
-      "placeholderNe": "Rechercher par code",
-      "cost-center-label": "Répartition du personnel du centre de coûts",
+      "placeholderNe": "Rechercher par centre de coûts",
+      "cost-center-label": "Répartition du personnel hôtel par centre de coûts",
       "general-manager-label": "Directeur général"
     },
     "compagny-update": {
@@ -128,7 +149,7 @@
     "cost-center-update": {
       "title-add": "Ajouter un Centre de coûts",
       "title-edit": "Modifier un Centre de coûts",
-      "message": "Toute modification ici aura pour conséquence que le directeur général deviendra automatiquement le répartiteur. N'hésitez pas à contacter le GM pour lui demander de réorganiser le flux de travail comme il le souhaite."
+      "message": "Toute modification réattribuera automatiquement le centre de coût au General Manager de l’hôtel par sécurité. Veuillez contacter le GM par la suite si modification, pour qu’il puisse réorganiser son workflow."
     },
     "cost-center-edit-gm": {
       "title": "Modifier un centre de coûts"

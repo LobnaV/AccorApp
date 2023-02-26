@@ -142,12 +142,12 @@ export class AccorService {
       .post<User>(`${this.urlLocal}`, user, {observe: 'response'});
   }
 
-  updateUser(user: User): Observable<HttpResponse<User>> {
-    return this.http.put<User>(`${this.urlLocal}`, user, {observe: 'response'});
-  }
-
   updateUserName(user: User): Observable<HttpResponse<User>> {
-    return this.http.put<User>(`${this.urlLocal}/name`, user, {observe: 'response'});
+    const accessTokenTs = this.oAuthTsService.getToken();
+    const headers = new HttpHeaders({
+      'Ts_Access_Token': accessTokenTs
+    });
+    return this.http.put<User>(`${this.urlLocal}/name`, user, { observe: 'response', headers });
   }
 
   userId(id: number): Observable<HttpResponse<User>> {
@@ -213,12 +213,6 @@ export class AccorService {
   CostCenterId(id: number): Observable<HttpResponse<CostCenter>> {
     return this.http
       .get<CostCenter>(`${this.CCUrl}/${id}`, {observe: 'response'})
-  }
-
-  updateOwner(idCostCenter: number, email: string, isStaff: boolean): Observable<HttpResponse<CostCenter>> {
-    return this.http.get<CostCenter>(`${this.CCUrl}/${idCostCenter}/owner?email=${email}&isStaff=${isStaff}`, {
-      observe: 'response',
-    });
   }
 
   updateCostCenter(costCenter: CostCenter): Observable<HttpResponse<CostCenter>> {

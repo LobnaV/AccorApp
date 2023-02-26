@@ -74,15 +74,11 @@ public class BranchService {
 		csvFormatDTO.setLastName(branchSaved.getUserMGM().getLastName());
 		csvFormatDTO.setState("ACTIVE");
 		csvFormatDTO.setManager(branchSaved.getUserMGM().getUsername());
-		csvFormatDTO.setApprovalLimit("1000");
-		csvFormatDTO.setSpendLimit("10000");
-		csvFormatDTO.setOwnedCostCenter("test");
+		csvFormatDTO.setApprovalLimit("");
+		csvFormatDTO.setSpendLimit("");
+		csvFormatDTO.setOwnedCostCenter("");
 		csvFormatDTO.setUserType("General Manager");
 		try {
-			//	String branchCode = tradeshiftInterface.getPrimaryBranchUser(companyParameter.getUserGM().getUsername());
-			//	csvFormatDTO.setHome(branchCode.equals(paramSaved.getBranch().getCode()) ? "TRUE" : "FALSE");
-//				csvFormatDTO.setHome("TRUE");
-			//csvFormatDTO.setOwnedCostCenter(branchSaved.getUserMGM().getUsername().equals(branch.getDispacherMail()) ? companyParameter.getMegaCode() : "" );
 			sftpUploadService.uploadFileToSftp(csvFormatDTO);
 		} catch (Exception e) {
 			throw new RuntimeException(e);

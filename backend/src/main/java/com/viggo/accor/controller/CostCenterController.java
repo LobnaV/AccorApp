@@ -78,12 +78,4 @@ public class CostCenterController {
 	}
 
 
-	@PreAuthorize("hasRole('ROLE_GM')")
-	@GetMapping("/{id}/owner")
-	public ResponseEntity<CostCenter> updateOwner(@RequestParam String email, @PathVariable Long id, @RequestParam boolean isStaff) throws Exception {
-
-		return ResponseEntity.ok(service.updateOwner(id, email, isStaff));
-	}
-
-
 }
