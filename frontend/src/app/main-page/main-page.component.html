@@ -16,8 +16,8 @@
           {{'DESCRIPTION7' | translate}}
         </div>
       </div>
-      <div class="mt-4 container">
-        <img src="../../assets/CompositonWorkflow.png">
+      <div class="mt-4 d-flex justify-content-center">
+        <img src="../../assets/CompositonWorkflow.png" class="img-home">
       </div>
       <div class="mt-4">
         <h5>{{'CONDITIONS.TITLE2' | translate}}</h5>
@@ -70,7 +70,7 @@
 
 
 <!-- Vue Master Admin -->
-<ng-container *ngIf="role === 'ROLE_MASTERADMIN'">
+<div *ngIf="role === 'ROLE_MASTERADMIN'">
 
   <div class="container-fluid">
     <div class="contenue">
@@ -112,5 +112,5 @@
       </table>
       </div>
 
-</ng-container>
+</div>
 
