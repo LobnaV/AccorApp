@@ -95,26 +95,17 @@ form .row {
   margin-bottom: 10px;
 }
 
-label.form-label {
-  font-weight: 400;
-  font-size: 14px;
-  color: #003B5C4C;
-  margin-bottom: 5px;
-}
-
 select.form-control::placeholder,
 input.form-control::placeholder {
   font-style: italic;
   font-weight: 400;
   font-size: 14px;
-  //color: #968c83;
 }
 
 select,
 input {
   font-weight: 500;
   font-size: 14px;
-  //color: ;
   border: 1px solid #003B5C4C;
   border-radius: 5px;
   height: 45px;
