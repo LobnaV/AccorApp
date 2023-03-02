@@ -95,8 +95,9 @@
         "leave": "Are you sure you want to leave this page without saving your changes?",
         "delete-user": "If you need to temporarily delete a user, we advise you use the delegation rule option within\nTradeshift (holiday, maternity leave, sick leave) to temporarily delegate tasks to another colleague.",
         "delete-user-confirmation": "Can you confirm there are not more pending tasks in the task manager for this user? If no, please reassign the pending tasks before deleting the user.",
-        "delete-compagny": "Deleting a hotel here means you will delete the hotel from the Company admin Dashboard, but does not mean that users will be deleted from Tradeshift production environment. If you need to delete a particular user in Tradeshift, as a company admin: If the user is a hotel member, you can ask the general manager to do it directly from his {{name}} session. This will delete the user from Tradeshift You can also delete the user directly from the Tradeshift app, please contact : astore.einvoicing.support@accor.com",
-        "delete-compagny-confirmation": "Yes I will delete users that need to be deleted, directly on Tradeshift, and I wish to delete this hotel from the dashboard."
+        "delete-compagny": "Deleting a hotel here means you will delete the hotel from the Company admin Dashboard, but <strong>does not mean that users will be deleted from Tradeshift production environment.</strong> <br><br>If you need to delete a particular user in Tradeshift, as a company admin:<br><ul><li>If the user is a hotel member, you can ask the general manager to do it directly from his {{name}} session. This will delete the user from Tradeshift.<li>You can also delete the user directly from the Tradeshift app, please contact : <a href=''>astore.einvoicing.support@accor.com</a></li></ul>",
+        "delete-compagny-confirmation": "Yes I will delete users that need to be deleted, directly on Tradeshift, and I wish to delete this hotel from the dashboard.",
+        "delete-cost-center": "Are you sure you want to delete this cost center ?"
       },
       "formulaire": {
         "megacode": "Hotel mega code",

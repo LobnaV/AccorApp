@@ -5,12 +5,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Data
 @Entity
-@Table
+@Table(uniqueConstraints = {
+	@UniqueConstraint(columnNames = {"code", "company_id"})
+})
 @AllArgsConstructor
 @NoArgsConstructor
 public class CostCenter implements Serializable {
@@ -19,7 +20,6 @@ public class CostCenter implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(unique = true)
 	private String code;
 
 	private String label;

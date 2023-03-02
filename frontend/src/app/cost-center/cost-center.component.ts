@@ -5,6 +5,7 @@ import { AccorService } from 'src/app/accor.service';
 import { CostCenter } from 'src/app/model/costCenter';
 import { Param } from 'src/app/model/param';
 import { Location } from '@angular/common';
+import {ConfirmationDialogService} from "../UserBack/confirmation-dialog/confirmation-dialog.service";
 
 @Component({
   selector: 'app-cost-center',
@@ -20,6 +21,7 @@ export class CostCenterComponent implements OnInit {
   constructor(
     private service: AccorService,
     private activatedRoute: ActivatedRoute,
+    private confirmationDialogService: ConfirmationDialogService,
     public location: Location,
   ) {
   }
@@ -58,5 +60,18 @@ export class CostCenterComponent implements OnInit {
 
   back() {
     this.location.back()
+  }
+
+  deleteCc(id: number) {
+    this.confirmationDialogService.confirm('Confirmation', 'layouts.commons.messages.delete-cost-center')
+      .then((deleteConfirm) => {
+        if (deleteConfirm) {
+          this.service.deleteCC(id).subscribe(
+            () => this.loadCostCenter(this.company?.id!),
+            (res: HttpErrorResponse) => console.log(res.message)
+          );
+        }
+      })
+      .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
   }
 }

@@ -65,8 +65,8 @@ public class CostCenterController {
 		return ResponseEntity.ok(result);
 	}
 
-
-	@DeleteMapping({"/deleteCostCenter/{id}"})
+	@PreAuthorize("hasAnyRole('ROLE_COMPANYADMIN')")
+	@DeleteMapping({"/{id}"})
 	public void delete(@PathVariable Long id) {
 		service.delete(id);
 	}

@@ -5,7 +5,7 @@
   </button>
 </div>
 <div class="modal-body">
-  {{ message! | translate: param }}
+  <p [innerHTML]="message! | translate: param"></p>
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-danger" (click)="decline()">{{"layouts.commons.buttons.cancel" |translate}}</button>

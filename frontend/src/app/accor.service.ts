@@ -221,9 +221,8 @@ export class AccorService {
       .pipe(catchError(error => throwError(error)));
   }
 
-  deleteCC(ccId: CostCenter) {
-    return this.http
-      .delete<CostCenter>(this.CCUrl + '/deleteCostCenter/' + ccId)
+  deleteCC(ccId: number) {
+    return this.http.delete<void>(this.CCUrl + '/' + ccId)
   }
 
 

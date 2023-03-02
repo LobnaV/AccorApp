@@ -139,9 +139,11 @@ public class CompanyParamService {
 	}
 
 	public void delete(Long id) {
+		CompanyParameter parameter = findById(id);
 		staffRepository.deleteAllByCompanyParameterId(id);
 		costCenterRepository.deleteAllByCompanyId(id);
-		parameterRepository.deleteById(id);
+		parameterRepository.delete(parameter);
+		userService.delete(parameter.getUserGM().getId());
 	}
 
 	public CompanyParameter updateDispacher(Long id, String email, boolean isStaff, String accessToken) {

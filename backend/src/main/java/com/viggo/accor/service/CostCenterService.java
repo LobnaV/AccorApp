@@ -101,7 +101,6 @@ public class CostCenterService {
 
 
 	public void delete(final Long id) {
-		Optional<CostCenter> costCenter = costCenterR.findById(id);
-		costCenter.ifPresent(center -> costCenterR.delete(center));
+		costCenterR.deleteById(id);
 	}
 }

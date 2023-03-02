@@ -93,22 +93,24 @@ export class CostCenterEditComponent implements OnInit {
       this.service.updateCostCenter(updateForm)
         .subscribe(
           () => this.location.back(),
-          (res: HttpErrorResponse) => {
-            if (res.error === 'uniqueCodeCostCenter') {
-              this.errorUniqueCode = res.error;
-              this.error = undefined;
-            } else {
-              this.error = res.error;
-              this.errorUniqueCode = undefined;
-            }
-          }
+          (res: HttpErrorResponse) => this.handleError(res.error)
         );
     } else {
       this.service.addcostCenter(updateForm)
         .subscribe(
           () => this.location.back(),
-          (res: HttpErrorResponse) => this.error = res.error
+          (res: HttpErrorResponse) => this.handleError(res.error)
         );
+    }
+  }
+
+  handleError(error: string) {
+    if (error === 'uniqueCodeCostCenter') {
+      this.errorUniqueCode = error;
+      this.error = undefined;
+    } else {
+      this.error = error;
+      this.errorUniqueCode = undefined;
     }
   }
 }

@@ -32,6 +32,7 @@
       <th>{{"layouts.commons.formulaire.lastname" | translate}}</th>
       <th>{{"layouts.commons.formulaire.mail" | translate}}</th>
       <th></th>
+      <th></th>
     </tr>
     </thead>
     <tbody *ngFor="let data of costcenters | filter: searchKey: 'code' " class="data" style="background-color: #C5C5C5;">
@@ -41,6 +42,9 @@
       <td>{{data.owner}}</td>
       <td class="text-right">
         <button [routerLink]="['cost-center', data?.id, 'edit']" class="btn btn-edit">{{"layouts.commons.buttons.edit" |translate}}</button>
+      </td>
+      <td class="text-right">
+        <button (click)="deleteCc(data.id)" class="btn btn-delete">{{"layouts.commons.buttons.delete" |translate}}</button>
       </td>
     </tr>
     </tbody>
