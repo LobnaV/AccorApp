@@ -16,7 +16,7 @@ VALUES (1, 'Belen', 'TOLOSA', '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.
 	 (15 ,'Alexandra', 'Hodge' , '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu', 'ps.accor+983@gmail.com'),
 	 (16 ,'Alexandra', 'Hodge ' , '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu', 'ps.accor+H3159-GM@gmail.com'),
 	 (17 ,'Alfredo', 'Rabadan' , '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu', 'ps.accor+926@gmail.com'),
-	 (18 ,'ALINE', 'MOREIRA' , '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu', 'ps.accor+H3159-GM@gmail.com'),
+	 (18 ,'ALINE', 'MOREIRA' , '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu', 'ps.accor+H3159-GM-double@gmail.com'),
 	 (19 ,'Anuj', 'Sagar' , '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu', 'ps.accor+H3272-GM@gmail.com'),
 	 (20 ,'Frederica', 'Scuto' , '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu', 'ps.accor+H6186-GM@gmail.com'),
 	 (21 ,'Arjan', 'Knijff' , '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu', 'PS.ACCOR+151@gmail.com'),
@@ -42,7 +42,7 @@ VALUES (1, 'Belen', 'TOLOSA', '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.
 	 (41 ,'Frederic', 'Dumont' , '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu', 'ps.accor+943@gmail.com'),
 	 (42 ,'GILLES', 'MATTERN' , '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu', 'ps.accor+H1461-GM@gmail.com'),
 	 (43 ,'Gilles', 'Mattern' , '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu', 'ps.accor+H6495-GM@gmail.com'),
-	 (44 ,'Harpreet', 'Sian' , '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu', 'ps.accor+926@gmail.com'),
+	 (44 ,'Harpreet', 'Sian' , '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu', 'ps.accor+926-double@gmail.com'),
 	 (45 ,'Inge', 'Staes' , '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu', 'ps.accor+H3154-gm@gmail.com'),
 	 (46 ,'Ioannis ', 'Koletakis' , '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu', 'ps.accor+H0737-GM@gmail.com'),
 	 (47 ,'Jacqui', 'Mcmillan' , '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu', 'ps.accor+H9057-GM@gmail.com'),
@@ -73,7 +73,7 @@ VALUES (1, 'Belen', 'TOLOSA', '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.
 	 (72 ,'Ludovic', 'Verzi' , '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu', 'ps.accor+860@gmail.com'),
 	 (73 ,'Magnus', 'Andersen' , '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu', 'ps.accor+957@gmail.com'),
 	 (74 ,'Majdi', 'Orifij' , '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu', 'ps.accor+H8710-gm@gmail.com'),
-	 (75 ,'Marc', 'Uytterhoeven' , '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu', 'ps.accor+816@gmail.com'),
+	 (75 ,'Marc', 'Uytterhoeven' , '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu', 'ps.accor+816-double@gmail.com'),
 	 (76 ,'Marc', 'Uytterhoeven' , '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu', 'ps.accor+832@gmail.com'),
 	 (77 ,'Marcell', 'Varga' , '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu', 'ps.accor+H6003-GM@gmail.com'),
 	 (78 ,'Marco', 'Jadidi' , '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu', 'ps.accor+H6176-GM@gmail.com'),
@@ -106,7 +106,7 @@ VALUES (1, 'Belen', 'TOLOSA', '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.
 	 (105 ,'Sebastiaan', 'van Rijgersma' , '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu', 'ps.accor+350@gmail.com'),
 	 (106 ,'Sebastiaan', 'Van Rijgersma' , '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu', 'ps.accor+353@gmail.com'),
 	 (107 ,'Shane', 'Parker' , '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu', 'ps.accor+966@gmail.com'),
-	 (108 ,'Shane', 'Parker' , '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu', 'ps.accor+966@gmail.com'),
+	 (108 ,'Shane', 'Parker' , '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu', 'ps.accor+966-double@gmail.com'),
 	 (109 ,'Sharon', 'Thandi' , '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu', 'ps.accor+889@gmail.com'),
 	 (110 ,'Simon', 'Girard' , '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu', 'ps.accor+931@gmail.com'),
 	 (111 ,'Sonya', 'Pavlova' , '$2a$10$OxVr0.tZrJFiDrE6.cGfZuSF7CqOwcNe6acvLYyr7.DT2HzvevVbu', 'ps.accor+955@gmail.com'),
@@ -214,7 +214,7 @@ VALUES (1, 'Ultra_ECO', 'Ultra ECO'),
 			 (4, 'Northern_Europe_Category', 'Northern_Europe_Category');
 
 
-
+-- il manque la relation entre les hotels n les branches et les GMs
 INSERT INTO `company_parameter`(`id`, `dispacher_mail`, `mega_code`, `name`, `branch_id`, `usergm_id`, `general_managern1mail`, `category_id`)
 VALUES (1, 'ps.accor+H3132-GM@gmail.com', '02507.H3132', 'IBIS BARCELONA FIRA DE CORNELLA', 1, 1, 'ps.accor+Nuria.VAZQUEZ@gmail.com', 2),
 			 (2, 'ps.accor+H3086-BO@gmail.com', '03354.H3086', 'IBIS BUDGET PARIS PORTE DE VINCENNES', 2, 2, 'ps.accor+Alyson.Greensmith@gmail.com', 1),
@@ -336,7 +336,7 @@ VALUES (1, 'ps.accor+H3132-GM@gmail.com', '02507.H3132', 'IBIS BARCELONA FIRA DE
 			 (117, 'ps.accor+426@gmail.com', '02785.H1073', 'NOVOTEL SOUTHAMPTON', 'ps.accor+426@gmail.com', 4),
 			 (118, 'ps.accor+H5587-GM@gmail.com', '02417.H5587', 'Ibis Luxembourg Sud Livange', 'ps.accor+H5587-GM@gmail.com', 4),
 			 (119, 'ps.accor+H0467-GM@gmail.com', '02396.H0467', 'Novotel Brussels Airport', 'ps.accor+H0467-GM@gmail.com', 4),
-			 (120, 'ps.accor+H1046-GM@gmail.com', '02408.H1046', 'Ibis Brussels Off Grand Place', 'ps.accor+H1046-GM@gmail.com', 4),
+			 (120, 'ps.accor+H1046-GM@gmail.com', '02408.H1046', 'Ibis Brussels Off Grand Place', 'ps.accor+H1046-GM@gmail.com', 4);
 
 
 INSERT INTO `role`(`id`, `name`)
@@ -476,7 +476,6 @@ VALUES (1, 1),
 
 INSERT INTO `staff`(`mail`, `first_name`, `last_name`, `company_parameter_id`)
 VALUES ('ps.accor+H3086-BO@gmail.com', 'Beatrice', 'Soubabere', 2),
-VALUES ('ps.accor+H3086-BO@gmail.com', 'Beatrice', 'Soubabere', 2),
 	('ps.accor+H1249-HK@gmail.com', 'Véronique', 'Fréoul', 4),
 	('ps.accor+H1249-KC@gmail.com', 'Yannick', 'Brémond', 4),
 	('ps.accor+H1249-RE@gmail.com', 'Philippe', 'Noblet', 4),
@@ -501,7 +500,7 @@ VALUES ('ps.accor+H3086-BO@gmail.com', 'Beatrice', 'Soubabere', 2),
 	('PS.ACCOR+164@gmail.com', 'Sonia', 'Boyer', 119),
 	('PS.ACCOR+165@gmail.com', 'Frederic', 'Vanhove', 119),
 	('PS.ACCOR+166@gmail.com', 'Henri', 'Ndione', 119),
-	('ps.accor+17@gmail.com', 'Krzysztof', 'Kaminski', ),
+	('ps.accor+17@gmail.com', 'Krzysztof', 'Kaminski', 113),
 	('PS.ACCOR+172@gmail.com', 'Esther', 'van der Helm', 113),
 	('PS.ACCOR+175@gmail.com', 'Sophie', 'Laruelle', 57),
 	('PS.ACCOR+176@gmail.com', 'Vincent', 'Beelen', 57),
@@ -656,7 +655,7 @@ VALUES ('ps.accor+H3086-BO@gmail.com', 'Beatrice', 'Soubabere', 2),
 	('ps.accor+987@gmail.com', 'Tamas', 'Balogh', 26),
 	('ps.accor+988@gmail.com', 'John ', 'Lindsay', 26),
 	('ps.accor+bojana@gmail.com', 'Bojana', 'Marzidovsek', 81),
-	('ps.accor+ELAINE.RANAHAN@gmail.com', 'Elaine', 'Ranahan', ),
+	('ps.accor+ELAINE.RANAHAN@gmail.com', 'Elaine', 'Ranahan', 81),
 	('ps.accor+H0737-AM@gmail.com', 'Louise', 'Gangi', 39),
 	('ps.accor+H0737-FB1@gmail.com', 'Aimee', 'McNiven', 39),
 	('ps.accor+h0737-fb5@gmail.com', 'Maggie', 'Biernacka', 39),
@@ -4165,7 +4164,6 @@ VALUES ('0000','BALANCE SHEET','PS.ACCOR+159@gmail.com','Jeremy','DeBock',119),
 			 ('ZZZ','DATA CONVERSION','ps.accor+853@gmail.com','Melanie','Harvey',29),
 			 ('3OA','KITCHEN PORTERS','ps.accor+856@gmail.com','Sharley','Thomas',29),
 			 ('3QZ','KITCHEN','ps.accor+856@gmail.com','Sharley','Thomas',29),
-	#VALEUR!
  ('2GZ','HOUSEKEEPING','ps.accor+854@gmail.com','Giada ','Melegoni',29),
  ('2HA','INTERNAL LAUNDRY','ps.accor+854@gmail.com','Giada ','Melegoni',29),
  ('2ZZ','ROOMS DIRECT EXPENSES','ps.accor+854@gmail.com','Giada ','Melegoni',29),
